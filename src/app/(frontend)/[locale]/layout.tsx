@@ -1,5 +1,9 @@
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Google_Sans_Flex, Work_Sans } from "next/font/google";
+
+import { Header } from "@/components/site/Header";
+import { estUneLangue, langues } from "@/lib/i18n";
 
 import "./globals.css";
 
@@ -25,13 +29,25 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export function generateStaticParams() {
+  return langues.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({ children, params }: LayoutProps<"/[locale]">) {
+  const { locale } = await params;
+  // Le middleware ne réécrit que vers une langue connue, mais une URL forgée
+  // comme /de/contact atteindrait ce segment sans passer par lui.
+  if (!estUneLangue(locale)) notFound();
+
   return (
     <html
-      lang="fr"
+      lang={locale}
       className={`${policePrimaire.variable} ${policeSecondaire.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Header langue={locale} />
+        {children}
+      </body>
     </html>
   );
 }

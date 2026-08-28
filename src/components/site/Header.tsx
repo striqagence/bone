@@ -1,7 +1,10 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/Button";
+import { lien, type Langue } from "@/lib/i18n";
+
 import { Navigation } from "./Navigation";
+import { SelecteurLangue } from "./SelecteurLangue";
 
 /**
  * En-tête du site (Figma « Menu sticky »).
@@ -13,16 +16,16 @@ import { Navigation } from "./Navigation";
  * à dimensions fixes, que l'optimiseur ne peut ni redimensionner utilement ni
  * convertir, et qui exigeraient en prime d'ouvrir `dangerouslyAllowSVG`.
  */
-export function Header() {
+export function Header({ langue }: { langue: Langue }) {
   return (
     <header className="sticky top-0 z-50 flex h-[114px] w-full items-center justify-center px-4 py-5">
       <div className="relative flex w-full max-w-[1648px] items-center justify-between rounded bg-encre/80 px-6 py-3.5 backdrop-blur-[5px]">
-        <Link href="/" aria-label="BONE IT — accueil">
+        <Link href={lien("/", langue)} aria-label="BONE IT — accueil">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/bone-logotype.svg" alt="BONE IT" width={141} height={40} />
         </Link>
 
-        <Navigation />
+        <Navigation langue={langue} />
 
         <div className="flex h-[45px] items-center gap-5">
           <div className="flex h-11 items-center justify-center gap-4 rounded py-3 pl-6 pr-4">
@@ -40,18 +43,10 @@ export function Header() {
                 CSS plutôt qu'en SVG — un trait droit n'a rien d'un glyphe. */}
             <span aria-hidden className="h-5 w-px bg-white" />
 
-            <button
-              type="button"
-              className="flex items-center gap-0.5 font-display text-sm font-bold text-white"
-              style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
-            >
-              Fr
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/chevron-bas.svg" alt="" width={8} height={4.29289} className="ml-1" />
-            </button>
+            <SelecteurLangue langue={langue} />
           </div>
 
-          <Button href="/contact" taille="barre" flecheAvant={false}>
+          <Button href={lien("/contact", langue)} taille="barre" flecheAvant={false}>
             Demander un audit
           </Button>
         </div>

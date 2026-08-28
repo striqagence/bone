@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { cheminSansLangue, lien, type Langue } from "@/lib/i18n";
+
 /**
  * Lien de la barre de navigation (Figma « Link menu »), trois états.
  *
@@ -17,20 +19,29 @@ import { usePathname } from "next/navigation";
  * changement de page. Au survol elle dépasse de 13px et mord volontairement sur
  * le début du texte ; à l'état actif elle est plus petite et entièrement
  * dégagée.
+ *
+ * `chemin` est donné sans préfixe de langue : la comparaison se fait sur l'URL
+ * dépouillée du sien, sans quoi une page anglaise n'allumerait jamais son
+ * entrée de menu.
  */
 export function NavLink({
-  href,
+  chemin,
+  langue,
   children,
   ...rest
-}: { href: string; children: React.ReactNode } & React.ComponentProps<typeof Link>) {
-  const chemin = usePathname();
+}: {
+  chemin: string;
+  langue: Langue;
+  children: React.ReactNode;
+} & Omit<React.ComponentProps<typeof Link>, "href">) {
+  const courant = cheminSansLangue(usePathname());
   // Une sous-page (/blog/mon-article) garde son entrée de menu active.
-  const actif = chemin === href || chemin.startsWith(`${href}/`);
+  const actif = courant === chemin || courant.startsWith(`${chemin}/`);
 
   return (
     <Link
       {...rest}
-      href={href}
+      href={lien(chemin, langue)}
       aria-current={actif ? "page" : undefined}
       className={`group relative whitespace-nowrap text-base text-white ${actif ? "font-medium" : "font-normal hover:font-medium"}`}
     >

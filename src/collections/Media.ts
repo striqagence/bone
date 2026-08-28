@@ -76,6 +76,7 @@ export const Media: CollectionConfig = {
       name: "alt",
       type: "text",
       required: true,
+      localized: true,
       label: "Texte alternatif",
       admin: { description: "Décrit l’image pour les lecteurs d’écran et le SEO." },
     },

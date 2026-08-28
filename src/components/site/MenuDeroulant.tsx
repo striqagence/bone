@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { lien, type Langue } from "@/lib/i18n";
+
 /**
  * Panneau déroulant des compétences (Figma « Menu déroulant sticky V3 »).
  *
@@ -11,27 +13,27 @@ export const poles = [
   {
     titre: "Expertise",
     sousTitre: "Réseau • Stockage • systèmes",
-    href: "/competences/expertise",
+    chemin: "/competences/expertise",
   },
   {
     titre: "Capital",
     sousTitre: "Jusqu’à 70% d’économie vs neuf",
-    href: "/competences/capital",
+    chemin: "/competences/capital",
   },
   {
     titre: "Feed",
     sousTitre: "Broadcast • Post-production",
-    href: "/competences/feed",
+    chemin: "/competences/feed",
   },
 ];
 
-export function MenuDeroulant() {
+export function MenuDeroulant({ langue }: { langue: Langue }) {
   return (
     <div className="flex items-start gap-6 rounded bg-black/90 py-4 pl-6 pr-9 backdrop-blur-[2px]">
-      {poles.map(({ titre, sousTitre, href }, index) => (
-        <div key={href} className="flex items-start gap-6">
+      {poles.map(({ titre, sousTitre, chemin }, index) => (
+        <div key={chemin} className="flex items-start gap-6">
           {index > 0 && <span aria-hidden className="w-px self-stretch bg-white/10" />}
-          <Link href={href} className="flex items-start gap-3">
+          <Link href={lien(chemin, langue)} className="flex items-start gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/brand/bone-mark-degrade.svg"

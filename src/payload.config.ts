@@ -80,6 +80,20 @@ export default buildConfig({
     meta: { titleSuffix: " · Bone" },
   },
   collections: [Users, Media],
+  /**
+   * Le français est la langue de référence : c'est elle qui est saisie, et
+   * l'anglais s'y replie tant qu'une traduction manque (`fallback`). Sans ce
+   * repli, une page anglaise non traduite s'afficherait vide plutôt que dans la
+   * langue d'origine.
+   */
+  localization: {
+    locales: [
+      { label: "Français", code: "fr" },
+      { label: "English", code: "en" },
+    ],
+    defaultLocale: "fr",
+    fallback: true,
+  },
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URI ?? "" },

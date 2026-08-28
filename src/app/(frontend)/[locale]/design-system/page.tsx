@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/Button";
-import { Header } from "@/components/site/Header";
 import { MenuDeroulant } from "@/components/site/MenuDeroulant";
+import { estUneLangue } from "@/lib/i18n";
+import { notFound } from "next/navigation";
 import { NavLink } from "@/components/site/NavLink";
 
 /**
@@ -14,25 +15,27 @@ import { NavLink } from "@/components/site/NavLink";
 const variantes = ["primary", "secondary", "tertiaire"] as const;
 const tailles = ["lg", "sm"] as const;
 
-export default function DesignSystem() {
+export default async function DesignSystem({ params }: PageProps<"/[locale]/design-system">) {
+  const { locale } = await params;
+  if (!estUneLangue(locale)) notFound();
+
   return (
     <main className="flex flex-1 flex-col gap-16 pb-16">
-      <section className="flex flex-col gap-6 bg-gris-950 pb-16">
-        <Header />
-        <h2 className="px-16 text-2xl text-white">En-tête</h2>
+      <section className="flex flex-col gap-6 bg-gris-950 py-16">
+        <h2 className="px-16 text-2xl text-white">Liens de navigation</h2>
 
         {/* Le lien pointant sur la page courante rend l'état Actif visible ici ;
-            les deux autres liens montrent Default, et Hover au survol. */}
+            les deux autres montrent Default, et Hover au survol. */}
         <div className="flex items-center gap-9 px-24">
-          <NavLink href="/design-system">Actif</NavLink>
-          <NavLink href="/exemple-a">Par défaut</NavLink>
-          <NavLink href="/exemple-b">Survole-moi</NavLink>
+          <NavLink chemin="/design-system" langue={locale}>Actif</NavLink>
+          <NavLink chemin="/exemple-a" langue={locale}>Par défaut</NavLink>
+          <NavLink chemin="/exemple-b" langue={locale}>Survole-moi</NavLink>
         </div>
 
         {/* Le déroulant est aussi montré déplié, pour l'examiner sans avoir à
             maintenir le survol. */}
         <div className="px-16">
-          <MenuDeroulant />
+          <MenuDeroulant langue={locale} />
         </div>
       </section>
 

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { type Langue } from "@/lib/i18n";
+
 import { MenuDeroulant } from "./MenuDeroulant";
 import { NavLink } from "./NavLink";
 
@@ -18,14 +20,14 @@ import { NavLink } from "./NavLink";
  * survol seul, l'entrée « Nos compétences » serait inatteignable sans souris.
  */
 const liens = [
-  { libelle: "Nos compétences", href: "/competences", deroulant: true },
-  { libelle: "Notre approche", href: "/notre-approche", deroulant: false },
-  { libelle: "Blog", href: "/blog", deroulant: false },
-  { libelle: "À propos", href: "/a-propos", deroulant: false },
-  { libelle: "Contact", href: "/contact", deroulant: false },
+  { libelle: "Nos compétences", chemin: "/competences", deroulant: true },
+  { libelle: "Notre approche", chemin: "/notre-approche", deroulant: false },
+  { libelle: "Blog", chemin: "/blog", deroulant: false },
+  { libelle: "À propos", chemin: "/a-propos", deroulant: false },
+  { libelle: "Contact", chemin: "/contact", deroulant: false },
 ];
 
-export function Navigation() {
+export function Navigation({ langue }: { langue: Langue }) {
   const [ouvert, setOuvert] = useState(false);
 
   return (
@@ -39,13 +41,13 @@ export function Navigation() {
         if (e.key === "Escape") setOuvert(false);
       }}
     >
-      {liens.map(({ libelle, href, deroulant }) => (
+      {liens.map(({ libelle, chemin, deroulant }) => (
         <span
-          key={href}
+          key={chemin}
           onMouseEnter={() => setOuvert(deroulant)}
           onFocus={() => setOuvert(deroulant)}
         >
-          <NavLink href={href} aria-expanded={deroulant ? ouvert : undefined}>
+          <NavLink chemin={chemin} langue={langue} aria-expanded={deroulant ? ouvert : undefined}>
             {libelle}
           </NavLink>
         </span>
@@ -53,7 +55,7 @@ export function Navigation() {
 
       {ouvert && (
         <div className="absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2">
-          <MenuDeroulant />
+          <MenuDeroulant langue={langue} />
         </div>
       )}
     </nav>
