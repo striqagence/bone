@@ -1,23 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =============================================================================
+   Design system BONE IT, transcrit depuis Figma (fichier « BONE IT Webdesign »).
+
+   Le kit Figma est dérivé de Tailwind : l'échelle de tailles de texte, les
+   espacements, les rayons et les nuances `gray/` et `red/` reprennent à
+   l'identique les valeurs par défaut du framework. On ne redéclare donc ici que
+   ce qui est réellement propre à la marque — redéfinir le reste ne ferait que
+   dupliquer Tailwind, avec le risque de dériver silencieusement à la prochaine
+   montée de version.
+
+   Les suffixes numériques sont ceux de Figma : « Blue Primary/600 » devient
+   `--color-primary-600`, pour qu'un écart entre maquette et code se repère sans
+   avoir à traduire mentalement les noms.
+   ========================================================================== */
+
+@theme {
+  /* --- Bleu principal ------------------------------------------------------ */
+  --color-primary-50: #ebf1ff;
+  --color-primary-600: #2020ff; /* couleur de marque */
+  --color-primary-800: #1e1db6;
+  --color-primary-900: #20228f;
+  --color-primary-950: #131353;
+
+  /* --- Bleu d'accentuation ------------------------------------------------- */
+  --color-accent-700: #0095ff;
+
+  /* --- Gris de marque ------------------------------------------------------
+     Distincts des `gray/` de Tailwind, qui restent disponibles par ailleurs. */
+  --color-gris-50: #fafafa;
+  --color-gris-100: #f3f3f6;
+  --color-gris-300: #dadadb;
+  --color-gris-400: #8b8ba4;
+  --color-gris-950: #08080c;
+
+  /* --- Typographies --------------------------------------------------------
+     `family/Primary` porte les titrages, `family/Secondary` le texte courant.
+     Les deux sont chargées en variable par next/font (cf. layout.tsx). */
+  --font-sans: var(--police-secondaire), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--police-primaire), var(--police-secondaire), sans-serif;
+
+  /* --- Interlettrage ------------------------------------------------------- */
+  --tracking-wider: 0.8px;
+  --tracking-widest: 1.6px;
+
+  /* --- Ombres -------------------------------------------------------------- */
+  --shadow-card: 0 4px 14px rgb(0 0 0 / 0.25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
+/* =============================================================================
+   Réglages de base.
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+   Les hauteurs de ligne viennent de Figma : 1.5 pour le texte courant, 1.4 pour
+   les titrages, ramené à 1.2 au-delà de 48px. Cette dernière valeur ne peut pas
+   vivre sur le token de taille — `size/base` sert à la fois à un titrage (1.4)
+   et à du texte courant (1.5) — elle est donc posée sur les deux plus grandes
+   tailles uniquement.
+   ========================================================================== */
+
+@layer base {
+  body {
+    background-color: #ffffff;
+    color: var(--color-gris-950);
+    font-family: var(--font-sans);
+    line-height: 1.5;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .text-6xl, .text-7xl {
+    line-height: 1.2;
+  }
 }
