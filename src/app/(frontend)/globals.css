@@ -26,6 +26,12 @@
   /* --- Bleu d'accentuation ------------------------------------------------- */
   --color-accent-700: #0095ff;
 
+  /* --- Encre ---------------------------------------------------------------
+     Bleu-noir des fonds translucides et des ombres dures des boutons. Non
+     nommé dans les variables Figma, mais répété à l'identique d'un composant à
+     l'autre : lui donner un token évite de recopier `rgb(0 0 34)` partout. */
+  --color-encre: #000022;
+
   /* --- Gris de marque ------------------------------------------------------
      Distincts des `gray/` de Tailwind, qui restent disponibles par ailleurs. */
   --color-gris-50: #fafafa;
