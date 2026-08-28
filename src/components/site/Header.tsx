@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/Button";
-import { NavLink } from "./NavLink";
+import { Navigation } from "./Navigation";
 
 /**
  * En-tête du site (Figma « Menu sticky »).
@@ -13,30 +13,16 @@ import { NavLink } from "./NavLink";
  * à dimensions fixes, que l'optimiseur ne peut ni redimensionner utilement ni
  * convertir, et qui exigeraient en prime d'ouvrir `dangerouslyAllowSVG`.
  */
-const liens = [
-  { libelle: "Nos compétences", href: "/competences" },
-  { libelle: "Notre approche", href: "/notre-approche" },
-  { libelle: "Blog", href: "/blog" },
-  { libelle: "À propos", href: "/a-propos" },
-  { libelle: "Contact", href: "/contact" },
-];
-
 export function Header() {
   return (
     <header className="sticky top-0 z-50 flex h-[114px] w-full items-center justify-center px-4 py-5">
-      <div className="flex w-full max-w-[1648px] items-center justify-between rounded bg-encre/80 px-6 py-3.5 backdrop-blur-[5px]">
+      <div className="relative flex w-full max-w-[1648px] items-center justify-between rounded bg-encre/80 px-6 py-3.5 backdrop-blur-[5px]">
         <Link href="/" aria-label="BONE IT — accueil">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/bone-logotype.svg" alt="BONE IT" width={141} height={40} />
         </Link>
 
-        <nav className="flex h-11 items-center justify-center gap-9 px-6 py-3">
-          {liens.map(({ libelle, href }) => (
-            <NavLink key={href} href={href}>
-              {libelle}
-            </NavLink>
-          ))}
-        </nav>
+        <Navigation />
 
         <div className="flex h-[45px] items-center gap-5">
           <div className="flex h-11 items-center justify-center gap-4 rounded py-3 pl-6 pr-4">

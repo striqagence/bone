@@ -18,13 +18,18 @@ import { usePathname } from "next/navigation";
  * le début du texte ; à l'état actif elle est plus petite et entièrement
  * dégagée.
  */
-export function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+export function NavLink({
+  href,
+  children,
+  ...rest
+}: { href: string; children: React.ReactNode } & React.ComponentProps<typeof Link>) {
   const chemin = usePathname();
   // Une sous-page (/blog/mon-article) garde son entrée de menu active.
   const actif = chemin === href || chemin.startsWith(`${href}/`);
 
   return (
     <Link
+      {...rest}
       href={href}
       aria-current={actif ? "page" : undefined}
       className={`group relative whitespace-nowrap text-base text-white ${actif ? "font-medium" : "font-normal hover:font-medium"}`}

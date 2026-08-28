@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/site/Header";
+import { MenuDeroulant } from "@/components/site/MenuDeroulant";
 import { NavLink } from "@/components/site/NavLink";
 
 /**
@@ -26,6 +27,12 @@ export default function DesignSystem() {
           <NavLink href="/design-system">Actif</NavLink>
           <NavLink href="/exemple-a">Par défaut</NavLink>
           <NavLink href="/exemple-b">Survole-moi</NavLink>
+        </div>
+
+        {/* Le déroulant est aussi montré déplié, pour l'examiner sans avoir à
+            maintenir le survol. */}
+        <div className="px-16">
+          <MenuDeroulant />
         </div>
       </section>
 
