@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Google_Sans_Flex, Work_Sans } from "next/font/google";
 
+import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { estUneLangue, langues } from "@/lib/i18n";
 
@@ -47,6 +48,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
       <body className="min-h-full flex flex-col">
         <Header langue={locale} />
         {children}
+        <Footer langue={locale} />
       </body>
     </html>
   );
