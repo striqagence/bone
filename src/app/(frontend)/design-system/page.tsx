@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/site/Header";
+import { NavLink } from "@/components/site/NavLink";
 
 /**
  * Planche de contrôle du design system.
@@ -18,6 +19,14 @@ export default function DesignSystem() {
       <section className="flex flex-col gap-6 bg-gris-950 pb-16">
         <Header />
         <h2 className="px-16 text-2xl text-white">En-tête</h2>
+
+        {/* Le lien pointant sur la page courante rend l'état Actif visible ici ;
+            les deux autres liens montrent Default, et Hover au survol. */}
+        <div className="flex items-center gap-9 px-24">
+          <NavLink href="/design-system">Actif</NavLink>
+          <NavLink href="/exemple-a">Par défaut</NavLink>
+          <NavLink href="/exemple-b">Survole-moi</NavLink>
+        </div>
       </section>
 
       <div className="flex flex-col gap-16 px-16">

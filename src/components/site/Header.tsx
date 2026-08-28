@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/Button";
+import { NavLink } from "./NavLink";
 
 /**
  * En-tête du site (Figma « Menu sticky »).
@@ -31,13 +32,9 @@ export function Header() {
 
         <nav className="flex h-11 items-center justify-center gap-9 px-6 py-3">
           {liens.map(({ libelle, href }) => (
-            <Link
-              key={href}
-              href={href}
-              className="text-base whitespace-nowrap text-white transition-opacity hover:opacity-70"
-            >
+            <NavLink key={href} href={href}>
               {libelle}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
