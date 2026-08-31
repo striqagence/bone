@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/Button";
 import { HeroInterne } from "@/components/sections/HeroInterne";
 import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
+import { CarteArticle } from "@/components/ui/CarteArticle";
 import { CartePole } from "@/components/ui/CartePole";
+import { SoumissionFormulaire } from "@/components/ui/SoumissionFormulaire";
 import { MenuDeroulant } from "@/components/site/MenuDeroulant";
 import { FilDAriane } from "@/components/ui/FilDAriane";
 import { Surtitre } from "@/components/ui/Surtitre";
@@ -152,6 +154,43 @@ export default async function DesignSystem({ params }: PageProps<"/[locale]/desi
             accroche="Broadcast • Post-production"
             description="Infrastructures critiques broadcast : flux temps réel, stockage massif, latence zéro tolérée, pensés par des experts du secteur."
             libelleAction="Voir le pôle"
+          />
+        </div>
+      </section>
+
+
+      <section className="flex flex-col gap-8">
+        <h2 className="px-16 text-2xl">Carte d’article</h2>
+        <div className="flex flex-wrap gap-12 px-16 pb-12">
+          <CarteArticle
+            langue={locale}
+            chemin="/blog/revendre-ou-revaloriser"
+            categorie="Capital"
+            date="avril 2026"
+            tempsDeLecture="6 min de lecture"
+            titre="Revendre ou revaloriser ? Le vrai calcul sur 3 ans"
+            description="Entre revente rapide et revalorisation interne, l’écart de coût réel n’est pas celui qu’on imagine."
+            libelleAction="Lire l’article"
+          />
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-8">
+        <h2 className="px-16 text-2xl">Soumission de formulaire</h2>
+        <div className="flex flex-col gap-10 px-16">
+          <SoumissionFormulaire
+            libelle="Envoyer ma demande"
+            message="En cliquant, vous acceptez les règles de confidentialité et les conditions d’utilisation de Google, ce site étant protégé par reCAPTCHA."
+          />
+          <SoumissionFormulaire
+            libelle="Envoyer ma demande"
+            etat="succes"
+            message="Votre demande a bien été envoyée. Un membre de l’équipe BONE vous recontacte sous 24 à 48h."
+          />
+          <SoumissionFormulaire
+            libelle="Envoyer ma demande"
+            etat="erreur"
+            message="Une erreur est survenue lors de l’envoi. Merci de réessayer, ou de nous contacter directement par email."
           />
         </div>
       </section>

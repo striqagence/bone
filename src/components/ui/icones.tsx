@@ -37,3 +37,41 @@ export function ChevronDroite() {
     </span>
   );
 }
+
+/**
+ * Pictogrammes d'état du formulaire, tracés exportés de Figma.
+ *
+ * Comme les précédents, ils mesurent 22,33 dans une boîte de 25 et passent en
+ * `currentColor`. La maquette les colore respectivement en bleu de marque et en
+ * rouge 600 — ce dernier plus soutenu que le rouge 500 du texte qui
+ * l'accompagne, nuance conservée telle quelle.
+ */
+function Cercle({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex size-[25px] shrink-0 items-center justify-center">
+      <svg width="22.3333" height="22.3333" viewBox="0 0 22.3333 22.3333" fill="none" aria-hidden>
+        <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          {children}
+        </g>
+      </svg>
+    </span>
+  );
+}
+
+export function IconeSucces() {
+  return (
+    <Cercle>
+      <path d="M14.2917 1.22688C13.3052 0.917036 12.2554 0.750001 11.1667 0.750001C5.4137 0.750001 0.75 5.4137 0.75 11.1667C0.75 16.9196 5.4137 21.5833 11.1667 21.5833C16.9196 21.5833 21.5833 16.9196 21.5833 11.1667C21.5833 10.0779 21.4163 9.02817 21.1065 8.04167" />
+      <path d="M7.52083 8.5625L11.1667 12.2083L20.5419 1.79167" />
+    </Cercle>
+  );
+}
+
+export function IconeErreur() {
+  return (
+    <Cercle>
+      <path d="M14.291 14.2917L8.04167 8.04167M8.04233 14.2917L14.2917 8.04167" />
+      <path d="M21.5833 11.1667C21.5833 5.4137 16.9196 0.750001 11.1667 0.750001C5.4137 0.750001 0.75 5.4137 0.75 11.1667C0.75 16.9196 5.4137 21.5833 11.1667 21.5833C16.9196 21.5833 21.5833 16.9196 21.5833 11.1667Z" />
+    </Cercle>
+  );
+}
