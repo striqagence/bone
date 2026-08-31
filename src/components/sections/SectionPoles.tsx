@@ -22,9 +22,10 @@ export function SectionPoles({
   poles,
 }: {
   langue: Langue;
-  surtitre: string;
-  titreHaut: string;
-  titreBas: string;
+  /** L'en-tête est absent sur l'écran Compétences, dont le hero l'annonce déjà. */
+  surtitre?: string | null;
+  titreHaut?: string | null;
+  titreBas?: string | null;
   poles: {
     pole: "expertise" | "capital" | "feed";
     chemin: string;
@@ -34,16 +35,18 @@ export function SectionPoles({
   }[];
 }) {
   return (
-    <section className="flex w-full flex-col items-center pt-24 lg:pt-64">
-      <div className="flex w-full max-w-[1600px] flex-col items-center gap-2.5 px-6 pb-10 lg:px-28 lg:pb-[60px]">
-        <Surtitre>{surtitre}</Surtitre>
-        <h2 className="w-full titrage text-center font-bold text-primary-950">
-          <span className="block text-3xl leading-[1.2] text-primary-600 lg:text-7xl">
-            {titreHaut}
-          </span>
-          <span className="block text-2xl leading-[1.4] lg:text-5xl">{titreBas}</span>
-        </h2>
-      </div>
+    <section className={`flex w-full flex-col items-center ${surtitre ? "pt-24 lg:pt-64" : ""}`}>
+      {surtitre && (
+        <div className="flex w-full max-w-[1600px] flex-col items-center gap-2.5 px-6 pb-10 lg:px-28 lg:pb-[60px]">
+          <Surtitre>{surtitre}</Surtitre>
+          <h2 className="w-full titrage text-center font-bold text-primary-950">
+            <span className="block text-3xl leading-[1.2] text-primary-600 lg:text-7xl">
+              {titreHaut}
+            </span>
+            <span className="block text-2xl leading-[1.4] lg:text-5xl">{titreBas}</span>
+          </h2>
+        </div>
+      )}
 
       <div className="flex w-full flex-col lg:flex-row lg:items-start">
         {poles.map((p) => (

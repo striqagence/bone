@@ -240,6 +240,42 @@ export interface Page {
      */
     chemin?: string | null;
   };
+  sections?:
+    | (
+        | {
+            /**
+             * À laisser décoché quand le hero de la page annonce déjà les pôles.
+             */
+            avecEnTete?: boolean | null;
+            surtitre?: string | null;
+            titreHaut?: string | null;
+            titreBas?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bandePoles';
+          }
+        | {
+            surtitre?: string | null;
+            titre: string;
+            texte: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'synergie';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            cta: {
+              libelle: string;
+              chemin: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'appelAction';
+          }
+      )[]
+    | null;
   /**
    * À défaut, le titre de la page est utilisé.
    */
@@ -444,6 +480,44 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         libelle?: T;
         chemin?: T;
+      };
+  sections?:
+    | T
+    | {
+        bandePoles?:
+          | T
+          | {
+              avecEnTete?: T;
+              surtitre?: T;
+              titreHaut?: T;
+              titreBas?: T;
+              id?: T;
+              blockName?: T;
+            };
+        synergie?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              texte?: T;
+              id?: T;
+              blockName?: T;
+            };
+        appelAction?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              cta?:
+                | T
+                | {
+                    libelle?: T;
+                    chemin?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   metaTitre?: T;
   metaDescription?: T;

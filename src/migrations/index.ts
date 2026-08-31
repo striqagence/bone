@@ -18,6 +18,7 @@ import * as migration_20260831_100017_accueil_appel from './20260831_100017_accu
 import * as migration_20260831_100258_accueil_profils from './20260831_100258_accueil_profils';
 import * as migration_20260831_111726_demandes from './20260831_111726_demandes';
 import * as migration_20260831_111952_contact from './20260831_111952_contact';
+import * as migration_20260831_112753_pages_sections from './20260831_112753_pages_sections';
 
 export const migrations = [
   {
@@ -118,6 +119,11 @@ export const migrations = [
   {
     up: migration_20260831_111952_contact.up,
     down: migration_20260831_111952_contact.down,
-    name: '20260831_111952_contact'
+    name: '20260831_111952_contact',
+  },
+  {
+    up: migration_20260831_112753_pages_sections.up,
+    down: migration_20260831_112753_pages_sections.down,
+    name: '20260831_112753_pages_sections'
   },
 ];

@@ -3,8 +3,9 @@ import { notFound } from "next/navigation";
 
 import { HeroInterne } from "@/components/sections/HeroInterne";
 import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
+import { RendreSections } from "@/components/sections/RendreSections";
 import { estUneLangue } from "@/lib/i18n";
-import { arianeDe, trouverPage } from "@/lib/pages";
+import { arianeDe, chargerPoles, trouverPage } from "@/lib/pages";
 
 /**
  * Rend une page du back-office à partir de son chemin.
@@ -40,6 +41,11 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
       ? { src: page.image.url, alt: page.image.alt }
       : undefined;
 
+  // Les sections des pôles tirent leurs libellés des pages de pôle : on ne les
+  // charge que si la page en affiche.
+  const sections = page.sections ?? [];
+  const bandes = sections.length > 0 ? await chargerPoles(locale) : [];
+
   const cta =
     page.cta?.libelle && page.cta.chemin
       ? { libelle: page.cta.libelle, chemin: page.cta.chemin }
@@ -47,30 +53,38 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
 
   // Les pages de pôle prennent le hero sur photo de la maquette, logotype
   // compris ; les autres gardent le hero clair.
+  const suite = <RendreSections sections={sections} langue={locale} bandes={bandes} />;
+
   if (page.pole) {
     return (
-      <HeroPleineImage
+      <>
+        <HeroPleineImage
+          langue={locale}
+          entrees={arianeDe(page)}
+          surtitre={page.surtitre ?? page.titre}
+          titre={page.accroche ?? page.titre}
+          description={page.description ?? ""}
+          image={image}
+          logo={page.pole}
+          cta={cta}
+        />
+        {suite}
+      </>
+    );
+  }
+
+  return (
+    <>
+      <HeroInterne
         langue={locale}
         entrees={arianeDe(page)}
         surtitre={page.surtitre ?? page.titre}
         titre={page.accroche ?? page.titre}
         description={page.description ?? ""}
         image={image}
-        logo={page.pole}
         cta={cta}
       />
-    );
-  }
-
-  return (
-    <HeroInterne
-      langue={locale}
-      entrees={arianeDe(page)}
-      surtitre={page.surtitre ?? page.titre}
-      titre={page.accroche ?? page.titre}
-      description={page.description ?? ""}
-      image={image}
-      cta={cta}
-    />
+      {suite}
+    </>
   );
 }

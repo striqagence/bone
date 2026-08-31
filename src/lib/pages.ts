@@ -47,6 +47,39 @@ export function cheminDe(page: Page): string {
   return morceaux.join("/");
 }
 
+/**
+ * Les trois pôles, dans l'ordre de la maquette, tels que leurs pages les
+ * décrivent. Sert aux sections qui les affichent — bande et synergie — pour que
+ * leur nom n'ait qu'une seule source.
+ */
+export async function chargerPoles(langue: Langue) {
+  const ordre = ["expertise", "capital", "feed"] as const;
+  const payload = await getPayload({ config });
+  const { docs } = await payload.find({
+    collection: "pages",
+    locale: langue,
+    where: { pole: { in: [...ordre] } },
+    depth: 2,
+    limit: 3,
+  });
+
+  return ordre.flatMap((cle) => {
+    const page = docs.find((p) => p.pole === cle);
+    if (!page) return [];
+    const image =
+      page.image && typeof page.image === "object" && page.image.url
+        ? { src: page.image.url, alt: page.image.alt }
+        : undefined;
+    return [{
+      pole: cle,
+      chemin: `/${cheminDe(page)}`,
+      accroche: page.accrocheCourte ?? "",
+      tagline: page.surtitre ?? "",
+      image,
+    }];
+  });
+}
+
 /** Entrées du fil d'ariane : les ancêtres cliquables, puis la page courante. */
 export function arianeDe(page: Page): { libelle: string; chemin?: string }[] {
   const ancetres: { libelle: string; chemin?: string }[] = [];

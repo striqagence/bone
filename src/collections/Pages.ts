@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 
+import { sections } from "../blocks";
 import { revaliderSite } from "../lib/revalidate";
 
 /**
@@ -135,6 +136,20 @@ export const Pages: CollectionConfig = {
                   admin: { description: "Sans préfixe de langue." },
                 },
               ],
+            },
+          ],
+        },
+        {
+          label: "Sections",
+          description:
+            "Blocs affichés sous le hero, dans l’ordre où ils sont rangés ici.",
+          fields: [
+            {
+              name: "sections",
+              type: "blocks",
+              label: "Sections",
+              blocks: sections,
+              admin: { initCollapsed: true },
             },
           ],
         },
