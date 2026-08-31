@@ -28,11 +28,11 @@ export function Footer({
   const { poles, colonnes, contact, liensLegaux, credit } = navigation;
 
   return (
-    <footer className="relative flex w-full flex-col items-center overflow-hidden bg-encre px-28">
-      <div className="relative flex w-full max-w-[1600px] flex-col gap-2.5 pb-64 pt-20">
-        <div className="flex w-full items-start justify-center py-8">
-          <div className="relative grid flex-1 grid-cols-[max-content_1fr_1fr_1fr_max-content] gap-x-28 gap-y-5 pt-5">
-            <div className="flex w-[493px] flex-col items-start gap-[30px] self-start">
+    <footer className="relative flex w-full flex-col items-center overflow-hidden bg-encre px-6 lg:px-28">
+      <div className="relative flex w-full max-w-[1600px] flex-col gap-10 pb-44 pt-12 lg:gap-2.5 lg:pb-64 lg:pt-20">
+        <div className="flex w-full items-start justify-center py-0 lg:py-8">
+          <div className="relative flex flex-1 flex-col gap-10 pt-0 sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-[max-content_1fr_1fr_1fr_max-content] lg:gap-x-28 lg:gap-y-5 lg:pt-5">
+            <div className="flex w-full flex-col items-start gap-[30px] self-start sm:col-span-2 lg:col-span-1 lg:w-[493px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand/bone-logotype-clair.svg"
@@ -40,7 +40,7 @@ export function Footer({
                 width={246}
                 height={70}
               />
-              <p className="text-xl text-white/80">{navigation.baseline}</p>
+              <p className="text-lg text-white/80 lg:text-xl">{navigation.baseline}</p>
             </div>
 
             <div className="flex flex-col items-start justify-center gap-2.5 self-start">
@@ -83,7 +83,7 @@ export function Footer({
               </a>
             </div>
 
-            <div className="flex h-[45px] items-center gap-5 justify-self-start">
+            <div className="flex h-[45px] items-center gap-5 sm:col-span-2 lg:col-span-1 lg:justify-self-start">
               <Button
                 href={lien(navigation.boutonEntete.chemin, langue)}
                 variante="secondary"
@@ -102,16 +102,16 @@ export function Footer({
           width={1429}
           height={206}
           aria-hidden
-          className="pointer-events-none absolute bottom-0 left-[85.51px] max-w-none"
+          className="pointer-events-none absolute bottom-0 left-0 h-auto w-[820px] max-w-none lg:left-[85.51px] lg:w-[1429px]"
         />
 
-        <div className="flex w-full items-start justify-between">
+        <div className="flex w-full flex-col items-start gap-4 lg:flex-row lg:justify-between">
           {/* L'année se calcule au build : figée dans le code, elle serait
               périmée au premier janvier suivant. */}
           <p className="text-xs whitespace-nowrap text-white/80">
             © {new Date().getFullYear()} Bone. Tous droits réservés
           </p>
-          <div className="flex items-center justify-end gap-7 text-xs text-white/80">
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-2 text-xs text-white/80 lg:justify-end">
             {(liensLegaux ?? []).map(({ libelle, chemin }) => (
               <Link key={chemin} href={lien(chemin, langue)} className="whitespace-nowrap">
                 {libelle}
