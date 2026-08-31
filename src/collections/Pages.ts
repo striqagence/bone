@@ -67,6 +67,20 @@ export const Pages: CollectionConfig = {
       filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
     },
     {
+      name: "pole",
+      type: "select",
+      label: "Pôle",
+      options: [
+        { label: "Expertise", value: "expertise" },
+        { label: "Capital", value: "capital" },
+        { label: "Feed", value: "feed" },
+      ],
+      admin: {
+        description:
+          "Bascule la page sur le hero sur photo et y affiche le logotype du pôle. Laisser vide pour une page ordinaire.",
+      },
+    },
+    {
       type: "tabs",
       tabs: [
         {

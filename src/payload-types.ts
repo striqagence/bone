@@ -212,6 +212,10 @@ export interface Page {
    * Détermine l’URL et le fil d’ariane. Laisser vide pour une page de premier niveau.
    */
   parent?: (number | null) | Page;
+  /**
+   * Bascule la page sur le hero sur photo et y affiche le logotype du pôle. Laisser vide pour une page ordinaire.
+   */
+  pole?: ('expertise' | 'capital' | 'feed') | null;
   surtitre?: string | null;
   /**
    * Le grand titre du hero, distinct du titre de la page.
@@ -396,6 +400,7 @@ export interface PagesSelect<T extends boolean = true> {
   titre?: T;
   slug?: T;
   parent?: T;
+  pole?: T;
   surtitre?: T;
   accroche?: T;
   description?: T;

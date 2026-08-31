@@ -99,7 +99,16 @@ export default buildConfig({
   },
   editor: lexicalEditor(),
   db: postgresAdapter({
-    pool: { connectionString: process.env.DATABASE_URI ?? "" },
+    pool: {
+      connectionString: process.env.DATABASE_URI ?? "",
+      /**
+       * Le pooler Supabase plafonne à 15 clients simultanés. Sans borne, chaque
+       * contexte — serveur local, script de peuplement, fonction serverless —
+       * en ouvre jusqu'à dix par défaut : deux suffisent alors à saturer le
+       * pool et à faire échouer le troisième sur un EMAXCONNSESSION.
+       */
+      max: 4,
+    },
     // Les migrations sont jouées explicitement (`npm run payload migrate`) et
     // non déduites du schéma au démarrage : en serverless, un push automatique
     // se déclencherait à froid sur chaque instance.

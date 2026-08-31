@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { Button } from "@/components/ui/Button";
 import { FilDAriane } from "@/components/ui/FilDAriane";
 import { Surtitre } from "@/components/ui/Surtitre";
@@ -16,7 +18,8 @@ import { lien, type Langue } from "@/lib/i18n";
  * 400px sur un téléphone les rendrait illisibles, ils s'empilent donc.
  *
  * La photo est un contenu, pas un élément de charte : elle vient en props et
- * sera à terme servie par Payload.
+ * passe par next/image — contrairement aux vectoriels de la charte, un JPEG de
+ * 2400px gagne à être redimensionné pour le gabarit réellement affiché.
  */
 export function HeroInterne({
   langue,
@@ -65,11 +68,13 @@ export function HeroInterne({
           <div className="flex flex-col items-start lg:mr-[-100px] lg:w-[476px] lg:pb-[30px]">
             <div className="relative h-[240px] w-full rounded lg:h-[430px] lg:max-w-[500px]">
               {image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={image.src}
                   alt={image.alt}
-                  className="absolute inset-0 size-full rounded object-cover"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 476px, 100vw"
+                  className="rounded object-cover"
                 />
               ) : (
                 <div className="absolute inset-0 rounded bg-gris-300" />

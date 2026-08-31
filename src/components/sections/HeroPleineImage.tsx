@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { Button } from "@/components/ui/Button";
 import { FilDAriane } from "@/components/ui/FilDAriane";
 import { Surtitre } from "@/components/ui/Surtitre";
@@ -48,8 +50,7 @@ export function HeroPleineImage({
           fournie, pour que le dégradé ne se détache pas sur du vide. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-primary-950">
         {image && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={image.src} alt="" className="absolute inset-0 size-full object-cover" />
+          <Image src={image.src} alt="" fill priority sizes="100vw" className="object-cover" />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_34/0.45),rgb(0_0_34/0.9)_64.271%)]" />
       </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { HeroInterne } from "@/components/sections/HeroInterne";
+import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
 import { estUneLangue } from "@/lib/i18n";
 import { arianeDe, trouverPage } from "@/lib/pages";
 
@@ -39,6 +40,28 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
       ? { src: page.image.url, alt: page.image.alt }
       : undefined;
 
+  const cta =
+    page.cta?.libelle && page.cta.chemin
+      ? { libelle: page.cta.libelle, chemin: page.cta.chemin }
+      : undefined;
+
+  // Les pages de pôle prennent le hero sur photo de la maquette, logotype
+  // compris ; les autres gardent le hero clair.
+  if (page.pole) {
+    return (
+      <HeroPleineImage
+        langue={locale}
+        entrees={arianeDe(page)}
+        surtitre={page.surtitre ?? page.titre}
+        titre={page.accroche ?? page.titre}
+        description={page.description ?? ""}
+        image={image}
+        logo={page.pole}
+        cta={cta}
+      />
+    );
+  }
+
   return (
     <HeroInterne
       langue={locale}
@@ -47,11 +70,7 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
       titre={page.accroche ?? page.titre}
       description={page.description ?? ""}
       image={image}
-      cta={
-        page.cta?.libelle && page.cta.chemin
-          ? { libelle: page.cta.libelle, chemin: page.cta.chemin }
-          : undefined
-      }
+      cta={cta}
     />
   );
 }

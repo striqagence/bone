@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { lien, type Langue } from "@/lib/i18n";
@@ -51,8 +52,13 @@ export function CartePole({
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-primary-950">
         {image && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={image.src} alt="" className="absolute inset-0 size-full object-cover" />
+          <Image
+            src={image.src}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 640px, 100vw"
+            className="object-cover"
+          />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_34/0.3),rgb(0_0_34/0.6))]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_34/0.45),rgb(0_0_34/0.9))] opacity-0 transition-opacity group-hover:opacity-100" />

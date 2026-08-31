@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { lien, type Langue } from "@/lib/i18n";
@@ -42,8 +43,13 @@ export function CarteArticle({
       <div className="relative flex w-full flex-col items-start gap-4">
         <div className="relative h-[180px] w-full overflow-hidden rounded bg-gris-300">
           {image && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={image.src} alt={image.alt} className="absolute inset-0 size-full object-cover" />
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 1024px) 344px, 100vw"
+              className="object-cover"
+            />
           )}
         </div>
         <span className="absolute left-2.5 top-2.5 flex items-center justify-center gap-2 rounded bg-encre/80 px-3.5 py-3 text-[10px] font-semibold uppercase leading-none tracking-widest whitespace-nowrap text-white">
