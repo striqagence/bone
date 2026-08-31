@@ -1,5 +1,6 @@
 import { SectionAppel } from "@/components/sections/SectionAppel";
 import { SectionGrille } from "@/components/sections/SectionGrille";
+import { SectionRole } from "@/components/sections/SectionRole";
 import { SectionPoles } from "@/components/sections/SectionPoles";
 import { SectionSynergie } from "@/components/sections/SectionSynergie";
 import type { Langue } from "@/lib/i18n";
@@ -61,6 +62,16 @@ export function RendreSections({
                 titre={section.titre}
                 chapo={section.chapo}
                 intitules={(section.intitules ?? []).map(({ texte }) => texte)}
+              />
+            );
+          case "escalier":
+            return (
+              <SectionRole
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                etapes={section.cartes ?? []}
               />
             );
           case "appelAction":

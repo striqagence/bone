@@ -85,4 +85,43 @@ export const Grille: Block = {
   ],
 };
 
-export const sections = [BandePoles, Synergie, Grille, AppelAction];
+export const Escalier: Block = {
+  slug: "escalier",
+  labels: { singular: "Cartes en escalier", plural: "Cartes en escalier" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    { name: "chapo", type: "textarea", required: true, localized: true, label: "Chapô" },
+    {
+      name: "cartes",
+      type: "array",
+      label: "Cartes",
+      minRows: 1,
+      maxRows: 3,
+      admin: {
+        description:
+          "Chaque carte porte soit un numéro, soit un pictogramme. La dernière est souvent mise en avant.",
+      },
+      fields: [
+        { name: "numero", type: "text", label: "Numéro" },
+        {
+          name: "picto",
+          type: "select",
+          label: "Pictogramme",
+          options: [
+            { label: "Antenne", value: "antenne" },
+            { label: "Stockage", value: "stockage" },
+            { label: "Systèmes", value: "systemes" },
+          ],
+          admin: { description: "Remplace le numéro s’il est renseigné." },
+        },
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+        { name: "accentuee", type: "checkbox", label: "Mise en avant", defaultValue: false },
+      ],
+    },
+  ],
+};
+
+export const sections = [BandePoles, Synergie, Grille, Escalier, AppelAction];

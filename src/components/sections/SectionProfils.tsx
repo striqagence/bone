@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Surtitre } from "@/components/ui/Surtitre";
 import { FlecheRenvoi } from "@/components/ui/icones";
+import { PictoAntenne, PictoBalance, PictoBoussole, PictoSecurite } from "@/components/ui/pictos";
 
 /**
  * Section « À qui s'adresse Bone » de l'accueil (Figma « Container »).
@@ -17,10 +18,10 @@ import { FlecheRenvoi } from "@/components/ui/icones";
 const fonds = ["bg-primary-600", "bg-primary-800", "bg-primary-900", "bg-primary-950"];
 
 const pictos = {
-  antenne: "/brand/picto-antenne.svg",
-  securite: "/brand/picto-securite.svg",
-  balance: "/brand/picto-balance.svg",
-  boussole: "/brand/picto-boussole.svg",
+  antenne: PictoAntenne,
+  securite: PictoSecurite,
+  balance: PictoBalance,
+  boussole: PictoBoussole,
 } as const;
 
 export function SectionProfils({
@@ -69,8 +70,14 @@ export function SectionProfils({
             </div>
 
             <div className="flex min-w-px flex-1 flex-col items-start gap-3.5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={pictos[profil.picto]} alt="" aria-hidden className="h-10 w-auto" />
+              {(() => {
+                const Picto = pictos[profil.picto];
+                return (
+                  <span className="text-primary-50">
+                    <Picto />
+                  </span>
+                );
+              })()}
               <p className="w-full titrage text-2xl font-bold leading-[1.4] text-white lg:text-3xl">
                 {profil.titre}
               </p>

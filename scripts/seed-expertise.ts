@@ -68,15 +68,78 @@ const grilleEn = {
   ],
 };
 
+
+const couchesFr = {
+  blockType: "escalier" as const,
+  surtitre: "Les enjeux que nous traitons",
+  titre: "Trois couches, une seule cohérence",
+  chapo:
+    "Réseau, stockage et systèmes ne se pilotent pas séparément : chaque décision sur l’un impacte les deux autres.",
+  cartes: [
+    {
+      picto: "antenne" as const,
+      titre: "Réseau",
+      texte:
+        "Le réseau, c’est le système circulatoire de votre infrastructure : tout transite par lui, et la moindre faiblesse s’y propage instantanément. On l’audite en premier, avant même de parler stockage ou systèmes. Une architecture réseau mal pensée rend inefficace tout ce qui repose dessus.",
+      accentuee: false,
+    },
+    {
+      picto: "stockage" as const,
+      titre: "Stockage",
+      texte:
+        "Le stockage n’est jamais neutre : mal dimensionné, il coûte cher ; mal sécurisé, il expose vos données les plus sensibles. On évalue autant la performance que la résilience — un stockage rapide mais sans plan de reprise n’est qu’un risque déguisé. C’est souvent là que se cache la dette technique la plus coûteuse à corriger.",
+      accentuee: false,
+    },
+    {
+      picto: "systemes" as const,
+      titre: "Systèmes et virtualisation",
+      texte:
+        "Les systèmes et la virtualisation sont la couche qui exécute vos applications critiques au quotidien. Une virtualisation mal architecturée crée des dépendances invisibles jusqu’au jour de l’incident. On vérifie la cohérence entre ce que vous croyez avoir déployé et ce qui tourne réellement.",
+      accentuee: true,
+    },
+  ],
+};
+
+const couchesEn = {
+  blockType: "escalier" as const,
+  surtitre: "The issues we handle",
+  titre: "Three layers, one coherence",
+  chapo:
+    "Network, storage and systems are not steered separately: every decision on one affects the other two.",
+  cartes: [
+    {
+      picto: "antenne" as const,
+      titre: "Network",
+      texte:
+        "The network is your infrastructure’s circulatory system: everything travels through it, and the slightest weakness spreads instantly. We audit it first, before even discussing storage or systems. A poorly designed network architecture makes everything resting on it ineffective.",
+      accentuee: false,
+    },
+    {
+      picto: "stockage" as const,
+      titre: "Storage",
+      texte:
+        "Storage is never neutral: badly sized, it costs a fortune; badly secured, it exposes your most sensitive data. We assess resilience as much as performance — fast storage with no recovery plan is only a risk in disguise. This is often where the most expensive technical debt hides.",
+      accentuee: false,
+    },
+    {
+      picto: "systemes" as const,
+      titre: "Systems and virtualisation",
+      texte:
+        "Systems and virtualisation are the layer that runs your critical applications day to day. Poorly architected virtualisation creates dependencies that stay invisible until the day of the incident. We check that what runs matches what you believe you deployed.",
+      accentuee: true,
+    },
+  ],
+};
+
 await payload.update({
   collection: "pages",
   id,
   locale: "fr",
-  data: { ...heroFr, sections: [grilleFr], _status: "published" },
+  data: { ...heroFr, sections: [grilleFr, couchesFr], _status: "published" },
 });
 
 const pose = await payload.findByID({ collection: "pages", id, locale: "fr", depth: 0 });
-const bloc = pose.sections?.[0];
+const [blocGrille, blocCouches] = pose.sections ?? [];
 
 await payload.update({
   collection: "pages",
@@ -87,10 +150,18 @@ await payload.update({
     sections: [
       {
         ...grilleEn,
-        id: bloc?.id,
+        id: blocGrille?.id,
         intitules: grilleEn.intitules.map((t, i) => ({
           ...t,
-          id: bloc && "intitules" in bloc ? bloc.intitules?.[i]?.id : undefined,
+          id: blocGrille && "intitules" in blocGrille ? blocGrille.intitules?.[i]?.id : undefined,
+        })),
+      },
+      {
+        ...couchesEn,
+        id: blocCouches?.id,
+        cartes: couchesEn.cartes.map((c, i) => ({
+          ...c,
+          id: blocCouches && "cartes" in blocCouches ? blocCouches.cartes?.[i]?.id : undefined,
         })),
       },
     ],

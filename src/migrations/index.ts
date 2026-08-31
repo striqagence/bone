@@ -20,6 +20,7 @@ import * as migration_20260831_111726_demandes from './20260831_111726_demandes'
 import * as migration_20260831_111952_contact from './20260831_111952_contact';
 import * as migration_20260831_112753_pages_sections from './20260831_112753_pages_sections';
 import * as migration_20260831_113236_bloc_grille from './20260831_113236_bloc_grille';
+import * as migration_20260831_113807_bloc_escalier from './20260831_113807_bloc_escalier';
 
 export const migrations = [
   {
@@ -130,6 +131,11 @@ export const migrations = [
   {
     up: migration_20260831_113236_bloc_grille.up,
     down: migration_20260831_113236_bloc_grille.down,
-    name: '20260831_113236_bloc_grille'
+    name: '20260831_113236_bloc_grille',
+  },
+  {
+    up: migration_20260831_113807_bloc_escalier.up,
+    down: migration_20260831_113807_bloc_escalier.down,
+    name: '20260831_113807_bloc_escalier'
   },
 ];

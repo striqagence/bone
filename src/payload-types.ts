@@ -283,6 +283,30 @@ export interface Page {
             surtitre: string;
             titre: string;
             chapo: string;
+            /**
+             * Chaque carte porte soit un numéro, soit un pictogramme. La dernière est souvent mise en avant.
+             */
+            cartes?:
+              | {
+                  numero?: string | null;
+                  /**
+                   * Remplace le numéro s’il est renseigné.
+                   */
+                  picto?: ('antenne' | 'stockage' | 'systemes') | null;
+                  titre: string;
+                  texte: string;
+                  accentuee?: boolean | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'escalier';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
             cta: {
               libelle: string;
               chemin: string;
@@ -530,6 +554,25 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     texte?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        escalier?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              cartes?:
+                | T
+                | {
+                    numero?: T;
+                    picto?: T;
+                    titre?: T;
+                    texte?: T;
+                    accentuee?: T;
                     id?: T;
                   };
               id?: T;
