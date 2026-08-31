@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { HeroInterne } from "@/components/sections/HeroInterne";
+import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
+import { CartePole } from "@/components/ui/CartePole";
 import { MenuDeroulant } from "@/components/site/MenuDeroulant";
 import { FilDAriane } from "@/components/ui/FilDAriane";
 import { Surtitre } from "@/components/ui/Surtitre";
@@ -88,6 +90,70 @@ export default async function DesignSystem({ params }: PageProps<"/[locale]/desi
           description="Expertise, Capital et Feed couvrent l’ensemble du cycle de vie de votre infrastructure : conseil et architecture, revalorisation du parc, et environnements critiques pour les médias. Trois entrées distinctes, une même exigence."
           cta={{ libelle: "Parler à un expert", chemin: "/contact" }}
         />
+      </section>
+
+
+      {/* Les photos de fond viendront de Payload : l'aplat marine tient leur
+          place, le dégradé de la maquette restant appliqué par-dessus. */}
+      <section className="flex flex-col gap-8">
+        <h2 className="px-16 text-2xl">Hero de pôle et d’article</h2>
+        <HeroPleineImage
+          langue={locale}
+          entrees={[
+            { libelle: "Nos compétences", chemin: "/competences" },
+            { libelle: "Expertise" },
+          ]}
+          surtitre="Réseau • Stockage • systèmes"
+          titre="L’expertise qui donne du sens à toute l’infrastructure."
+          description="On n’exécute pas une commande. On analyse, on structure, on guide. Bone Expertise ne vend pas qu’une prestation : on sécurise une décision."
+          logo="expertise"
+          cta={{ libelle: "Parler à un expert", chemin: "/contact" }}
+        />
+        <HeroPleineImage
+          langue={locale}
+          entrees={[{ libelle: "Blog", chemin: "/blog" }, { libelle: "Un article" }]}
+          surtitre="Réseau • Stockage • systèmes"
+          titre="L’expertise qui donne du sens à toute l’infrastructure."
+          description="On n’exécute pas une commande. On analyse, on structure, on guide."
+          infos={{ date: "avril 2026", tempsDeLecture: "12 min de lecture" }}
+        />
+      </section>
+
+      <section className="flex flex-col gap-8">
+        <h2 className="px-16 text-2xl">Cartes de pôle</h2>
+        <p className="px-16 text-sm text-gris-400">
+          Le bloc description et action apparaît au survol à partir de 1024px, et reste
+          visible en dessous — le survol n’existe pas sur écran tactile.
+        </p>
+        <div className="flex flex-wrap gap-6 px-16">
+          <CartePole
+            langue={locale}
+            chemin="/competences/expertise"
+            pole="expertise"
+            eyebrow="Pôle cœur"
+            accroche="Réseau • Stockage • systèmes"
+            description="Audit de l’existant, cartographie des risques, conformité NIS2/ISO 27001 : Bone Expertise sécurise vos décisions d’architecture."
+            libelleAction="Voir le pôle"
+          />
+          <CartePole
+            langue={locale}
+            chemin="/competences/capital"
+            pole="capital"
+            eyebrow="Complément stratégique"
+            accroche="Jusqu’à 70% d’économie vs neuf"
+            description="Revalorisation plutôt que renouvellement systématique : jusqu’à 70% d’économie sur votre parc IT, avec une expertise infrastructure, pas de logique revendeur."
+            libelleAction="Voir le pôle"
+          />
+          <CartePole
+            langue={locale}
+            chemin="/competences/feed"
+            pole="feed"
+            eyebrow="Vertical business"
+            accroche="Broadcast • Post-production"
+            description="Infrastructures critiques broadcast : flux temps réel, stockage massif, latence zéro tolérée, pensés par des experts du secteur."
+            libelleAction="Voir le pôle"
+          />
+        </div>
       </section>
 
       <div className="flex flex-col gap-16 px-16">

@@ -44,6 +44,25 @@ const tailles: Record<Taille, string> = {
  */
 const axesTypo = { fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' };
 
+/**
+ * Compose les classes du bouton.
+ *
+ * Exporté pour les cas où l'apparence est requise sans le lien : la carte de
+ * pôle est cliquable dans son ensemble, son « Voir le pôle » ne doit donc pas
+ * être une seconde ancre imbriquée dans la première.
+ */
+export function classesBouton({
+  variante = "primary",
+  taille = "lg",
+  className = "",
+}: {
+  variante?: Variante;
+  taille?: Taille;
+  className?: string;
+} = {}) {
+  return `${base} ${variantes[variante]} ${tailles[taille]} ${className}`;
+}
+
 export function Button({
   href,
   children,
@@ -71,7 +90,7 @@ export function Button({
       target={target}
       rel={target === "_blank" ? "noreferrer" : undefined}
       style={axesTypo}
-      className={`${base} ${variantes[variante]} ${tailles[taille]} ${className}`}
+      className={classesBouton({ variante, taille, className })}
     >
       {flecheAvant && fleche}
       {children}
