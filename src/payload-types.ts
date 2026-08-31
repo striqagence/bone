@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    pages: Page;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -197,6 +199,44 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  titre: string;
+  /**
+   * Sans barre oblique : « competences », « expertise ».
+   */
+  slug: string;
+  /**
+   * Détermine l’URL et le fil d’ariane. Laisser vide pour une page de premier niveau.
+   */
+  parent?: (number | null) | Page;
+  surtitre?: string | null;
+  /**
+   * Le grand titre du hero, distinct du titre de la page.
+   */
+  accroche?: string | null;
+  description?: string | null;
+  image?: (number | null) | Media;
+  cta?: {
+    libelle?: string | null;
+    /**
+     * Sans préfixe de langue.
+     */
+    chemin?: string | null;
+  };
+  /**
+   * À défaut, le titre de la page est utilisé.
+   */
+  metaTitre?: string | null;
+  metaDescription?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -226,6 +266,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -343,6 +387,30 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  titre?: T;
+  slug?: T;
+  parent?: T;
+  surtitre?: T;
+  accroche?: T;
+  description?: T;
+  image?: T;
+  cta?:
+    | T
+    | {
+        libelle?: T;
+        chemin?: T;
+      };
+  metaTitre?: T;
+  metaDescription?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

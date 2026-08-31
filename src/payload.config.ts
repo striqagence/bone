@@ -8,6 +8,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 
 import { Media } from "./collections/Media";
+import { Pages } from "./collections/Pages";
 import { Users } from "./collections/Users";
 import { Navigation } from "./globals/Navigation";
 
@@ -80,7 +81,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " · Bone" },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Pages],
   globals: [Navigation],
   /**
    * Le français est la langue de référence : c'est elle qui est saisie, et
