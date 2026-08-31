@@ -3,31 +3,37 @@ import { Surtitre } from "@/components/ui/Surtitre";
 /**
  * Bande de logotypes partenaires (Figma « Logotype section » de la page Media).
  *
+ * La rangée est plus large que l'écran et déborde des deux côtés : la maquette
+ * coupe le premier et le dernier logotype, ce qui donne le bandeau continu
+ * plutôt qu'une liste qui commence et s'arrête. HPE y figure donc deux fois,
+ * en ouverture et en fermeture, comme la couture d'une boucle.
+ *
  * Chaque logo porte sa propre hauteur : la maquette les cale à l'œil — 26px
- * pour VMware, 45px pour un autre — et les aligner sur une hauteur unique
+ * pour VMware, 45px pour Palo Alto — et les aligner sur une hauteur unique
  * déséquilibrerait la rangée, les logos n'ayant pas le même poids optique.
  *
- * La rangée défile horizontalement en dessous de sa largeur : sept logos ne
- * tiennent pas côte à côte sur un téléphone, et les empiler ferait perdre la
- * lecture en bandeau.
+ * Sur téléphone la bande défile au doigt au lieu d'être rognée : à 375px de
+ * large, un débordement centré rendrait la moitié des logotypes inatteignables.
  */
 export function SectionPartenaires({
   surtitre,
   logos,
 }: {
   surtitre: string;
-  logos: { fichier: string; nom: string; hauteur: number }[];
+  logos: { id?: string | null; fichier: string; nom: string; hauteur: number }[];
 }) {
   return (
-    <section className="flex w-full flex-col items-center justify-center border-b border-gris-300 py-16 lg:py-24">
-      <div className="flex w-full flex-col items-center justify-center gap-6 px-6 lg:px-28">
+    <section className="flex w-full flex-col items-center justify-center gap-6 border-b border-gris-300 py-16 lg:py-24">
+      <div className="flex w-full justify-center px-6 lg:px-28">
         <div className="flex w-full max-w-[1600px] flex-col items-start justify-center p-2.5">
           <Surtitre>{surtitre}</Surtitre>
         </div>
+      </div>
 
-        <ul className="flex w-full max-w-[1600px] items-center gap-10 overflow-x-auto lg:justify-center">
-          {logos.map(({ fichier, nom, hauteur }, index) => (
-            <li key={fichier} className="flex shrink-0 items-center gap-10">
+      <div className="w-full overflow-x-auto lg:overflow-hidden">
+        <ul className="mx-auto flex w-max items-center gap-10 px-6 lg:w-full lg:justify-center lg:px-0">
+          {logos.map(({ id, fichier, nom, hauteur }, index) => (
+            <li key={id ?? `${fichier}-${index}`} className="flex shrink-0 items-center gap-10">
               {index > 0 && <span aria-hidden className="h-[50px] w-px bg-gris-300" />}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
