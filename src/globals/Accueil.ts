@@ -144,5 +144,34 @@ export const Accueil: GlobalConfig = {
         { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
       ],
     },
+    {
+      name: "role",
+      type: "group",
+      label: "Notre rôle fondamental",
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+        { name: "chapo", type: "textarea", required: true, localized: true, label: "Chapô" },
+        {
+          name: "etapes",
+          type: "array",
+          label: "Étapes",
+          minRows: 1,
+          admin: { initCollapsed: true },
+          fields: [
+            { name: "numero", type: "text", required: true, label: "Numéro" },
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+            {
+              name: "accentuee",
+              type: "checkbox",
+              label: "Mise en avant",
+              defaultValue: false,
+              admin: { description: "Affiche la carte sur fond bleu." },
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

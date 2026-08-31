@@ -529,6 +529,23 @@ export interface Accueil {
     surtitre: string;
     titre: string;
   };
+  role: {
+    surtitre: string;
+    titre: string;
+    chapo: string;
+    etapes?:
+      | {
+          numero: string;
+          titre: string;
+          texte: string;
+          /**
+           * Affiche la carte sur fond bleu.
+           */
+          accentuee?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -680,6 +697,22 @@ export interface AccueilSelect<T extends boolean = true> {
     | {
         surtitre?: T;
         titre?: T;
+      };
+  role?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        chapo?: T;
+        etapes?:
+          | T
+          | {
+              numero?: T;
+              titre?: T;
+              texte?: T;
+              accentuee?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

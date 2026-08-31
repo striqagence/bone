@@ -7,6 +7,7 @@ import * as migration_20260831_091006_accueil from './20260831_091006_accueil';
 import * as migration_20260831_091945_accueil_en_bref from './20260831_091945_accueil_en_bref';
 import * as migration_20260831_093327_accueil_constat from './20260831_093327_accueil_constat';
 import * as migration_20260831_093643_accueil_promesse from './20260831_093643_accueil_promesse';
+import * as migration_20260831_093819_accueil_role from './20260831_093819_accueil_role';
 
 export const migrations = [
   {
@@ -52,6 +53,11 @@ export const migrations = [
   {
     up: migration_20260831_093643_accueil_promesse.up,
     down: migration_20260831_093643_accueil_promesse.down,
-    name: '20260831_093643_accueil_promesse'
+    name: '20260831_093643_accueil_promesse',
+  },
+  {
+    up: migration_20260831_093819_accueil_role.up,
+    down: migration_20260831_093819_accueil_role.down,
+    name: '20260831_093819_accueil_role'
   },
 ];
