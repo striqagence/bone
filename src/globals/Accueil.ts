@@ -83,5 +83,57 @@ export const Accueil: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "constat",
+      type: "group",
+      label: "Le constat",
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+        {
+          name: "realite",
+          type: "group",
+          label: "Carte « La réalité terrain »",
+          fields: [
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            {
+              name: "chiffre",
+              type: "text",
+              required: true,
+              label: "Chiffre",
+              admin: { description: "Affiché en très grand, en bleu de marque." },
+            },
+            { name: "legende", type: "textarea", required: true, localized: true, label: "Légende" },
+            {
+              name: "puces",
+              type: "array",
+              label: "Puces",
+              fields: [
+                { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+              ],
+            },
+            { name: "photo", type: "upload", relationTo: "media", label: "Photo" },
+          ],
+        },
+        {
+          name: "enjeu",
+          type: "group",
+          label: "Carte « Le vrai enjeu »",
+          fields: [
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+            {
+              name: "citation",
+              type: "textarea",
+              required: true,
+              localized: true,
+              label: "Citation",
+              admin: { description: "Affichée en italique, guillemets compris." },
+            },
+            { name: "photo", type: "upload", relationTo: "media", label: "Photo" },
+          ],
+        },
+      ],
+    },
   ],
 };

@@ -497,6 +497,34 @@ export interface Accueil {
       chemin: string;
     };
   };
+  constat: {
+    surtitre: string;
+    titre: string;
+    realite: {
+      titre: string;
+      /**
+       * Affiché en très grand, en bleu de marque.
+       */
+      chiffre: string;
+      legende: string;
+      puces?:
+        | {
+            texte: string;
+            id?: string | null;
+          }[]
+        | null;
+      photo?: (number | null) | Media;
+    };
+    enjeu: {
+      titre: string;
+      texte: string;
+      /**
+       * Affichée en italique, guillemets compris.
+       */
+      citation: string;
+      photo?: (number | null) | Media;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -613,6 +641,34 @@ export interface AccueilSelect<T extends boolean = true> {
           | {
               libelle?: T;
               chemin?: T;
+            };
+      };
+  constat?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        realite?:
+          | T
+          | {
+              titre?: T;
+              chiffre?: T;
+              legende?: T;
+              puces?:
+                | T
+                | {
+                    texte?: T;
+                    id?: T;
+                  };
+              photo?: T;
+            };
+        enjeu?:
+          | T
+          | {
+              titre?: T;
+              texte?: T;
+              citation?: T;
+              photo?: T;
             };
       };
   updatedAt?: T;

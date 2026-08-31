@@ -75,3 +75,22 @@ export function IconeErreur() {
     </Cercle>
   );
 }
+
+/**
+ * Flèche de renvoi des puces (Figma « arrow-move-down-right-sharp »).
+ *
+ * Tracé exporté, mesuré 17,96 × 20,25 dans une boîte de 25. La maquette la
+ * colore en bleu de marque, porté ici par le parent via `currentColor`.
+ */
+export function FlecheRenvoi() {
+  return (
+    <span className="inline-flex size-[25px] shrink-0 items-center justify-center">
+      <svg width="17.9596" height="20.25" viewBox="0 0 17.9596 20.25" fill="none" aria-hidden>
+        <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M0.750003 0.75V2.91346C0.750003 4.99777 0.750003 6.03992 0.901384 6.91192C1.73468 11.712 5.861 15.4766 11.1222 16.2369C12.078 16.375 14.0904 16.375 16.375 16.375" />
+          <path d="M14.2917 19.5L16.7096 17.0821C17.0429 16.7488 17.2096 16.5821 17.2096 16.375C17.2096 16.1679 17.0429 16.0012 16.7096 15.6679L14.2917 13.25" />
+        </g>
+      </svg>
+    </span>
+  );
+}

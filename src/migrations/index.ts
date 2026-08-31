@@ -5,6 +5,7 @@ import * as migration_20260831_070907_pages from './20260831_070907_pages';
 import * as migration_20260831_090136_pole from './20260831_090136_pole';
 import * as migration_20260831_091006_accueil from './20260831_091006_accueil';
 import * as migration_20260831_091945_accueil_en_bref from './20260831_091945_accueil_en_bref';
+import * as migration_20260831_093327_accueil_constat from './20260831_093327_accueil_constat';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20260831_091945_accueil_en_bref.up,
     down: migration_20260831_091945_accueil_en_bref.down,
-    name: '20260831_091945_accueil_en_bref'
+    name: '20260831_091945_accueil_en_bref',
+  },
+  {
+    up: migration_20260831_093327_accueil_constat.up,
+    down: migration_20260831_093327_accueil_constat.down,
+    name: '20260831_093327_accueil_constat'
   },
 ];
