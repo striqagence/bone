@@ -3,6 +3,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 
 import { HeroAccueil } from "@/components/sections/HeroAccueil";
+import { SectionAppel } from "@/components/sections/SectionAppel";
 import { SectionChiffres } from "@/components/sections/SectionChiffres";
 import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
 import { SectionFaq } from "@/components/sections/SectionFaq";
@@ -20,7 +21,7 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres, faq } =
+  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres, faq, appel } =
     await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
 
   /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
@@ -145,6 +146,13 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
         titre={faq.titre}
         questions={faq.questions ?? []}
         image={photo(faq.image)}
+      />
+      <SectionAppel
+        langue={locale}
+        surtitre={appel.surtitre}
+        titre={appel.titre}
+        chapo={appel.chapo}
+        cta={appel.cta}
       />
     </>
   );

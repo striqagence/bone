@@ -654,6 +654,15 @@ export interface Accueil {
         }[]
       | null;
   };
+  appel: {
+    surtitre: string;
+    titre: string;
+    chapo: string;
+    cta: {
+      libelle: string;
+      chemin: string;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -920,6 +929,19 @@ export interface AccueilSelect<T extends boolean = true> {
               question?: T;
               reponse?: T;
               id?: T;
+            };
+      };
+  appel?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        chapo?: T;
+        cta?:
+          | T
+          | {
+              libelle?: T;
+              chemin?: T;
             };
       };
   updatedAt?: T;

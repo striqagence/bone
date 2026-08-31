@@ -368,5 +368,24 @@ export const Accueil: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "appel",
+      type: "group",
+      label: "Appel à l’action",
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+        { name: "chapo", type: "textarea", required: true, localized: true, label: "Chapô" },
+        {
+          name: "cta",
+          type: "group",
+          label: "Bouton",
+          fields: [
+            { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
+            { name: "chemin", type: "text", required: true, label: "Chemin" },
+          ],
+        },
+      ],
+    },
   ],
 };
