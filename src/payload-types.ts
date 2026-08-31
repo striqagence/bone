@@ -546,6 +546,35 @@ export interface Accueil {
         }[]
       | null;
   };
+  /**
+   * Les deux colonnes se lisent par paires : la première entrée de gauche fait face à la première de droite.
+   */
+  positionnement: {
+    surtitre: string;
+    titre: string;
+    gauche: {
+      titre: string;
+      sousTitre: string;
+      entrees?:
+        | {
+            titre: string;
+            texte: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    droite: {
+      titre: string;
+      sousTitre: string;
+      entrees?:
+        | {
+            titre: string;
+            texte: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -712,6 +741,38 @@ export interface AccueilSelect<T extends boolean = true> {
               texte?: T;
               accentuee?: T;
               id?: T;
+            };
+      };
+  positionnement?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        gauche?:
+          | T
+          | {
+              titre?: T;
+              sousTitre?: T;
+              entrees?:
+                | T
+                | {
+                    titre?: T;
+                    texte?: T;
+                    id?: T;
+                  };
+            };
+        droite?:
+          | T
+          | {
+              titre?: T;
+              sousTitre?: T;
+              entrees?:
+                | T
+                | {
+                    titre?: T;
+                    texte?: T;
+                    id?: T;
+                  };
             };
       };
   updatedAt?: T;

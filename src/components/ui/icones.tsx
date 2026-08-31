@@ -94,3 +94,22 @@ export function FlecheRenvoi() {
     </span>
   );
 }
+
+/**
+ * Variante à pointe arrondie de la flèche de renvoi (« arrow-move-down-right-round »).
+ *
+ * La maquette distingue les deux colonnes de la section « Positionnement » par
+ * cette seule nuance : pointe anguleuse à droite, arrondie à gauche.
+ */
+export function FlecheRenvoiRonde() {
+  return (
+    <span className="inline-flex size-[25px] shrink-0 items-center justify-center">
+      <svg width="18.1667" height="20.25" viewBox="0 0 18.1667 20.25" fill="none" aria-hidden>
+        <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M0.750003 0.75V2.91346C0.750003 4.99777 0.750003 6.03992 0.901384 6.91192C1.73468 11.712 5.861 15.4766 11.1222 16.2369C12.078 16.375 14.0904 16.375 16.375 16.375" />
+          <path d="M14.2917 19.5C14.9238 18.8856 17.4167 17.2503 17.4167 16.375C17.4167 15.4997 14.9238 13.8644 14.2917 13.25" />
+        </g>
+      </svg>
+    </span>
+  );
+}

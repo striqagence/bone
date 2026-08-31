@@ -5,6 +5,7 @@ import config from "@payload-config";
 import { HeroAccueil } from "@/components/sections/HeroAccueil";
 import { SectionEnBref } from "@/components/sections/SectionEnBref";
 import { SectionLeConstat } from "@/components/sections/SectionLeConstat";
+import { SectionPositionnement } from "@/components/sections/SectionPositionnement";
 import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
 import { estUneLangue } from "@/lib/i18n";
@@ -14,7 +15,7 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero, enBref, constat, promesse, role } = await payload.findGlobal({
+  const { hero, enBref, constat, promesse, positionnement, role } = await payload.findGlobal({
     slug: "accueil",
     locale,
     depth: 1,
@@ -64,6 +65,20 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
         }}
       />
       <SectionPromesse surtitre={promesse.surtitre} titre={promesse.titre} />
+      <SectionPositionnement
+        surtitre={positionnement.surtitre}
+        titre={positionnement.titre}
+        gauche={{
+          titre: positionnement.gauche.titre,
+          sousTitre: positionnement.gauche.sousTitre,
+          entrees: positionnement.gauche.entrees ?? [],
+        }}
+        droite={{
+          titre: positionnement.droite.titre,
+          sousTitre: positionnement.droite.sousTitre,
+          entrees: positionnement.droite.entrees ?? [],
+        }}
+      />
       <SectionRole
         surtitre={role.surtitre}
         titre={role.titre}

@@ -173,5 +173,56 @@ export const Accueil: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "positionnement",
+      type: "group",
+      label: "Positionnement",
+      admin: {
+        description:
+          "Les deux colonnes se lisent par paires : la première entrée de gauche fait face à la première de droite.",
+      },
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+        {
+          name: "gauche",
+          type: "group",
+          label: "Colonne de gauche",
+          fields: [
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            { name: "sousTitre", type: "text", required: true, localized: true, label: "Sous-titre" },
+            {
+              name: "entrees",
+              type: "array",
+              label: "Entrées",
+              minRows: 1,
+              fields: [
+                { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+                { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+              ],
+            },
+          ],
+        },
+        {
+          name: "droite",
+          type: "group",
+          label: "Colonne de droite",
+          fields: [
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            { name: "sousTitre", type: "text", required: true, localized: true, label: "Sous-titre" },
+            {
+              name: "entrees",
+              type: "array",
+              label: "Entrées",
+              minRows: 1,
+              fields: [
+                { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+                { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
