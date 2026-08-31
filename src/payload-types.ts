@@ -575,6 +575,30 @@ export interface Accueil {
         | null;
     };
   };
+  differenciation: {
+    surtitre: string;
+    titre: string;
+    habituelle: {
+      badge: string;
+      titre: string;
+      puces?:
+        | {
+            texte: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    bone: {
+      badge: string;
+      titre: string;
+      puces?:
+        | {
+            texte: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -770,6 +794,36 @@ export interface AccueilSelect<T extends boolean = true> {
                 | T
                 | {
                     titre?: T;
+                    texte?: T;
+                    id?: T;
+                  };
+            };
+      };
+  differenciation?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        habituelle?:
+          | T
+          | {
+              badge?: T;
+              titre?: T;
+              puces?:
+                | T
+                | {
+                    texte?: T;
+                    id?: T;
+                  };
+            };
+        bone?:
+          | T
+          | {
+              badge?: T;
+              titre?: T;
+              puces?:
+                | T
+                | {
                     texte?: T;
                     id?: T;
                   };

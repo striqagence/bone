@@ -224,5 +224,50 @@ export const Accueil: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "differenciation",
+      type: "group",
+      label: "Différenciation",
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+        {
+          name: "habituelle",
+          type: "group",
+          label: "Carte « L’approche habituelle »",
+          fields: [
+            { name: "badge", type: "text", required: true, localized: true, label: "Étiquette" },
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            {
+              name: "puces",
+              type: "array",
+              label: "Puces",
+              minRows: 1,
+              fields: [
+                { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+              ],
+            },
+          ],
+        },
+        {
+          name: "bone",
+          type: "group",
+          label: "Carte « Bone »",
+          fields: [
+            { name: "badge", type: "text", required: true, localized: true, label: "Étiquette" },
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            {
+              name: "puces",
+              type: "array",
+              label: "Puces",
+              minRows: 1,
+              fields: [
+                { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
