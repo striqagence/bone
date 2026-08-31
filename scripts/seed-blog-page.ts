@@ -1,3 +1,4 @@
+import path from "path";
 import { getPayload } from "payload";
 import config from "@payload-config";
 
@@ -10,12 +11,29 @@ import config from "@payload-config";
  */
 const payload = await getPayload({ config });
 
+const DOSSIER =
+  "/private/tmp/claude-501/-Users-audreybraun/9252f681-a78f-45ef-b4cc-a15965bdb178/scratchpad/photos/pretes";
+
 const { docs: photos } = await payload.find({
   collection: "media",
-  where: { filename: { equals: "hero-competences.jpg" } },
+  where: { filename: { equals: "hero-blog.jpg" } },
   limit: 1,
 });
-const photoHero = photos[0]?.id;
+const photo =
+  photos[0] ??
+  (await payload.create({
+    collection: "media",
+    locale: "fr",
+    filePath: path.join(DOSSIER, "hero-blog.jpg"),
+    data: { alt: "Une ingénieure annote un porte-bloc au milieu d’une salle serveurs." },
+  }));
+await payload.update({
+  collection: "media",
+  id: photo.id,
+  locale: "en",
+  data: { alt: "An engineer takes notes on a clipboard in the middle of a server room." },
+});
+const photoHero = photo.id;
 
 const heroFr = {
   surtitre: "ressources",
@@ -88,6 +106,11 @@ await payload.updateGlobal({
     libelleTousSujets: "Tous les sujets",
     gabaritCompte: "{n} articles",
     libelleCharger: "Charger plus d’articles",
+    libelleSommaire: "Sommaire",
+    libelleFaq: "FAQ",
+    libellePartageLinkedin: "Partager sur LinkedIn",
+    libelleCopierLien: "Copier le lien",
+    libelleLienCopie: "Lien copié",
     messageVide: "Aucun article dans cette catégorie pour le moment.",
   },
 });
@@ -101,6 +124,11 @@ await payload.updateGlobal({
     libelleTousSujets: "All topics",
     gabaritCompte: "{n} articles",
     libelleCharger: "Load more articles",
+    libelleSommaire: "Contents",
+    libelleFaq: "FAQ",
+    libellePartageLinkedin: "Share on LinkedIn",
+    libelleCopierLien: "Copy the link",
+    libelleLienCopie: "Link copied",
     messageVide: "No article in this category yet.",
   },
 });

@@ -188,18 +188,17 @@ toutes les pages, sans message d'erreur.
 
 ## Suite du travail
 
-Sept écrans sont finis — accueil, Contact, Compétences, Expertise, Capital,
-Feed et Notre approche. Restent trois écrans, page « Maquettes desktop »
-(`1:12`) :
+Neuf écrans sont finis — accueil, Contact, Compétences, Expertise, Capital,
+Feed, Notre approche, Blog et le détail d'un article. Reste un écran, page
+« Maquettes desktop » (`1:12`) :
 
 | Écran | Node | Hauteur |
 | --- | --- | --- |
-| Blog | `4148:8071` | 4 186 px |
-| Détail d'un article | `4153:9100` | 5 862 px |
 | À propos | `4159:10191` | 4 891 px |
 
-Les deux premiers supposent des routes `/blog` et `/blog/[slug]`, qui n'existent
-pas encore.
+Le corps des articles reste à écrire : seul celui de la une (« Dette technique
+d'infrastructure ») figure dans la maquette et a donc été saisi. Les neuf
+autres n'ont que leur titre, leur extrait et leur image.
 
 Les composants partagés sont tous intégrés : bouton, flèche, surtitre, fil
 d'ariane, carte de pôle, carte d'article, ligne de soumission, en-tête, pied de

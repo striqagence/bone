@@ -202,6 +202,7 @@ export function RendreSections({
             return (
               <SectionFaq
                 key={section.id}
+                id="faq"
                 surtitre={section.surtitre}
                 titre={section.titre}
                 questions={section.questions ?? []}

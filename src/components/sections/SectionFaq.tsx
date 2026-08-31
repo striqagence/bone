@@ -20,14 +20,20 @@ export function SectionFaq({
   titre,
   questions,
   image,
+  id,
 }: {
   surtitre: string;
   titre: string;
   questions: { question: string; reponse?: string | null }[];
   image?: { src: string; alt: string };
+  /** Ancre, pour que le sommaire d'un article puisse viser la section. */
+  id?: string;
 }) {
   return (
-    <section className="flex w-full flex-col items-center bg-encre px-6 py-16 lg:px-28 lg:py-32">
+    <section
+      id={id}
+      className="flex w-full scroll-mt-24 flex-col items-center bg-encre px-6 py-16 lg:px-28 lg:py-32"
+    >
       <div className="grid w-full max-w-[1600px] grid-cols-1 gap-12 lg:grid-cols-[0.75fr_1fr] lg:gap-x-20">
         <div className="relative h-[320px] w-full overflow-hidden rounded bg-gris-300 lg:h-[666px]">
           {image && (

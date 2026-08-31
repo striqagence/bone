@@ -1,5 +1,20 @@
 import type { CollectionConfig } from "payload";
+import {
+  BlocksFeature,
+  BlockquoteFeature,
+  BoldFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  ItalicFeature,
+  LinkFeature,
+  ParagraphFeature,
+  UnorderedListFeature,
+  UploadFeature,
+  lexicalEditor,
+} from "@payloadcms/richtext-lexical";
 
+import { Articles, AppelAction, Faq } from "../blocks";
+import { ARetenir } from "../blocks/article";
 import { revaliderSite } from "../lib/revalidate";
 
 /**
@@ -12,6 +27,9 @@ import { revaliderSite } from "../lib/revalidate";
  * la carte, et un article peut être publié avec un contenu encore court sans
  * que l'estimation devienne absurde.
  */
+/** Ce qui peut suivre le corps d'un article, dans l'ordre de la maquette. */
+const sectionsArticle = [Articles, Faq, AppelAction];
+
 export const Posts: CollectionConfig = {
   slug: "posts",
   labels: { singular: "Article", plural: "Articles" },
@@ -84,7 +102,62 @@ export const Posts: CollectionConfig = {
         {
           label: "Contenu",
           fields: [
-            { name: "contenu", type: "richText", localized: true, label: "Corps de l’article" },
+            {
+              name: "contenu",
+              type: "richText",
+              localized: true,
+              label: "Corps de l’article",
+              /**
+               * L'éditeur est restreint à ce que la maquette sait mettre en
+               * page : deux niveaux de titre, du texte, des listes, des
+               * citations, des images légendées et l'encadré « à retenir ».
+               * Ouvrir tout Lexical laisserait produire des mises en forme
+               * qu'aucune feuille de style du site ne couvre.
+               */
+              editor: lexicalEditor({
+                features: [
+                  ParagraphFeature(),
+                  HeadingFeature({ enabledHeadingSizes: ["h2", "h3"] }),
+                  BoldFeature(),
+                  ItalicFeature(),
+                  LinkFeature(),
+                  UnorderedListFeature(),
+                  BlockquoteFeature(),
+                  UploadFeature({
+                    collections: {
+                      media: {
+                        fields: [
+                          {
+                            name: "legende",
+                            type: "text",
+                            localized: true,
+                            label: "Légende",
+                            admin: { description: "Affichée sous l’image." },
+                          },
+                        ],
+                      },
+                    },
+                  }),
+                  BlocksFeature({ blocks: [ARetenir] }),
+                  InlineToolbarFeature(),
+                ],
+              }),
+            },
+          ],
+        },
+        {
+          label: "Sections",
+          fields: [
+            {
+              name: "sections",
+              type: "blocks",
+              label: "Sections de bas de page",
+              blocks: sectionsArticle,
+              admin: {
+                description:
+                  "Ce qui suit le corps de l’article : les articles à lire aussi, la FAQ et l’appel à l’action.",
+              },
+            },
           ],
         },
         {

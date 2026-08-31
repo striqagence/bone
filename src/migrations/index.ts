@@ -33,6 +33,7 @@ import * as migration_20260831_122544_bloc_partenaires from './20260831_122544_b
 import * as migration_20260831_135139_posture_points_entree from './20260831_135139_posture_points_entree';
 import * as migration_20260831_141346_blog_newsletter from './20260831_141346_blog_newsletter';
 import * as migration_20260831_141557_categories_ordonnees from './20260831_141557_categories_ordonnees';
+import * as migration_20260831_151345_article_contenu from './20260831_151345_article_contenu';
 
 export const migrations = [
   {
@@ -208,6 +209,11 @@ export const migrations = [
   {
     up: migration_20260831_141557_categories_ordonnees.up,
     down: migration_20260831_141557_categories_ordonnees.down,
-    name: '20260831_141557_categories_ordonnees'
+    name: '20260831_141557_categories_ordonnees',
+  },
+  {
+    up: migration_20260831_151345_article_contenu.up,
+    down: migration_20260831_151345_article_contenu.down,
+    name: '20260831_151345_article_contenu'
   },
 ];

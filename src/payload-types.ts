@@ -558,6 +558,55 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Ce qui suit le corps de l’article : les articles à lire aussi, la FAQ et l’appel à l’action.
+   */
+  sections?:
+    | (
+        | {
+            surtitre: string;
+            titre: string;
+            libelleAction: string;
+            /**
+             * Les derniers articles publiés sont repris automatiquement : leur contenu se gère depuis le blog.
+             */
+            nombre: number;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'articles';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            image?: (number | null) | Media;
+            questions?:
+              | {
+                  question: string;
+                  /**
+                   * Sans réponse, la question s’affiche sans pouvoir se déplier.
+                   */
+                  reponse?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            cta: {
+              libelle: string;
+              chemin: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'appelAction';
+          }
+      )[]
+    | null;
   metaTitre?: string | null;
   metaDescription?: string | null;
   updatedAt: string;
@@ -1073,6 +1122,51 @@ export interface PostsSelect<T extends boolean = true> {
   extrait?: T;
   image?: T;
   contenu?: T;
+  sections?:
+    | T
+    | {
+        articles?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              libelleAction?: T;
+              nombre?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              image?: T;
+              questions?:
+                | T
+                | {
+                    question?: T;
+                    reponse?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        appelAction?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              cta?:
+                | T
+                | {
+                    libelle?: T;
+                    chemin?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
   metaTitre?: T;
   metaDescription?: T;
   updatedAt?: T;
@@ -1396,6 +1490,14 @@ export interface Blog {
    */
   gabaritCompte: string;
   libelleCharger: string;
+  libelleSommaire: string;
+  /**
+   * Ajoutée au sommaire quand l’article porte une FAQ.
+   */
+  libelleFaq: string;
+  libellePartageLinkedin: string;
+  libelleCopierLien: string;
+  libelleLienCopie: string;
   /**
    * Affiché quand un filtre ne ramène rien.
    */
@@ -1775,6 +1877,11 @@ export interface BlogSelect<T extends boolean = true> {
   libelleTousSujets?: T;
   gabaritCompte?: T;
   libelleCharger?: T;
+  libelleSommaire?: T;
+  libelleFaq?: T;
+  libellePartageLinkedin?: T;
+  libelleCopierLien?: T;
+  libelleLienCopie?: T;
   messageVide?: T;
   updatedAt?: T;
   createdAt?: T;
