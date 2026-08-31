@@ -1,8 +1,12 @@
-# État du projet — 28 août 2026
+# État du projet — 31 août 2026
 
 Site vitrine **BONE IT**, intégré depuis Figma. Ce document sert à reprendre le
 travail : il consigne ce qui est en place, les décisions prises et ce qui reste
 à trancher.
+
+**Fait à ce jour** : design system, composants partagés, bilinguisme, collection
+Pages, et la **page d'accueil complète** (12 sections). Rendu desktop et mobile
+validés par la cliente.
 
 ---
 
@@ -15,7 +19,7 @@ travail : il consigne ce qui est en place, les décisions prises et ce qui reste
 | URL de production | **https://bone-striqagence.vercel.app** |
 | Base | Supabase `tdtcgyvesbrvxgqtqzwc`, région `eu-west-1` |
 | Médias | bucket public `media`, clés S3 en variables d'environnement |
-| Fichier Figma | clé `qVfmMdH5gRReZS5uhzbMw4` |
+| Fichier Figma | clé `qVfmMdH5gRReZS5uhzbMw4`, plan **Professional** (200 appels/jour) |
 
 **`bone.vercel.app` n'est pas ce site** : ce sous-domaine appartient à un projet
 tiers. L'URL de production est bien `bone-striqagence.vercel.app`.
@@ -103,64 +107,93 @@ ligne.**
 
 ---
 
+## Pièges rencontrés, qui se reposeront
+
+**Les exports Figma embarquent le décor du cadre.** Tout SVG exporté en tant que
+nœud contient le fond blanc de la page, sa bordure grise, parfois un rectangle
+opaque et l'aplat de la barre sur laquelle l'élément est posé. Ils couvrent tout
+le viewBox et se voient sur fond sombre. Le critère de nettoyage est la
+position : un tracé qui démarre en dehors du viewBox n'appartient pas au dessin.
+**Vérifier par rendu, pas par lecture du fichier.**
+
+**Un groupe exporté en image est rendu sur canevas blanc.** Le décor de « Notre
+promesse » livrait des coins blancs opaques. L'aplatir n'y change rien, le blanc
+est dans la source : il faut recomposer les éléments un par un.
+
+**Les axes de police doivent être déclarés.** `next/font` ne sert que la graisse
+par défaut ; sans `axes: ["slnt", "wdth"]`, le `wdth 120` de toute la maquette
+reste sans effet et rien ne le signale. Le réglage vit dans l'utilitaire
+`titrage` de `globals.css`, pas en style inline.
+
+**Les migrations sur un global déjà peuplé** échouent sur `column contains null
+values`. Motif sûr : créer la colonne avec un défaut, le retirer aussitôt.
+
+**Les tableaux localisés partagent leurs lignes entre langues.** Écrire la
+seconde langue sans reprendre les identifiants de lignes efface les libellés de
+la première. Tous les scripts de peuplement recopient ces identifiants.
+
+**Le pool Postgres est à quatre connexions.** Le pooler Supabase plafonne à 15 :
+le défaut de dix sature dès deux contextes. Mais une seule ne marche pas non
+plus — Payload imbrique ses requêtes, et la génération statique expire alors sur
+toutes les pages, sans message d'erreur.
+
+---
+
 ## Décisions prises, à confirmer
 
 - **Troisième pôle nommé `Feed`.** Le fichier Figma emploie trois graphies :
-  « Feed » (déroulant), « Média » (footer), « Media » (nom d'écran). Retenu
-  `Feed` partout, URL `/competences/feed`.
-- **Placement du déroulant** : centré sous la barre. Il fait 781px là où
-  l'entrée de menu en fait 150, et aucune maquette ne le montre posé dans une
-  page.
-- **Filigrane du footer ancré en bas**, pas à son `top: 402px` d'origine :
-  équivalent aujourd'hui, mais résistant à l'allongement du contenu en anglais.
-- **Liens légaux créés** (`/mentions-legales`, `/politique-de-confidentialite`,
-  `/gestion-des-cookies`) alors que Figma n'y met que du texte. **Ces pages
-  n'existent pas encore.**
+  « Feed » (déroulant), « Média » (pied de page), « Media » (nom d'écran).
+- **L'en-tête a deux états** sur l'accueil : au repos, hors flux et posé sur le
+  hero ; compact et fixé dès le défilement. Les pages internes gardent la barre
+  compacte, leur hero étant clair.
+- **Les cartes sont cliquables en entier**, là où la maquette pose l'ancre sur
+  le seul petit bouton.
+- **La bande des pôles est alimentée par les pages de pôle**, pas par un contenu
+  d'accueil : ces libellés apparaissent à quatre endroits, et c'est cette
+  duplication qui a produit le Feed/Média/Media.
+- **Le mobile est dérivé du desktop**, aucune maquette mobile n'existant. Validé
+  par la cliente.
+
+---
+
+## Contenu à écrire
+
+- **Trois réponses de la FAQ** de l'accueil manquent : la maquette n'en rédige
+  qu'une sur quatre.
+- **Les accroches des pages internes** : seule « Nos compétences » est
+  renseignée, les autres retombent sur leur titre.
+- **Les textes alternatifs des images** sont écrits d'après ce que montrent les
+  maquettes. À relire — c'est ce qu'une personne non voyante reçoit.
+- **Une coquille de la maquette** est reproduite telle quelle : « Challenge le
+  besoin avant de propose une solution ».
+- **L'anglais est une première passe** sur tout le site.
 
 ---
 
 ## Questions ouvertes
 
-1. **Où vivent les libellés de navigation ?** Ils sont écrits en dur en français
-   dans `Navigation.tsx`, `MenuDeroulant.tsx` et `Footer.tsx`, alors que le site
-   est bilingue. Deux options : un global Payload « Navigation » (traduisible
-   depuis le back-office, sans déploiement) ou des fichiers de traduction dans
-   le code. **Préférence : le global Payload.** À trancher avant d'aller plus
-   loin — chaque composant ajouté aggrave la dette.
-2. **Collections Payload** : rien n'est modélisé au-delà de `Users` et `Media`.
-   Un site vitrine avec blog appelle au minimum `Pages` et `Posts`.
-3. **Adaptation mobile** : aucune maquette mobile trouvée dans le fichier (l'API
-   ne liste qu'une page, « Cover »). Décision actée : **le mobile sera dérivé du
-   desktop**, en signalant les points relevant d'un choix de design (navigation
-   repliée, éléments masqués, recadrages) plutôt qu'en les glissant dans le
-   code. Les frames mobile restent l'arbitre si elles sont fournies.
-4. **Pas d'adaptateur e-mail** : la réinitialisation de mot de passe du
-   back-office ne part pas. `striq-web` utilise Resend.
-5. **Rotation des identifiants Supabase** : ils ont transité par une
-   conversation. À régénérer si l'on veut être rigoureux.
+1. **Vidéo du hero d'accueil** : prévue, une image est servie en attendant. Le
+   passage demandera un champ vidéo, une balise `<video>` muette en boucle, et
+   l'image actuelle en repli.
+2. **Collections manquantes** : `Posts` et catégories pour le blog.
+3. **Pas d'adaptateur e-mail** : ni réinitialisation de mot de passe, ni
+   formulaire de contact. `striq-web` utilise Resend.
+4. **Rotation des identifiants Supabase** : ils ont transité par une
+   conversation.
+5. **`/design-system` est publique** : à retirer ou conditionner avant la mise
+   en ligne.
+6. **Protection de déploiement Vercel** active : à désactiver le jour J.
 
 ---
 
 ## Suite du travail
 
-Composants partagés restants, avec leurs identifiants Figma :
-
-| Composant | Node |
-| --- | --- |
-| Hero pages internes niveau 1 | `4180:6614` |
-| Hero pages internes niveau 2 | `4180:7024` |
-| Fil d'ariane | `4180:6407` |
-| Surtitre | `4048:1052` |
-| Pôles | `4112:787` |
-| Formulaire | `4186:6095` |
-| Carte blog | `4135:3497` |
-| Logo compétences | `4180:7000` |
-
-Puis les écrans, page « Maquettes desktop » (`1:12`) :
+La page d'accueil est finie. Restent neuf écrans, page « Maquettes desktop »
+(`1:12`) :
 
 | Écran | Node | Hauteur |
 | --- | --- | --- |
-| Homepage | `4042:1110` | 10 669 px |
+| Contact | `4159:11124` | 2 940 px |
 | Compétences | `4135:1171` | 2 559 px |
 | Compétences → Expertise | `4135:2651` | 6 089 px |
 | Compétences → Capital | `4145:4904` | 5 367 px |
@@ -169,9 +202,10 @@ Puis les écrans, page « Maquettes desktop » (`1:12`) :
 | Blog | `4148:8071` | 4 186 px |
 | Détail d'un article | `4153:9100` | 5 862 px |
 | À propos | `4159:10191` | 4 891 px |
-| Contact | `4159:11124` | 2 940 px |
 
-Section « Composants » : `4028:97`.
+Les composants partagés sont tous intégrés : bouton, flèche, surtitre, fil
+d'ariane, carte de pôle, carte d'article, ligne de soumission, en-tête, pied de
+page, et deux gabarits de hero.
 
 ---
 
