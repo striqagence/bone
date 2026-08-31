@@ -10,6 +10,7 @@ import sharp from "sharp";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Users } from "./collections/Users";
+import { Accueil } from "./globals/Accueil";
 import { Navigation } from "./globals/Navigation";
 
 const filename = fileURLToPath(import.meta.url);
@@ -82,7 +83,7 @@ export default buildConfig({
     meta: { titleSuffix: " · Bone" },
   },
   collections: [Users, Media, Pages],
-  globals: [Navigation],
+  globals: [Accueil, Navigation],
   /**
    * Le français est la langue de référence : c'est elle qui est saisie, et
    * l'anglais s'y replie tant qu'une traduction manque (`fallback`). Sans ce

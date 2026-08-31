@@ -90,9 +90,11 @@ export interface Config {
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('fr' | 'en') | ('fr' | 'en')[];
   globals: {
+    accueil: Accueil;
     navigation: Navigation;
   };
   globalsSelect: {
+    accueil: AccueilSelect<false> | AccueilSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
   };
   locale: 'fr' | 'en';
@@ -459,6 +461,34 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accueil".
+ */
+export interface Accueil {
+  id: number;
+  hero: {
+    surtitre: string;
+    /**
+     * Chaque ligne se compose d’un verbe à pleine intensité et d’un complément atténué.
+     */
+    lignes?:
+      | {
+          verbe: string;
+          complement: string;
+          id?: string | null;
+        }[]
+      | null;
+    chapo: string;
+    cta: {
+      libelle: string;
+      chemin: string;
+    };
+    image?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigation".
  */
 export interface Navigation {
@@ -532,6 +562,35 @@ export interface Navigation {
   };
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accueil_select".
+ */
+export interface AccueilSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        surtitre?: T;
+        lignes?:
+          | T
+          | {
+              verbe?: T;
+              complement?: T;
+              id?: T;
+            };
+        chapo?: T;
+        cta?:
+          | T
+          | {
+              libelle?: T;
+              chemin?: T;
+            };
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

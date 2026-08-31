@@ -1,14 +1,30 @@
-export default function Home() {
+import { notFound } from "next/navigation";
+import { getPayload } from "payload";
+import config from "@payload-config";
+
+import { HeroAccueil } from "@/components/sections/HeroAccueil";
+import { estUneLangue } from "@/lib/i18n";
+
+export default async function Accueil({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
+  if (!estUneLangue(locale)) notFound();
+
+  const payload = await getPayload({ config });
+  const { hero } = await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
+
+  const image =
+    hero.image && typeof hero.image === "object" && hero.image.url
+      ? { src: hero.image.url, alt: hero.image.alt }
+      : undefined;
+
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-4 p-16 text-center">
-      <h1 className="text-3xl font-semibold tracking-tight">Bone</h1>
-      <p className="text-sm text-black/60 dark:text-white/60">
-        Le contenu se gère depuis{" "}
-        <a className="underline underline-offset-4" href="/admin">
-          le back-office
-        </a>
-        .
-      </p>
-    </main>
+    <HeroAccueil
+      langue={locale}
+      surtitre={hero.surtitre}
+      titre={(hero.lignes ?? []).map(({ verbe, complement }) => ({ verbe, complement }))}
+      chapo={hero.chapo}
+      cta={hero.cta}
+      image={image}
+    />
   );
 }
