@@ -6,17 +6,19 @@ import { HeroAccueil } from "@/components/sections/HeroAccueil";
 import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
 import { SectionEnBref } from "@/components/sections/SectionEnBref";
 import { SectionLeConstat } from "@/components/sections/SectionLeConstat";
+import { SectionPoles } from "@/components/sections/SectionPoles";
 import { SectionPositionnement } from "@/components/sections/SectionPositionnement";
 import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
 import { estUneLangue } from "@/lib/i18n";
+import { cheminDe } from "@/lib/pages";
 
 export default async function Accueil({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero, enBref, constat, promesse, positionnement, role, differenciation } =
+  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles } =
     await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
 
   /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
@@ -26,6 +28,31 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
       : undefined;
 
   const image = photo(hero.image);
+
+  /**
+   * Les bandes des pôles sont alimentées par leurs pages, pour que le nom d'un
+   * pôle n'ait qu'une seule source. L'ordre suit celui de la maquette.
+   */
+  const ordre = ["expertise", "capital", "feed"] as const;
+  const { docs: pagesPoles } = await payload.find({
+    collection: "pages",
+    locale,
+    where: { pole: { in: [...ordre] } },
+    depth: 2,
+    limit: 3,
+  });
+  const bandes = ordre.flatMap((cle) => {
+    const page = pagesPoles.find((p) => p.pole === cle);
+    return page
+      ? [{
+          pole: cle,
+          chemin: `/${cheminDe(page)}`,
+          accroche: page.accrocheCourte ?? "",
+          tagline: page.surtitre ?? "",
+          image: photo(page.image),
+        }]
+      : [];
+  });
 
   return (
     <>
@@ -82,6 +109,13 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
         titre={role.titre}
         chapo={role.chapo}
         etapes={role.etapes ?? []}
+      />
+      <SectionPoles
+        langue={locale}
+        surtitre={poles.surtitre}
+        titreHaut={poles.titreHaut}
+        titreBas={poles.titreBas}
+        poles={bandes}
       />
       <SectionDifferenciation
         surtitre={differenciation.surtitre}

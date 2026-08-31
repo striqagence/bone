@@ -81,6 +81,17 @@ export const Pages: CollectionConfig = {
       },
     },
     {
+      name: "accrocheCourte",
+      type: "text",
+      localized: true,
+      label: "Accroche courte",
+      admin: {
+        description:
+          "Deux ou trois mots situant le pôle (« Pôle cœur »). Affichée sur la bande des pôles de l’accueil.",
+        condition: (donnees) => Boolean(donnees?.pole),
+      },
+    },
+    {
       type: "tabs",
       tabs: [
         {

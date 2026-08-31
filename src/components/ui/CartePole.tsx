@@ -16,6 +16,10 @@ import { classesBouton } from "./Button";
  * écran tactile : l'y cacher rendrait la description et l'appel à l'action
  * inatteignables, alors même que c'est là que la carte dit ce qu'elle vend.
  *
+ * La variante « bande » sert la section des trois pôles de l'accueil : mêmes
+ * fond, logotype et libellés, mais bord à bord et sans description — la
+ * maquette n'y prévoit pas d'état survolé.
+ *
  * La carte entière est le lien. Le « Voir le pôle » n'en emprunte que
  * l'apparence — une ancre imbriquée dans une autre est invalide, et les
  * lecteurs d'écran l'annonceraient deux fois.
@@ -35,20 +39,23 @@ export function CartePole({
   description,
   libelleAction,
   image,
+  variante = "carte",
 }: {
   langue: Langue;
   chemin: string;
   pole: keyof typeof logos;
   eyebrow: string;
   accroche: string;
-  description: string;
-  libelleAction: string;
+  description?: string;
+  libelleAction?: string;
   image?: { src: string; alt: string };
+  variante?: "carte" | "bande";
 }) {
+  const bande = variante === "bande";
   return (
     <Link
       href={lien(chemin, langue)}
-      className="group relative flex h-[400px] w-full max-w-[640px] flex-col justify-center gap-5 overflow-hidden rounded p-8 lg:p-14"
+      className={`group relative flex h-[400px] flex-col justify-center gap-5 overflow-hidden p-8 lg:p-14 ${bande ? "flex-1" : "w-full max-w-[640px] rounded"}`}
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-primary-950">
         {image && (
@@ -61,7 +68,9 @@ export function CartePole({
           />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_34/0.3),rgb(0_0_34/0.6))]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_34/0.45),rgb(0_0_34/0.9))] opacity-0 transition-opacity group-hover:opacity-100" />
+        {!bande && (
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_34/0.45),rgb(0_0_34/0.9))] opacity-0 transition-opacity group-hover:opacity-100" />
+        )}
       </div>
 
       <div className="relative flex flex-col items-start gap-5">
@@ -86,6 +95,7 @@ export function CartePole({
           {accroche}
         </p>
 
+        {!bande && description && libelleAction && (
         <div className="flex w-full items-end justify-between gap-5 lg:hidden lg:group-hover:flex">
           <p className="max-w-[350px] flex-1 text-sm leading-[1.5] text-white">{description}</p>
           <span className={classesBouton({ taille: "sm", className: "w-[136px] shrink-0" })}>
@@ -93,6 +103,7 @@ export function CartePole({
             <ArrowRight />
           </span>
         </div>
+        )}
       </div>
     </Link>
   );

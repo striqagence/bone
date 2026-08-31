@@ -269,5 +269,33 @@ export const Accueil: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "poles",
+      type: "group",
+      label: "Nos 3 pôles",
+      admin: {
+        description:
+          "Les trois bandes sont alimentées par les pages de pôle : leur accroche courte, leur surtitre et leur photo. Seuls les titres de la section se saisissent ici.",
+      },
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        {
+          name: "titreHaut",
+          type: "text",
+          required: true,
+          localized: true,
+          label: "Titre, première ligne",
+          admin: { description: "En grand, bleu de marque." },
+        },
+        {
+          name: "titreBas",
+          type: "text",
+          required: true,
+          localized: true,
+          label: "Titre, seconde ligne",
+          admin: { description: "Plus petite, marine." },
+        },
+      ],
+    },
   ],
 };

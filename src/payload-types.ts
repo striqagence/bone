@@ -218,6 +218,10 @@ export interface Page {
    * Bascule la page sur le hero sur photo et y affiche le logotype du pôle. Laisser vide pour une page ordinaire.
    */
   pole?: ('expertise' | 'capital' | 'feed') | null;
+  /**
+   * Deux ou trois mots situant le pôle (« Pôle cœur »). Affichée sur la bande des pôles de l’accueil.
+   */
+  accrocheCourte?: string | null;
   surtitre?: string | null;
   /**
    * Le grand titre du hero, distinct du titre de la page.
@@ -403,6 +407,7 @@ export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   parent?: T;
   pole?: T;
+  accrocheCourte?: T;
   surtitre?: T;
   accroche?: T;
   description?: T;
@@ -598,6 +603,20 @@ export interface Accueil {
           }[]
         | null;
     };
+  };
+  /**
+   * Les trois bandes sont alimentées par les pages de pôle : leur accroche courte, leur surtitre et leur photo. Seuls les titres de la section se saisissent ici.
+   */
+  poles: {
+    surtitre: string;
+    /**
+     * En grand, bleu de marque.
+     */
+    titreHaut: string;
+    /**
+     * Plus petite, marine.
+     */
+    titreBas: string;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -828,6 +847,13 @@ export interface AccueilSelect<T extends boolean = true> {
                     id?: T;
                   };
             };
+      };
+  poles?:
+    | T
+    | {
+        surtitre?: T;
+        titreHaut?: T;
+        titreBas?: T;
       };
   updatedAt?: T;
   createdAt?: T;
