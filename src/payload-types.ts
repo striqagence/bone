@@ -663,6 +663,27 @@ export interface Accueil {
       chemin: string;
     };
   };
+  /**
+   * Les fonds s’assombrissent dans l’ordre des profils : la progression suit la position, elle ne se saisit pas.
+   */
+  profils: {
+    surtitre: string;
+    /**
+     * Affiché en retrait.
+     */
+    titreHaut: string;
+    titreBas: string;
+    liste?:
+      | {
+          picto: 'antenne' | 'securite' | 'balance' | 'boussole';
+          titre: string;
+          description: string;
+          reponse: string;
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -942,6 +963,23 @@ export interface AccueilSelect<T extends boolean = true> {
           | {
               libelle?: T;
               chemin?: T;
+            };
+      };
+  profils?:
+    | T
+    | {
+        surtitre?: T;
+        titreHaut?: T;
+        titreBas?: T;
+        liste?:
+          | T
+          | {
+              picto?: T;
+              titre?: T;
+              description?: T;
+              reponse?: T;
+              image?: T;
+              id?: T;
             };
       };
   updatedAt?: T;

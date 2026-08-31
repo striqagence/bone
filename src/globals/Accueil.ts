@@ -387,5 +387,70 @@ export const Accueil: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "profils",
+      type: "group",
+      label: "À qui s’adresse Bone",
+      admin: {
+        description:
+          "Les fonds s’assombrissent dans l’ordre des profils : la progression suit la position, elle ne se saisit pas.",
+      },
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        {
+          name: "titreHaut",
+          type: "text",
+          required: true,
+          localized: true,
+          label: "Titre, énoncé",
+          admin: { description: "Affiché en retrait." },
+        },
+        {
+          name: "titreBas",
+          type: "text",
+          required: true,
+          localized: true,
+          label: "Titre, résolution",
+        },
+        {
+          name: "liste",
+          type: "array",
+          label: "Profils",
+          minRows: 1,
+          maxRows: 4,
+          admin: { initCollapsed: true },
+          fields: [
+            {
+              name: "picto",
+              type: "select",
+              required: true,
+              label: "Pictogramme",
+              options: [
+                { label: "Antenne", value: "antenne" },
+                { label: "Sécurité", value: "securite" },
+                { label: "Balance", value: "balance" },
+                { label: "Boussole", value: "boussole" },
+              ],
+            },
+            { name: "titre", type: "text", required: true, localized: true, label: "Profil" },
+            {
+              name: "description",
+              type: "textarea",
+              required: true,
+              localized: true,
+              label: "Situation",
+            },
+            {
+              name: "reponse",
+              type: "textarea",
+              required: true,
+              localized: true,
+              label: "Ce que Bone apporte",
+            },
+            { name: "image", type: "upload", relationTo: "media", label: "Photo" },
+          ],
+        },
+      ],
+    },
   ],
 };

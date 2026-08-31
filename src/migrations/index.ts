@@ -15,6 +15,7 @@ import * as migration_20260831_095521_accueil_chiffres from './20260831_095521_a
 import * as migration_20260831_095753_accueil_faq from './20260831_095753_accueil_faq';
 import * as migration_20260831_095847_faq_reponse_facultative from './20260831_095847_faq_reponse_facultative';
 import * as migration_20260831_100017_accueil_appel from './20260831_100017_accueil_appel';
+import * as migration_20260831_100258_accueil_profils from './20260831_100258_accueil_profils';
 
 export const migrations = [
   {
@@ -100,6 +101,11 @@ export const migrations = [
   {
     up: migration_20260831_100017_accueil_appel.up,
     down: migration_20260831_100017_accueil_appel.down,
-    name: '20260831_100017_accueil_appel'
+    name: '20260831_100017_accueil_appel',
+  },
+  {
+    up: migration_20260831_100258_accueil_profils.up,
+    down: migration_20260831_100258_accueil_profils.down,
+    name: '20260831_100258_accueil_profils'
   },
 ];

@@ -11,6 +11,7 @@ import { SectionEnBref } from "@/components/sections/SectionEnBref";
 import { SectionLeConstat } from "@/components/sections/SectionLeConstat";
 import { SectionPoles } from "@/components/sections/SectionPoles";
 import { SectionPositionnement } from "@/components/sections/SectionPositionnement";
+import { SectionProfils } from "@/components/sections/SectionProfils";
 import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
 import { estUneLangue } from "@/lib/i18n";
@@ -21,7 +22,7 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres, faq, appel } =
+  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres, faq, appel, profils } =
     await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
 
   /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
@@ -140,6 +141,18 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
         constat={chiffres.constat}
         consequence={chiffres.consequence}
         statistiques={chiffres.statistiques ?? []}
+      />
+      <SectionProfils
+        surtitre={profils.surtitre}
+        titreHaut={profils.titreHaut}
+        titreBas={profils.titreBas}
+        profils={(profils.liste ?? []).map((p) => ({
+          picto: p.picto,
+          titre: p.titre,
+          description: p.description,
+          reponse: p.reponse,
+          image: photo(p.image),
+        }))}
       />
       <SectionFaq
         surtitre={faq.surtitre}
