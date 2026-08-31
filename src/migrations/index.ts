@@ -27,6 +27,7 @@ import * as migration_20260831_114907_bloc_faq from './20260831_114907_bloc_faq'
 import * as migration_20260831_120218_bloc_enjeux from './20260831_120218_bloc_enjeux';
 import * as migration_20260831_120642_blocs_promesse_chiffres from './20260831_120642_blocs_promesse_chiffres';
 import * as migration_20260831_120729_grille_description from './20260831_120729_grille_description';
+import * as migration_20260831_120945_bloc_differenciation from './20260831_120945_bloc_differenciation';
 
 export const migrations = [
   {
@@ -172,6 +173,11 @@ export const migrations = [
   {
     up: migration_20260831_120729_grille_description.up,
     down: migration_20260831_120729_grille_description.down,
-    name: '20260831_120729_grille_description'
+    name: '20260831_120729_grille_description',
+  },
+  {
+    up: migration_20260831_120945_bloc_differenciation.up,
+    down: migration_20260831_120945_bloc_differenciation.down,
+    name: '20260831_120945_bloc_differenciation'
   },
 ];

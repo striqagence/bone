@@ -22,7 +22,7 @@ export function SectionChiffres({
   surtitre: string;
   titre: string;
   constat: string;
-  consequence: string;
+  consequence?: string | null;
   statistiques: { valeur: string; unite: string; libelle: string; precision: string }[];
 }) {
   return (
@@ -44,7 +44,8 @@ export function SectionChiffres({
             {titre}
           </h2>
           <p className="w-full text-lg leading-[1.5] text-white lg:text-2xl">
-            {constat} <span className="text-white/50">{consequence}</span>
+            {constat}
+            {consequence && <span className="text-white/50"> {consequence}</span>}
           </p>
         </div>
 

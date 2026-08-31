@@ -350,9 +350,9 @@ export interface Page {
              */
             constat: string;
             /**
-             * Seconde moitié, affichée en retrait.
+             * Facultative. Affichée en retrait à la suite du constat — l’accueil l’emploie, Capital énonce d’un seul tenant.
              */
-            consequence: string;
+            consequence?: string | null;
             statistiques?:
               | {
                   valeur: string;
@@ -395,6 +395,33 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'faq';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            habituelle: {
+              badge: string;
+              titre: string;
+              puces?:
+                | {
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            bone: {
+              badge: string;
+              titre: string;
+              puces?:
+                | {
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'differenciation';
           }
         | {
             surtitre: string;
@@ -802,6 +829,38 @@ export interface PagesSelect<T extends boolean = true> {
                     question?: T;
                     reponse?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        differenciation?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              habituelle?:
+                | T
+                | {
+                    badge?: T;
+                    titre?: T;
+                    puces?:
+                      | T
+                      | {
+                          texte?: T;
+                          id?: T;
+                        };
+                  };
+              bone?:
+                | T
+                | {
+                    badge?: T;
+                    titre?: T;
+                    puces?:
+                      | T
+                      | {
+                          texte?: T;
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

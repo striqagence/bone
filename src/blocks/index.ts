@@ -267,10 +267,12 @@ export const Chiffres: Block = {
     {
       name: "consequence",
       type: "textarea",
-      required: true,
       localized: true,
       label: "Conséquence",
-      admin: { description: "Seconde moitié, affichée en retrait." },
+      admin: {
+        description:
+          "Facultative. Affichée en retrait à la suite du constat — l’accueil l’emploie, Capital énonce d’un seul tenant.",
+      },
     },
     {
       name: "statistiques",
@@ -288,6 +290,52 @@ export const Chiffres: Block = {
   ],
 };
 
+export const Differenciation: Block = {
+  slug: "differenciation",
+  labels: { singular: "Comparaison", plural: "Comparaisons" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    {
+      name: "habituelle",
+      type: "group",
+      label: "Carte de gauche",
+      fields: [
+        { name: "badge", type: "text", required: true, localized: true, label: "Étiquette" },
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        {
+          name: "puces",
+          type: "array",
+          label: "Puces",
+          minRows: 1,
+          fields: [
+            { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "bone",
+      type: "group",
+      label: "Carte de droite, mise en avant",
+      fields: [
+        { name: "badge", type: "text", required: true, localized: true, label: "Étiquette" },
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        {
+          name: "puces",
+          type: "array",
+          label: "Puces",
+          minRows: 1,
+          fields: [
+            { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 export const sections = [
   BandePoles,
   Synergie,
@@ -298,5 +346,6 @@ export const sections = [
   Chiffres,
   Articles,
   Faq,
+  Differenciation,
   AppelAction,
 ];

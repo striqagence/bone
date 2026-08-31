@@ -3,6 +3,7 @@ import { SectionArticles } from "@/components/sections/SectionArticles";
 import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionGrille } from "@/components/sections/SectionGrille";
 import { SectionChiffres } from "@/components/sections/SectionChiffres";
+import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
 import { SectionProfils } from "@/components/sections/SectionProfils";
 import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
@@ -103,6 +104,24 @@ export function RendreSections({
                   reponse: c.reponse,
                   image: photo(c.image),
                 }))}
+              />
+            );
+          case "differenciation":
+            return (
+              <SectionDifferenciation
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                habituelle={{
+                  badge: section.habituelle.badge,
+                  titre: section.habituelle.titre,
+                  puces: (section.habituelle.puces ?? []).map(({ texte }) => texte),
+                }}
+                bone={{
+                  badge: section.bone.badge,
+                  titre: section.bone.titre,
+                  puces: (section.bone.puces ?? []).map(({ texte }) => texte),
+                }}
               />
             );
           case "promesse":
