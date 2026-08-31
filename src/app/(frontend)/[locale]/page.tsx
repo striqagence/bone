@@ -5,6 +5,7 @@ import config from "@payload-config";
 import { HeroAccueil } from "@/components/sections/HeroAccueil";
 import { SectionChiffres } from "@/components/sections/SectionChiffres";
 import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
+import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionEnBref } from "@/components/sections/SectionEnBref";
 import { SectionLeConstat } from "@/components/sections/SectionLeConstat";
 import { SectionPoles } from "@/components/sections/SectionPoles";
@@ -19,7 +20,7 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres } =
+  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres, faq } =
     await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
 
   /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
@@ -138,6 +139,12 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
         constat={chiffres.constat}
         consequence={chiffres.consequence}
         statistiques={chiffres.statistiques ?? []}
+      />
+      <SectionFaq
+        surtitre={faq.surtitre}
+        titre={faq.titre}
+        questions={faq.questions ?? []}
+        image={photo(faq.image)}
       />
     </>
   );

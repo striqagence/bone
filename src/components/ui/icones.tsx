@@ -125,3 +125,42 @@ export function FlecheRenvoiRonde() {
     </span>
   );
 }
+
+/**
+ * Chevrons de bascule de l'accordéon (Figma « ToggleArrowDown » / « ToggleArrowUp »).
+ *
+ * Les tracés exportés sont horizontaux ; la maquette les pivote et les miroite
+ * pour les rendre verticaux. La transformation est reprise telle quelle plutôt
+ * que les chemins redessinés, et la boîte transposée en conséquence — 11,92 ×
+ * 17,96 dans une boîte de 25.
+ */
+export function ChevronBascule({ sens }: { sens: "bas" | "haut" }) {
+  const traces =
+    sens === "bas"
+      ? [
+          "M16.375 5.95845L0.75 5.95845",
+          "M12.2084 0.75L16.7096 5.25123C17.043 5.58456 17.2096 5.75123 17.2096 5.95833C17.2096 6.16544 17.043 6.33211 16.7096 6.66544L12.2084 11.1667",
+        ]
+      : [
+          "M1.58456 5.95833L17.2096 5.95833",
+          "M5.75123 0.75L1.25 5.25123C0.916667 5.58456 0.75 5.75123 0.75 5.95833C0.75 6.16544 0.916667 6.33211 1.25 6.66544L5.75123 11.1667",
+        ];
+
+  return (
+    <span className="inline-flex size-[25px] shrink-0 items-center justify-center">
+      <svg width="11.9167" height="17.9596" viewBox="0 0 11.9167 17.9596" fill="none" aria-hidden>
+        <g
+          transform="rotate(-90) scale(-1, 1)"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {traces.map((d) => (
+            <path key={d} d={d} />
+          ))}
+        </g>
+      </svg>
+    </span>
+  );
+}

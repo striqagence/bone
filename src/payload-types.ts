@@ -639,6 +639,21 @@ export interface Accueil {
         }[]
       | null;
   };
+  faq: {
+    surtitre: string;
+    titre: string;
+    image?: (number | null) | Media;
+    questions?:
+      | {
+          question: string;
+          /**
+           * Sans réponse, la question s’affiche sans pouvoir se déplier.
+           */
+          reponse?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -890,6 +905,20 @@ export interface AccueilSelect<T extends boolean = true> {
               unite?: T;
               libelle?: T;
               precision?: T;
+              id?: T;
+            };
+      };
+  faq?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        image?: T;
+        questions?:
+          | T
+          | {
+              question?: T;
+              reponse?: T;
               id?: T;
             };
       };

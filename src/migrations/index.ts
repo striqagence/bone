@@ -12,6 +12,8 @@ import * as migration_20260831_094107_accueil_positionnement from './20260831_09
 import * as migration_20260831_094501_accueil_differenciation from './20260831_094501_accueil_differenciation';
 import * as migration_20260831_094814_accueil_poles from './20260831_094814_accueil_poles';
 import * as migration_20260831_095521_accueil_chiffres from './20260831_095521_accueil_chiffres';
+import * as migration_20260831_095753_accueil_faq from './20260831_095753_accueil_faq';
+import * as migration_20260831_095847_faq_reponse_facultative from './20260831_095847_faq_reponse_facultative';
 
 export const migrations = [
   {
@@ -82,6 +84,16 @@ export const migrations = [
   {
     up: migration_20260831_095521_accueil_chiffres.up,
     down: migration_20260831_095521_accueil_chiffres.down,
-    name: '20260831_095521_accueil_chiffres'
+    name: '20260831_095521_accueil_chiffres',
+  },
+  {
+    up: migration_20260831_095753_accueil_faq.up,
+    down: migration_20260831_095753_accueil_faq.down,
+    name: '20260831_095753_accueil_faq',
+  },
+  {
+    up: migration_20260831_095847_faq_reponse_facultative.up,
+    down: migration_20260831_095847_faq_reponse_facultative.down,
+    name: '20260831_095847_faq_reponse_facultative'
   },
 ];
