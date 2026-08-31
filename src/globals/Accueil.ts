@@ -135,5 +135,14 @@ export const Accueil: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "promesse",
+      type: "group",
+      label: "Notre promesse",
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+      ],
+    },
   ],
 };

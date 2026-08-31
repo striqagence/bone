@@ -525,6 +525,10 @@ export interface Accueil {
       photo?: (number | null) | Media;
     };
   };
+  promesse: {
+    surtitre: string;
+    titre: string;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -670,6 +674,12 @@ export interface AccueilSelect<T extends boolean = true> {
               citation?: T;
               photo?: T;
             };
+      };
+  promesse?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
       };
   updatedAt?: T;
   createdAt?: T;
