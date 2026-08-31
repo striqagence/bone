@@ -23,16 +23,20 @@ export function Navigation({
   langue,
   liens,
   poles,
+  className = "h-11 px-6 py-3",
 }: {
   langue: Langue;
   liens: NonNullable<NavigationGlobal["liensPrincipaux"]>;
   poles: NonNullable<NavigationGlobal["poles"]>;
+  /** L'état au repos enveloppe la navigation dans une pastille qui porte déjà
+      ses marges : elles sont donc pilotées par l'appelant. */
+  className?: string;
 }) {
   const [ouvert, setOuvert] = useState(false);
 
   return (
     <nav
-      className="flex h-11 items-center justify-center gap-9 px-6 py-3"
+      className={`flex items-center justify-center gap-9 ${className}`}
       onMouseLeave={() => setOuvert(false)}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setOuvert(false);
