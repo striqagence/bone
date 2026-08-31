@@ -1,9 +1,11 @@
 import { SectionAppel } from "@/components/sections/SectionAppel";
+import { SectionArticles } from "@/components/sections/SectionArticles";
 import { SectionGrille } from "@/components/sections/SectionGrille";
 import { SectionRole } from "@/components/sections/SectionRole";
 import { SectionPoles } from "@/components/sections/SectionPoles";
 import { SectionSynergie } from "@/components/sections/SectionSynergie";
 import type { Langue } from "@/lib/i18n";
+import type { Article } from "@/lib/articles";
 import type { Page } from "@/lib/pages";
 
 type Bande = {
@@ -24,10 +26,12 @@ export function RendreSections({
   sections,
   langue,
   bandes,
+  articles,
 }: {
   sections: NonNullable<Page["sections"]>;
   langue: Langue;
   bandes: Bande[];
+  articles: Article[];
 }) {
   return (
     <>
@@ -72,6 +76,17 @@ export function RendreSections({
                 titre={section.titre}
                 chapo={section.chapo}
                 etapes={section.cartes ?? []}
+              />
+            );
+          case "articles":
+            return (
+              <SectionArticles
+                key={section.id}
+                langue={langue}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                libelleAction={section.libelleAction}
+                articles={articles.slice(0, section.nombre)}
               />
             );
           case "appelAction":

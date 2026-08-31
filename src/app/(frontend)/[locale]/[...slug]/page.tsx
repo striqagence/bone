@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { HeroInterne } from "@/components/sections/HeroInterne";
 import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
 import { RendreSections } from "@/components/sections/RendreSections";
+import { derniersArticles } from "@/lib/articles";
 import { estUneLangue } from "@/lib/i18n";
 import { arianeDe, chargerPoles, trouverPage } from "@/lib/pages";
 
@@ -44,7 +45,12 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
   // Les sections des pôles tirent leurs libellés des pages de pôle : on ne les
   // charge que si la page en affiche.
   const sections = page.sections ?? [];
-  const bandes = sections.length > 0 ? await chargerPoles(locale) : [];
+  const besoinPoles = sections.some((s) => s.blockType === "bandePoles" || s.blockType === "synergie");
+  const besoinArticles = sections.some((s) => s.blockType === "articles");
+  const [bandes, articles] = await Promise.all([
+    besoinPoles ? chargerPoles(locale) : Promise.resolve([]),
+    besoinArticles ? derniersArticles(locale) : Promise.resolve([]),
+  ]);
 
   const cta =
     page.cta?.libelle && page.cta.chemin
@@ -53,7 +59,7 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
 
   // Les pages de pôle prennent le hero sur photo de la maquette, logotype
   // compris ; les autres gardent le hero clair.
-  const suite = <RendreSections sections={sections} langue={locale} bandes={bandes} />;
+  const suite = <RendreSections sections={sections} langue={locale} bandes={bandes} articles={articles} />;
 
   if (page.pole) {
     return (

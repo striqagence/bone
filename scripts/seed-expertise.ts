@@ -131,15 +131,31 @@ const couchesEn = {
   ],
 };
 
+const articlesFr = {
+  blockType: "articles" as const,
+  surtitre: "à lire aussi",
+  titre: "Pour aller plus loin",
+  libelleAction: "Lire l’article",
+  nombre: 4,
+};
+
+const articlesEn = {
+  blockType: "articles" as const,
+  surtitre: "further reading",
+  titre: "Going further",
+  libelleAction: "Read the article",
+  nombre: 4,
+};
+
 await payload.update({
   collection: "pages",
   id,
   locale: "fr",
-  data: { ...heroFr, sections: [grilleFr, couchesFr], _status: "published" },
+  data: { ...heroFr, sections: [grilleFr, couchesFr, articlesFr], _status: "published" },
 });
 
 const pose = await payload.findByID({ collection: "pages", id, locale: "fr", depth: 0 });
-const [blocGrille, blocCouches] = pose.sections ?? [];
+const [blocGrille, blocCouches, blocArticles] = pose.sections ?? [];
 
 await payload.update({
   collection: "pages",
@@ -164,6 +180,7 @@ await payload.update({
           id: blocCouches && "cartes" in blocCouches ? blocCouches.cartes?.[i]?.id : undefined,
         })),
       },
+      { ...articlesEn, id: blocArticles?.id },
     ],
   },
 });

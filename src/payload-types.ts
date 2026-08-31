@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    posts: Post;
+    categories: Category;
     demandes: Demande;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -81,6 +83,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     demandes: DemandesSelect<false> | DemandesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -306,6 +310,18 @@ export interface Page {
         | {
             surtitre: string;
             titre: string;
+            libelleAction: string;
+            /**
+             * Les derniers articles publiés sont repris automatiquement : leur contenu se gère depuis le blog.
+             */
+            nombre: number;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'articles';
+          }
+        | {
+            surtitre: string;
+            titre: string;
             chapo: string;
             cta: {
               libelle: string;
@@ -325,6 +341,60 @@ export interface Page {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  titre: string;
+  /**
+   * Sans barre oblique.
+   */
+  slug: string;
+  categorie: number | Category;
+  publieLe: string;
+  minutesLecture: number;
+  /**
+   * Affiché sur la carte, sous le titre.
+   */
+  extrait: string;
+  image?: (number | null) | Media;
+  contenu?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  metaTitre?: string | null;
+  metaDescription?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  nom: string;
+  /**
+   * Sert au filtrage du blog. Non localisé.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -380,6 +450,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
       } | null)
     | ({
         relationTo: 'demandes';
@@ -578,6 +656,16 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        articles?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              libelleAction?: T;
+              nombre?: T;
+              id?: T;
+              blockName?: T;
+            };
         appelAction?:
           | T
           | {
@@ -599,6 +687,35 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  titre?: T;
+  slug?: T;
+  categorie?: T;
+  publieLe?: T;
+  minutesLecture?: T;
+  extrait?: T;
+  image?: T;
+  contenu?: T;
+  metaTitre?: T;
+  metaDescription?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  nom?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

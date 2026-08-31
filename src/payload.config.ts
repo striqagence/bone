@@ -7,9 +7,11 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 
+import { Categories } from "./collections/Categories";
 import { Demandes } from "./collections/Demandes";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
+import { Posts } from "./collections/Posts";
 import { Users } from "./collections/Users";
 import { Accueil } from "./globals/Accueil";
 import { Contact } from "./globals/Contact";
@@ -84,7 +86,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " · Bone" },
   },
-  collections: [Users, Media, Pages, Demandes],
+  collections: [Users, Media, Pages, Posts, Categories, Demandes],
   globals: [Accueil, Contact, Navigation],
   /**
    * Le français est la langue de référence : c'est elle qui est saisie, et

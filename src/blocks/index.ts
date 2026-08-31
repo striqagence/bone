@@ -124,4 +124,34 @@ export const Escalier: Block = {
   ],
 };
 
-export const sections = [BandePoles, Synergie, Grille, Escalier, AppelAction];
+export const Articles: Block = {
+  slug: "articles",
+  labels: { singular: "À lire aussi", plural: "À lire aussi" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    {
+      name: "libelleAction",
+      type: "text",
+      required: true,
+      localized: true,
+      label: "Libellé du bouton des cartes",
+    },
+    {
+      name: "nombre",
+      type: "number",
+      required: true,
+      min: 1,
+      max: 8,
+      defaultValue: 4,
+      label: "Nombre d’articles",
+      admin: {
+        description:
+          "Les derniers articles publiés sont repris automatiquement : leur contenu se gère depuis le blog.",
+      },
+    },
+  ],
+};
+
+export const sections = [BandePoles, Synergie, Grille, Escalier, Articles, AppelAction];
