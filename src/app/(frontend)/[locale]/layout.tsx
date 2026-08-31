@@ -5,6 +5,7 @@ import { Google_Sans_Flex, Work_Sans } from "next/font/google";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { estUneLangue, langues } from "@/lib/i18n";
+import { chargerNavigation } from "@/lib/navigation";
 
 import "./globals.css";
 
@@ -40,15 +41,17 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
   // comme /de/contact atteindrait ce segment sans passer par lui.
   if (!estUneLangue(locale)) notFound();
 
+  const navigation = await chargerNavigation(locale);
+
   return (
     <html
       lang={locale}
       className={`${policePrimaire.variable} ${policeSecondaire.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header langue={locale} />
+        <Header langue={locale} navigation={navigation} />
         {children}
-        <Footer langue={locale} />
+        <Footer langue={locale} navigation={navigation} />
       </body>
     </html>
   );

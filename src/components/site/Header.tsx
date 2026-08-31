@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/Button";
 import { lien, type Langue } from "@/lib/i18n";
+import type { Navigation as NavigationGlobal } from "@/lib/navigation";
 
 import { Navigation } from "./Navigation";
 import { SelecteurLangue } from "./SelecteurLangue";
@@ -16,7 +17,13 @@ import { SelecteurLangue } from "./SelecteurLangue";
  * à dimensions fixes, que l'optimiseur ne peut ni redimensionner utilement ni
  * convertir, et qui exigeraient en prime d'ouvrir `dangerouslyAllowSVG`.
  */
-export function Header({ langue }: { langue: Langue }) {
+export function Header({
+  langue,
+  navigation,
+}: {
+  langue: Langue;
+  navigation: NavigationGlobal;
+}) {
   return (
     <header className="sticky top-0 z-50 flex h-[114px] w-full items-center justify-center px-4 py-5">
       <div className="relative flex w-full max-w-[1648px] items-center justify-between rounded bg-encre/80 px-6 py-3.5 backdrop-blur-[5px]">
@@ -25,12 +32,16 @@ export function Header({ langue }: { langue: Langue }) {
           <img src="/brand/bone-logotype.svg" alt="BONE IT" width={141} height={40} />
         </Link>
 
-        <Navigation langue={langue} />
+        <Navigation
+          langue={langue}
+          liens={navigation.liensPrincipaux ?? []}
+          poles={navigation.poles ?? []}
+        />
 
         <div className="flex h-[45px] items-center gap-5">
           <div className="flex h-11 items-center justify-center gap-4 rounded py-3 pl-6 pr-4">
             <a
-              href="https://www.linkedin.com"
+              href={navigation.contact.linkedin}
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -46,8 +57,12 @@ export function Header({ langue }: { langue: Langue }) {
             <SelecteurLangue langue={langue} />
           </div>
 
-          <Button href={lien("/contact", langue)} taille="barre" flecheAvant={false}>
-            Demander un audit
+          <Button
+            href={lien(navigation.boutonEntete.chemin, langue)}
+            taille="barre"
+            flecheAvant={false}
+          >
+            {navigation.boutonEntete.libelle}
           </Button>
         </div>
       </div>

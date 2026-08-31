@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { lien, type Langue } from "@/lib/i18n";
+import type { Navigation } from "@/lib/navigation";
 
 /**
  * Panneau déroulant des compétences (Figma « Menu déroulant sticky V3 »).
@@ -9,25 +10,13 @@ import { lien, type Langue } from "@/lib/i18n";
  * est strictement la même image pour les trois : Figma en exporte trois copies
  * qui ne diffèrent que par les identifiants de leurs dégradés.
  */
-export const poles = [
-  {
-    titre: "Expertise",
-    sousTitre: "Réseau • Stockage • systèmes",
-    chemin: "/competences/expertise",
-  },
-  {
-    titre: "Capital",
-    sousTitre: "Jusqu’à 70% d’économie vs neuf",
-    chemin: "/competences/capital",
-  },
-  {
-    titre: "Feed",
-    sousTitre: "Broadcast • Post-production",
-    chemin: "/competences/feed",
-  },
-];
-
-export function MenuDeroulant({ langue }: { langue: Langue }) {
+export function MenuDeroulant({
+  langue,
+  poles,
+}: {
+  langue: Langue;
+  poles: NonNullable<Navigation["poles"]>;
+}) {
   return (
     <div className="flex items-start gap-6 rounded bg-black/90 py-4 pl-6 pr-9 backdrop-blur-[2px]">
       {poles.map(({ titre, sousTitre, chemin }, index) => (

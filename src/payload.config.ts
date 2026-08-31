@@ -9,6 +9,7 @@ import sharp from "sharp";
 
 import { Media } from "./collections/Media";
 import { Users } from "./collections/Users";
+import { Navigation } from "./globals/Navigation";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -80,6 +81,7 @@ export default buildConfig({
     meta: { titleSuffix: " · Bone" },
   },
   collections: [Users, Media],
+  globals: [Navigation],
   /**
    * Le français est la langue de référence : c'est elle qui est saisie, et
    * l'anglais s'y replie tant qu'une traduction manque (`fallback`). Sans ce

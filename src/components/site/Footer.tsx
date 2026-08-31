@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/Button";
 import { lien, type Langue } from "@/lib/i18n";
+import type { Navigation as NavigationGlobal } from "@/lib/navigation";
 
 import { NavLink } from "./NavLink";
 
@@ -12,32 +13,20 @@ import { NavLink } from "./NavLink";
  * dans la maquette, ses 206px de haut s'arrêtent pile sur les 608px du bloc, et
  * l'ancrer par le haut le décalerait dès que le contenu grandit — ce qui
  * arrivera en anglais, où les libellés sont plus longs.
+ *
+ * La première colonne de liens reprend les pôles du déroulant : le pied de page
+ * et l'en-tête doivent les nommer pareil, les tenir en double invitait à ce
+ * qu'ils divergent.
  */
-const colonnes = [
-  {
-    titre: "Nos pôles",
-    liens: [
-      { libelle: "Expertise", chemin: "/competences/expertise" },
-      { libelle: "Capital", chemin: "/competences/capital" },
-      { libelle: "Feed", chemin: "/competences/feed" },
-    ],
-  },
-  {
-    titre: "L’entreprise",
-    liens: [
-      { libelle: "Approche", chemin: "/notre-approche" },
-      { libelle: "À propos", chemin: "/a-propos" },
-    ],
-  },
-];
+export function Footer({
+  langue,
+  navigation,
+}: {
+  langue: Langue;
+  navigation: NavigationGlobal;
+}) {
+  const { poles, colonnes, contact, liensLegaux, credit } = navigation;
 
-const legales = [
-  { libelle: "Mentions légales", chemin: "/mentions-legales" },
-  { libelle: "Politique de confidentialité", chemin: "/politique-de-confidentialite" },
-  { libelle: "Gestion des cookies", chemin: "/gestion-des-cookies" },
-];
-
-export function Footer({ langue }: { langue: Langue }) {
   return (
     <footer className="relative flex w-full flex-col items-center overflow-hidden bg-encre px-28">
       <div className="relative flex w-full max-w-[1600px] flex-col gap-2.5 pb-64 pt-20">
@@ -51,15 +40,22 @@ export function Footer({ langue }: { langue: Langue }) {
                 width={246}
                 height={70}
               />
-              <p className="text-xl text-white/80">
-                Les bonnes décisions transforment votre infrastructure en avantage durable.
-              </p>
+              <p className="text-xl text-white/80">{navigation.baseline}</p>
             </div>
 
-            {colonnes.map(({ titre, liens }) => (
+            <div className="flex flex-col items-start justify-center gap-2.5 self-start">
+              <TitreColonne>{navigation.titrePoles}</TitreColonne>
+              {(poles ?? []).map(({ titre, chemin }) => (
+                <NavLink key={chemin} chemin={chemin} langue={langue}>
+                  {titre}
+                </NavLink>
+              ))}
+            </div>
+
+            {(colonnes ?? []).map(({ titre, liens }) => (
               <div key={titre} className="flex flex-col items-start justify-center gap-2.5 self-start">
                 <TitreColonne>{titre}</TitreColonne>
-                {liens.map(({ libelle, chemin }) => (
+                {(liens ?? []).map(({ libelle, chemin }) => (
                   <NavLink key={chemin} chemin={chemin} langue={langue}>
                     {libelle}
                   </NavLink>
@@ -68,17 +64,17 @@ export function Footer({ langue }: { langue: Langue }) {
             ))}
 
             <div className="flex flex-col items-start justify-center gap-2.5 self-start">
-              <TitreColonne>Contact</TitreColonne>
+              <TitreColonne>{contact.titre}</TitreColonne>
               <NavLink chemin="/contact" langue={langue}>
-                Notre formulaire
+                {contact.libelleFormulaire}
               </NavLink>
               {/* Adresse et réseau social sortent du site : ni l'un ni l'autre
                   ne peut porter l'indicateur de page courante. */}
-              <a href="mailto:bone@contact.fr" className="text-base text-white">
-                bone@contact.fr
+              <a href={`mailto:${contact.email}`} className="text-base text-white">
+                {contact.email}
               </a>
               <a
-                href="https://www.linkedin.com"
+                href={contact.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 className="text-base text-white"
@@ -89,11 +85,11 @@ export function Footer({ langue }: { langue: Langue }) {
 
             <div className="flex h-[45px] items-center gap-5 justify-self-start">
               <Button
-                href={lien("/contact", langue)}
+                href={lien(navigation.boutonEntete.chemin, langue)}
                 variante="secondary"
                 flecheAvant={false}
               >
-                Demander un audit
+                {navigation.boutonEntete.libelle}
               </Button>
             </div>
           </div>
@@ -116,18 +112,18 @@ export function Footer({ langue }: { langue: Langue }) {
             © {new Date().getFullYear()} Bone. Tous droits réservés
           </p>
           <div className="flex items-center justify-end gap-7 text-xs text-white/80">
-            {legales.map(({ libelle, chemin }) => (
+            {(liensLegaux ?? []).map(({ libelle, chemin }) => (
               <Link key={chemin} href={lien(chemin, langue)} className="whitespace-nowrap">
                 {libelle}
               </Link>
             ))}
             <a
-              href="https://www.striq.fr"
+              href={credit.url}
               target="_blank"
               rel="noreferrer"
               className="whitespace-nowrap"
             >
-              Site conçu par l’agence StriQ
+              {credit.libelle}
             </a>
           </div>
         </div>

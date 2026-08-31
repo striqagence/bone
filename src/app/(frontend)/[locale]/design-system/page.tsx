@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { MenuDeroulant } from "@/components/site/MenuDeroulant";
 import { estUneLangue } from "@/lib/i18n";
+import { chargerNavigation } from "@/lib/navigation";
 import { notFound } from "next/navigation";
 import { NavLink } from "@/components/site/NavLink";
 
@@ -19,6 +20,8 @@ export default async function DesignSystem({ params }: PageProps<"/[locale]/desi
   const { locale } = await params;
   if (!estUneLangue(locale)) notFound();
 
+  const navigation = await chargerNavigation(locale);
+
   return (
     <main className="flex flex-1 flex-col gap-16 pb-16">
       <section className="flex flex-col gap-6 bg-gris-950 py-16">
@@ -35,7 +38,7 @@ export default async function DesignSystem({ params }: PageProps<"/[locale]/desi
         {/* Le déroulant est aussi montré déplié, pour l'examiner sans avoir à
             maintenir le survol. */}
         <div className="px-16">
-          <MenuDeroulant langue={locale} />
+          <MenuDeroulant langue={locale} poles={navigation.poles ?? []} />
         </div>
       </section>
 

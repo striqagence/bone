@@ -87,8 +87,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('fr' | 'en') | ('fr' | 'en')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    navigation: Navigation;
+  };
+  globalsSelect: {
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+  };
   locale: 'fr' | 'en';
   widgets: {
     collections: CollectionsWidget;
@@ -379,6 +383,149 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: number;
+  liensPrincipaux?:
+    | {
+        libelle: string;
+        /**
+         * Sans préfixe de langue : « /contact », pas « /fr/contact ».
+         */
+        chemin: string;
+        avecDeroulant?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  boutonEntete: {
+    libelle: string;
+    /**
+     * Sans préfixe de langue : « /contact », pas « /fr/contact ».
+     */
+    chemin: string;
+  };
+  poles?:
+    | {
+        titre: string;
+        sousTitre: string;
+        /**
+         * Sans préfixe de langue : « /contact », pas « /fr/contact ».
+         */
+        chemin: string;
+        id?: string | null;
+      }[]
+    | null;
+  baseline: string;
+  titrePoles: string;
+  colonnes?:
+    | {
+        titre: string;
+        liens?:
+          | {
+              libelle: string;
+              /**
+               * Sans préfixe de langue : « /contact », pas « /fr/contact ».
+               */
+              chemin: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  contact: {
+    titre: string;
+    libelleFormulaire: string;
+    email: string;
+    linkedin: string;
+  };
+  liensLegaux?:
+    | {
+        libelle: string;
+        /**
+         * Sans préfixe de langue : « /contact », pas « /fr/contact ».
+         */
+        chemin: string;
+        id?: string | null;
+      }[]
+    | null;
+  credit: {
+    libelle: string;
+    url: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  liensPrincipaux?:
+    | T
+    | {
+        libelle?: T;
+        chemin?: T;
+        avecDeroulant?: T;
+        id?: T;
+      };
+  boutonEntete?:
+    | T
+    | {
+        libelle?: T;
+        chemin?: T;
+      };
+  poles?:
+    | T
+    | {
+        titre?: T;
+        sousTitre?: T;
+        chemin?: T;
+        id?: T;
+      };
+  baseline?: T;
+  titrePoles?: T;
+  colonnes?:
+    | T
+    | {
+        titre?: T;
+        liens?:
+          | T
+          | {
+              libelle?: T;
+              chemin?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  contact?:
+    | T
+    | {
+        titre?: T;
+        libelleFormulaire?: T;
+        email?: T;
+        linkedin?: T;
+      };
+  liensLegaux?:
+    | T
+    | {
+        libelle?: T;
+        chemin?: T;
+        id?: T;
+      };
+  credit?:
+    | T
+    | {
+        libelle?: T;
+        url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
