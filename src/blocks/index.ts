@@ -305,10 +305,19 @@ export const Differenciation: Block = {
         { name: "badge", type: "text", required: true, localized: true, label: "Étiquette" },
         { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
         {
+          name: "texte",
+          type: "textarea",
+          localized: true,
+          label: "Paragraphe",
+          admin: {
+            description:
+              "Alternative aux puces : la page Media énonce d’un bloc là où l’accueil détaille point par point.",
+          },
+        },
+        {
           name: "puces",
           type: "array",
           label: "Puces",
-          minRows: 1,
           fields: [
             { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
           ],
@@ -323,10 +332,19 @@ export const Differenciation: Block = {
         { name: "badge", type: "text", required: true, localized: true, label: "Étiquette" },
         { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
         {
+          name: "texte",
+          type: "textarea",
+          localized: true,
+          label: "Paragraphe",
+          admin: {
+            description:
+              "Alternative aux puces : la page Media énonce d’un bloc là où l’accueil détaille point par point.",
+          },
+        },
+        {
           name: "puces",
           type: "array",
           label: "Puces",
-          minRows: 1,
           fields: [
             { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
           ],

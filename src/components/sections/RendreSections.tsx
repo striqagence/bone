@@ -115,11 +115,13 @@ export function RendreSections({
                 habituelle={{
                   badge: section.habituelle.badge,
                   titre: section.habituelle.titre,
+                  texte: section.habituelle.texte,
                   puces: (section.habituelle.puces ?? []).map(({ texte }) => texte),
                 }}
                 bone={{
                   badge: section.bone.badge,
                   titre: section.bone.titre,
+                  texte: section.bone.texte,
                   puces: (section.bone.puces ?? []).map(({ texte }) => texte),
                 }}
               />

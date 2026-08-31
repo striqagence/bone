@@ -402,6 +402,10 @@ export interface Page {
             habituelle: {
               badge: string;
               titre: string;
+              /**
+               * Alternative aux puces : la page Media énonce d’un bloc là où l’accueil détaille point par point.
+               */
+              texte?: string | null;
               puces?:
                 | {
                     texte: string;
@@ -412,6 +416,10 @@ export interface Page {
             bone: {
               badge: string;
               titre: string;
+              /**
+               * Alternative aux puces : la page Media énonce d’un bloc là où l’accueil détaille point par point.
+               */
+              texte?: string | null;
               puces?:
                 | {
                     texte: string;
@@ -843,6 +851,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     badge?: T;
                     titre?: T;
+                    texte?: T;
                     puces?:
                       | T
                       | {
@@ -855,6 +864,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     badge?: T;
                     titre?: T;
+                    texte?: T;
                     puces?:
                       | T
                       | {

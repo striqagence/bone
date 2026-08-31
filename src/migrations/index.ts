@@ -28,6 +28,7 @@ import * as migration_20260831_120218_bloc_enjeux from './20260831_120218_bloc_e
 import * as migration_20260831_120642_blocs_promesse_chiffres from './20260831_120642_blocs_promesse_chiffres';
 import * as migration_20260831_120729_grille_description from './20260831_120729_grille_description';
 import * as migration_20260831_120945_bloc_differenciation from './20260831_120945_bloc_differenciation';
+import * as migration_20260831_122234_comparaison_paragraphe from './20260831_122234_comparaison_paragraphe';
 
 export const migrations = [
   {
@@ -178,6 +179,11 @@ export const migrations = [
   {
     up: migration_20260831_120945_bloc_differenciation.up,
     down: migration_20260831_120945_bloc_differenciation.down,
-    name: '20260831_120945_bloc_differenciation'
+    name: '20260831_120945_bloc_differenciation',
+  },
+  {
+    up: migration_20260831_122234_comparaison_paragraphe.up,
+    down: migration_20260831_122234_comparaison_paragraphe.down,
+    name: '20260831_122234_comparaison_paragraphe'
   },
 ];

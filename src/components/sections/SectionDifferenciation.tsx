@@ -1,7 +1,14 @@
 import { Surtitre } from "@/components/ui/Surtitre";
 import { FlecheRenvoi } from "@/components/ui/icones";
 
-type Carte = { badge: string; titre: string; puces: string[] };
+type Carte = {
+  badge: string;
+  titre: string;
+  /** La maquette alterne : une liste à puces sur l'accueil, un paragraphe sur
+      la page Media. Le paragraphe l'emporte quand il est renseigné. */
+  texte?: string | null;
+  puces: string[];
+};
 
 /**
  * Section « Différenciation » de l'accueil (Figma « Container »).
@@ -60,18 +67,26 @@ function CarteComparaison({ carte, accentuee = false }: { carte: Carte; accentue
 
         <p className="w-full titrage text-2xl font-bold leading-[1.4]">{carte.titre}</p>
 
-        <ul className="flex w-full flex-col items-start gap-2">
-          {carte.puces.map((puce) => (
-            <li key={puce} className="flex w-full items-start gap-2.5 text-primary-600">
-              <FlecheRenvoi taille={20} />
-              <span
-                className={`flex-1 text-base leading-[1.5] ${accentuee ? "text-white opacity-80" : "text-primary-950 opacity-60"}`}
-              >
-                {puce}
-              </span>
-            </li>
-          ))}
-        </ul>
+        {carte.texte ? (
+          <p
+            className={`w-full text-base leading-[1.5] ${accentuee ? "text-white opacity-80" : "text-primary-950 opacity-60"}`}
+          >
+            {carte.texte}
+          </p>
+        ) : (
+          <ul className="flex w-full flex-col items-start gap-2">
+            {carte.puces.map((puce) => (
+              <li key={puce} className="flex w-full items-start gap-2.5 text-primary-600">
+                <FlecheRenvoi taille={20} />
+                <span
+                  className={`flex-1 text-base leading-[1.5] ${accentuee ? "text-white opacity-80" : "text-primary-950 opacity-60"}`}
+                >
+                  {puce}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
