@@ -23,9 +23,11 @@ import { SelecteurLangue } from "./SelecteurLangue";
  * et floutée, logotype réduit. C'est l'état permanent des pages internes, dont
  * le hero est clair : un logotype blanc y serait illisible.
  *
- * La barre reste collée en haut dans les deux états. La maquette laisse celui
- * du repos défiler avec le hero, mais la navigation deviendrait alors
- * inatteignable sur une page de 10 000px sans remonter tout en haut.
+ * Sur l'accueil, la barre au repos est posée par-dessus le hero et sort du flux
+ * : le hero occupe donc bien toute la hauteur de la fenêtre, image de fond
+ * comprise, et la barre défile avec lui. Dès les premiers pixels de défilement
+ * elle cède la place à la barre compacte, fixée en haut — sans quoi la
+ * navigation deviendrait inatteignable sur une page de 10 000px.
  *
  * Les SVG sont servis en `<img>` et non via next/image : ce sont des vectoriels
  * à dimensions fixes, que l'optimiseur ne peut ni redimensionner utilement ni
@@ -86,7 +88,11 @@ export function Header({
 
   if (compact) {
     return (
-      <header className="sticky top-0 z-50 flex h-[86px] w-full items-center justify-center px-4 py-4 xl:h-[114px] xl:py-5">
+      <header
+        className={`z-50 flex h-[86px] w-full items-center justify-center px-4 py-4 xl:h-[114px] xl:py-5 ${
+          surAccueil ? "fixed inset-x-0 top-0" : "sticky top-0"
+        }`}
+      >
         <div className="relative flex w-full max-w-[1648px] items-center justify-between rounded bg-encre/80 px-4 py-3 backdrop-blur-[5px] xl:px-6 xl:py-3.5">
           {logotype}
 
@@ -115,7 +121,7 @@ export function Header({
   }
 
   return (
-    <header className="sticky top-0 z-50 flex w-full justify-center px-4 pt-8 xl:px-28">
+    <header className="absolute inset-x-0 top-0 z-50 flex w-full justify-center px-4 pt-8 xl:px-28">
       <div className="relative flex w-full max-w-[1600px] items-center justify-between py-5">
         {logotype}
 

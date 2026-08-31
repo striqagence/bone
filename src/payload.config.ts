@@ -103,10 +103,13 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI ?? "",
       /**
-       * Le pooler Supabase plafonne à 15 clients simultanés. Sans borne, chaque
-       * contexte — serveur local, script de peuplement, fonction serverless —
-       * en ouvre jusqu'à dix par défaut : deux suffisent alors à saturer le
-       * pool et à faire échouer le troisième sur un EMAXCONNSESSION.
+       * Le pooler Supabase plafonne à 15 clients simultanés, là où le pilote
+       * en ouvre dix par défaut : deux contextes suffisent à le saturer.
+       *
+       * Descendre à une seule connexion ne marche pas pour autant : Payload
+       * imbrique ses requêtes, et la seconde attend alors indéfiniment celle
+       * que la première détient. Quatre laissent la marge nécessaire sans
+       * approcher le plafond.
        */
       max: 4,
     },
