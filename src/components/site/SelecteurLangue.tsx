@@ -24,8 +24,7 @@ export function SelecteurLangue({ langue }: { langue: Langue }) {
       href={lien(chemin, autre)}
       hrefLang={autre}
       aria-label={`Passer en ${autre === "fr" ? "français" : "anglais"}`}
-      className="flex items-center gap-0.5 font-display text-sm font-bold text-white transition-opacity hover:opacity-70"
-      style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+      className="flex items-center gap-0.5 titrage text-sm font-bold text-white transition-opacity hover:opacity-70"
     >
       {libelles[langue]}
       {/* eslint-disable-next-line @next/next/no-img-element */}

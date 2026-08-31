@@ -54,6 +54,28 @@
   --shadow-card: 0 4px 14px rgb(0 0 0 / 0.25);
 }
 
+/**
+ * Titrages.
+ *
+ * La maquette pousse l'axe de largeur à 120 sur toute la police primaire. Le
+ * réglage vit ici plutôt qu'en style inline sur chaque composant : répété à la
+ * main, il finissait par manquer quelque part, et il était impossible de voir
+ * d'un coup d'œil qu'il ne s'appliquait nulle part faute d'axe chargé.
+ *
+ * La graisse reste à la charge de l'appelant : les titres sont gras, les
+ * surtitres semi-gras.
+ */
+@utility titrage {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 120;
+}
+
+/** Citations de la maquette : même police, inclinée par l'axe `slnt`. */
+@utility titrage-italique {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 120, "slnt" -10;
+}
+
 /* =============================================================================
    Réglages de base.
 

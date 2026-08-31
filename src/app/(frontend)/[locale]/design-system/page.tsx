@@ -259,9 +259,9 @@ export default async function DesignSystem({ params }: PageProps<"/[locale]/desi
 
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl">Typographie</h2>
-        <p className="font-display text-6xl font-bold">Titrage 6xl</p>
-        <p className="font-display text-4xl font-bold">Titrage 4xl</p>
-        <p className="font-display text-2xl font-bold">Titrage 2xl</p>
+        <p className="titrage text-6xl font-bold">Titrage 6xl</p>
+        <p className="titrage text-4xl font-bold">Titrage 4xl</p>
+        <p className="titrage text-2xl font-bold">Titrage 2xl</p>
         <p className="text-xl">Corps xl — Work Sans</p>
         <p className="text-base">Corps base — Work Sans</p>
         <p className="text-sm">Corps sm — Work Sans</p>

@@ -42,8 +42,7 @@ export function SectionEnBref({
         <div className="flex flex-col items-start justify-center gap-2.5 self-start">
           <Surtitre>{surtitre}</Surtitre>
           <h2
-            className="w-full font-display text-3xl font-bold leading-[1.4] text-primary-950 lg:text-5xl"
-            style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+            className="w-full titrage text-3xl font-bold leading-[1.4] text-primary-950 lg:text-5xl"
           >
             {titre}
           </h2>

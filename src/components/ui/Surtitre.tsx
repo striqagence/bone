@@ -26,8 +26,7 @@ export function Surtitre({
 }) {
   return (
     <p
-      className={`flex items-center justify-center gap-2.5 font-display text-xs font-semibold uppercase leading-5 tracking-widest whitespace-nowrap ${couleurs[couleur]} ${className}`}
-      style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+      className={`flex items-center justify-center gap-2.5 titrage text-xs font-semibold uppercase leading-5 tracking-widest whitespace-nowrap ${couleurs[couleur]} ${className}`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

@@ -64,8 +64,7 @@ export function CarteArticle({
             <span className="text-gris-400">{tempsDeLecture}</span>
           </div>
           <p
-            className="w-full font-display text-xl font-bold leading-[1.4] text-primary-950"
-            style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+            className="w-full titrage text-xl font-bold leading-[1.4] text-primary-950"
           >
             {titre}
           </p>

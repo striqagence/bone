@@ -135,8 +135,7 @@ export function Footer({
 function TitreColonne({ children }: { children: React.ReactNode }) {
   return (
     <p
-      className="font-display text-base font-bold leading-[1.4] whitespace-nowrap text-white"
-      style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+      className="titrage text-base font-bold leading-[1.4] whitespace-nowrap text-white"
     >
       {children}
     </p>

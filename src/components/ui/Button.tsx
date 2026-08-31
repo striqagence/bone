@@ -14,7 +14,7 @@ type Taille = "lg" | "sm" | "barre";
  * rectangle opaque et sans le coût d'un filtre au repaint.
  */
 const base =
-  "inline-flex items-center justify-center gap-2 rounded font-display font-bold leading-7 whitespace-nowrap transition-colors";
+  "inline-flex items-center justify-center gap-2 rounded titrage font-bold leading-7 whitespace-nowrap transition-colors";
 
 const variantes: Record<Variante, string> = {
   primary:
@@ -36,13 +36,6 @@ const tailles: Record<Taille, string> = {
   sm: "p-3.5 text-xs",
   barre: "px-5 py-3.5 text-sm",
 };
-
-/**
- * Google Sans Flex est une police variable à axes personnalisés. Sans ce
- * réglage, le rendu s'écarte de la maquette : `wdth` 120 élargit sensiblement
- * les glyphes, ce qui change la largeur des boutons.
- */
-const axesTypo = { fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' };
 
 /**
  * Compose les classes du bouton.
@@ -89,7 +82,6 @@ export function Button({
       href={href}
       target={target}
       rel={target === "_blank" ? "noreferrer" : undefined}
-      style={axesTypo}
       className={classesBouton({ variante, taille, className })}
     >
       {flecheAvant && fleche}

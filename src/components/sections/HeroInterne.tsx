@@ -47,8 +47,7 @@ export function HeroInterne({
           <div className="flex w-full flex-col items-start justify-end gap-5">
             <Surtitre couleur="marine">{surtitre}</Surtitre>
             <h1
-              className="font-display text-4xl font-bold leading-[1.2] text-primary-950 lg:text-6xl"
-              style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+              className="titrage text-4xl font-bold leading-[1.2] text-primary-950 lg:text-6xl"
             >
               {titre}
             </h1>

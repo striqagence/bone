@@ -57,8 +57,7 @@ export function HeroAccueil({
         <div className="flex w-full flex-1 flex-col items-start justify-end gap-5">
           <Surtitre couleur="blanc">{surtitre}</Surtitre>
           <h1
-            className="font-display text-4xl font-bold leading-[1.2] text-white lg:text-7xl"
-            style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+            className="titrage text-4xl font-bold leading-[1.2] text-white lg:text-7xl"
           >
             {titre.map(({ verbe, complement }) => (
               <span key={verbe} className="block">

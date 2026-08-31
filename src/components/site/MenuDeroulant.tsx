@@ -33,8 +33,7 @@ export function MenuDeroulant({
             />
             <span className="flex flex-col items-start whitespace-nowrap text-white">
               <span
-                className="font-display text-sm font-bold leading-[1.4]"
-                style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+                className="titrage text-sm font-bold leading-[1.4]"
               >
                 {titre}
               </span>

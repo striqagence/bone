@@ -66,8 +66,7 @@ export function CartePole({
 
       <div className="relative flex flex-col items-start gap-5">
         <p
-          className="font-display text-xs font-bold leading-[1.2] text-white"
-          style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+          className="titrage text-xs font-bold leading-[1.2] text-white"
         >
           {eyebrow}
         </p>
@@ -82,8 +81,7 @@ export function CartePole({
         />
 
         <p
-          className="font-display text-lg font-bold leading-[1.4] text-white"
-          style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+          className="titrage text-lg font-bold leading-[1.4] text-white"
         >
           {accroche}
         </p>

@@ -18,6 +18,13 @@ const policePrimaire = Google_Sans_Flex({
   subsets: ["latin"],
   variable: "--police-primaire",
   display: "swap",
+  /**
+   * Sans cette liste, next/font ne sert que l'axe de graisse : le fichier
+   * arrive figé en `font-stretch: 100%` et tout réglage de `wdth` reste sans
+   * effet. La maquette pousse la largeur à 120 sur tous les titrages, et
+   * incline de -10 les citations.
+   */
+  axes: ["slnt", "wdth"],
 });
 
 const policeSecondaire = Work_Sans({

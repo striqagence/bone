@@ -91,8 +91,7 @@ export function MenuMobile({
                     {(navigation.poles ?? []).map(({ titre, sousTitre, chemin: versPole }) => (
                       <Link key={versPole} href={lien(versPole, langue)} className="flex flex-col">
                         <span
-                          className="font-display text-sm font-bold leading-[1.4] text-white"
-                          style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+                          className="titrage text-sm font-bold leading-[1.4] text-white"
                         >
                           {titre}
                         </span>

@@ -75,8 +75,7 @@ export function HeroPleineImage({
               {surtitre}
             </Surtitre>
             <h1
-              className="font-display text-3xl font-bold leading-[1.4] text-white lg:text-5xl"
-              style={{ fontVariationSettings: '"GRAD" 0, "ROND" 0, "wdth" 120' }}
+              className="titrage text-3xl font-bold leading-[1.4] text-white lg:text-5xl"
             >
               {titre}
             </h1>
