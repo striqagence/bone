@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/Button";
+import { HeroInterne } from "@/components/sections/HeroInterne";
 import { MenuDeroulant } from "@/components/site/MenuDeroulant";
+import { FilDAriane } from "@/components/ui/FilDAriane";
+import { Surtitre } from "@/components/ui/Surtitre";
 import { estUneLangue } from "@/lib/i18n";
 import { chargerNavigation } from "@/lib/navigation";
 import { notFound } from "next/navigation";
@@ -40,6 +43,51 @@ export default async function DesignSystem({ params }: PageProps<"/[locale]/desi
         <div className="px-16">
           <MenuDeroulant langue={locale} poles={navigation.poles ?? []} />
         </div>
+      </section>
+
+      <section className="flex flex-col gap-8">
+        <h2 className="px-16 text-2xl">Surtitres et fil d’ariane</h2>
+        <div className="flex flex-col gap-6 px-16">
+          <Surtitre>Le constat</Surtitre>
+          <Surtitre couleur="marine">Nos compétences</Surtitre>
+          <FilDAriane
+            langue={locale}
+            fond="clair"
+            entrees={[{ libelle: "Nos compétences" }]}
+          />
+          <FilDAriane
+            langue={locale}
+            fond="clair"
+            entrees={[
+              { libelle: "Nos compétences", chemin: "/competences" },
+              { libelle: "Expertise" },
+            ]}
+          />
+        </div>
+        <div className="flex flex-col gap-6 bg-gris-950 px-16 py-10">
+          <Surtitre couleur="blanc">Le constat</Surtitre>
+          <FilDAriane
+            langue={locale}
+            fond="sombre"
+            entrees={[
+              { libelle: "Nos compétences", chemin: "/competences" },
+              { libelle: "Expertise" },
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* La photo viendra de Payload : l'aplat tient sa place en attendant. */}
+      <section className="flex flex-col gap-8">
+        <h2 className="px-16 text-2xl">Hero de page interne</h2>
+        <HeroInterne
+          langue={locale}
+          entrees={[{ libelle: "Nos compétences" }]}
+          surtitre="Nos compétences"
+          titre="Trois pôles, une seule logique : sécuriser vos décisions d’infrastructure."
+          description="Expertise, Capital et Feed couvrent l’ensemble du cycle de vie de votre infrastructure : conseil et architecture, revalorisation du parc, et environnements critiques pour les médias. Trois entrées distinctes, une même exigence."
+          cta={{ libelle: "Parler à un expert", chemin: "/contact" }}
+        />
       </section>
 
       <div className="flex flex-col gap-16 px-16">
