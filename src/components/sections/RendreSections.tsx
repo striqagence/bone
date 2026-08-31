@@ -5,6 +5,8 @@ import { SectionGrille } from "@/components/sections/SectionGrille";
 import { SectionChiffres } from "@/components/sections/SectionChiffres";
 import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
 import { SectionPartenaires } from "@/components/sections/SectionPartenaires";
+import { SectionPointsEntree } from "@/components/sections/SectionPointsEntree";
+import { SectionPosture } from "@/components/sections/SectionPosture";
 import { SectionProfils } from "@/components/sections/SectionProfils";
 import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
@@ -133,6 +135,25 @@ export function RendreSections({
                 key={section.id}
                 surtitre={section.surtitre}
                 logos={section.logos ?? []}
+              />
+            );
+          case "posture":
+            return (
+              <SectionPosture
+                key={section.id}
+                surtitre={section.surtitre}
+                refus={section.refus}
+                engagement={section.engagement}
+              />
+            );
+          case "pointsEntree":
+            return (
+              <SectionPointsEntree
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                enTetes={section.enTetes}
+                lignes={section.lignes ?? []}
               />
             );
           case "promesse":

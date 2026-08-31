@@ -30,6 +30,7 @@ import * as migration_20260831_120729_grille_description from './20260831_120729
 import * as migration_20260831_120945_bloc_differenciation from './20260831_120945_bloc_differenciation';
 import * as migration_20260831_122234_comparaison_paragraphe from './20260831_122234_comparaison_paragraphe';
 import * as migration_20260831_122544_bloc_partenaires from './20260831_122544_bloc_partenaires';
+import * as migration_20260831_135139_posture_points_entree from './20260831_135139_posture_points_entree';
 
 export const migrations = [
   {
@@ -190,6 +191,11 @@ export const migrations = [
   {
     up: migration_20260831_122544_bloc_partenaires.up,
     down: migration_20260831_122544_bloc_partenaires.down,
-    name: '20260831_122544_bloc_partenaires'
+    name: '20260831_122544_bloc_partenaires',
+  },
+  {
+    up: migration_20260831_135139_posture_points_entree.up,
+    down: migration_20260831_135139_posture_points_entree.down,
+    name: '20260831_135139_posture_points_entree'
   },
 ];

@@ -18,6 +18,8 @@
 @theme {
   /* --- Bleu principal ------------------------------------------------------ */
   --color-primary-50: #ebf1ff;
+  --color-primary-100: #dbe5ff;
+  --color-primary-500: #4c5aff;
   --color-primary-600: #2020ff; /* couleur de marque */
   --color-primary-800: #1e1db6;
   --color-primary-900: #20228f;

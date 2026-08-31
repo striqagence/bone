@@ -386,6 +386,77 @@ export const Partenaires: Block = {
   ],
 };
 
+/**
+ * « On ne dit pas / On dit » : deux colonnes qui opposent la phrase que Bone
+ * refuse de prononcer à celle qu'il prononce. La citation de gauche est
+ * estompée, celle de droite pleine ; la précision n'existe qu'à gauche, elle
+ * élargit le refus à tout ce qui n'est pas justifié par le diagnostic.
+ */
+export const Posture: Block = {
+  slug: "posture",
+  labels: { singular: "Posture", plural: "Postures" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    {
+      name: "refus",
+      type: "group",
+      label: "Colonne de gauche, ce qu'on ne dit pas",
+      fields: [
+        { name: "intitule", type: "text", required: true, localized: true, label: "Intitulé" },
+        { name: "citation", type: "textarea", required: true, localized: true, label: "Citation" },
+        { name: "precision", type: "textarea", localized: true, label: "Précision" },
+      ],
+    },
+    {
+      name: "engagement",
+      type: "group",
+      label: "Colonne de droite, ce qu'on dit",
+      fields: [
+        { name: "intitule", type: "text", required: true, localized: true, label: "Intitulé" },
+        { name: "citation", type: "textarea", required: true, localized: true, label: "Citation" },
+      ],
+    },
+  ],
+};
+
+/**
+ * Tableau « un point d'entrée par fonction ».
+ *
+ * Les trois en-têtes sont saisis plutôt que codés : ce sont des libellés de
+ * contenu, et l'anglais ne les traduit pas mot à mot.
+ */
+export const PointsEntree: Block = {
+  slug: "pointsEntree",
+  labels: { singular: "Points d'entrée", plural: "Points d'entrée" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    {
+      name: "enTetes",
+      type: "group",
+      label: "En-têtes de colonnes",
+      fields: [
+        { name: "profil", type: "text", required: true, localized: true, label: "Profil" },
+        { name: "pointEntree", type: "text", required: true, localized: true, label: "Point d'entrée" },
+        { name: "livrable", type: "text", required: true, localized: true, label: "Livrable" },
+      ],
+    },
+    {
+      name: "lignes",
+      type: "array",
+      label: "Lignes",
+      minRows: 1,
+      fields: [
+        { name: "profil", type: "text", required: true, localized: true, label: "Profil" },
+        { name: "pointEntree", type: "text", required: true, localized: true, label: "Point d'entrée" },
+        { name: "livrable", type: "text", required: true, localized: true, label: "Livrable" },
+      ],
+    },
+  ],
+};
+
 export const sections = [
   BandePoles,
   Synergie,
@@ -398,5 +469,7 @@ export const sections = [
   Faq,
   Differenciation,
   Partenaires,
+  Posture,
+  PointsEntree,
   AppelAction,
 ];

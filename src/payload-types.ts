@@ -453,6 +453,41 @@ export interface Page {
           }
         | {
             surtitre: string;
+            refus: {
+              intitule: string;
+              citation: string;
+              precision?: string | null;
+            };
+            engagement: {
+              intitule: string;
+              citation: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'posture';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            enTetes: {
+              profil: string;
+              pointEntree: string;
+              livrable: string;
+            };
+            lignes?:
+              | {
+                  profil: string;
+                  pointEntree: string;
+                  livrable: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pointsEntree';
+          }
+        | {
+            surtitre: string;
             titre: string;
             chapo: string;
             cta: {
@@ -905,6 +940,49 @@ export interface PagesSelect<T extends boolean = true> {
                     fichier?: T;
                     nom?: T;
                     hauteur?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        posture?:
+          | T
+          | {
+              surtitre?: T;
+              refus?:
+                | T
+                | {
+                    intitule?: T;
+                    citation?: T;
+                    precision?: T;
+                  };
+              engagement?:
+                | T
+                | {
+                    intitule?: T;
+                    citation?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        pointsEntree?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              enTetes?:
+                | T
+                | {
+                    profil?: T;
+                    pointEntree?: T;
+                    livrable?: T;
+                  };
+              lignes?:
+                | T
+                | {
+                    profil?: T;
+                    pointEntree?: T;
+                    livrable?: T;
                     id?: T;
                   };
               id?: T;

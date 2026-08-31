@@ -188,17 +188,17 @@ toutes les pages, sans message d'erreur.
 
 ## Suite du travail
 
-Six écrans sont finis — accueil, Contact, Compétences, Expertise, Capital et
-Feed. Restent quatre écrans, page « Maquettes desktop » (`1:12`) :
+Sept écrans sont finis — accueil, Contact, Compétences, Expertise, Capital,
+Feed et Notre approche. Restent trois écrans, page « Maquettes desktop »
+(`1:12`) :
 
 | Écran | Node | Hauteur |
 | --- | --- | --- |
-| Notre approche | `4147:6348` | 4 623 px |
 | Blog | `4148:8071` | 4 186 px |
 | Détail d'un article | `4153:9100` | 5 862 px |
 | À propos | `4159:10191` | 4 891 px |
 
-Les deux derniers supposent des routes `/blog` et `/blog/[slug]`, qui n'existent
+Les deux premiers supposent des routes `/blog` et `/blog/[slug]`, qui n'existent
 pas encore.
 
 Les composants partagés sont tous intégrés : bouton, flèche, surtitre, fil
