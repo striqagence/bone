@@ -1,5 +1,6 @@
 import { SectionAppel } from "@/components/sections/SectionAppel";
 import { SectionArticles } from "@/components/sections/SectionArticles";
+import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionGrille } from "@/components/sections/SectionGrille";
 import { SectionRole } from "@/components/sections/SectionRole";
 import { SectionPoles } from "@/components/sections/SectionPoles";
@@ -22,6 +23,13 @@ type Bande = {
  * Les blocs qui parlent des pôles sont alimentés par les pages de pôle et non
  * par une saisie : ces libellés n'ont qu'une source dans tout le site.
  */
+/** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
+function photo(valeur: unknown) {
+  return valeur && typeof valeur === "object" && "url" in valeur && typeof valeur.url === "string"
+    ? { src: valeur.url, alt: String((valeur as { alt?: string }).alt ?? "") }
+    : undefined;
+}
+
 export function RendreSections({
   sections,
   langue,
@@ -87,6 +95,16 @@ export function RendreSections({
                 titre={section.titre}
                 libelleAction={section.libelleAction}
                 articles={articles.slice(0, section.nombre)}
+              />
+            );
+          case "faq":
+            return (
+              <SectionFaq
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                questions={section.questions ?? []}
+                image={photo(section.image)}
               />
             );
           case "appelAction":

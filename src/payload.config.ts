@@ -112,10 +112,13 @@ export default buildConfig({
        *
        * Descendre à une seule connexion ne marche pas pour autant : Payload
        * imbrique ses requêtes, et la seconde attend alors indéfiniment celle
-       * que la première détient. Quatre laissent la marge nécessaire sans
-       * approcher le plafond.
+       * que la première détient.
+       *
+       * Trois, combinées aux deux workers de build (cf. next.config.ts),
+       * plafonnent à six connexions simultanées — la marge nécessaire à
+       * l'imbrication, loin des quinze du pooler.
        */
-      max: 4,
+      max: 3,
     },
     // Les migrations sont jouées explicitement (`npm run payload migrate`) et
     // non déduites du schéma au démarrage : en serverless, un push automatique

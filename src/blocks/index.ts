@@ -154,4 +154,31 @@ export const Articles: Block = {
   ],
 };
 
-export const sections = [BandePoles, Synergie, Grille, Escalier, Articles, AppelAction];
+export const Faq: Block = {
+  slug: "faq",
+  labels: { singular: "Questions fréquentes", plural: "Questions fréquentes" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    { name: "image", type: "upload", relationTo: "media", label: "Photo" },
+    {
+      name: "questions",
+      type: "array",
+      label: "Questions",
+      minRows: 1,
+      fields: [
+        { name: "question", type: "text", required: true, localized: true, label: "Question" },
+        {
+          name: "reponse",
+          type: "textarea",
+          localized: true,
+          label: "Réponse",
+          admin: { description: "Sans réponse, la question s’affiche sans pouvoir se déplier." },
+        },
+      ],
+    },
+  ],
+};
+
+export const sections = [BandePoles, Synergie, Grille, Escalier, Articles, Faq, AppelAction];

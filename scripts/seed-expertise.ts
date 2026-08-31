@@ -147,15 +147,56 @@ const articlesEn = {
   nombre: 4,
 };
 
+const { docs: photosFaq } = await payload.find({
+  collection: "media",
+  where: { filename: { equals: "article-exemple.jpg" } },
+  limit: 1,
+});
+
+/** Mêmes questions que la FAQ de l'accueil : la maquette les répète. */
+const faqFr = {
+  blockType: "faq" as const,
+  surtitre: "Questions fréquentes",
+  titre: "Vos questions, nos réponses franches.",
+  image: photosFaq[0]?.id,
+  questions: [
+    { question: "Que fait exactement Bone ?", reponse: "" },
+    {
+      question: "Bone est-il un revendeur de matériel ou un cabinet de conseil ?",
+      reponse:
+        "Bone ne revend aucun matériel : c’est un cabinet de conseil et d’architecture indépendant, rémunéré pour la clarté de la décision.",
+    },
+    { question: "Faut-il un budget pour démarrer avec Bone ?", reponse: "" },
+    { question: "Bone intervient-il sans créer de dépendance ?", reponse: "" },
+  ],
+};
+
+const faqEn = {
+  blockType: "faq" as const,
+  surtitre: "Frequently asked questions",
+  titre: "Your questions, our straight answers.",
+  image: photosFaq[0]?.id,
+  questions: [
+    { question: "What exactly does Bone do?", reponse: "" },
+    {
+      question: "Is Bone a hardware reseller or a consultancy?",
+      reponse:
+        "Bone resells no hardware: it is an independent consultancy and architecture practice, paid for the clarity of the decision.",
+    },
+    { question: "Do I need a budget to start with Bone?", reponse: "" },
+    { question: "Does Bone work without creating dependency?", reponse: "" },
+  ],
+};
+
 await payload.update({
   collection: "pages",
   id,
   locale: "fr",
-  data: { ...heroFr, sections: [grilleFr, couchesFr, articlesFr], _status: "published" },
+  data: { ...heroFr, sections: [grilleFr, couchesFr, faqFr, articlesFr], _status: "published" },
 });
 
 const pose = await payload.findByID({ collection: "pages", id, locale: "fr", depth: 0 });
-const [blocGrille, blocCouches, blocArticles] = pose.sections ?? [];
+const [blocGrille, blocCouches, blocFaq, blocArticles] = pose.sections ?? [];
 
 await payload.update({
   collection: "pages",
@@ -178,6 +219,14 @@ await payload.update({
         cartes: couchesEn.cartes.map((c, i) => ({
           ...c,
           id: blocCouches && "cartes" in blocCouches ? blocCouches.cartes?.[i]?.id : undefined,
+        })),
+      },
+      {
+        ...faqEn,
+        id: blocFaq?.id,
+        questions: faqEn.questions.map((q, i) => ({
+          ...q,
+          id: blocFaq && "questions" in blocFaq ? blocFaq.questions?.[i]?.id : undefined,
         })),
       },
       { ...articlesEn, id: blocArticles?.id },

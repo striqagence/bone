@@ -23,6 +23,7 @@ import * as migration_20260831_113236_bloc_grille from './20260831_113236_bloc_g
 import * as migration_20260831_113807_bloc_escalier from './20260831_113807_bloc_escalier';
 import * as migration_20260831_114152_blog from './20260831_114152_blog';
 import * as migration_20260831_114351_bloc_articles from './20260831_114351_bloc_articles';
+import * as migration_20260831_114907_bloc_faq from './20260831_114907_bloc_faq';
 
 export const migrations = [
   {
@@ -148,6 +149,11 @@ export const migrations = [
   {
     up: migration_20260831_114351_bloc_articles.up,
     down: migration_20260831_114351_bloc_articles.down,
-    name: '20260831_114351_bloc_articles'
+    name: '20260831_114351_bloc_articles',
+  },
+  {
+    up: migration_20260831_114907_bloc_faq.up,
+    down: migration_20260831_114907_bloc_faq.down,
+    name: '20260831_114907_bloc_faq'
   },
 ];

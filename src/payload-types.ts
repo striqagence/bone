@@ -322,6 +322,24 @@ export interface Page {
         | {
             surtitre: string;
             titre: string;
+            image?: (number | null) | Media;
+            questions?:
+              | {
+                  question: string;
+                  /**
+                   * Sans réponse, la question s’affiche sans pouvoir se déplier.
+                   */
+                  reponse?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            surtitre: string;
+            titre: string;
             chapo: string;
             cta: {
               libelle: string;
@@ -663,6 +681,22 @@ export interface PagesSelect<T extends boolean = true> {
               titre?: T;
               libelleAction?: T;
               nombre?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              image?: T;
+              questions?:
+                | T
+                | {
+                    question?: T;
+                    reponse?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
