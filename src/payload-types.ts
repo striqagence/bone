@@ -484,6 +484,19 @@ export interface Accueil {
     };
     image?: (number | null) | Media;
   };
+  enBref: {
+    surtitre: string;
+    titre: string;
+    propos: string;
+    /**
+     * Affichée en retrait sous le propos.
+     */
+    precision: string;
+    cta: {
+      libelle: string;
+      chemin: string;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -587,6 +600,20 @@ export interface AccueilSelect<T extends boolean = true> {
               chemin?: T;
             };
         image?: T;
+      };
+  enBref?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        propos?: T;
+        precision?: T;
+        cta?:
+          | T
+          | {
+              libelle?: T;
+              chemin?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

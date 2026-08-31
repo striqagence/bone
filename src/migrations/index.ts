@@ -4,6 +4,7 @@ import * as migration_20260831_063524_navigation from './20260831_063524_navigat
 import * as migration_20260831_070907_pages from './20260831_070907_pages';
 import * as migration_20260831_090136_pole from './20260831_090136_pole';
 import * as migration_20260831_091006_accueil from './20260831_091006_accueil';
+import * as migration_20260831_091945_accueil_en_bref from './20260831_091945_accueil_en_bref';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260831_091006_accueil.up,
     down: migration_20260831_091006_accueil.down,
-    name: '20260831_091006_accueil'
+    name: '20260831_091006_accueil',
+  },
+  {
+    up: migration_20260831_091945_accueil_en_bref.up,
+    down: migration_20260831_091945_accueil_en_bref.down,
+    name: '20260831_091945_accueil_en_bref'
   },
 ];

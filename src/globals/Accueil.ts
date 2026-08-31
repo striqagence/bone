@@ -56,5 +56,32 @@ export const Accueil: GlobalConfig = {
         { name: "image", type: "upload", relationTo: "media", label: "Photo de fond" },
       ],
     },
+    {
+      name: "enBref",
+      type: "group",
+      label: "En bref",
+      fields: [
+        { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+        { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+        { name: "propos", type: "textarea", required: true, localized: true, label: "Propos" },
+        {
+          name: "precision",
+          type: "textarea",
+          required: true,
+          localized: true,
+          label: "Précision",
+          admin: { description: "Affichée en retrait sous le propos." },
+        },
+        {
+          name: "cta",
+          type: "group",
+          label: "Bouton",
+          fields: [
+            { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
+            { name: "chemin", type: "text", required: true, label: "Chemin" },
+          ],
+        },
+      ],
+    },
   ],
 };

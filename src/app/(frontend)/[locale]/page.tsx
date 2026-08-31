@@ -3,6 +3,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 
 import { HeroAccueil } from "@/components/sections/HeroAccueil";
+import { SectionEnBref } from "@/components/sections/SectionEnBref";
 import { estUneLangue } from "@/lib/i18n";
 
 export default async function Accueil({ params }: PageProps<"/[locale]">) {
@@ -10,7 +11,7 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero } = await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
+  const { hero, enBref } = await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
 
   const image =
     hero.image && typeof hero.image === "object" && hero.image.url
@@ -18,13 +19,23 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
       : undefined;
 
   return (
-    <HeroAccueil
-      langue={locale}
-      surtitre={hero.surtitre}
-      titre={(hero.lignes ?? []).map(({ verbe, complement }) => ({ verbe, complement }))}
-      chapo={hero.chapo}
-      cta={hero.cta}
-      image={image}
-    />
+    <>
+      <HeroAccueil
+        langue={locale}
+        surtitre={hero.surtitre}
+        titre={(hero.lignes ?? []).map(({ verbe, complement }) => ({ verbe, complement }))}
+        chapo={hero.chapo}
+        cta={hero.cta}
+        image={image}
+      />
+      <SectionEnBref
+        langue={locale}
+        surtitre={enBref.surtitre}
+        titre={enBref.titre}
+        propos={enBref.propos}
+        precision={enBref.precision}
+        cta={enBref.cta}
+      />
+    </>
   );
 }
