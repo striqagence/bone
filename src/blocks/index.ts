@@ -181,4 +181,53 @@ export const Faq: Block = {
   ],
 };
 
-export const sections = [BandePoles, Synergie, Grille, Escalier, Articles, Faq, AppelAction];
+export const Enjeux: Block = {
+  slug: "enjeux",
+  labels: { singular: "Cartes d’enjeux", plural: "Cartes d’enjeux" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    {
+      name: "titreHaut",
+      type: "text",
+      localized: true,
+      label: "Titre, énoncé",
+      admin: { description: "Facultatif. Affiché en retrait devant le titre." },
+    },
+    { name: "titreBas", type: "text", required: true, localized: true, label: "Titre" },
+    {
+      name: "cartes",
+      type: "array",
+      label: "Cartes",
+      minRows: 1,
+      maxRows: 4,
+      admin: {
+        initCollapsed: true,
+        description: "Les fonds s’assombrissent dans l’ordre : la progression suit la position.",
+      },
+      fields: [
+        {
+          name: "picto",
+          type: "select",
+          required: true,
+          label: "Pictogramme",
+          options: [
+            { label: "Antenne", value: "antenne" },
+            { label: "Sécurité", value: "securite" },
+            { label: "Balance", value: "balance" },
+            { label: "Boussole", value: "boussole" },
+            { label: "Dette", value: "dette" },
+            { label: "Alerte", value: "alerte" },
+            { label: "Interdépendances", value: "liens" },
+          ],
+        },
+        { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+        { name: "description", type: "textarea", required: true, localized: true, label: "Situation" },
+        { name: "reponse", type: "textarea", required: true, localized: true, label: "Ce que Bone apporte" },
+        { name: "image", type: "upload", relationTo: "media", label: "Photo" },
+      ],
+    },
+  ],
+};
+
+export const sections = [BandePoles, Synergie, Grille, Escalier, Enjeux, Articles, Faq, AppelAction];

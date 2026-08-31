@@ -309,6 +309,30 @@ export interface Page {
           }
         | {
             surtitre: string;
+            /**
+             * Facultatif. Affiché en retrait devant le titre.
+             */
+            titreHaut?: string | null;
+            titreBas: string;
+            /**
+             * Les fonds s’assombrissent dans l’ordre : la progression suit la position.
+             */
+            cartes?:
+              | {
+                  picto: 'antenne' | 'securite' | 'balance' | 'boussole' | 'dette' | 'alerte' | 'liens';
+                  titre: string;
+                  description: string;
+                  reponse: string;
+                  image?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'enjeux';
+          }
+        | {
+            surtitre: string;
             titre: string;
             libelleAction: string;
             /**
@@ -669,6 +693,25 @@ export interface PagesSelect<T extends boolean = true> {
                     titre?: T;
                     texte?: T;
                     accentuee?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        enjeux?:
+          | T
+          | {
+              surtitre?: T;
+              titreHaut?: T;
+              titreBas?: T;
+              cartes?:
+                | T
+                | {
+                    picto?: T;
+                    titre?: T;
+                    description?: T;
+                    reponse?: T;
+                    image?: T;
                     id?: T;
                   };
               id?: T;

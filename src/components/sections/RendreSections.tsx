@@ -2,6 +2,7 @@ import { SectionAppel } from "@/components/sections/SectionAppel";
 import { SectionArticles } from "@/components/sections/SectionArticles";
 import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionGrille } from "@/components/sections/SectionGrille";
+import { SectionProfils } from "@/components/sections/SectionProfils";
 import { SectionRole } from "@/components/sections/SectionRole";
 import { SectionPoles } from "@/components/sections/SectionPoles";
 import { SectionSynergie } from "@/components/sections/SectionSynergie";
@@ -84,6 +85,22 @@ export function RendreSections({
                 titre={section.titre}
                 chapo={section.chapo}
                 etapes={section.cartes ?? []}
+              />
+            );
+          case "enjeux":
+            return (
+              <SectionProfils
+                key={section.id}
+                surtitre={section.surtitre}
+                titreHaut={section.titreHaut}
+                titreBas={section.titreBas}
+                profils={(section.cartes ?? []).map((c) => ({
+                  picto: c.picto,
+                  titre: c.titre,
+                  description: c.description,
+                  reponse: c.reponse,
+                  image: photo(c.image),
+                }))}
               />
             );
           case "articles":

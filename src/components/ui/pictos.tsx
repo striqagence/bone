@@ -117,3 +117,50 @@ export function PictoBoussole({ taille = 40 }: { taille?: number }) {
     </svg>
   );
 }
+
+export function PictoDette({ taille = 40 }: { taille?: number }) {
+  return (
+    <svg
+      width={taille}
+      height={taille}
+      viewBox="0 0 34.8334 33.1669"
+      fill="none"
+      aria-hidden
+      className="shrink-0"
+    >
+      <path d="M12.4167 2.78856C5.7367 4.30432 0.75 10.2782 0.75 17.4169C0.75 18.2686 0.820997 19.1038 0.957396 19.9169M10.75 7.41686L12.4167 2.78856L7.41667 0.750198M29.1908 24.0835C30.1888 22.0753 30.75 19.8116 30.75 17.4169C30.75 9.98437 25.3443 3.81446 18.25 2.62426M26.5833 19.0835L29.1908 24.0835L34.0833 20.7502M3.27591 25.7502C5.96679 29.7701 10.5493 32.4169 15.75 32.4169C19.5918 32.4169 23.0962 30.9726 25.75 28.5974M3.27591 31.5835V25.7502H9.08333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function PictoAlerte({ taille = 40 }: { taille?: number }) {
+  return (
+    <svg
+      width={taille}
+      height={taille}
+      viewBox="0 0 31.5 34.8333"
+      fill="none"
+      aria-hidden
+      className="shrink-0"
+    >
+      <path d="M4.34728 16.5684C4.22482 18.895 4.3656 21.3716 2.28689 22.9307C1.31939 23.6563 0.75 24.7951 0.75 26.0044C0.75 27.668 2.053 29.0833 3.75 29.0833H27.75C29.447 29.0833 30.75 27.668 30.75 26.0044C30.75 24.7951 30.1806 23.6563 29.2131 22.9307C27.1344 21.3716 27.2752 18.895 27.1527 16.5684C26.8335 10.5037 21.823 5.75 15.75 5.75C9.67696 5.75 4.66647 10.5037 4.34728 16.5684Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13.25 2.625C13.25 4.00571 14.3693 5.75 15.75 5.75C17.1307 5.75 18.25 4.00571 18.25 2.625C18.25 1.24429 17.1307 0.75 15.75 0.75C14.3693 0.75 13.25 1.24429 13.25 2.625Z" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M20.75 29.0833C20.75 31.8448 18.5114 34.0833 15.75 34.0833C12.9886 34.0833 10.75 31.8448 10.75 29.0833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function PictoLiens({ taille = 40 }: { taille?: number }) {
+  return (
+    <svg
+      width={taille}
+      height={taille}
+      viewBox="0 0 34.8333 34.8333"
+      fill="none"
+      aria-hidden
+      className="shrink-0"
+    >
+      <path d="M0.75 17.4167H34.0833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}

@@ -2,7 +2,15 @@ import Image from "next/image";
 
 import { Surtitre } from "@/components/ui/Surtitre";
 import { FlecheRenvoi } from "@/components/ui/icones";
-import { PictoAntenne, PictoBalance, PictoBoussole, PictoSecurite } from "@/components/ui/pictos";
+import {
+  PictoAlerte,
+  PictoAntenne,
+  PictoBalance,
+  PictoBoussole,
+  PictoDette,
+  PictoLiens,
+  PictoSecurite,
+} from "@/components/ui/pictos";
 
 /**
  * Section « À qui s'adresse Bone » de l'accueil (Figma « Container »).
@@ -22,6 +30,9 @@ const pictos = {
   securite: PictoSecurite,
   balance: PictoBalance,
   boussole: PictoBoussole,
+  dette: PictoDette,
+  alerte: PictoAlerte,
+  liens: PictoLiens,
 } as const;
 
 export function SectionProfils({
@@ -31,7 +42,9 @@ export function SectionProfils({
   profils,
 }: {
   surtitre: string;
-  titreHaut: string;
+  /** Absent, le titre s'affiche d'une seule intensité — l'accueil l'énonce en
+      deux temps, la page Expertise non. */
+  titreHaut?: string | null;
   titreBas: string;
   profils: {
     picto: keyof typeof pictos;
@@ -45,9 +58,9 @@ export function SectionProfils({
     <section className="flex w-full flex-col items-center bg-primary-50 pt-16 lg:pt-32">
       <div className="flex w-full max-w-[1600px] flex-col items-center justify-center gap-2.5 px-6 pb-8 lg:px-28 lg:pb-12">
         <Surtitre>{surtitre}</Surtitre>
-        <h2 className="w-full titrage text-center text-3xl font-bold leading-[1.2] lg:text-7xl">
-          <span className="text-primary-950/50">{titreHaut}</span>{" "}
-          <span className="block text-primary-950">{titreBas}</span>
+        <h2 className="w-full titrage text-center text-3xl font-bold leading-[1.2] text-primary-950 lg:text-7xl">
+          {titreHaut && <span className="text-primary-950/50">{titreHaut} </span>}
+          <span className="block">{titreBas}</span>
         </h2>
       </div>
 
