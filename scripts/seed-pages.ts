@@ -50,6 +50,7 @@ const pages: Definition[] = [
   { slug: "capital", parent: "competences", fr: { titre: "Capital" }, en: { titre: "Capital" } },
   { slug: "feed", parent: "competences", fr: { titre: "Feed" }, en: { titre: "Feed" } },
   { slug: "notre-approche", fr: { titre: "Notre approche" }, en: { titre: "Our approach" } },
+  { slug: "blog", fr: { titre: "Blog" }, en: { titre: "Blog" } },
   { slug: "a-propos", fr: { titre: "À propos" }, en: { titre: "About" } },
   { slug: "contact", fr: { titre: "Contact" }, en: { titre: "Contact" } },
   { slug: "mentions-legales", fr: { titre: "Mentions légales" }, en: { titre: "Legal notice" } },

@@ -217,3 +217,17 @@ export function IconeLivrable() {
     </span>
   );
 }
+
+/** Le « plus » encadré du bouton « charger plus d'articles ». */
+export function IconePlus() {
+  return (
+    <span className="inline-flex size-5 shrink-0 items-center justify-center">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+        <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="0.75" y="0.75" width="14.5" height="14.5" rx="3" />
+          <path d="M8 4.75V11.25M4.75 8H11.25" />
+        </g>
+      </svg>
+    </span>
+  );
+}

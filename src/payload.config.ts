@@ -8,12 +8,14 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 
 import { Categories } from "./collections/Categories";
+import { Abonnes } from "./collections/Abonnes";
 import { Demandes } from "./collections/Demandes";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
 import { Users } from "./collections/Users";
 import { Accueil } from "./globals/Accueil";
+import { Blog } from "./globals/Blog";
 import { Contact } from "./globals/Contact";
 import { Navigation } from "./globals/Navigation";
 
@@ -86,8 +88,8 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " · Bone" },
   },
-  collections: [Users, Media, Pages, Posts, Categories, Demandes],
-  globals: [Accueil, Contact, Navigation],
+  collections: [Users, Media, Pages, Posts, Categories, Demandes, Abonnes],
+  globals: [Accueil, Blog, Contact, Navigation],
   /**
    * Le français est la langue de référence : c'est elle qui est saisie, et
    * l'anglais s'y replie tant qu'une traduction manque (`fallback`). Sans ce

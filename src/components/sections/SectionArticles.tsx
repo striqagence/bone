@@ -38,7 +38,7 @@ export function SectionArticles({
             section. */}
         <ul className="flex w-full min-w-px gap-7 overflow-x-auto pb-3 lg:flex-1">
           {articles.map((article) => (
-            <li key={article.chemin} className="shrink-0">
+            <li key={article.chemin} className="w-[400px] shrink-0">
               <CarteArticle
                 langue={langue}
                 chemin={article.chemin}

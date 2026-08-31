@@ -73,6 +73,7 @@ export interface Config {
     posts: Post;
     categories: Category;
     demandes: Demande;
+    abonnes: Abonne;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     demandes: DemandesSelect<false> | DemandesSelect<true>;
+    abonnes: AbonnesSelect<false> | AbonnesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -97,11 +99,13 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('fr' | 'en') | ('fr' | 'en')[];
   globals: {
     accueil: Accueil;
+    blog: Blog;
     contact: Contact;
     navigation: Navigation;
   };
   globalsSelect: {
     accueil: AccueilSelect<false> | AccueilSelect<true>;
+    blog: BlogSelect<false> | BlogSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
   };
@@ -490,6 +494,17 @@ export interface Page {
             surtitre: string;
             titre: string;
             chapo: string;
+            libelleChamp: string;
+            libelleBouton: string;
+            messageSucces: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsletter';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
             cta: {
               libelle: string;
               chemin: string;
@@ -555,7 +570,12 @@ export interface Post {
  */
 export interface Category {
   id: number;
+  _order?: string | null;
   nom: string;
+  /**
+   * Version développée du nom, pour les filtres du blog : « Capital » sur l’étiquette d’une carte, « Revalorisation / Capital » dans la barre. Vide, le nom sert aux deux.
+   */
+  libelleLong?: string | null;
   /**
    * Sert au filtrage du blog. Non localisé.
    */
@@ -579,6 +599,20 @@ export interface Demande {
    * Renseignée automatiquement, utile pour répondre dans la bonne langue.
    */
   langue?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "abonnes".
+ */
+export interface Abonne {
+  id: number;
+  email: string;
+  /**
+   * Langue de la page depuis laquelle l’inscription a été faite.
+   */
+  langue?: ('fr' | 'en') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -629,6 +663,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'demandes';
         value: number | Demande;
+      } | null)
+    | ({
+        relationTo: 'abonnes';
+        value: number | Abonne;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -988,6 +1026,18 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        newsletter?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              libelleChamp?: T;
+              libelleBouton?: T;
+              messageSucces?: T;
+              id?: T;
+              blockName?: T;
+            };
         appelAction?:
           | T
           | {
@@ -1034,7 +1084,9 @@ export interface PostsSelect<T extends boolean = true> {
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
+  _order?: T;
   nom?: T;
+  libelleLong?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1050,6 +1102,16 @@ export interface DemandesSelect<T extends boolean = true> {
   email?: T;
   telephone?: T;
   contexte?: T;
+  langue?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "abonnes_select".
+ */
+export interface AbonnesSelect<T extends boolean = true> {
+  email?: T;
   langue?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1314,6 +1376,30 @@ export interface Accueil {
         }[]
       | null;
   };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog".
+ */
+export interface Blog {
+  id: number;
+  surtitreUne: string;
+  libelleLire: string;
+  /**
+   * Le filtre qui n’en applique aucun : « Tous les sujets ».
+   */
+  libelleTousSujets: string;
+  /**
+   * « {n} articles » — {n} est remplacé par le nombre trouvé.
+   */
+  gabaritCompte: string;
+  libelleCharger: string;
+  /**
+   * Affiché quand un filtre ne ramène rien.
+   */
+  messageVide: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1675,6 +1761,21 @@ export interface AccueilSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog_select".
+ */
+export interface BlogSelect<T extends boolean = true> {
+  surtitreUne?: T;
+  libelleLire?: T;
+  libelleTousSujets?: T;
+  gabaritCompte?: T;
+  libelleCharger?: T;
+  messageVide?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

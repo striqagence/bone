@@ -31,6 +31,8 @@ import * as migration_20260831_120945_bloc_differenciation from './20260831_1209
 import * as migration_20260831_122234_comparaison_paragraphe from './20260831_122234_comparaison_paragraphe';
 import * as migration_20260831_122544_bloc_partenaires from './20260831_122544_bloc_partenaires';
 import * as migration_20260831_135139_posture_points_entree from './20260831_135139_posture_points_entree';
+import * as migration_20260831_141346_blog_newsletter from './20260831_141346_blog_newsletter';
+import * as migration_20260831_141557_categories_ordonnees from './20260831_141557_categories_ordonnees';
 
 export const migrations = [
   {
@@ -196,6 +198,16 @@ export const migrations = [
   {
     up: migration_20260831_135139_posture_points_entree.up,
     down: migration_20260831_135139_posture_points_entree.down,
-    name: '20260831_135139_posture_points_entree'
+    name: '20260831_135139_posture_points_entree',
+  },
+  {
+    up: migration_20260831_141346_blog_newsletter.up,
+    down: migration_20260831_141346_blog_newsletter.down,
+    name: '20260831_141346_blog_newsletter',
+  },
+  {
+    up: migration_20260831_141557_categories_ordonnees.up,
+    down: migration_20260831_141557_categories_ordonnees.down,
+    name: '20260831_141557_categories_ordonnees'
   },
 ];

@@ -4,6 +4,7 @@ import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionGrille } from "@/components/sections/SectionGrille";
 import { SectionChiffres } from "@/components/sections/SectionChiffres";
 import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
+import { SectionNewsletter } from "@/components/sections/SectionNewsletter";
 import { SectionPartenaires } from "@/components/sections/SectionPartenaires";
 import { SectionPointsEntree } from "@/components/sections/SectionPointsEntree";
 import { SectionPosture } from "@/components/sections/SectionPosture";
@@ -135,6 +136,21 @@ export function RendreSections({
                 key={section.id}
                 surtitre={section.surtitre}
                 logos={section.logos ?? []}
+              />
+            );
+          case "newsletter":
+            return (
+              <SectionNewsletter
+                key={section.id}
+                langue={langue}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                libelles={{
+                  placeholder: section.libelleChamp,
+                  bouton: section.libelleBouton,
+                  succes: section.messageSucces,
+                }}
               />
             );
           case "posture":

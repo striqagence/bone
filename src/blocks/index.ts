@@ -457,6 +457,39 @@ export const PointsEntree: Block = {
   ],
 };
 
+/**
+ * Bandeau d'inscription à la newsletter (écran Blog).
+ *
+ * Les libellés du formulaire vivent dans le bloc plutôt que dans le composant :
+ * ce sont des textes de contenu, et ils doivent exister dans les deux langues
+ * comme le reste de la section.
+ */
+export const Newsletter: Block = {
+  slug: "newsletter",
+  labels: { singular: "Newsletter", plural: "Newsletters" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    { name: "chapo", type: "textarea", required: true, localized: true, label: "Chapô" },
+    {
+      name: "libelleChamp",
+      type: "text",
+      required: true,
+      localized: true,
+      label: "Texte du champ",
+    },
+    { name: "libelleBouton", type: "text", required: true, localized: true, label: "Bouton" },
+    {
+      name: "messageSucces",
+      type: "textarea",
+      required: true,
+      localized: true,
+      label: "Message de confirmation",
+    },
+  ],
+};
+
 export const sections = [
   BandePoles,
   Synergie,
@@ -471,5 +504,6 @@ export const sections = [
   Partenaires,
   Posture,
   PointsEntree,
+  Newsletter,
   AppelAction,
 ];
