@@ -618,6 +618,27 @@ export interface Accueil {
      */
     titreBas: string;
   };
+  chiffres: {
+    surtitre: string;
+    titre: string;
+    /**
+     * Première moitié du chapô, à pleine intensité.
+     */
+    constat: string;
+    /**
+     * Seconde moitié, affichée en retrait.
+     */
+    consequence: string;
+    statistiques?:
+      | {
+          valeur: string;
+          unite: string;
+          libelle: string;
+          precision: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -854,6 +875,23 @@ export interface AccueilSelect<T extends boolean = true> {
         surtitre?: T;
         titreHaut?: T;
         titreBas?: T;
+      };
+  chiffres?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        constat?: T;
+        consequence?: T;
+        statistiques?:
+          | T
+          | {
+              valeur?: T;
+              unite?: T;
+              libelle?: T;
+              precision?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

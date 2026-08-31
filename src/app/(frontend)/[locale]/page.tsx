@@ -3,6 +3,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 
 import { HeroAccueil } from "@/components/sections/HeroAccueil";
+import { SectionChiffres } from "@/components/sections/SectionChiffres";
 import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
 import { SectionEnBref } from "@/components/sections/SectionEnBref";
 import { SectionLeConstat } from "@/components/sections/SectionLeConstat";
@@ -18,7 +19,7 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles } =
+  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres } =
     await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
 
   /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
@@ -130,6 +131,13 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
           titre: differenciation.bone.titre,
           puces: (differenciation.bone.puces ?? []).map(({ texte }) => texte),
         }}
+      />
+      <SectionChiffres
+        surtitre={chiffres.surtitre}
+        titre={chiffres.titre}
+        constat={chiffres.constat}
+        consequence={chiffres.consequence}
+        statistiques={chiffres.statistiques ?? []}
       />
     </>
   );
