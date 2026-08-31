@@ -354,6 +354,38 @@ export const Differenciation: Block = {
   ],
 };
 
+export const Partenaires: Block = {
+  slug: "partenaires",
+  labels: { singular: "Logos partenaires", plural: "Logos partenaires" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    {
+      name: "logos",
+      type: "array",
+      label: "Logos",
+      minRows: 1,
+      admin: {
+        description:
+          "Les fichiers vivent dans public/brand/partenaires. Ajouter un partenaire suppose d’y déposer son SVG.",
+      },
+      fields: [
+        { name: "fichier", type: "text", required: true, label: "Fichier" },
+        { name: "nom", type: "text", required: true, label: "Nom du partenaire" },
+        {
+          name: "hauteur",
+          type: "number",
+          required: true,
+          min: 10,
+          max: 80,
+          label: "Hauteur en pixels",
+          admin: { description: "Calée à l’œil dans la maquette : les logos n’ont pas le même poids optique." },
+        },
+      ],
+    },
+  ],
+};
+
 export const sections = [
   BandePoles,
   Synergie,
@@ -365,5 +397,6 @@ export const sections = [
   Articles,
   Faq,
   Differenciation,
+  Partenaires,
   AppelAction,
 ];

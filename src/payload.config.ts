@@ -107,18 +107,17 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI ?? "",
       /**
-       * Le pooler Supabase plafonne à 15 clients simultanés, là où le pilote
-       * en ouvre dix par défaut : deux contextes suffisent à le saturer.
+       * Le site passe par le pooler Supabase en mode transaction (port 6543),
+       * qui rend la connexion au pool à la fin de chaque requête au lieu de la
+       * retenir toute la session. C'est le mode fait pour le serverless : le
+       * mode session, lui, plafonnait à quinze clients et saturait dès que
+       * plusieurs builds ou scripts se croisaient.
        *
-       * Descendre à une seule connexion ne marche pas pour autant : Payload
-       * imbrique ses requêtes, et la seconde attend alors indéfiniment celle
-       * que la première détient.
-       *
-       * Trois, combinées aux deux workers de build (cf. next.config.ts),
-       * plafonnent à six connexions simultanées — la marge nécessaire à
-       * l'imbrication, loin des quinze du pooler.
+       * Cinq laissent la marge nécessaire aux requêtes imbriquées de Payload —
+       * une seule les fait interbloquer, la seconde attendant celle que la
+       * première détient.
        */
-      max: 3,
+      max: 5,
     },
     // Les migrations sont jouées explicitement (`npm run payload migrate`) et
     // non déduites du schéma au démarrage : en serverless, un push automatique

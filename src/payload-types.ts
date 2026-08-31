@@ -433,6 +433,26 @@ export interface Page {
           }
         | {
             surtitre: string;
+            /**
+             * Les fichiers vivent dans public/brand/partenaires. Ajouter un partenaire suppose d’y déposer son SVG.
+             */
+            logos?:
+              | {
+                  fichier: string;
+                  nom: string;
+                  /**
+                   * Calée à l’œil dans la maquette : les logos n’ont pas le même poids optique.
+                   */
+                  hauteur: number;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'partenaires';
+          }
+        | {
+            surtitre: string;
             titre: string;
             chapo: string;
             cta: {
@@ -871,6 +891,21 @@ export interface PagesSelect<T extends boolean = true> {
                           texte?: T;
                           id?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        partenaires?:
+          | T
+          | {
+              surtitre?: T;
+              logos?:
+                | T
+                | {
+                    fichier?: T;
+                    nom?: T;
+                    hauteur?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

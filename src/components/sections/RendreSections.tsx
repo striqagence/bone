@@ -4,6 +4,7 @@ import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionGrille } from "@/components/sections/SectionGrille";
 import { SectionChiffres } from "@/components/sections/SectionChiffres";
 import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
+import { SectionPartenaires } from "@/components/sections/SectionPartenaires";
 import { SectionProfils } from "@/components/sections/SectionProfils";
 import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
@@ -124,6 +125,14 @@ export function RendreSections({
                   texte: section.bone.texte,
                   puces: (section.bone.puces ?? []).map(({ texte }) => texte),
                 }}
+              />
+            );
+          case "partenaires":
+            return (
+              <SectionPartenaires
+                key={section.id}
+                surtitre={section.surtitre}
+                logos={section.logos ?? []}
               />
             );
           case "promesse":

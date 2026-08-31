@@ -29,6 +29,7 @@ import * as migration_20260831_120642_blocs_promesse_chiffres from './20260831_1
 import * as migration_20260831_120729_grille_description from './20260831_120729_grille_description';
 import * as migration_20260831_120945_bloc_differenciation from './20260831_120945_bloc_differenciation';
 import * as migration_20260831_122234_comparaison_paragraphe from './20260831_122234_comparaison_paragraphe';
+import * as migration_20260831_122544_bloc_partenaires from './20260831_122544_bloc_partenaires';
 
 export const migrations = [
   {
@@ -184,6 +185,11 @@ export const migrations = [
   {
     up: migration_20260831_122234_comparaison_paragraphe.up,
     down: migration_20260831_122234_comparaison_paragraphe.down,
-    name: '20260831_122234_comparaison_paragraphe'
+    name: '20260831_122234_comparaison_paragraphe',
+  },
+  {
+    up: migration_20260831_122544_bloc_partenaires.up,
+    down: migration_20260831_122544_bloc_partenaires.down,
+    name: '20260831_122544_bloc_partenaires'
   },
 ];
