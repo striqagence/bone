@@ -490,6 +490,126 @@ export const Newsletter: Block = {
   ],
 };
 
+/**
+ * Les huit pictogrammes des valeurs et de l'archétype, nommés par leur dessin
+ * et non par leur sens : « Fiabilité » et « Fiable » partagent le bouclier, et
+ * l'un des deux libellés changera avant l'autre.
+ */
+const pictosTraits = [
+  { label: "Parchemin", value: "diplome" },
+  { label: "Éclair", value: "eclair" },
+  { label: "Flèche circulaire", value: "boucle" },
+  { label: "Cible", value: "cible" },
+  { label: "Bouclier", value: "bouclier" },
+  { label: "Fanion", value: "direction" },
+  { label: "Ampoule", value: "ampoule" },
+  { label: "Silhouette", value: "personne" },
+];
+
+/**
+ * Repères chiffrés en escalier (écran À propos).
+ *
+ * Chaque carte descend d'un cran par rapport à la précédente. Le nombre est
+ * découpé en trois : « +13 » porte son signe en petit devant, « 10K+ » son
+ * suffixe en petit derrière, et « 2021 » ni l'un ni l'autre.
+ */
+export const Reperes: Block = {
+  slug: "reperes",
+  labels: { singular: "Repères chiffrés", plural: "Repères chiffrés" },
+  admin: { group: "Sections" },
+  fields: [
+    {
+      name: "cartes",
+      type: "array",
+      label: "Repères",
+      minRows: 1,
+      fields: [
+        {
+          type: "row",
+          fields: [
+            { name: "prefixe", type: "text", label: "Avant, en petit", admin: { width: "20%" } },
+            { name: "valeur", type: "text", required: true, label: "Nombre", admin: { width: "40%" } },
+            { name: "suffixe", type: "text", label: "Après, en petit", admin: { width: "40%" } },
+          ],
+        },
+        { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
+        { name: "description", type: "textarea", required: true, localized: true, label: "Description" },
+      ],
+    },
+  ],
+};
+
+/** Bandeau des valeurs : un surtitre et des cartes à pictogramme (écran À propos). */
+export const Valeurs: Block = {
+  slug: "valeurs",
+  labels: { singular: "Valeurs", plural: "Valeurs" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    {
+      name: "cartes",
+      type: "array",
+      label: "Valeurs",
+      minRows: 1,
+      fields: [
+        { name: "picto", type: "select", required: true, label: "Pictogramme", options: pictosTraits },
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+      ],
+    },
+  ],
+};
+
+/**
+ * Archétype : l'énoncé à gauche, ses quatre traits en étiquettes à droite
+ * (écran À propos).
+ */
+export const Archetype: Block = {
+  slug: "archetype",
+  labels: { singular: "Archétype", plural: "Archétypes" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+    { name: "chapo", type: "textarea", required: true, localized: true, label: "Chapô" },
+    {
+      name: "traits",
+      type: "array",
+      label: "Traits",
+      minRows: 1,
+      fields: [
+        { name: "picto", type: "select", required: true, label: "Pictogramme", options: pictosTraits },
+        { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
+      ],
+    },
+  ],
+};
+
+/**
+ * Présentation de l'équipe : une photo large, une carte qui la chevauche, et
+ * une rangée de chiffres en dessous (écran À propos).
+ */
+export const Equipe: Block = {
+  slug: "equipe",
+  labels: { singular: "Équipe", plural: "Équipes" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+    { name: "image", type: "upload", relationTo: "media", label: "Photo" },
+    {
+      name: "statistiques",
+      type: "array",
+      label: "Chiffres",
+      fields: [
+        { name: "valeur", type: "text", required: true, label: "Nombre" },
+        { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
+      ],
+    },
+  ],
+};
+
 export const sections = [
   BandePoles,
   Synergie,
@@ -505,5 +625,9 @@ export const sections = [
   Posture,
   PointsEntree,
   Newsletter,
+  Reperes,
+  Valeurs,
+  Archetype,
+  Equipe,
   AppelAction,
 ];

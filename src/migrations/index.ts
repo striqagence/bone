@@ -34,6 +34,7 @@ import * as migration_20260831_135139_posture_points_entree from './20260831_135
 import * as migration_20260831_141346_blog_newsletter from './20260831_141346_blog_newsletter';
 import * as migration_20260831_141557_categories_ordonnees from './20260831_141557_categories_ordonnees';
 import * as migration_20260831_151345_article_contenu from './20260831_151345_article_contenu';
+import * as migration_20260831_152338_page_a_propos from './20260831_152338_page_a_propos';
 
 export const migrations = [
   {
@@ -214,6 +215,11 @@ export const migrations = [
   {
     up: migration_20260831_151345_article_contenu.up,
     down: migration_20260831_151345_article_contenu.down,
-    name: '20260831_151345_article_contenu'
+    name: '20260831_151345_article_contenu',
+  },
+  {
+    up: migration_20260831_152338_page_a_propos.up,
+    down: migration_20260831_152338_page_a_propos.down,
+    name: '20260831_152338_page_a_propos'
   },
 ];

@@ -188,17 +188,17 @@ toutes les pages, sans message d'erreur.
 
 ## Suite du travail
 
-Neuf écrans sont finis — accueil, Contact, Compétences, Expertise, Capital,
-Feed, Notre approche, Blog et le détail d'un article. Reste un écran, page
-« Maquettes desktop » (`1:12`) :
+Les dix écrans de la page « Maquettes desktop » (`1:12`) sont intégrés :
+accueil, Contact, Compétences, Expertise, Capital, Feed, Notre approche, Blog,
+détail d'un article et À propos.
 
-| Écran | Node | Hauteur |
-| --- | --- | --- |
-| À propos | `4159:10191` | 4 891 px |
+Restent des contenus à écrire, tous en première main :
 
-Le corps des articles reste à écrire : seul celui de la une (« Dette technique
-d'infrastructure ») figure dans la maquette et a donc été saisi. Les neuf
-autres n'ont que leur titre, leur extrait et leur image.
+- le corps des neuf articles autres que la une — seul celui de « Dette
+  technique d'infrastructure » figure dans la maquette ;
+- les réponses des FAQ laissées vides, la maquette n'en montrant qu'une par
+  écran ;
+- la relecture de l'anglais et des textes de remplacement des images.
 
 Les composants partagés sont tous intégrés : bouton, flèche, surtitre, fil
 d'ariane, carte de pôle, carte d'article, ligne de soumission, en-tête, pied de

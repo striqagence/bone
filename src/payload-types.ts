@@ -502,6 +502,66 @@ export interface Page {
             blockType: 'newsletter';
           }
         | {
+            cartes?:
+              | {
+                  prefixe?: string | null;
+                  valeur: string;
+                  suffixe?: string | null;
+                  libelle: string;
+                  description: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'reperes';
+          }
+        | {
+            surtitre: string;
+            cartes?:
+              | {
+                  picto: 'diplome' | 'eclair' | 'boucle' | 'cible' | 'bouclier' | 'direction' | 'ampoule' | 'personne';
+                  titre: string;
+                  texte: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'valeurs';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            traits?:
+              | {
+                  picto: 'diplome' | 'eclair' | 'boucle' | 'cible' | 'bouclier' | 'direction' | 'ampoule' | 'personne';
+                  libelle: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'archetype';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            texte: string;
+            image?: (number | null) | Media;
+            statistiques?:
+              | {
+                  valeur: string;
+                  libelle: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'equipe';
+          }
+        | {
             surtitre: string;
             titre: string;
             chapo: string;
@@ -1084,6 +1144,70 @@ export interface PagesSelect<T extends boolean = true> {
               libelleChamp?: T;
               libelleBouton?: T;
               messageSucces?: T;
+              id?: T;
+              blockName?: T;
+            };
+        reperes?:
+          | T
+          | {
+              cartes?:
+                | T
+                | {
+                    prefixe?: T;
+                    valeur?: T;
+                    suffixe?: T;
+                    libelle?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        valeurs?:
+          | T
+          | {
+              surtitre?: T;
+              cartes?:
+                | T
+                | {
+                    picto?: T;
+                    titre?: T;
+                    texte?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        archetype?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              traits?:
+                | T
+                | {
+                    picto?: T;
+                    libelle?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        equipe?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              texte?: T;
+              image?: T;
+              statistiques?:
+                | T
+                | {
+                    valeur?: T;
+                    libelle?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

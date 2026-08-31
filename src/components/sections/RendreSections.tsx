@@ -4,7 +4,11 @@ import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionGrille } from "@/components/sections/SectionGrille";
 import { SectionChiffres } from "@/components/sections/SectionChiffres";
 import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
+import { SectionArchetype } from "@/components/sections/SectionArchetype";
+import { SectionEquipe } from "@/components/sections/SectionEquipe";
 import { SectionNewsletter } from "@/components/sections/SectionNewsletter";
+import { SectionReperes } from "@/components/sections/SectionReperes";
+import { SectionValeurs } from "@/components/sections/SectionValeurs";
 import { SectionPartenaires } from "@/components/sections/SectionPartenaires";
 import { SectionPointsEntree } from "@/components/sections/SectionPointsEntree";
 import { SectionPosture } from "@/components/sections/SectionPosture";
@@ -136,6 +140,37 @@ export function RendreSections({
                 key={section.id}
                 surtitre={section.surtitre}
                 logos={section.logos ?? []}
+              />
+            );
+          case "reperes":
+            return <SectionReperes key={section.id} cartes={section.cartes ?? []} />;
+          case "valeurs":
+            return (
+              <SectionValeurs
+                key={section.id}
+                surtitre={section.surtitre}
+                cartes={section.cartes ?? []}
+              />
+            );
+          case "archetype":
+            return (
+              <SectionArchetype
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                traits={section.traits ?? []}
+              />
+            );
+          case "equipe":
+            return (
+              <SectionEquipe
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                texte={section.texte}
+                image={photo(section.image)}
+                statistiques={section.statistiques ?? []}
               />
             );
           case "newsletter":
