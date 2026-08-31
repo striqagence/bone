@@ -80,7 +80,16 @@ export const Grille: Block = {
       type: "array",
       label: "Intitulés",
       minRows: 1,
-      fields: [{ name: "texte", type: "text", required: true, localized: true, label: "Intitulé" }],
+      fields: [
+        { name: "texte", type: "text", required: true, localized: true, label: "Intitulé" },
+        {
+          name: "description",
+          type: "textarea",
+          localized: true,
+          label: "Explication",
+          admin: { description: "Facultative. Affichée sous l’intitulé, précédée d’une flèche." },
+        },
+      ],
     },
   ],
 };
@@ -230,4 +239,64 @@ export const Enjeux: Block = {
   ],
 };
 
-export const sections = [BandePoles, Synergie, Grille, Escalier, Enjeux, Articles, Faq, AppelAction];
+export const Promesse: Block = {
+  slug: "promesse",
+  labels: { singular: "Affirmation sur halos", plural: "Affirmations sur halos" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+  ],
+};
+
+export const Chiffres: Block = {
+  slug: "chiffres",
+  labels: { singular: "Statistiques", plural: "Statistiques" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    {
+      name: "constat",
+      type: "textarea",
+      required: true,
+      localized: true,
+      label: "Constat",
+      admin: { description: "Première moitié du chapô, à pleine intensité." },
+    },
+    {
+      name: "consequence",
+      type: "textarea",
+      required: true,
+      localized: true,
+      label: "Conséquence",
+      admin: { description: "Seconde moitié, affichée en retrait." },
+    },
+    {
+      name: "statistiques",
+      type: "array",
+      label: "Statistiques",
+      minRows: 1,
+      admin: { initCollapsed: true },
+      fields: [
+        { name: "valeur", type: "text", required: true, label: "Valeur" },
+        { name: "unite", type: "text", required: true, label: "Unité" },
+        { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
+        { name: "precision", type: "textarea", required: true, localized: true, label: "Précision" },
+      ],
+    },
+  ],
+};
+
+export const sections = [
+  BandePoles,
+  Synergie,
+  Grille,
+  Escalier,
+  Enjeux,
+  Promesse,
+  Chiffres,
+  Articles,
+  Faq,
+  AppelAction,
+];

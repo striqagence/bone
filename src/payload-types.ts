@@ -276,6 +276,10 @@ export interface Page {
             intitules?:
               | {
                   texte: string;
+                  /**
+                   * Facultative. Affichée sous l’intitulé, précédée d’une flèche.
+                   */
+                  description?: string | null;
                   id?: string | null;
                 }[]
               | null;
@@ -330,6 +334,37 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'enjeux';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'promesse';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            /**
+             * Première moitié du chapô, à pleine intensité.
+             */
+            constat: string;
+            /**
+             * Seconde moitié, affichée en retrait.
+             */
+            consequence: string;
+            statistiques?:
+              | {
+                  valeur: string;
+                  unite: string;
+                  libelle: string;
+                  precision: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'chiffres';
           }
         | {
             surtitre: string;
@@ -674,6 +709,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     texte?: T;
+                    description?: T;
                     id?: T;
                   };
               id?: T;
@@ -712,6 +748,33 @@ export interface PagesSelect<T extends boolean = true> {
                     description?: T;
                     reponse?: T;
                     image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        promesse?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              id?: T;
+              blockName?: T;
+            };
+        chiffres?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              constat?: T;
+              consequence?: T;
+              statistiques?:
+                | T
+                | {
+                    valeur?: T;
+                    unite?: T;
+                    libelle?: T;
+                    precision?: T;
                     id?: T;
                   };
               id?: T;

@@ -1,11 +1,12 @@
 import { Surtitre } from "@/components/ui/Surtitre";
+import { FlecheRenvoi } from "@/components/ui/icones";
 
 /**
  * Grille d'intitulés sur fond sombre (Figma, écran Expertise).
  *
  * L'en-tête pose l'annonce à gauche et sa précision à droite ; suit une grille
- * de deux colonnes de cartes claires, qui ne portent qu'un intitulé — pas de
- * description, la maquette s'en tient à la liste.
+ * de deux colonnes de cartes claires. L'intitulé peut suffire — c'est le cas
+ * sur Expertise — ou porter une explication, comme sur Capital.
  *
  * Le filigrane est celui de la section « Positionnement » de l'accueil, halo
  * flouté et silhouette pleine superposés. Ses positions sont en pourcentages,
@@ -20,7 +21,7 @@ export function SectionGrille({
   surtitre: string;
   titre: string;
   chapo?: string | null;
-  intitules: string[];
+  intitules: { texte: string; description?: string | null }[];
 }) {
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden bg-encre px-6 py-16 lg:px-28 lg:py-32">
@@ -51,14 +52,22 @@ export function SectionGrille({
           )}
         </div>
 
-        {intitules.map((intitule) => (
+        {intitules.map(({ texte, description }) => (
           <div
-            key={intitule}
+            key={texte}
             className="flex flex-col items-start justify-center gap-2.5 rounded bg-gray-50 px-9 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)]"
           >
             <p className="w-full titrage text-lg font-bold leading-[1.4] text-primary-950">
-              {intitule}
+              {texte}
             </p>
+            {description && (
+              <div className="flex w-full items-start gap-2.5 text-primary-600">
+                <FlecheRenvoi />
+                <span className="flex-1 text-base leading-[1.5] text-primary-950 opacity-60">
+                  {description}
+                </span>
+              </div>
+            )}
           </div>
         ))}
       </div>

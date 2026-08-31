@@ -25,6 +25,8 @@ import * as migration_20260831_114152_blog from './20260831_114152_blog';
 import * as migration_20260831_114351_bloc_articles from './20260831_114351_bloc_articles';
 import * as migration_20260831_114907_bloc_faq from './20260831_114907_bloc_faq';
 import * as migration_20260831_120218_bloc_enjeux from './20260831_120218_bloc_enjeux';
+import * as migration_20260831_120642_blocs_promesse_chiffres from './20260831_120642_blocs_promesse_chiffres';
+import * as migration_20260831_120729_grille_description from './20260831_120729_grille_description';
 
 export const migrations = [
   {
@@ -160,6 +162,16 @@ export const migrations = [
   {
     up: migration_20260831_120218_bloc_enjeux.up,
     down: migration_20260831_120218_bloc_enjeux.down,
-    name: '20260831_120218_bloc_enjeux'
+    name: '20260831_120218_bloc_enjeux',
+  },
+  {
+    up: migration_20260831_120642_blocs_promesse_chiffres.up,
+    down: migration_20260831_120642_blocs_promesse_chiffres.down,
+    name: '20260831_120642_blocs_promesse_chiffres',
+  },
+  {
+    up: migration_20260831_120729_grille_description.up,
+    down: migration_20260831_120729_grille_description.down,
+    name: '20260831_120729_grille_description'
   },
 ];

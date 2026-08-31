@@ -2,7 +2,9 @@ import { SectionAppel } from "@/components/sections/SectionAppel";
 import { SectionArticles } from "@/components/sections/SectionArticles";
 import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionGrille } from "@/components/sections/SectionGrille";
+import { SectionChiffres } from "@/components/sections/SectionChiffres";
 import { SectionProfils } from "@/components/sections/SectionProfils";
+import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
 import { SectionPoles } from "@/components/sections/SectionPoles";
 import { SectionSynergie } from "@/components/sections/SectionSynergie";
@@ -74,7 +76,7 @@ export function RendreSections({
                 surtitre={section.surtitre}
                 titre={section.titre}
                 chapo={section.chapo}
-                intitules={(section.intitules ?? []).map(({ texte }) => texte)}
+                intitules={section.intitules ?? []}
               />
             );
           case "escalier":
@@ -101,6 +103,21 @@ export function RendreSections({
                   reponse: c.reponse,
                   image: photo(c.image),
                 }))}
+              />
+            );
+          case "promesse":
+            return (
+              <SectionPromesse key={section.id} surtitre={section.surtitre} titre={section.titre} />
+            );
+          case "chiffres":
+            return (
+              <SectionChiffres
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                constat={section.constat}
+                consequence={section.consequence}
+                statistiques={section.statistiques ?? []}
               />
             );
           case "articles":
