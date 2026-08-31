@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    demandes: Demande;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    demandes: DemandesSelect<false> | DemandesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,10 +93,12 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('fr' | 'en') | ('fr' | 'en')[];
   globals: {
     accueil: Accueil;
+    contact: Contact;
     navigation: Navigation;
   };
   globalsSelect: {
     accueil: AccueilSelect<false> | AccueilSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
   };
   locale: 'fr' | 'en';
@@ -247,6 +251,25 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "demandes".
+ */
+export interface Demande {
+  id: number;
+  profil: 'dsi' | 'rssi' | 'technique' | 'infra' | 'dirigeant';
+  nom: string;
+  prenom: string;
+  email: string;
+  telephone: string;
+  contexte: string;
+  /**
+   * Renseignée automatiquement, utile pour répondre dans la bonne langue.
+   */
+  langue?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -280,6 +303,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'demandes';
+        value: number | Demande;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -423,6 +450,21 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "demandes_select".
+ */
+export interface DemandesSelect<T extends boolean = true> {
+  profil?: T;
+  nom?: T;
+  prenom?: T;
+  email?: T;
+  telephone?: T;
+  contexte?: T;
+  langue?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -683,6 +725,69 @@ export interface Accueil {
           id?: string | null;
         }[]
       | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  surtitre: string;
+  titre: string;
+  description: string;
+  mentionChamps: string;
+  /**
+   * La valeur doit correspondre à l’un des rôles de la collection Demandes.
+   */
+  profils?:
+    | {
+        valeur: string;
+        libelle: string;
+        id?: string | null;
+      }[]
+    | null;
+  libelles: {
+    vousEtes: string;
+    nom: string;
+    prenom: string;
+    email: string;
+    telephone: string;
+    contexte: string;
+    contextePlaceholder: string;
+    envoyer: string;
+    mentionLegale: string;
+    succes: string;
+    erreur: string;
+  };
+  carte?: (number | null) | Media;
+  coordonnees: {
+    badge: string;
+    adresse: string;
+    contact: string;
+  };
+  faq: {
+    surtitre: string;
+    titre: string;
+    image?: (number | null) | Media;
+    questions?:
+      | {
+          question: string;
+          reponse?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  appel: {
+    surtitre: string;
+    titre: string;
+    chapo: string;
+    cta: {
+      libelle: string;
+      url: string;
+    };
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -980,6 +1085,76 @@ export interface AccueilSelect<T extends boolean = true> {
               reponse?: T;
               image?: T;
               id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  surtitre?: T;
+  titre?: T;
+  description?: T;
+  mentionChamps?: T;
+  profils?:
+    | T
+    | {
+        valeur?: T;
+        libelle?: T;
+        id?: T;
+      };
+  libelles?:
+    | T
+    | {
+        vousEtes?: T;
+        nom?: T;
+        prenom?: T;
+        email?: T;
+        telephone?: T;
+        contexte?: T;
+        contextePlaceholder?: T;
+        envoyer?: T;
+        mentionLegale?: T;
+        succes?: T;
+        erreur?: T;
+      };
+  carte?: T;
+  coordonnees?:
+    | T
+    | {
+        badge?: T;
+        adresse?: T;
+        contact?: T;
+      };
+  faq?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        image?: T;
+        questions?:
+          | T
+          | {
+              question?: T;
+              reponse?: T;
+              id?: T;
+            };
+      };
+  appel?:
+    | T
+    | {
+        surtitre?: T;
+        titre?: T;
+        chapo?: T;
+        cta?:
+          | T
+          | {
+              libelle?: T;
+              url?: T;
             };
       };
   updatedAt?: T;

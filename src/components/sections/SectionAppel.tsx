@@ -15,12 +15,15 @@ export function SectionAppel({
   titre,
   chapo,
   cta,
+  icone,
 }: {
   langue: Langue;
   surtitre: string;
   titre: string;
   chapo: string;
-  cta: { libelle: string; chemin: string };
+  /** `chemin` reste interne ; `url` sort du site et n'est pas préfixée. */
+  cta: { libelle: string; chemin?: string; url?: string };
+  icone?: React.ReactNode;
 }) {
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden bg-gradient-to-r from-primary-600 to-primary-950 px-6 py-12 lg:px-28 lg:py-20">
@@ -41,7 +44,12 @@ export function SectionAppel({
           <p className="w-full text-lg leading-[1.5] text-white/80 lg:text-xl">{chapo}</p>
         </div>
 
-        <Button href={lien(cta.chemin, langue)} flecheAvant={false}>
+        <Button
+          href={cta.url ?? lien(cta.chemin ?? "/", langue)}
+          target={cta.url ? "_blank" : undefined}
+          flecheAvant={false}
+          icone={icone}
+        >
           {cta.libelle}
         </Button>
       </div>

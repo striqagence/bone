@@ -16,6 +16,8 @@ import * as migration_20260831_095753_accueil_faq from './20260831_095753_accuei
 import * as migration_20260831_095847_faq_reponse_facultative from './20260831_095847_faq_reponse_facultative';
 import * as migration_20260831_100017_accueil_appel from './20260831_100017_accueil_appel';
 import * as migration_20260831_100258_accueil_profils from './20260831_100258_accueil_profils';
+import * as migration_20260831_111726_demandes from './20260831_111726_demandes';
+import * as migration_20260831_111952_contact from './20260831_111952_contact';
 
 export const migrations = [
   {
@@ -106,6 +108,16 @@ export const migrations = [
   {
     up: migration_20260831_100258_accueil_profils.up,
     down: migration_20260831_100258_accueil_profils.down,
-    name: '20260831_100258_accueil_profils'
+    name: '20260831_100258_accueil_profils',
+  },
+  {
+    up: migration_20260831_111726_demandes.up,
+    down: migration_20260831_111726_demandes.down,
+    name: '20260831_111726_demandes',
+  },
+  {
+    up: migration_20260831_111952_contact.up,
+    down: migration_20260831_111952_contact.down,
+    name: '20260831_111952_contact'
   },
 ];

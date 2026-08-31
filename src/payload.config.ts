@@ -7,10 +7,12 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 
+import { Demandes } from "./collections/Demandes";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Users } from "./collections/Users";
 import { Accueil } from "./globals/Accueil";
+import { Contact } from "./globals/Contact";
 import { Navigation } from "./globals/Navigation";
 
 const filename = fileURLToPath(import.meta.url);
@@ -82,8 +84,8 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " · Bone" },
   },
-  collections: [Users, Media, Pages],
-  globals: [Accueil, Navigation],
+  collections: [Users, Media, Pages, Demandes],
+  globals: [Accueil, Contact, Navigation],
   /**
    * Le français est la langue de référence : c'est elle qui est saisie, et
    * l'anglais s'y replie tant qu'une traduction manque (`fallback`). Sans ce

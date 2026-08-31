@@ -63,6 +63,7 @@ export function Button({
   taille = "lg",
   flecheAvant = true,
   flecheApres = true,
+  icone,
   className = "",
   target,
 }: {
@@ -72,6 +73,9 @@ export function Button({
   taille?: Taille;
   flecheAvant?: boolean;
   flecheApres?: boolean;
+  /** Remplace la flèche de fin — la maquette y met le logo LinkedIn sur le
+      bouton « Nous suivre sur ». */
+  icone?: React.ReactNode;
   className?: string;
   target?: "_blank";
 }) {
@@ -84,9 +88,9 @@ export function Button({
       rel={target === "_blank" ? "noreferrer" : undefined}
       className={classesBouton({ variante, taille, className })}
     >
-      {flecheAvant && fleche}
+      {flecheAvant && !icone && fleche}
       {children}
-      {flecheApres && fleche}
+      {icone ?? (flecheApres && fleche)}
     </Link>
   );
 }
