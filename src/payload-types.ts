@@ -265,6 +265,23 @@ export interface Page {
         | {
             surtitre: string;
             titre: string;
+            /**
+             * Affichée à droite du titre.
+             */
+            chapo?: string | null;
+            intitules?:
+              | {
+                  texte: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'grille';
+          }
+        | {
+            surtitre: string;
+            titre: string;
             chapo: string;
             cta: {
               libelle: string;
@@ -500,6 +517,21 @@ export interface PagesSelect<T extends boolean = true> {
               surtitre?: T;
               titre?: T;
               texte?: T;
+              id?: T;
+              blockName?: T;
+            };
+        grille?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              intitules?:
+                | T
+                | {
+                    texte?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

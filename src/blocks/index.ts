@@ -61,4 +61,28 @@ export const AppelAction: Block = {
   ],
 };
 
-export const sections = [BandePoles, Synergie, AppelAction];
+export const Grille: Block = {
+  slug: "grille",
+  labels: { singular: "Grille d’intitulés", plural: "Grilles d’intitulés" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    {
+      name: "chapo",
+      type: "textarea",
+      localized: true,
+      label: "Précision",
+      admin: { description: "Affichée à droite du titre." },
+    },
+    {
+      name: "intitules",
+      type: "array",
+      label: "Intitulés",
+      minRows: 1,
+      fields: [{ name: "texte", type: "text", required: true, localized: true, label: "Intitulé" }],
+    },
+  ],
+};
+
+export const sections = [BandePoles, Synergie, Grille, AppelAction];

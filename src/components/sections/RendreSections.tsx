@@ -1,4 +1,5 @@
 import { SectionAppel } from "@/components/sections/SectionAppel";
+import { SectionGrille } from "@/components/sections/SectionGrille";
 import { SectionPoles } from "@/components/sections/SectionPoles";
 import { SectionSynergie } from "@/components/sections/SectionSynergie";
 import type { Langue } from "@/lib/i18n";
@@ -50,6 +51,16 @@ export function RendreSections({
                 titre={section.titre}
                 texte={section.texte}
                 poles={bandes.map(({ pole }) => pole)}
+              />
+            );
+          case "grille":
+            return (
+              <SectionGrille
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                intitules={(section.intitules ?? []).map(({ texte }) => texte)}
               />
             );
           case "appelAction":
