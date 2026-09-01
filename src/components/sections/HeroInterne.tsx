@@ -72,9 +72,12 @@ export function HeroInterne({
         </div>
 
         <div className="flex flex-col items-stretch lg:flex-row lg:items-center">
-          <div className="flex flex-col items-start lg:mr-[-12.9%] lg:w-[61.3%] lg:pb-[30px]">
-            <div className="relative h-[240px] w-full rounded lg:h-[380px] xl:h-[430px]">
-              {image ? (
+          {/* Sans photo — les pages légales n'en portent pas — la colonne se
+              réduit à l'encart : un aplat gris à la place de l'image se lirait
+              comme une image qui n'a pas chargé. */}
+          {image && (
+            <div className="flex flex-col items-start lg:mr-[-12.9%] lg:w-[61.3%] lg:pb-[30px]">
+              <div className="relative h-[240px] w-full rounded lg:h-[380px] xl:h-[430px]">
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -83,16 +86,14 @@ export function HeroInterne({
                   sizes="(min-width: 1024px) 30vw, 100vw"
                   className="rounded object-cover"
                 />
-              ) : (
-                <div className="absolute inset-0 rounded bg-gris-300" />
-              )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* L'encart passe au-dessus de la photo, comme dans la maquette : la
               photo est positionnée, elle prendrait sinon le dessus quel que
               soit l'ordre du document, et rognerait le texte. */}
-          <div className="relative flex items-end lg:h-full lg:w-[51.5%] lg:pt-[30px]">
+          <div className={`relative flex items-end lg:h-full lg:pt-[30px] ${image ? "lg:w-[51.5%]" : "lg:w-full"}`}>
             <div className="flex flex-1 flex-col items-start justify-center gap-5 rounded bg-gray-50 p-6 shadow-[10px_10px_0_0_var(--color-encre)] xl:p-9">
               <p className="w-full text-base font-medium text-primary-950">{description}</p>
             </div>

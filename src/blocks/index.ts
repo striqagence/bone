@@ -1,4 +1,14 @@
 import type { Block } from "payload";
+import {
+  BoldFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  ItalicFeature,
+  LinkFeature,
+  ParagraphFeature,
+  UnorderedListFeature,
+  lexicalEditor,
+} from "@payloadcms/richtext-lexical";
 
 /**
  * Sections composables des pages.
@@ -610,6 +620,41 @@ export const Equipe: Block = {
   ],
 };
 
+/**
+ * Bloc de texte long, pour les pages qui en sont faites : mentions légales,
+ * politique de confidentialité, gestion des cookies.
+ *
+ * L'éditeur est restreint comme celui des articles, aux formes que la charte
+ * sait mettre en page. Un texte juridique se relit et se corrige souvent : il
+ * vit en base, pas dans le code.
+ */
+export const TexteLong: Block = {
+  slug: "texteLong",
+  labels: { singular: "Texte", plural: "Textes" },
+  admin: { group: "Sections" },
+  fields: [
+    { name: "surtitre", type: "text", localized: true, label: "Surtitre" },
+    {
+      name: "corps",
+      type: "richText",
+      required: true,
+      localized: true,
+      label: "Texte",
+      editor: lexicalEditor({
+        features: [
+          ParagraphFeature(),
+          HeadingFeature({ enabledHeadingSizes: ["h2", "h3"] }),
+          BoldFeature(),
+          ItalicFeature(),
+          LinkFeature(),
+          UnorderedListFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
+    },
+  ],
+};
+
 export const sections = [
   BandePoles,
   Synergie,
@@ -625,6 +670,7 @@ export const sections = [
   Posture,
   PointsEntree,
   Newsletter,
+  TexteLong,
   Reperes,
   Valeurs,
   Archetype,

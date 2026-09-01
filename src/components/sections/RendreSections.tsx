@@ -8,6 +8,7 @@ import { SectionArchetype } from "@/components/sections/SectionArchetype";
 import { SectionEquipe } from "@/components/sections/SectionEquipe";
 import { SectionNewsletter } from "@/components/sections/SectionNewsletter";
 import { SectionReperes } from "@/components/sections/SectionReperes";
+import { SectionTexteLong } from "@/components/sections/SectionTexteLong";
 import { SectionValeurs } from "@/components/sections/SectionValeurs";
 import { SectionPartenaires } from "@/components/sections/SectionPartenaires";
 import { SectionPointsEntree } from "@/components/sections/SectionPointsEntree";
@@ -141,6 +142,10 @@ export function RendreSections({
                 surtitre={section.surtitre}
                 logos={section.logos ?? []}
               />
+            );
+          case "texteLong":
+            return (
+              <SectionTexteLong key={section.id} surtitre={section.surtitre} corps={section.corps} />
             );
           case "reperes":
             return <SectionReperes key={section.id} cartes={section.cartes ?? []} />;

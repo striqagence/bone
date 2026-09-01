@@ -502,6 +502,27 @@ export interface Page {
             blockType: 'newsletter';
           }
         | {
+            surtitre?: string | null;
+            corps: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'texteLong';
+          }
+        | {
             cartes?:
               | {
                   prefixe?: string | null;
@@ -1147,6 +1168,14 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        texteLong?:
+          | T
+          | {
+              surtitre?: T;
+              corps?: T;
+              id?: T;
+              blockName?: T;
+            };
         reperes?:
           | T
           | {
@@ -1666,7 +1695,21 @@ export interface Contact {
     succes: string;
     erreur: string;
   };
-  carte?: (number | null) | Media;
+  /**
+   * Le plan est une vraie carte, dessinée par OpenStreetMap : ce sont ces coordonnées qui la centrent et qui posent le repère.
+   */
+  carte: {
+    latitude: number;
+    longitude: number;
+    /**
+     * 1 le monde, 19 la rue.
+     */
+    zoom: number;
+    /**
+     * Lu à la place de la carte, et affiché au survol du repère.
+     */
+    intitule: string;
+  };
   coordonnees: {
     badge: string;
     adresse: string;
@@ -2047,7 +2090,14 @@ export interface ContactSelect<T extends boolean = true> {
         succes?: T;
         erreur?: T;
       };
-  carte?: T;
+  carte?:
+    | T
+    | {
+        latitude?: T;
+        longitude?: T;
+        zoom?: T;
+        intitule?: T;
+      };
   coordonnees?:
     | T
     | {

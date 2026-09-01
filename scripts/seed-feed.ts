@@ -88,13 +88,21 @@ const fr = [
     titre: "Vos questions, nos réponses franches.",
     image: photoFaq,
     questions: [
-      { question: "Pourquoi une infrastructure dédiée aux médias ?", reponse: "" },
+      {
+        question: "Pourquoi une infrastructure dédiée aux médias ?",
+        reponse:
+          "Parce que les contraintes n’y sont pas les mêmes : débits vidéo continus, volumes de stockage hors norme, et une interruption qui se voit immédiatement à l’antenne. Une architecture IT classique n’est pas dimensionnée pour ça.",
+      },
       {
         question: "Qu’est-ce qu’une architecture PRA/PCA broadcast ?",
         reponse:
           "Un dispositif de secours conçu pour basculer sans interruption visible à l’antenne, testé en conditions réelles.",
       },
-      { question: "BONE intervient-il en diffusion live et en post-production ?", reponse: "" },
+      {
+        question: "BONE intervient-il en diffusion live et en post-production ?",
+        reponse:
+          "Oui, sur les deux. Les besoins diffèrent — latence et redondance d’un côté, capacité et débit de l’autre — mais ils reposent sur la même chaîne, qu’on traite d’un bout à l’autre.",
+      },
     ],
   },
   {
@@ -165,13 +173,21 @@ const en = [
     titre: "Your questions, our straight answers.",
     image: photoFaq,
     questions: [
-      { question: "Why a dedicated infrastructure for media?", reponse: "" },
+      {
+        question: "Why a dedicated infrastructure for media?",
+        reponse:
+          "Because the constraints are not the same: continuous video throughput, storage volumes out of the ordinary, and an interruption that shows on air at once. A standard IT architecture is not sized for that.",
+      },
       {
         question: "What is a broadcast DR/BC architecture?",
         reponse:
           "A failover setup designed to switch over with no interruption visible on air, tested in real conditions.",
       },
-      { question: "Does BONE work on live broadcast as well as post-production?", reponse: "" },
+      {
+        question: "Does BONE work on live broadcast as well as post-production?",
+        reponse:
+          "Yes, on both. The needs differ — latency and redundancy on one side, capacity and throughput on the other — but they rest on the same chain, which we handle end to end.",
+      },
     ],
   },
   {

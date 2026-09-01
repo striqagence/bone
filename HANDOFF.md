@@ -175,14 +175,25 @@ toutes les pages, sans message d'erreur.
 1. **Vidéo du hero d'accueil** : prévue, une image est servie en attendant. Le
    passage demandera un champ vidéo, une balise `<video>` muette en boucle, et
    l'image actuelle en repli.
-2. **Collections manquantes** : `Posts` et catégories pour le blog.
+2. **Mentions légales incomplètes** : forme juridique, capital, RCS, SIRET,
+   TVA et directeur de la publication sont entre crochets dans le texte. Le
+   reste — hébergeur, sous-traitants, régions — est exact. À compléter au
+   back-office avant la mise en ligne.
 3. **Pas d'adaptateur e-mail** : ni réinitialisation de mot de passe, ni
-   formulaire de contact. `striq-web` utilise Resend.
+   notification du formulaire de contact, ni envoi de la lettre d'information.
+   `striq-web` utilise Resend.
 4. **Rotation des identifiants Supabase** : ils ont transité par une
    conversation.
 5. **`/design-system` est publique** : à retirer ou conditionner avant la mise
    en ligne.
 6. **Protection de déploiement Vercel** active : à désactiver le jour J.
+7. **Tuiles OpenStreetMap** : le plan de la page contact les charge depuis
+   `tile.openstreetmap.org`, sans clé ni compte. La fondation demande qu'on
+   évite les usages lourds ; une page de contact reste dans les clous. À
+   revoir — fournisseur payant ou tuiles hébergées — si le trafic grimpe.
+8. **Ajouter une mesure d'audience** obligerait à reprendre la politique de
+   confidentialité et la page cookies, qui affirment toutes deux qu'il n'y en
+   a pas, et à poser un bandeau de consentement.
 
 ---
 

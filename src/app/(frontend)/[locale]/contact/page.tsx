@@ -53,7 +53,7 @@ export default async function PageContact({ params }: PageProps<"/[locale]/conta
         mentionChamps={contenu.mentionChamps}
         profils={(contenu.profils ?? []).map(({ valeur, libelle }) => ({ valeur, libelle }))}
         libelles={contenu.libelles}
-        carte={photo(contenu.carte)}
+        carte={contenu.carte}
         coordonnees={contenu.coordonnees}
       />
       <SectionFaq

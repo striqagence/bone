@@ -154,13 +154,21 @@ const fr = [
     titre: "Vos questions, nos réponses franches.",
     image: photoFaq,
     questions: [
-      { question: "Depuis quand Bone existe-t-il ?", reponse: "" },
+      {
+        question: "Depuis quand Bone existe-t-il ?",
+        reponse:
+          "L’équipe pratique le métier depuis plus de treize ans. L’activité de revalorisation du parc a démarré en 2020, et s’est ouverte à l’international en 2021.",
+      },
       {
         question: "Quelles certifications possède l’équipe ?",
         reponse:
           "L’équipe est certifiée sur les principaux environnements du marché : HPE, Fortinet, Palo Alto, VMware, entre autres.",
       },
-      { question: "Bone travaille-t-il avec des PME comme avec des grands comptes ?", reponse: "" },
+      {
+        question: "Bone travaille-t-il avec des PME comme avec des grands comptes ?",
+        reponse:
+          "Oui. Le point d’entrée change — un diagnostic de deux heures pour une PME, un audit cadré pour un grand compte — mais la méthode reste la même : comprendre avant de recommander.",
+      },
     ],
   },
   {
@@ -265,13 +273,21 @@ const en = [
     titre: "Your questions, our straight answers.",
     image: photoFaq,
     questions: [
-      { question: "How long has Bone been around?", reponse: "" },
+      {
+        question: "How long has Bone been around?",
+        reponse:
+          "The team has been doing this work for more than thirteen years. The estate remarketing business started in 2020 and opened internationally in 2021.",
+      },
       {
         question: "What certifications does the team hold?",
         reponse:
           "The team is certified on the main environments on the market: HPE, Fortinet, Palo Alto and VMware, among others.",
       },
-      { question: "Does Bone work with SMEs as well as large accounts?", reponse: "" },
+      {
+        question: "Does Bone work with SMEs as well as large accounts?",
+        reponse:
+          "Yes. The entry point changes — a two-hour diagnosis for an SME, a framed audit for a large account — but the method stays the same: understand before recommending.",
+      },
     ],
   },
   {

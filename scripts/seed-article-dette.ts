@@ -180,13 +180,21 @@ const sectionsFr = [
     titre: "Vos questions, nos réponses franches.",
     image: photoFaq,
     questions: [
-      { question: "Comment chiffrer le coût de ma dette technique ?", reponse: "" },
+      {
+        question: "Comment chiffrer le coût de ma dette technique ?",
+        reponse:
+          "En additionnant ce que coûte l’immobilisme sur douze mois : heures passées sur les incidents récurrents, support hors contrat, et risque financier d’un arrêt non planifié. C’est ce total, et non la liste des symptômes, qui fait basculer une décision.",
+      },
       {
         question: "Faut-il tout remplacer d’un coup ?",
         reponse:
           "Non, un diagnostic permet de distinguer ce qui doit être traité en urgence de ce qui peut encore attendre.",
       },
-      { question: "En combien de temps voit-on un retour ?", reponse: "" },
+      {
+        question: "En combien de temps voit-on un retour ?",
+        reponse:
+          "Les premiers effets se mesurent en semaines : moins d’incidents répétés, des interventions plus courtes. Le gain budgétaire, lui, se lit sur l’exercice, une fois documentés les remplacements évités.",
+      },
     ],
   },
   {
@@ -213,13 +221,21 @@ const sectionsEn = [
     titre: "Your questions, our straight answers.",
     image: photoFaq,
     questions: [
-      { question: "How do I put a figure on my technical debt?", reponse: "" },
+      {
+        question: "How do I put a figure on my technical debt?",
+        reponse:
+          "By adding up what standing still costs over twelve months: hours spent on recurring incidents, out-of-contract support, and the financial risk of an unplanned outage. It is that total, not the list of symptoms, that tips a decision.",
+      },
       {
         question: "Do I have to replace everything at once?",
         reponse:
           "No — a diagnosis separates what must be dealt with urgently from what can still wait.",
       },
-      { question: "How long before we see a return?", reponse: "" },
+      {
+        question: "How long before we see a return?",
+        reponse:
+          "The first effects are measurable in weeks: fewer repeat incidents, shorter interventions. The budget gain reads over the financial year, once the avoided replacements are documented.",
+      },
     ],
   },
   {

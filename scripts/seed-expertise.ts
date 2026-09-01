@@ -160,14 +160,26 @@ const faqFr = {
   titre: "Vos questions, nos réponses franches.",
   image: photosFaq[0]?.id,
   questions: [
-    { question: "Que fait exactement Bone ?", reponse: "" },
+    {
+        question: "Que fait exactement Bone ?",
+        reponse:
+          "Bone conseille et architecture des infrastructures IT : réseau, stockage, systèmes et sécurité. On audite l’existant, on pose un diagnostic, on hiérarchise les risques et on accompagne la mise en œuvre. On ne revend pas de matériel.",
+      },
     {
       question: "Bone est-il un revendeur de matériel ou un cabinet de conseil ?",
       reponse:
         "Bone ne revend aucun matériel : c’est un cabinet de conseil et d’architecture indépendant, rémunéré pour la clarté de la décision.",
     },
-    { question: "Faut-il un budget pour démarrer avec Bone ?", reponse: "" },
-    { question: "Bone intervient-il sans créer de dépendance ?", reponse: "" },
+    {
+        question: "Faut-il un budget pour démarrer avec Bone ?",
+        reponse:
+          "Non. Le premier diagnostic est offert et sans engagement : il sert justement à distinguer ce qui mérite un budget de ce qui n’en demande pas.",
+      },
+    {
+        question: "Bone intervient-il sans créer de dépendance ?",
+        reponse:
+          "Oui, c’est la règle. Chaque mission se termine par des livrables qui restent chez vous — cartographie, documentation, plan d’action — et par un transfert à vos équipes. Vous devez pouvoir continuer sans nous.",
+      },
   ],
 };
 
@@ -177,14 +189,26 @@ const faqEn = {
   titre: "Your questions, our straight answers.",
   image: photosFaq[0]?.id,
   questions: [
-    { question: "What exactly does Bone do?", reponse: "" },
+    {
+        question: "What exactly does Bone do?",
+        reponse:
+          "Bone advises on and architects IT infrastructure: network, storage, systems and security. We audit what exists, make a diagnosis, rank the risks and support the implementation. We do not resell hardware.",
+      },
     {
       question: "Is Bone a hardware reseller or a consultancy?",
       reponse:
         "Bone resells no hardware: it is an independent consultancy and architecture practice, paid for the clarity of the decision.",
     },
-    { question: "Do I need a budget to start with Bone?", reponse: "" },
-    { question: "Does Bone work without creating dependency?", reponse: "" },
+    {
+        question: "Do I need a budget to start with Bone?",
+        reponse:
+          "No. The first diagnosis is free and non-binding: its purpose is precisely to separate what deserves a budget from what does not.",
+      },
+    {
+        question: "Does Bone work without creating dependency?",
+        reponse:
+          "Yes, that is the rule. Every engagement ends with deliverables that stay with you — maps, documentation, an action plan — and with a handover to your teams. You must be able to carry on without us.",
+      },
   ],
 };
 

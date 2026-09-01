@@ -90,7 +90,58 @@ export const Contact: GlobalConfig = {
         {
           label: "Coordonnées",
           fields: [
-            { name: "carte", type: "upload", relationTo: "media", label: "Plan d’accès" },
+            {
+              name: "carte",
+              type: "group",
+              label: "Plan d’accès",
+              admin: {
+                description:
+                  "Le plan est une vraie carte, dessinée par OpenStreetMap : ce sont ces coordonnées qui la centrent et qui posent le repère.",
+              },
+              fields: [
+                {
+                  type: "row",
+                  fields: [
+                    {
+                      name: "latitude",
+                      type: "number",
+                      required: true,
+                      min: -90,
+                      max: 90,
+                      label: "Latitude",
+                      admin: { width: "34%" },
+                    },
+                    {
+                      name: "longitude",
+                      type: "number",
+                      required: true,
+                      min: -180,
+                      max: 180,
+                      label: "Longitude",
+                      admin: { width: "33%" },
+                    },
+                    {
+                      name: "zoom",
+                      type: "number",
+                      required: true,
+                      min: 1,
+                      max: 19,
+                      defaultValue: 15,
+                      label: "Niveau de zoom",
+                      admin: { width: "33%", description: "1 le monde, 19 la rue." },
+                    },
+                  ],
+                },
+                {
+                  name: "intitule",
+                  type: "text",
+                  required: true,
+                  localized: true,
+                  label: "Nom du repère",
+                  admin: { description: "Lu à la place de la carte, et affiché au survol du repère." },
+                },
+              ],
+            },
             {
               name: "coordonnees",
               type: "group",

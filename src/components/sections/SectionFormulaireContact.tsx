@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+import { CarteAcces } from "@/components/site/CarteAcces";
 import { FormulaireContact } from "@/components/site/FormulaireContact";
 import { FilDAriane } from "@/components/ui/FilDAriane";
 import { Surtitre } from "@/components/ui/Surtitre";
@@ -31,7 +30,7 @@ export function SectionFormulaireContact({
   mentionChamps: string;
   profils: { valeur: string; libelle: string }[];
   libelles: React.ComponentProps<typeof FormulaireContact>["libelles"];
-  carte?: { src: string; alt: string };
+  carte: { latitude: number; longitude: number; zoom: number; intitule: string };
   coordonnees: { badge: string; adresse: string; contact: string };
   ariane: string;
 }) {
@@ -61,15 +60,12 @@ export function SectionFormulaireContact({
         <div className="flex flex-col items-center justify-center">
           <div className="flex w-full flex-col items-start lg:mb-[-20px] lg:px-9">
             <div className="relative h-[280px] w-full overflow-hidden rounded bg-gris-300 lg:h-[500px]">
-              {carte && (
-                <Image
-                  src={carte.src}
-                  alt={carte.alt}
-                  fill
-                  sizes="(min-width: 1024px) 500px, 100vw"
-                  className="object-cover"
-                />
-              )}
+              <CarteAcces
+                latitude={carte.latitude}
+                longitude={carte.longitude}
+                zoom={carte.zoom}
+                intitule={carte.intitule}
+              />
             </div>
           </div>
 

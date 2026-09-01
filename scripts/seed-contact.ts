@@ -25,11 +25,15 @@ async function media(fichier: string, altFr: string, altEn: string) {
   return doc.id;
 }
 
-const carte = await media(
-  "carte-contact.jpg",
-  "Plan de situation des bureaux, à Villebon-sur-Yvette.",
-  "Location map of the offices, in Villebon-sur-Yvette.",
-);
+/**
+ * Coordonnées relevées sur OpenStreetMap pour le 27 avenue de la Baltique.
+ * Le plan n'est plus une image : c'est la carte elle-même, centrée là.
+ */
+const carte = {
+  latitude: 48.6915304,
+  longitude: 2.2151003,
+  zoom: 16,
+};
 
 const { docs: photos } = await payload.find({
   collection: "media",
@@ -62,13 +66,13 @@ const fr = {
     contextePlaceholder: "Décrivez-nous votre demande",
     envoyer: "Envoyer ma demande",
     mentionLegale:
-      "En cliquant, vous acceptez les règles de confidentialité et les conditions d’utilisation de Google, ce site étant protégé par reCAPTCHA.",
+      "Vos coordonnées servent uniquement à répondre à votre demande. Elles ne sont ni revendues, ni utilisées à d’autres fins.",
     succes:
       "Votre demande a bien été envoyée. Un membre de l’équipe BONE vous recontacte sous 24 à 48h.",
     erreur:
       "Une erreur est survenue lors de l’envoi. Merci de réessayer, ou de nous contacter directement par email.",
   },
-  carte,
+  carte: { ...carte, intitule: "Bone, 27 avenue de la Baltique, Villebon-sur-Yvette" },
   coordonnees: {
     badge: "coordonnées",
     adresse: "27 Av. de la Baltique, 91140 Villebon-sur-Yvette",
@@ -79,12 +83,20 @@ const fr = {
     titre: "Vos questions, nos réponses franches.",
     image: photos[0]?.id,
     questions: [
-      { question: "Le diagnostic est-il payant ?", reponse: "" },
+      {
+        question: "Le diagnostic est-il payant ?",
+        reponse:
+          "Non, le premier diagnostic est offert et sans engagement. Seules les missions qui en découlent sont facturées, sur devis.",
+      },
       {
         question: "Sous quel délai serai-je recontacté ?",
         reponse: "Une réponse est apportée sous 24 à 48 heures ouvrées.",
       },
-      { question: "Faut-il préparer des documents avant l’échange ?", reponse: "" },
+      {
+        question: "Faut-il préparer des documents avant l’échange ?",
+        reponse:
+          "Rien n’est obligatoire. Si vous les avez sous la main, un schéma d’architecture, un inventaire du parc ou la liste de vos derniers incidents rendent le premier échange plus concret.",
+      },
     ],
   },
   appel: {
@@ -113,10 +125,11 @@ const en = {
     contextePlaceholder: "Tell us about your request",
     envoyer: "Send my request",
     mentionLegale:
-      "By clicking, you accept Google’s privacy policy and terms of use, this site being protected by reCAPTCHA.",
+      "Your details are used only to answer your request. They are neither sold on nor used for anything else.",
     succes: "Your request has been sent. A member of the BONE team will get back to you within 24 to 48 hours.",
     erreur: "Something went wrong while sending. Please try again, or contact us directly by email.",
   },
+  carte: { ...carte, intitule: "Bone, 27 avenue de la Baltique, Villebon-sur-Yvette, France" },
   coordonnees: {
     badge: "contact details",
     adresse: "27 Av. de la Baltique, 91140 Villebon-sur-Yvette, France",
@@ -127,12 +140,20 @@ const en = {
     surtitre: "Frequently asked questions",
     titre: "Your questions, our straight answers.",
     questions: [
-      { question: "Is the diagnosis chargeable?", reponse: "" },
+      {
+        question: "Is the diagnosis chargeable?",
+        reponse:
+          "No, the first diagnosis is free and non-binding. Only the engagements that follow are billed, against a quote.",
+      },
       {
         question: "How soon will I be contacted?",
         reponse: "We reply within 24 to 48 working hours.",
       },
-      { question: "Do I need to prepare documents beforehand?", reponse: "" },
+      {
+        question: "Do I need to prepare documents beforehand?",
+        reponse:
+          "Nothing is required. If you have them to hand, an architecture diagram, an estate inventory or a list of your recent incidents make the first conversation more concrete.",
+      },
     ],
   },
   appel: {
