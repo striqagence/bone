@@ -37,6 +37,22 @@ type Bande = {
  * Les blocs qui parlent des pôles sont alimentés par les pages de pôle et non
  * par une saisie : ces libellés n'ont qu'une source dans tout le site.
  */
+/**
+ * Ces sections révèlent leurs cartes une à une, en descente. L'enveloppe de
+ * section leur ferait double emploi : les deux animations se multiplieraient
+ * en opacité, et leurs mouvements se contrarieraient, l'une montant quand
+ * l'autre descend.
+ */
+const ANIME_SES_BLOCS = new Set([
+  "grille",
+  "escalier",
+  "enjeux",
+  "differenciation",
+  "reperes",
+  "valeurs",
+  "archetype",
+]);
+
 /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
 function photo(valeur: unknown) {
   return valeur && typeof valeur === "object" && "url" in valeur && typeof valeur.url === "string"
@@ -279,7 +295,12 @@ export function RendreSections({
           }
         })();
 
-        return rendu ? <Apparition key={section.id}>{rendu}</Apparition> : null;
+        if (!rendu) return null;
+        return ANIME_SES_BLOCS.has(section.blockType) ? (
+          rendu
+        ) : (
+          <Apparition key={section.id}>{rendu}</Apparition>
+        );
       })}
     </>
   );

@@ -30,7 +30,7 @@ export function SectionValeurs({
         {/* Cinq colonnes ne tiennent qu'à partir de 1536px : en dessous, une
             carte n'offrirait que 116px de texte, moins large que ses propres
             mots. */}
-        <ul className="grid w-full grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
+        <ul className="apparition-bloc grid w-full grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
           {cartes.map(({ id, picto, titre, texte }) => (
             <li
               key={id ?? titre}

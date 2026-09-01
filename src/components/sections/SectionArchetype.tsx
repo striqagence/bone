@@ -37,7 +37,7 @@ export function SectionArchetype({
           <p className="w-full text-lg font-medium leading-[1.5] text-primary-950">{chapo}</p>
         </div>
 
-        <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <ul className="apparition-bloc grid grid-cols-1 gap-5 sm:grid-cols-2">
           {traits.map(({ id, picto, libelle }) => (
             <li
               key={id ?? libelle}

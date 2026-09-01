@@ -129,11 +129,11 @@
 @keyframes apparition {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    translate: 0 16px;
   }
   to {
     opacity: 1;
-    transform: none;
+    translate: none;
   }
 }
 
@@ -143,6 +143,58 @@
       animation: apparition linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+/* =============================================================================
+   Apparition des blocs, un à un.
+
+   Les cartes d'une même rangée descendent en se révélant, décalées les unes
+   des autres. Le retard ne peut pas passer par `animation-delay` : une
+   animation accrochée au défilement l'ignore, sa progression étant une
+   position et non un temps. Il se règle donc en décalant la plage de chaque
+   carte, de huit points par rang.
+
+   L'animation porte sur `translate` et non sur `transform` : `both` maintient
+   la dernière image jusqu'au bout, et une animation l'emporte sur une simple
+   déclaration. Sur `transform`, elle aurait figé le survol des cartes, qui
+   s'en sert pour les soulever. Les deux propriétés se composent.
+   ========================================================================== */
+
+@keyframes apparition-bloc {
+  from {
+    opacity: 0;
+    translate: 0 -18px;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .apparition-bloc > * {
+      animation: apparition-bloc linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+
+    .apparition-bloc > *:nth-child(2) {
+      animation-range: entry 8% entry 68%;
+    }
+
+    .apparition-bloc > *:nth-child(3) {
+      animation-range: entry 16% entry 76%;
+    }
+
+    .apparition-bloc > *:nth-child(4) {
+      animation-range: entry 24% entry 84%;
+    }
+
+    .apparition-bloc > *:nth-child(n + 5) {
+      animation-range: entry 32% entry 92%;
     }
   }
 }

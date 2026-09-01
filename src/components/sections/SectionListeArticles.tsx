@@ -86,7 +86,7 @@ export function SectionListeArticles({
         {articles.length === 0 ? (
           <p className="py-12 text-lg text-primary-950 opacity-60">{libelles.vide}</p>
         ) : (
-          <ul className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="apparition-bloc grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
             {articles.map((article) => (
               <li key={article.chemin} className="flex">
                 <CarteArticle

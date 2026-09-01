@@ -67,7 +67,7 @@ export function SectionProfils({
         </h2>
       </div>
 
-      <div className="grid w-full grid-cols-1 lg:grid-cols-2">
+      <div className="apparition-bloc grid w-full grid-cols-1 lg:grid-cols-2">
         {profils.map((profil, index) => (
           <div
             key={profil.titre}

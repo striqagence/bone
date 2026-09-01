@@ -35,7 +35,7 @@ export function SectionReperes({
         <div className="absolute inset-[32%] rounded-full bg-[radial-gradient(circle,rgb(70_130_255/0.55)_0%,rgb(32_32_255/0.25)_55%,transparent_78%)] blur-2xl" />
       </div>
 
-      <ul className="relative mx-auto grid w-full max-w-[1600px] grid-cols-1 items-start gap-10 [--marche:0px] lg:grid-cols-2 lg:gap-7 xl:grid-cols-4 xl:[--marche:50px]">
+      <ul className="apparition-bloc relative mx-auto grid w-full max-w-[1600px] grid-cols-1 items-start gap-10 [--marche:0px] lg:grid-cols-2 lg:gap-7 xl:grid-cols-4 xl:[--marche:50px]">
         {cartes.map(({ id, prefixe, valeur, suffixe, libelle, description }, index) => (
           <li
             key={id ?? valeur}

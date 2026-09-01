@@ -39,7 +39,7 @@ export function SectionGrille({
         <img src="/brand/filigrane-position.svg" alt="" className="absolute inset-0 max-w-none" />
       </div>
 
-      <div className="relative grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-6 lg:grid-cols-2">
+      <div className="apparition-bloc relative grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-6 lg:grid-cols-2">
         <div className="flex flex-col items-start gap-6 lg:col-span-2 lg:flex-row lg:items-end lg:justify-center">
           <div className="flex flex-1 flex-col items-start gap-2.5">
             <Surtitre couleur="blanc">{surtitre}</Surtitre>

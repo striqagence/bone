@@ -41,7 +41,7 @@ export function SectionRole({
 }) {
   return (
     <section className="flex w-full flex-col items-center bg-encre bg-[linear-gradient(249.27deg,rgb(0_0_0/0)_3.28%,rgb(32_32_255/0.2)_94.98%)] px-6 pt-16 lg:px-28 lg:pt-32">
-      <div className="grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-12 lg:grid-cols-3">
+      <div className="apparition-bloc grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-12 lg:grid-cols-3">
         <div className="flex flex-col items-start gap-6 lg:col-span-3 lg:flex-row lg:items-end">
           {/* Le titre prend 64 % de la largeur, la proportion des 1036px de la
               maquette sur ses 1600 : en pixels fixes, il ne laissait que 20px

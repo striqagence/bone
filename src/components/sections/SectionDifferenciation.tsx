@@ -41,7 +41,7 @@ export function SectionDifferenciation({
           </h2>
         </div>
 
-        <div className="flex flex-col gap-7 lg:flex-row lg:items-end">
+        <div className="apparition-bloc flex flex-col gap-7 lg:flex-row lg:items-end">
           <CarteComparaison carte={habituelle} />
           <CarteComparaison carte={bone} accentuee />
         </div>
