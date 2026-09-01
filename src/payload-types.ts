@@ -1706,9 +1706,13 @@ export interface Contact {
      */
     zoom: number;
     /**
-     * Lu à la place de la carte, et affiché au survol du repère.
+     * Lu à la place de la carte, affiché au survol du repère, et recherché sur Google Maps.
      */
     intitule: string;
+    /**
+     * Posé sur la carte, et porté par l’adresse de l’encart.
+     */
+    libelleLien: string;
   };
   coordonnees: {
     badge: string;
@@ -2104,6 +2108,7 @@ export interface ContactSelect<T extends boolean = true> {
         longitude?: T;
         zoom?: T;
         intitule?: T;
+        libelleLien?: T;
       };
   coordonnees?:
     | T

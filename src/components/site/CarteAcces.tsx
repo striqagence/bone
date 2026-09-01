@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
+import { ArrowRight } from "@/components/ui/ArrowRight";
+
 import "leaflet/dist/leaflet.css";
 import "./carte.css";
 
@@ -24,6 +26,10 @@ import "./carte.css";
  * `isolate` n'est pas décoratif : Leaflet empile ses propres couches jusqu'à
  * z-index 1000, bien au-dessus de l'en-tête. Sans contexte d'empilement propre,
  * la carte passait par-dessus le menu au défilement.
+ *
+ * La mention « © OpenStreetMap » reste : c'est une condition de la licence
+ * ODbL des données, pas un ornement. Le crédit « Leaflet » qui la précédait
+ * n'était, lui, qu'une courtoisie, et cède la place au bouton vers Google Maps.
  */
 const REPERE = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 44" width="32" height="44">
@@ -37,11 +43,13 @@ export function CarteAcces({
   longitude,
   zoom,
   intitule,
+  libelleLien,
 }: {
   latitude: number;
   longitude: number;
   zoom: number;
   intitule: string;
+  libelleLien: string;
 }) {
   const conteneur = useRef<HTMLDivElement>(null);
 
@@ -65,11 +73,7 @@ export function CarteAcces({
         attributionControl: true,
       });
 
-      // Leaflet signe la carte d'un drapeau ukrainien par défaut. Le crédit
-      // lui reste dû, la prise de position n'appartient pas au client.
-      carte.attributionControl.setPrefix(
-        '<a href="https://leafletjs.com" target="_blank" rel="noreferrer">Leaflet</a>',
-      );
+      carte.attributionControl.setPrefix(false);
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -95,11 +99,21 @@ export function CarteAcces({
   }, [latitude, longitude, zoom, intitule]);
 
   return (
-    <div
-      ref={conteneur}
-      role="img"
-      aria-label={intitule}
-      className="carte-bone isolate size-full bg-gris-100"
-    />
+    <div className="carte-bone isolate relative size-full bg-gris-100">
+      <div ref={conteneur} role="img" aria-label={intitule} className="size-full" />
+
+      {/* Au-dessus des couches de Leaflet, qui montent jusqu'à 1000. Remonté
+          de la hauteur dont l'encart de coordonnées chevauche la carte, pour
+          que son ombre ne tombe pas dessus. */}
+      <a
+        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(intitule)}`}
+        target="_blank"
+        rel="noreferrer"
+        className="absolute bottom-3 left-3 z-[1200] flex lg:bottom-9 items-center gap-2 rounded bg-gris-50 px-3.5 py-3 titrage text-xs font-bold text-primary-950 shadow-[4px_4px_0_0_rgb(0_0_34/0.25)] transition-colors hover:bg-white hover:text-primary-600"
+      >
+        {libelleLien}
+        <ArrowRight />
+      </a>
+    </div>
   );
 }

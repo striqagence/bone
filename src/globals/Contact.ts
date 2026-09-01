@@ -138,7 +138,18 @@ export const Contact: GlobalConfig = {
                   required: true,
                   localized: true,
                   label: "Nom du repère",
-                  admin: { description: "Lu à la place de la carte, et affiché au survol du repère." },
+                  admin: {
+                    description:
+                      "Lu à la place de la carte, affiché au survol du repère, et recherché sur Google Maps.",
+                  },
+                },
+                {
+                  name: "libelleLien",
+                  type: "text",
+                  required: true,
+                  localized: true,
+                  label: "Bouton vers Google Maps",
+                  admin: { description: "Posé sur la carte, et porté par l’adresse de l’encart." },
                 },
               ],
             },

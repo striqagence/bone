@@ -32,7 +32,13 @@ export function SectionFormulaireContact({
   mentionChamps: string;
   profils: { valeur: string; libelle: string }[];
   libelles: React.ComponentProps<typeof FormulaireContact>["libelles"];
-  carte: { latitude: number; longitude: number; zoom: number; intitule: string };
+  carte: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+    intitule: string;
+    libelleLien: string;
+  };
   coordonnees: { badge: string; adresse: string; email: string; contact: string };
   ariane: string;
 }) {
@@ -67,6 +73,7 @@ export function SectionFormulaireContact({
                 longitude={carte.longitude}
                 zoom={carte.zoom}
                 intitule={carte.intitule}
+                libelleLien={carte.libelleLien}
               />
             </div>
           </div>
@@ -75,9 +82,16 @@ export function SectionFormulaireContact({
             <span className="flex items-center justify-center rounded bg-encre/40 px-3.5 py-3 text-[10px] font-semibold uppercase leading-none tracking-widest whitespace-nowrap text-primary-50">
               {coordonnees.badge}
             </span>
-            <p className="w-full text-base leading-[1.5] text-white opacity-80">
+            {/* L'adresse ouvre le même plan que le bouton de la carte : c'est
+                le geste qu'on attend d'une adresse affichée. */}
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(carte.intitule)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full text-base leading-[1.5] text-white underline underline-offset-2 opacity-80 transition-opacity hover:opacity-100"
+            >
               {coordonnees.adresse}
-            </p>
+            </a>
             <p className="w-full text-base leading-[1.5] text-white opacity-80">
               <AdresseCourriel
                 code={encoderCourriel(coordonnees.email)}

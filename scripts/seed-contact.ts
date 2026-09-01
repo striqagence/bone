@@ -72,7 +72,11 @@ const fr = {
     erreur:
       "Une erreur est survenue lors de l’envoi. Merci de réessayer, ou de nous contacter directement par email.",
   },
-  carte: { ...carte, intitule: "Bone, 27 avenue de la Baltique, Villebon-sur-Yvette" },
+  carte: {
+    ...carte,
+    intitule: "Bone, 27 avenue de la Baltique, Villebon-sur-Yvette",
+    libelleLien: "Voir sur Google Maps",
+  },
   coordonnees: {
     badge: "coordonnées",
     adresse: "27 Av. de la Baltique, 91140 Villebon-sur-Yvette",
@@ -131,7 +135,11 @@ const en = {
     succes: "Your request has been sent. A member of the BONE team will get back to you within 24 to 48 hours.",
     erreur: "Something went wrong while sending. Please try again, or contact us directly by email.",
   },
-  carte: { ...carte, intitule: "Bone, 27 avenue de la Baltique, Villebon-sur-Yvette, France" },
+  carte: {
+    ...carte,
+    intitule: "Bone, 27 avenue de la Baltique, Villebon-sur-Yvette, France",
+    libelleLien: "View on Google Maps",
+  },
   coordonnees: {
     badge: "contact details",
     adresse: "27 Av. de la Baltique, 91140 Villebon-sur-Yvette, France",

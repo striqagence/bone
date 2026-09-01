@@ -39,6 +39,7 @@ import * as migration_20260901_094651_titre_liste_blog from './20260901_094651_t
 import * as migration_20260901_121614_retire_image_du_plan from './20260901_121614_retire_image_du_plan';
 import * as migration_20260901_121627_plan_en_coordonnees from './20260901_121627_plan_en_coordonnees';
 import * as migration_20260901_124047_courriel_encart_contact from './20260901_124047_courriel_encart_contact';
+import * as migration_20260901_144904_bouton_google_maps from './20260901_144904_bouton_google_maps';
 
 export const migrations = [
   {
@@ -244,6 +245,11 @@ export const migrations = [
   {
     up: migration_20260901_124047_courriel_encart_contact.up,
     down: migration_20260901_124047_courriel_encart_contact.down,
-    name: '20260901_124047_courriel_encart_contact'
+    name: '20260901_124047_courriel_encart_contact',
+  },
+  {
+    up: migration_20260901_144904_bouton_google_maps.up,
+    down: migration_20260901_144904_bouton_google_maps.down,
+    name: '20260901_144904_bouton_google_maps'
   },
 ];
