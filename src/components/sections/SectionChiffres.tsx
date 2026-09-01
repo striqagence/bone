@@ -35,7 +35,7 @@ export function SectionChiffres({
         className="pointer-events-none absolute inset-[13.22%_79.68%_24.65%_-3.65%] hidden max-w-none lg:block"
       />
 
-      <div className="relative grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-14 lg:grid-cols-4">
+      <div className="apparition-bloc relative grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-14 lg:grid-cols-4">
         <div className="flex flex-col items-start gap-6 lg:col-start-2 lg:col-end-5 lg:items-end lg:pl-[100px]">
           <Surtitre couleur="blanc" className="w-full">
             {surtitre}

@@ -44,6 +44,7 @@ type Bande = {
  * l'autre descend.
  */
 const ANIME_SES_BLOCS = new Set([
+  "chiffres",
   "grille",
   "escalier",
   "enjeux",
