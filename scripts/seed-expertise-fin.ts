@@ -2,6 +2,8 @@ import path from "path";
 import { getPayload } from "payload";
 import config from "@payload-config";
 
+import { logosPartenaires } from "./partenaires";
+
 /** Complète Expertise : enjeux, bande des pôles et appel final. */
 const DOSSIER =
   "/private/tmp/claude-501/-Users-audreybraun/9252f681-a78f-45ef-b4cc-a15965bdb178/scratchpad/photos/pretes";
@@ -110,6 +112,22 @@ const enjeuxEn = {
   })),
 };
 
+/**
+ * La bande de logotypes suit les trois couches. Elle porte ici les
+ * certifications et les environnements maîtrisés, là où celle de Feed annonce
+ * des clients : même rangée, autre propos.
+ */
+const partenairesFr = {
+  blockType: "partenaires" as const,
+  surtitre: "Certifications & environnements maîtrisés",
+  logos: logosPartenaires,
+};
+const partenairesEn = {
+  blockType: "partenaires" as const,
+  surtitre: "Certifications & environments we master",
+  logos: logosPartenaires,
+};
+
 /** Titre non affiché, mais lu : cf. la bande des pôles de « Nos compétences ». */
 const bandeFr = {
   blockType: "bandePoles" as const,
@@ -138,7 +156,8 @@ const appelEn = {
   cta: { libelle: "Request an audit", chemin: "/contact" },
 };
 
-// L'ordre de la maquette : grille, couches, enjeux, FAQ, à lire aussi, bande, appel.
+// L'ordre de la maquette : grille, couches, logotypes, enjeux, FAQ, à lire
+// aussi, bande des pôles, appel.
 const [grille, couches, faq, articles] = existantes;
 
 await payload.update({
@@ -146,15 +165,16 @@ await payload.update({
   id,
   locale: "fr",
   data: {
-    sections: [grille, couches, enjeuxFr, faq, articles, bandeFr, appelFr],
+    sections: [grille, couches, partenairesFr, enjeuxFr, faq, articles, bandeFr, appelFr],
     _status: "published",
   },
 });
 
 const pose = await payload.findByID({ collection: "pages", id, locale: "fr", depth: 0 });
-const blocEnjeux = pose.sections?.[2];
-const blocAppel = pose.sections?.[6];
-const blocBande = pose.sections?.[5];
+const blocPartenaires = pose.sections?.[2];
+const blocEnjeux = pose.sections?.[3];
+const blocBande = pose.sections?.[6];
+const blocAppel = pose.sections?.[7];
 
 /**
  * Les blocs que ce script ne réécrit pas sont relus en anglais, sans repli sur
@@ -179,6 +199,17 @@ await payload.update({
       poseEn.sections![0],
       poseEn.sections![1],
       {
+        ...partenairesEn,
+        id: blocPartenaires?.id,
+        logos: partenairesEn.logos.map((l, i) => ({
+          ...l,
+          id:
+            blocPartenaires && "logos" in blocPartenaires
+              ? blocPartenaires.logos?.[i]?.id
+              : undefined,
+        })),
+      },
+      {
         ...enjeuxEn,
         id: blocEnjeux?.id,
         cartes: enjeuxEn.cartes.map((c, i) => ({
@@ -186,8 +217,8 @@ await payload.update({
           id: blocEnjeux && "cartes" in blocEnjeux ? blocEnjeux.cartes?.[i]?.id : undefined,
         })),
       },
-      poseEn.sections![3],
       poseEn.sections![4],
+      poseEn.sections![5],
       { ...bandeEn, id: blocBande?.id },
       { ...appelEn, id: blocAppel?.id },
     ],
