@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { cheminSansLangue, lien, type Langue } from "@/lib/i18n";
-import type { Navigation as NavigationGlobal } from "@/lib/navigation";
+import type { NavigationEntete } from "@/lib/navigation";
 
 import { MenuMobile } from "./MenuMobile";
 import { Navigation } from "./Navigation";
@@ -38,7 +38,7 @@ export function Header({
   navigation,
 }: {
   langue: Langue;
-  navigation: NavigationGlobal;
+  navigation: NavigationEntete;
 }) {
   const surAccueil = cheminSansLangue(usePathname()) === "/";
   const [defile, setDefile] = useState(false);

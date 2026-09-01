@@ -5,7 +5,7 @@ import { Google_Sans_Flex, Work_Sans } from "next/font/google";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { estUneLangue, langues } from "@/lib/i18n";
-import { chargerNavigation } from "@/lib/navigation";
+import { chargerNavigation, pourEntete } from "@/lib/navigation";
 
 import "./globals.css";
 
@@ -56,7 +56,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
       className={`${policePrimaire.variable} ${policeSecondaire.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header langue={locale} navigation={navigation} />
+        <Header langue={locale} navigation={pourEntete(navigation)} />
         {children}
         <Footer langue={locale} navigation={navigation} />
       </body>

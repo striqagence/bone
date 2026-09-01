@@ -1,7 +1,9 @@
 import { CarteAcces } from "@/components/site/CarteAcces";
+import { AdresseCourriel } from "@/components/ui/AdresseCourriel";
 import { FormulaireContact } from "@/components/site/FormulaireContact";
 import { FilDAriane } from "@/components/ui/FilDAriane";
 import { Surtitre } from "@/components/ui/Surtitre";
+import { encoderCourriel } from "@/lib/courriel";
 import type { Langue } from "@/lib/i18n";
 
 /**
@@ -31,7 +33,7 @@ export function SectionFormulaireContact({
   profils: { valeur: string; libelle: string }[];
   libelles: React.ComponentProps<typeof FormulaireContact>["libelles"];
   carte: { latitude: number; longitude: number; zoom: number; intitule: string };
-  coordonnees: { badge: string; adresse: string; contact: string };
+  coordonnees: { badge: string; adresse: string; email: string; contact: string };
   ariane: string;
 }) {
   return (
@@ -77,6 +79,12 @@ export function SectionFormulaireContact({
               {coordonnees.adresse}
             </p>
             <p className="w-full text-base leading-[1.5] text-white opacity-80">
+              <AdresseCourriel
+                code={encoderCourriel(coordonnees.email)}
+                langue={langue}
+                className="underline underline-offset-2"
+              />
+              {" · "}
               {coordonnees.contact}
             </p>
           </div>

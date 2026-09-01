@@ -76,7 +76,9 @@ const fr = {
   coordonnees: {
     badge: "coordonnées",
     adresse: "27 Av. de la Baltique, 91140 Villebon-sur-Yvette",
-    contact: "bone@contact.fr · 01 80 86 60 66 · LinkedIn",
+    // L'adresse est à part : elle n'est pas écrite dans la page servie.
+    email: "bone@contact.fr",
+    contact: "01 80 86 60 66 · LinkedIn",
   },
   faq: {
     surtitre: "Questions fréquentes",
@@ -133,7 +135,8 @@ const en = {
   coordonnees: {
     badge: "contact details",
     adresse: "27 Av. de la Baltique, 91140 Villebon-sur-Yvette, France",
-    contact: "bone@contact.fr · +33 1 80 86 60 66 · LinkedIn",
+    email: "bone@contact.fr",
+    contact: "+33 1 80 86 60 66 · LinkedIn",
   },
   faq: {
     ...fr.faq,

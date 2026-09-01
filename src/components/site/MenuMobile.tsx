@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/Button";
 import { lien, type Langue } from "@/lib/i18n";
-import type { Navigation as NavigationGlobal } from "@/lib/navigation";
+import type { NavigationEntete } from "@/lib/navigation";
 
 import { NavLink } from "./NavLink";
 import { SelecteurLangue } from "./SelecteurLangue";
@@ -33,7 +33,7 @@ export function MenuMobile({
   navigation,
 }: {
   langue: Langue;
-  navigation: NavigationGlobal;
+  navigation: NavigationEntete;
 }) {
   const [ouvert, setOuvert] = useState(false);
   const chemin = usePathname();

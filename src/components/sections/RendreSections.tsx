@@ -48,11 +48,16 @@ export function RendreSections({
   langue,
   bandes,
   articles,
+  courriel,
+  repliCourriel = "",
 }: {
   sections: NonNullable<Page["sections"]>;
   langue: Langue;
   bandes: Bande[];
   articles: Article[];
+  /** Adresse encodée, pour les textes qui portent le jeton de courriel. */
+  courriel?: string;
+  repliCourriel?: string;
 }) {
   return (
     <>
@@ -145,7 +150,14 @@ export function RendreSections({
             );
           case "texteLong":
             return (
-              <SectionTexteLong key={section.id} surtitre={section.surtitre} corps={section.corps} />
+              <SectionTexteLong
+                key={section.id}
+                surtitre={section.surtitre}
+                corps={section.corps}
+                courriel={courriel}
+                langue={langue}
+                repliCourriel={repliCourriel}
+              />
             );
           case "reperes":
             return <SectionReperes key={section.id} cartes={section.cartes ?? []} />;

@@ -1,8 +1,10 @@
 import { RichText, type JSXConvertersFunction } from "@payloadcms/richtext-lexical/react";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
+import { AdresseCourriel } from "@/components/ui/AdresseCourriel";
 import { Surtitre } from "@/components/ui/Surtitre";
 import { FlecheRenvoi } from "@/components/ui/icones";
+import type { Langue } from "@/lib/i18n";
 
 /**
  * Texte long d'une page légale.
@@ -11,9 +13,18 @@ import { FlecheRenvoi } from "@/components/ui/icones";
  * mesure de 1600px rendrait chaque ligne impraticable. Les convertisseurs sont
  * ceux du corps d'article, sans les images ni l'encadré — un texte juridique
  * n'en porte pas.
+ *
+ * Les mentions légales doivent afficher une adresse de courriel, la loi
+ * l'exige : elle ne peut pas être remplacée par un renvoi au formulaire. Le
+ * texte porte donc un jeton à sa place, et le rendu y substitue l'adresse, qui
+ * n'est jamais écrite dans la page.
  */
-const convertisseurs: JSXConvertersFunction = ({ defaultConverters }) => ({
-  ...defaultConverters,
+const JETON = "⟦courriel⟧";
+
+const fabriquer =
+  (courriel: string | undefined, langue: Langue, repli: string): JSXConvertersFunction =>
+  ({ defaultConverters }) => ({
+    ...defaultConverters,
   heading: ({ node, nodesToJSX }) => {
     const enfants = nodesToJSX({ nodes: node.children });
     return node.tag === "h2" ? (
@@ -38,6 +49,23 @@ const convertisseurs: JSXConvertersFunction = ({ defaultConverters }) => ({
       </span>
     </li>
   ),
+  text: ({ node }) => {
+    const morceaux = node.text.split(JETON);
+    if (morceaux.length === 1 || !courriel) return node.text.replace(JETON, "");
+    return morceaux.map((morceau, i) => (
+      <span key={i}>
+        {i > 0 && (
+          <AdresseCourriel
+            code={courriel}
+            langue={langue}
+            repli={repli}
+            className="text-primary-600 underline underline-offset-2"
+          />
+        )}
+        {morceau}
+      </span>
+    ));
+  },
   link: ({ node, nodesToJSX }) => {
     const champs = node.fields as { url?: string; newTab?: boolean; doc?: unknown };
     return (
@@ -56,15 +84,22 @@ const convertisseurs: JSXConvertersFunction = ({ defaultConverters }) => ({
 export function SectionTexteLong({
   surtitre,
   corps,
+  courriel,
+  langue,
+  repliCourriel,
 }: {
   surtitre?: string | null;
   corps: SerializedEditorState;
+  /** L'adresse encodée, si la page en porte une. */
+  courriel?: string;
+  langue: Langue;
+  repliCourriel: string;
 }) {
   return (
     <section className="flex w-full flex-col items-center bg-white px-6 py-16 lg:px-28 lg:py-24">
       <div className="flex w-full max-w-[820px] flex-col gap-6">
         {surtitre && <Surtitre>{surtitre}</Surtitre>}
-        <RichText data={corps} converters={convertisseurs} disableContainer />
+        <RichText data={corps} converters={fabriquer(courriel, langue, repliCourriel)} disableContainer />
       </div>
     </section>
   );

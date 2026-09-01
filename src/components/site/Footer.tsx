@@ -1,6 +1,8 @@
 import Link from "next/link";
 
+import { AdresseCourriel } from "@/components/ui/AdresseCourriel";
 import { Button } from "@/components/ui/Button";
+import { encoderCourriel } from "@/lib/courriel";
 import { lien, type Langue } from "@/lib/i18n";
 import type { Navigation as NavigationGlobal } from "@/lib/navigation";
 
@@ -70,10 +72,14 @@ export function Footer({
                 {contact.libelleFormulaire}
               </NavLink>
               {/* Adresse et réseau social sortent du site : ni l'un ni l'autre
-                  ne peut porter l'indicateur de page courante. */}
-              <a href={`mailto:${contact.email}`} className="text-base text-white">
-                {contact.email}
-              </a>
+                  ne peut porter l'indicateur de page courante. L'adresse n'est
+                  pas écrite dans la page, elle y est rétablie à l'affichage. */}
+              <AdresseCourriel
+                code={encoderCourriel(contact.email)}
+                langue={langue}
+                repli={contact.libelleFormulaire}
+                className="text-base text-white"
+              />
               <a
                 href={contact.linkedin}
                 target="_blank"

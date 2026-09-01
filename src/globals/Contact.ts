@@ -149,7 +149,24 @@ export const Contact: GlobalConfig = {
               fields: [
                 { name: "badge", type: "text", required: true, localized: true, label: "Étiquette" },
                 { name: "adresse", type: "textarea", required: true, localized: true, label: "Adresse" },
-                { name: "contact", type: "text", required: true, localized: true, label: "Ligne de contact" },
+                {
+                  name: "email",
+                  type: "email",
+                  required: true,
+                  label: "Adresse e-mail",
+                  admin: {
+                    description:
+                      "Affichée à part du reste de la ligne : elle n’est pas écrite dans la page, mais rétablie à l’affichage, pour la dérober aux moissonneurs d’adresses.",
+                  },
+                },
+                {
+                  name: "contact",
+                  type: "text",
+                  required: true,
+                  localized: true,
+                  label: "Suite de la ligne de contact",
+                  admin: { description: "Ce qui suit l’adresse : téléphone, réseau social." },
+                },
               ],
             },
           ],

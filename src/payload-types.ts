@@ -1713,6 +1713,13 @@ export interface Contact {
   coordonnees: {
     badge: string;
     adresse: string;
+    /**
+     * Affichée à part du reste de la ligne : elle n’est pas écrite dans la page, mais rétablie à l’affichage, pour la dérober aux moissonneurs d’adresses.
+     */
+    email: string;
+    /**
+     * Ce qui suit l’adresse : téléphone, réseau social.
+     */
     contact: string;
   };
   faq: {
@@ -2103,6 +2110,7 @@ export interface ContactSelect<T extends boolean = true> {
     | {
         badge?: T;
         adresse?: T;
+        email?: T;
         contact?: T;
       };
   faq?:

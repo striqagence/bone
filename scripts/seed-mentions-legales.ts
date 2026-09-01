@@ -37,12 +37,12 @@ const corpsFr = racine([
     "SIRET : [numéro]",
     "TVA intracommunautaire : [numéro]",
     "Téléphone : 01 80 86 60 66",
-    "Courriel : bone@contact.fr",
+    "Courriel : ⟦courriel⟧",
   ]),
   titre("Directeur de la publication"),
   paragraphe(
     "[Prénom et nom], en sa qualité de [fonction]. Toute demande relative au contenu du site peut lui " +
-      "être adressée à bone@contact.fr.",
+      "être adressée à ⟦courriel⟧.",
   ),
   titre("Hébergement"),
   paragraphe(
@@ -92,12 +92,12 @@ const corpsEn = racine([
     "SIRET: [number]",
     "VAT number: [number]",
     "Telephone: +33 1 80 86 60 66",
-    "Email: bone@contact.fr",
+    "Email: ⟦courriel⟧",
   ]),
   titre("Publication director"),
   paragraphe(
     "[First name and surname], acting as [role]. Any request concerning the content of this site may " +
-      "be sent to bone@contact.fr.",
+      "be sent to ⟦courriel⟧.",
   ),
   titre("Hosting"),
   paragraphe(

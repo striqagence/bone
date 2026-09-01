@@ -197,6 +197,25 @@ toutes les pages, sans message d'erreur.
 
 ---
 
+## Adresse de courriel
+
+L'adresse n'est jamais écrite dans le HTML servi : elle y est encodée, et le
+navigateur la rétablit à l'affichage en un lien `mailto:` ordinaire. C'est ce
+qui la dérobe aux moissonneurs, qui n'exécutent pas de JavaScript. Dans les
+textes longs — mentions légales, confidentialité — le contenu porte le jeton
+`⟦courriel⟧`, que le rendu remplace.
+
+Deux pièges à connaître :
+
+- **Un composant client reçoit tout ce qu'on lui passe**, sérialisé dans la
+  page. Donner le global `navigation` entier à l'en-tête y réécrivait l'adresse
+  sur chaque page ; `pourEntete()` l'en retire.
+- **La vérification se fait sur le HTML servi**, pas sur la page rendue :
+  `curl … | grep -E '[^@]+@[^@]+\.[a-z]+'` doit ne rien trouver, tandis que le
+  même chemin en navigateur doit bien montrer le lien.
+
+---
+
 ## Largeurs
 
 La maquette est dessinée pour 1920px. Les sections gardent ses proportions à

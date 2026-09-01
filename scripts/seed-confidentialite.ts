@@ -33,7 +33,7 @@ const corpsFr = racine([
   titre("Qui est responsable de vos données"),
   paragraphe(
     "BONE, dont le siège est situé 27 avenue de la Baltique, 91140 Villebon-sur-Yvette, est " +
-      "responsable des traitements décrits ici. Pour toute question, écrivez à bone@contact.fr.",
+      "responsable des traitements décrits ici. Pour toute question, écrivez à ⟦courriel⟧.",
   ),
 
   titre("Ce que nous collectons, et pourquoi"),
@@ -85,7 +85,7 @@ const corpsFr = racine([
       "retirer votre consentement à la lettre d’information à tout moment.",
   ),
   paragraphe(
-    "Pour exercer ces droits, écrivez à bone@contact.fr. Une réponse vous est apportée dans un délai " +
+    "Pour exercer ces droits, écrivez à ⟦courriel⟧. Une réponse vous est apportée dans un délai " +
       "d’un mois. Si la réponse ne vous satisfait pas, vous pouvez saisir la Commission nationale de " +
       "l’informatique et des libertés (CNIL), 3 place de Fontenoy, 75007 Paris, cnil.fr.",
   ),
@@ -107,7 +107,7 @@ const corpsEn = racine([
   titre("Who is responsible for your data"),
   paragraphe(
     "BONE, registered office at 27 avenue de la Baltique, 91140 Villebon-sur-Yvette, France, is the " +
-      "controller for the processing described here. For any question, write to bone@contact.fr.",
+      "controller for the processing described here. For any question, write to ⟦courriel⟧.",
   ),
 
   titre("What we collect, and why"),
@@ -156,7 +156,7 @@ const corpsEn = racine([
       "to and restrict its processing. You may withdraw your consent to the newsletter at any time.",
   ),
   paragraphe(
-    "To exercise these rights, write to bone@contact.fr. You will receive a reply within one month. " +
+    "To exercise these rights, write to ⟦courriel⟧. You will receive a reply within one month. " +
       "If that reply does not satisfy you, you may refer the matter to the French data protection " +
       "authority (CNIL), 3 place de Fontenoy, 75007 Paris, cnil.fr.",
   ),
