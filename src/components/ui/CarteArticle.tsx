@@ -63,11 +63,9 @@ export function CarteArticle({
             <span className="text-primary-600">{date}</span>
             <span className="text-gris-400">{tempsDeLecture}</span>
           </div>
-          <p
-            className="w-full titrage text-xl font-bold leading-[1.4] text-primary-950"
-          >
+          <h3 className="w-full titrage text-xl font-bold leading-[1.4] text-primary-950">
             {titre}
-          </p>
+          </h3>
           <p className="w-full text-base leading-[1.5] text-primary-950 opacity-60">{description}</p>
         </div>
 

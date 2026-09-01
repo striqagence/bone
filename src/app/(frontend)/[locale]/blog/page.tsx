@@ -101,6 +101,7 @@ export default async function PageBlog({
         articles={liste.articles}
         pageSuivante={liste.encore ? numero + 1 : undefined}
         libelles={{
+          titre: libelles.titreListe,
           tousSujets: libelles.libelleTousSujets,
           compte: libelles.gabaritCompte.replace("{n}", String(liste.total)),
           charger: libelles.libelleCharger,

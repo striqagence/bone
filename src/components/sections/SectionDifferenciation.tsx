@@ -30,10 +30,13 @@ export function SectionDifferenciation({
 }) {
   return (
     <section className="flex w-full flex-col items-center bg-white px-6 py-16 lg:px-28 lg:py-32">
-      <div className="grid w-full max-w-[1600px] grid-cols-1 gap-12 lg:grid-cols-[0.5fr_2fr]">
+      {/* 26,5 % / 73,5 % : la proportion des 423 et 1128px de la maquette. À
+          un cinquième, la colonne de titre tombait à 200px sur un écran de
+          1280 et n'affichait plus qu'un mot par ligne. */}
+      <div className="grid w-full max-w-[1600px] grid-cols-1 gap-12 lg:grid-cols-[0.36fr_1fr]">
         <div className="flex flex-col items-start justify-end gap-2.5">
           <Surtitre>{surtitre}</Surtitre>
-          <h2 className="w-full titrage text-2xl font-bold leading-[1.4] text-primary-950 lg:text-3xl">
+          <h2 className="w-full titrage text-2xl font-bold leading-[1.4] text-primary-950 2xl:text-3xl">
             {titre}
           </h2>
         </div>
@@ -65,7 +68,7 @@ function CarteComparaison({ carte, accentuee = false }: { carte: Carte; accentue
           {carte.badge}
         </span>
 
-        <p className="w-full titrage text-2xl font-bold leading-[1.4]">{carte.titre}</p>
+        <h3 className="w-full titrage text-2xl font-bold leading-[1.4]">{carte.titre}</h3>
 
         {carte.texte ? (
           <p

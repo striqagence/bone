@@ -80,14 +80,18 @@ export function CartePole({
           {eyebrow}
         </p>
 
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={logos[pole]}
-          alt={`Bone ${pole}`}
-          width={211.172}
-          height={60}
-          className="w-[170px] lg:w-[211.172px]"
-        />
+        {/* Le logotype porte le nom du pôle : c'est lui le titre de la carte,
+            et son texte de remplacement en tient lieu pour qui ne le voit pas. */}
+        <h3>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={logos[pole]}
+            alt={`Bone ${pole}`}
+            width={211.172}
+            height={60}
+            className="w-[170px] lg:w-[211.172px]"
+          />
+        </h3>
 
         <p
           className="titrage text-lg font-bold leading-[1.4] text-white"

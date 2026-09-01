@@ -41,9 +41,9 @@ export function SectionEquipe({
 
           <div className="flex flex-col items-start justify-center gap-3.5 rounded bg-gray-50 p-9 shadow-[10px_10px_0_0_var(--color-encre)] lg:absolute lg:right-0 lg:top-[180px] lg:w-[400px]">
             <Surtitre>{surtitre}</Surtitre>
-            <p className="w-full titrage text-xl font-bold leading-[1.4] text-primary-950">
+            <h2 className="w-full titrage text-xl font-bold leading-[1.4] text-primary-950">
               {titre}
-            </p>
+            </h2>
             <p className="w-full text-base leading-[1.5] text-primary-950 opacity-60">{texte}</p>
           </div>
         </div>

@@ -31,6 +31,7 @@ export function SectionListeArticles({
   articles: Article[];
   pageSuivante?: number;
   libelles: {
+    titre: string;
     tousSujets: string;
     compte: string;
     charger: string;
@@ -54,6 +55,10 @@ export function SectionListeArticles({
   return (
     <section className="flex w-full flex-col items-center bg-white px-6 py-16 lg:px-28 lg:py-20">
       <div className="flex w-full max-w-[1600px] flex-col items-stretch gap-9">
+        {/* La maquette ne titre pas la grille : le titre existe quand même pour
+            qui navigue au clavier ou à l'oreille, sans rien changer à l'écran. */}
+        <h2 className="sr-only">{libelles.titre}</h2>
+
         <div className="flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between">
           {/* Les filtres défilent au doigt : cinq puces ne tiennent pas sur la
               largeur d'un téléphone, et les passer à la ligne repousserait la

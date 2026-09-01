@@ -25,17 +25,20 @@ export function SectionValeurs({
       />
 
       <div className="relative flex w-full max-w-[1600px] flex-col items-start gap-6">
-        <Surtitre couleur="blanc">{surtitre}</Surtitre>
+        <Surtitre couleur="blanc" balise="h2">{surtitre}</Surtitre>
 
-        <ul className="grid w-full grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-5">
+        {/* Cinq colonnes ne tiennent qu'à partir de 1536px : en dessous, une
+            carte n'offrirait que 116px de texte, moins large que ses propres
+            mots. */}
+        <ul className="grid w-full grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
           {cartes.map(({ id, picto, titre, texte }) => (
             <li
               key={id ?? titre}
-              className="flex flex-col items-start gap-2.5 rounded bg-gray-50 px-9 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)]"
+              className="flex flex-col items-start gap-2.5 rounded bg-gray-50 px-6 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)] 2xl:px-9"
             >
               <div className="flex items-center gap-2.5 text-primary-600">
                 {pictoTrait(picto)}
-                <p className="titrage text-lg font-bold leading-[1.4] text-primary-950">{titre}</p>
+                <h3 className="titrage text-lg font-bold leading-[1.4] text-primary-950">{titre}</h3>
               </div>
               <p className="text-base leading-[1.5] text-primary-950 opacity-60">{texte}</p>
             </li>

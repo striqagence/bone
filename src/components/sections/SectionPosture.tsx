@@ -33,17 +33,17 @@ export function SectionPosture({
       </div>
 
       <div className="relative mx-auto flex w-full max-w-[1600px] flex-col gap-12 lg:gap-20">
-        <Surtitre couleur="blanc">{surtitre}</Surtitre>
+        <Surtitre couleur="blanc" balise="h2">{surtitre}</Surtitre>
 
         <div className="flex flex-col items-start gap-12 lg:flex-row lg:gap-20">
           <div className="flex flex-1 flex-col items-start gap-3.5">
             <div className="flex w-full items-center gap-3.5 text-primary-500">
               <IconeMainRefus />
-              <p className="titrage text-xl font-bold leading-[1.4] text-white/90 lg:text-2xl">
+              <h3 className="titrage text-xl font-bold leading-[1.4] text-white/90 lg:text-2xl">
                 {refus.intitule}
-              </p>
+              </h3>
             </div>
-            <p className="titrage w-full text-3xl font-bold leading-[1.4] text-primary-100/70 lg:text-5xl">
+            <p className="titrage w-full break-words text-3xl font-bold leading-[1.4] text-primary-100/70 xl:text-4xl 2xl:text-5xl">
               {refus.citation}
             </p>
             {refus.precision && (
@@ -58,11 +58,11 @@ export function SectionPosture({
           <div className="flex flex-1 flex-col items-start gap-3.5">
             <div className="flex w-full items-center gap-3.5 text-primary-500">
               <IconeMainOuverte />
-              <p className="titrage text-xl font-bold leading-[1.4] text-white/90 lg:text-2xl">
+              <h3 className="titrage text-xl font-bold leading-[1.4] text-white/90 lg:text-2xl">
                 {engagement.intitule}
-              </p>
+              </h3>
             </div>
-            <p className="titrage w-full text-3xl font-bold leading-[1.4] text-white lg:text-5xl">
+            <p className="titrage w-full break-words text-3xl font-bold leading-[1.4] text-white xl:text-4xl 2xl:text-5xl">
               {engagement.citation}
             </p>
           </div>

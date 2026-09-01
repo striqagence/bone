@@ -11,6 +11,9 @@ import { FlecheRenvoi, IconeLivrable } from "@/components/ui/icones";
  * Les en-têtes disparaissent alors, remplacés dans chaque cellule par leur
  * libellé : hors du tableau, « Cartographie des risques » ne dirait pas de
  * lui-même qu'il s'agit du livrable.
+ *
+ * Le passage à trois colonnes n'a lieu qu'à 1280px : à 1024, la colonne des
+ * profils tombait à 77px de texte et « Directeur technique » en sortait.
  */
 export function SectionPointsEntree({
   surtitre,
@@ -23,31 +26,31 @@ export function SectionPointsEntree({
   enTetes: { profil: string; pointEntree: string; livrable: string };
   lignes: { id?: string | null; profil: string; pointEntree: string; livrable: string }[];
 }) {
-  const enTeteMobile = "titrage text-xs font-semibold uppercase tracking-widest lg:hidden";
+  const enTeteMobile = "titrage text-xs font-semibold uppercase tracking-widest xl:hidden";
 
   return (
     <section className="flex w-full flex-col items-center bg-encre px-6 py-16 lg:px-28 lg:py-32">
-      <div className="grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-6 lg:grid-cols-[minmax(0,0.5fr)_minmax(0,1fr)_minmax(0,1fr)]">
-        <div className="flex flex-col items-start gap-2.5 pb-5 lg:col-span-3">
+      <div className="grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-6 xl:grid-cols-[minmax(0,0.5fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="flex flex-col items-start gap-2.5 pb-5 xl:col-span-3">
           <Surtitre couleur="blanc">{surtitre}</Surtitre>
           <h2 className="w-full titrage text-2xl font-bold leading-[1.4] text-gris-50 lg:text-4xl">
             {titre}
           </h2>
         </div>
 
-        <p className="hidden titrage text-xl font-bold leading-[1.4] text-white/70 lg:block">
+        <p className="hidden titrage text-xl font-bold leading-[1.4] text-white/70 xl:block">
           {enTetes.profil}
         </p>
-        <p className="hidden titrage text-xl font-bold leading-[1.4] text-white/90 lg:block">
+        <p className="hidden titrage text-xl font-bold leading-[1.4] text-white/90 xl:block">
           {enTetes.pointEntree}
         </p>
-        <p className="hidden titrage text-xl font-bold leading-[1.4] text-white/90 lg:block">
+        <p className="hidden titrage text-xl font-bold leading-[1.4] text-white/90 xl:block">
           {enTetes.livrable}
         </p>
 
         {lignes.map(({ id, profil, pointEntree, livrable }) => (
           <div key={id ?? profil} className="contents">
-            <div className="mt-6 flex flex-col justify-center rounded bg-white/10 px-9 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)] lg:mt-0">
+            <div className="mt-6 flex flex-col justify-center rounded bg-white/10 px-9 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)] xl:mt-0">
               <p className="titrage text-lg font-bold leading-[1.4] text-white/80">{profil}</p>
             </div>
             <div className="flex flex-col justify-center gap-2 rounded bg-gray-50 px-9 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)]">

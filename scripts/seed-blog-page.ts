@@ -103,6 +103,7 @@ await payload.updateGlobal({
   data: {
     surtitreUne: "À la une",
     libelleLire: "Lire l’article",
+    titreListe: "Tous les articles",
     libelleTousSujets: "Tous les sujets",
     gabaritCompte: "{n} articles",
     libelleCharger: "Charger plus d’articles",
@@ -121,6 +122,7 @@ await payload.updateGlobal({
   data: {
     surtitreUne: "Featured",
     libelleLire: "Read the article",
+    titreListe: "All articles",
     libelleTousSujets: "All topics",
     gabaritCompte: "{n} articles",
     libelleCharger: "Load more articles",

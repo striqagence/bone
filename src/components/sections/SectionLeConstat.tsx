@@ -50,9 +50,9 @@ export function SectionLeConstat({
 
         <Paire photo={realite.photo}>
           <div className="flex flex-col items-start justify-center gap-5 rounded bg-gray-50 p-9 shadow-[10px_10px_0_0_var(--color-encre)]">
-            <p className="w-full titrage text-xl font-bold leading-[1.4] text-primary-950">
+            <h3 className="w-full titrage text-xl font-bold leading-[1.4] text-primary-950">
               {realite.titre}
-            </p>
+            </h3>
             <div className="flex w-full flex-col items-start justify-end gap-5">
               <p className="titrage text-6xl font-bold leading-[1.2] whitespace-nowrap text-primary-600 lg:text-7xl">
                 {realite.chiffre}
@@ -76,7 +76,7 @@ export function SectionLeConstat({
 
         <Paire photo={enjeu.photo} decalee>
           <div className="flex flex-col items-start justify-center gap-5 rounded bg-primary-600 p-9 text-white shadow-[10px_10px_0_0_var(--color-encre)]">
-            <p className="w-full titrage text-xl font-bold leading-[1.4]">{enjeu.titre}</p>
+            <h3 className="w-full titrage text-xl font-bold leading-[1.4]">{enjeu.titre}</h3>
             <p className="w-full text-base leading-[1.5] opacity-80">{enjeu.texte}</p>
             <p className="w-full titrage-italique text-lg font-bold leading-[1.4]">
               {enjeu.citation}

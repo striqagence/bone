@@ -31,14 +31,15 @@ export function Footer({
     <footer className="relative flex w-full flex-col items-center overflow-hidden bg-encre px-6 lg:px-28">
       <div className="relative flex w-full max-w-[1600px] flex-col gap-10 pb-44 pt-12 lg:gap-2.5 lg:pb-64 lg:pt-20">
         <div className="flex w-full items-start justify-center py-0 lg:py-8">
-          <div className="relative flex flex-1 flex-col gap-10 pt-0 sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-[max-content_1fr_1fr_1fr_max-content] lg:gap-x-28 lg:gap-y-5 lg:pt-5">
-            <div className="flex w-full flex-col items-start gap-[30px] self-start sm:col-span-2 lg:col-span-1 lg:w-[493px]">
+          <div className="relative flex flex-1 flex-col gap-10 pt-0 sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10 lg:gap-y-5 lg:pt-5 xl:grid-cols-[minmax(0,1.5fr)_1fr_1fr_1fr_max-content] xl:gap-x-14 2xl:gap-x-20">
+            <div className="flex w-full flex-col items-start gap-[30px] self-start sm:col-span-2 xl:col-span-1 xl:max-w-[493px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand/bone-logotype-clair.svg"
                 alt="BONE IT"
                 width={246}
                 height={70}
+                className="w-[200px] 2xl:w-[246px]"
               />
               <p className="text-lg text-white/80 lg:text-xl">{navigation.baseline}</p>
             </div>
@@ -83,7 +84,7 @@ export function Footer({
               </a>
             </div>
 
-            <div className="flex h-[45px] items-center gap-5 sm:col-span-2 lg:col-span-1 lg:justify-self-start">
+            <div className="flex h-[45px] items-center gap-5 sm:col-span-2 xl:col-span-1 xl:justify-self-start">
               <Button
                 href={lien(navigation.boutonEntete.chemin, langue)}
                 variante="secondary"
@@ -132,12 +133,11 @@ export function Footer({
   );
 }
 
+/** Chaque colonne de liens est un groupe : son intitulé est un vrai titre. */
 function TitreColonne({ children }: { children: React.ReactNode }) {
   return (
-    <p
-      className="titrage text-base font-bold leading-[1.4] whitespace-nowrap text-white"
-    >
+    <h2 className="titrage text-base font-bold leading-[1.4] whitespace-nowrap text-white">
       {children}
-    </p>
+    </h2>
   );
 }

@@ -54,12 +54,15 @@ export function SectionChiffres({
             key={libelle}
             className={`flex flex-col items-start ${index === 0 ? "lg:col-start-2" : ""} ${index === 1 ? "lg:pt-[50px]" : ""} ${index === 2 ? "lg:pt-[100px]" : ""}`}
           >
-            <div className="flex w-full flex-col items-start gap-2.5 border-l-2 border-accent-700 px-11 py-5 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)]">
+            <div className="flex w-full flex-col items-start gap-2.5 border-l-2 border-accent-700 px-8 py-5 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)] 2xl:px-11">
               <p className="titrage pb-5 font-semibold leading-[1.2] whitespace-nowrap text-white">
-                <span className="text-7xl">{valeur}</span>
+                <span className="text-5xl 2xl:text-7xl">{valeur}</span>
                 <span className="text-lg font-light">{unite}</span>
               </p>
-              <p className="titrage text-xs font-semibold uppercase leading-5 tracking-[3px] whitespace-nowrap text-accent-700">
+              {/* Le libellé passe à la ligne : à quatre colonnes sur un écran
+                  de portable, « Unique sur le marché français » demandait 290px
+                  pour 155 disponibles et sortait de sa carte. */}
+              <p className="titrage text-xs font-semibold uppercase leading-5 tracking-[3px] text-accent-700">
                 {libelle}
               </p>
               <p className="w-full max-w-[292px] text-base leading-[1.5] text-white opacity-80">

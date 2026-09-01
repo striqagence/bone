@@ -74,7 +74,7 @@ function EnTeteColonne({ colonne, opacites }: { colonne: Colonne; opacites: stri
   const [titre, sousTitre] = opacites.split(" ");
   return (
     <div className="flex flex-col items-start justify-center gap-1 text-white">
-      <p className={`w-full titrage text-xl font-bold leading-[1.4] ${titre}`}>{colonne.titre}</p>
+      <h3 className={`w-full titrage text-xl font-bold leading-[1.4] ${titre}`}>{colonne.titre}</h3>
       <p className={`w-full text-lg leading-[1.5] ${sousTitre}`}>{colonne.sousTitre}</p>
     </div>
   );
@@ -85,9 +85,9 @@ function Carte({ entree, sombre = false }: { entree: Entree; sombre?: boolean })
     <div
       className={`flex flex-col items-start justify-center gap-2.5 rounded px-9 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)] ${sombre ? "bg-white/10 text-white" : "bg-gray-50 text-primary-950"}`}
     >
-      <p className={`w-full titrage text-lg font-bold leading-[1.4] ${sombre ? "opacity-80" : ""}`}>
+      <h4 className={`w-full titrage text-lg font-bold leading-[1.4] ${sombre ? "opacity-80" : ""}`}>
         {entree.titre}
-      </p>
+      </h4>
       <div className="flex w-full items-start gap-2.5 text-primary-600">
         {sombre ? <FlecheRenvoiRonde /> : <FlecheRenvoi />}
         <span className={`flex-1 text-base leading-[1.5] opacity-60 ${sombre ? "text-white" : "text-primary-950"}`}>

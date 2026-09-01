@@ -21,6 +21,17 @@ export const Blog: GlobalConfig = {
     { name: "surtitreUne", type: "text", required: true, localized: true, label: "Surtitre de l’article à la une" },
     { name: "libelleLire", type: "text", required: true, localized: true, label: "Bouton des cartes" },
     {
+      name: "titreListe",
+      type: "text",
+      required: true,
+      localized: true,
+      label: "Titre de la liste",
+      admin: {
+        description:
+          "Lu par les lecteurs d’écran, pas affiché : la maquette ne titre pas la grille, mais neuf articles sans titre restent difficiles à situer.",
+      },
+    },
+    {
       name: "libelleTousSujets",
       type: "text",
       required: true,

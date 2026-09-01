@@ -110,13 +110,25 @@ const enjeuxEn = {
   })),
 };
 
-const bandeFr = { blockType: "bandePoles" as const, avecEnTete: false };
+/** Titre non affiché, mais lu : cf. la bande des pôles de « Nos compétences ». */
+const bandeFr = {
+  blockType: "bandePoles" as const,
+  avecEnTete: false,
+  titreHaut: "Trois pôles, une seule logique :",
+  titreBas: "sécuriser vos décisions d’infrastructure.",
+};
 const appelFr = {
   blockType: "appelAction" as const,
   surtitre: "notre point de départ",
   titre: "On part de votre problème.",
   chapo: "Un diagnostic clair, sans engagement, pour savoir par où commencer.",
   cta: { libelle: "Demander un audit", chemin: "/contact" },
+};
+const bandeEn = {
+  blockType: "bandePoles" as const,
+  avecEnTete: false,
+  titreHaut: "Three divisions, one logic:",
+  titreBas: "making your infrastructure decisions safe.",
 };
 const appelEn = {
   blockType: "appelAction" as const,
@@ -142,6 +154,21 @@ await payload.update({
 const pose = await payload.findByID({ collection: "pages", id, locale: "fr", depth: 0 });
 const blocEnjeux = pose.sections?.[2];
 const blocAppel = pose.sections?.[6];
+const blocBande = pose.sections?.[5];
+
+/**
+ * Les blocs que ce script ne réécrit pas sont relus en anglais, sans repli sur
+ * le français : renvoyés depuis la lecture française, ils auraient recopié le
+ * français dans la version anglaise — et un repli, lui, aurait figé en base un
+ * texte qui n'était qu'affiché à défaut de traduction.
+ */
+const poseEn = await payload.findByID({
+  collection: "pages",
+  id,
+  locale: "en",
+  fallbackLocale: false,
+  depth: 0,
+});
 
 await payload.update({
   collection: "pages",
@@ -149,8 +176,8 @@ await payload.update({
   locale: "en",
   data: {
     sections: [
-      pose.sections![0],
-      pose.sections![1],
+      poseEn.sections![0],
+      poseEn.sections![1],
       {
         ...enjeuxEn,
         id: blocEnjeux?.id,
@@ -159,9 +186,9 @@ await payload.update({
           id: blocEnjeux && "cartes" in blocEnjeux ? blocEnjeux.cartes?.[i]?.id : undefined,
         })),
       },
-      pose.sections![3],
-      pose.sections![4],
-      pose.sections![5],
+      poseEn.sections![3],
+      poseEn.sections![4],
+      { ...bandeEn, id: blocBande?.id },
       { ...appelEn, id: blocAppel?.id },
     ],
   },

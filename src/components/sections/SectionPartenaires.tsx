@@ -12,8 +12,10 @@ import { Surtitre } from "@/components/ui/Surtitre";
  * pour VMware, 45px pour Palo Alto — et les aligner sur une hauteur unique
  * déséquilibrerait la rangée, les logos n'ayant pas le même poids optique.
  *
- * Sur téléphone la bande défile au doigt au lieu d'être rognée : à 375px de
- * large, un débordement centré rendrait la moitié des logotypes inatteignables.
+ * Le débordement centré ne vaut qu'à partir de 1920px, la largeur pour laquelle
+ * la maquette est dessinée. En dessous, la rangée passe en défilement aligné à
+ * gauche : centrée, elle escamotait deux logotypes entiers sur un portable de
+ * 13 pouces, sans aucun moyen de les atteindre.
  */
 export function SectionPartenaires({
   surtitre,
@@ -26,12 +28,12 @@ export function SectionPartenaires({
     <section className="flex w-full flex-col items-center justify-center gap-6 border-b border-gris-300 py-16 lg:py-24">
       <div className="flex w-full justify-center px-6 lg:px-28">
         <div className="flex w-full max-w-[1600px] flex-col items-start justify-center p-2.5">
-          <Surtitre>{surtitre}</Surtitre>
+          <Surtitre balise="h2">{surtitre}</Surtitre>
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto lg:overflow-hidden">
-        <ul className="mx-auto flex w-max items-center gap-10 px-6 lg:w-full lg:justify-center lg:px-0">
+      <div className="w-full overflow-x-auto min-[1920px]:overflow-hidden">
+        <ul className="mx-auto flex w-max items-center gap-10 px-6 min-[1920px]:w-full min-[1920px]:justify-center min-[1920px]:px-0">
           {logos.map(({ id, fichier, nom, hauteur }, index) => (
             <li key={id ?? `${fichier}-${index}`} className="flex shrink-0 items-center gap-10">
               {index > 0 && <span aria-hidden className="h-[50px] w-px bg-gris-300" />}

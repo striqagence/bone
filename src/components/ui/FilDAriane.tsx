@@ -32,7 +32,7 @@ export function FilDAriane({
   return (
     <nav aria-label="Fil d’ariane" className={className}>
       <ol
-        className={`flex h-[16.5px] items-center gap-1 text-[9px] font-semibold leading-none whitespace-nowrap ${attenue}`}
+        className={`flex min-w-0 items-center gap-1 text-[9px] font-semibold leading-none ${attenue}`}
       >
         <li className="flex items-center gap-1">
           <Link href={lien("/", langue)} aria-label="Accueil" className="flex items-center">
@@ -44,9 +44,12 @@ export function FilDAriane({
         {entrees.map(({ libelle, chemin }, index) => {
           const dernier = index === entrees.length - 1;
           return (
-            <li key={libelle} className="flex items-center gap-1 titrage">
+            <li key={libelle} className="flex min-w-0 items-center gap-1 titrage">
               {dernier || !chemin ? (
-                <span className={dernier ? appuye : undefined} aria-current={dernier ? "page" : undefined}>
+                <span
+                  className={`truncate ${dernier ? appuye : ""}`}
+                  aria-current={dernier ? "page" : undefined}
+                >
                   {libelle}
                 </span>
               ) : (

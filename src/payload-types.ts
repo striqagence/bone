@@ -252,7 +252,7 @@ export interface Page {
     | (
         | {
             /**
-             * À laisser décoché quand le hero de la page annonce déjà les pôles.
+             * À laisser décoché quand le hero de la page annonce déjà les pôles. Le titre reste alors saisi : il n’est plus affiché, mais les lecteurs d’écran l’annoncent avant les trois bandes.
              */
             avecEnTete?: boolean | null;
             surtitre?: string | null;
@@ -1606,6 +1606,10 @@ export interface Blog {
   surtitreUne: string;
   libelleLire: string;
   /**
+   * Lu par les lecteurs d’écran, pas affiché : la maquette ne titre pas la grille, mais neuf articles sans titre restent difficiles à situer.
+   */
+  titreListe: string;
+  /**
    * Le filtre qui n’en applique aucun : « Tous les sujets ».
    */
   libelleTousSujets: string;
@@ -1998,6 +2002,7 @@ export interface AccueilSelect<T extends boolean = true> {
 export interface BlogSelect<T extends boolean = true> {
   surtitreUne?: T;
   libelleLire?: T;
+  titreListe?: T;
   libelleTousSujets?: T;
   gabaritCompte?: T;
   libelleCharger?: T;

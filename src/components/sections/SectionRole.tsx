@@ -43,7 +43,10 @@ export function SectionRole({
     <section className="flex w-full flex-col items-center bg-encre bg-[linear-gradient(249.27deg,rgb(0_0_0/0)_3.28%,rgb(32_32_255/0.2)_94.98%)] px-6 pt-16 lg:px-28 lg:pt-32">
       <div className="grid w-full max-w-[1600px] grid-cols-1 gap-x-7 gap-y-12 lg:grid-cols-3">
         <div className="flex flex-col items-start gap-6 lg:col-span-3 lg:flex-row lg:items-end">
-          <div className="flex flex-col items-start gap-2.5 lg:w-[1036px]">
+          {/* Le titre prend 64 % de la largeur, la proportion des 1036px de la
+              maquette sur ses 1600 : en pixels fixes, il ne laissait que 20px
+              au chapô sur un écran de 1280 et le réduisait à un mot par ligne. */}
+          <div className="flex flex-col items-start gap-2.5 lg:w-[64%]">
             <Surtitre couleur="blanc">{surtitre}</Surtitre>
             <h2 className="w-full titrage text-3xl font-bold leading-[1.2] text-primary-50 lg:text-6xl">
               {titre}
@@ -70,7 +73,7 @@ export function SectionRole({
                       </span>
                     );
                   })()}
-                  <p className="titrage text-xl font-bold leading-[1.4] whitespace-nowrap">
+                  <p className="titrage text-xl font-bold leading-[1.4]">
                     {titreEtape}
                   </p>
                 </div>
@@ -79,7 +82,7 @@ export function SectionRole({
                   <p className="titrage pb-8 text-7xl font-semibold leading-[1.2] opacity-20">
                     {numero}
                   </p>
-                  <p className="w-full titrage text-xl font-bold leading-[1.4]">{titreEtape}</p>
+                  <h3 className="w-full titrage text-xl font-bold leading-[1.4]">{titreEtape}</h3>
                 </>
               )}
               <p className={`w-full text-base leading-[1.5] ${accentuee ? "opacity-80" : "opacity-60"}`}>

@@ -186,6 +186,22 @@ toutes les pages, sans message d'erreur.
 
 ---
 
+## Largeurs
+
+La maquette est dessinée pour 1920px. Les sections gardent ses proportions à
+cette largeur et s'adaptent en dessous : les paires de blocs qui se chevauchent
+sont exprimées en pourcentages, les grilles perdent des colonnes par paliers, et
+les corps de titre descendent d'un cran. Les seuils utilisés sont ceux de
+Tailwind — `lg` 1024, `xl` 1280, `2xl` 1536 — plus `min-[1920px]` pour la bande
+de logotypes, seul endroit où la maquette suppose vraiment 1920.
+
+Le débordement se vérifie en mesurant, pas à l'œil : une page servie dans une
+iframe de largeur donnée, on compare `scrollWidth` et `clientWidth` du document,
+puis on cherche les éléments à texte qui sortent du premier ancêtre qui rogne.
+Contrôlé à 390, 768, 1024, 1280, 1440, 1512 et 1920.
+
+---
+
 ## Suite du travail
 
 Les dix écrans de la page « Maquettes desktop » (`1:12`) sont intégrés :

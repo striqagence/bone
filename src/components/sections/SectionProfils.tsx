@@ -54,6 +54,9 @@ export function SectionProfils({
     image?: { src: string; alt: string };
   }[];
 }) {
+  // La photo passe à côté du texte à partir de 1280px seulement : à deux
+  // colonnes sur un portable de 13 pouces, il ne restait que 246px pour le
+  // texte, et « infrastructure » débordait de la carte.
   return (
     <section className="flex w-full flex-col items-center bg-primary-50 pt-16 lg:pt-32">
       <div className="flex w-full max-w-[1600px] flex-col items-center justify-center gap-2.5 px-6 pb-8 lg:px-28 lg:pb-12">
@@ -68,7 +71,7 @@ export function SectionProfils({
         {profils.map((profil, index) => (
           <div
             key={profil.titre}
-            className={`flex flex-col items-start gap-8 p-8 shadow-[10px_10px_0_0_var(--color-encre)] lg:min-h-[450px] lg:flex-row lg:items-center lg:p-14 ${fonds[index % fonds.length]}`}
+            className={`flex flex-col items-start gap-8 p-8 shadow-[10px_10px_0_0_var(--color-encre)] xl:min-h-[450px] xl:flex-row xl:items-center xl:p-10 2xl:p-14 ${fonds[index % fonds.length]}`}
           >
             <div className="relative size-[250px] max-w-full shrink-0 overflow-hidden rounded bg-primary-950">
               {profil.image && (
@@ -91,9 +94,9 @@ export function SectionProfils({
                   </span>
                 );
               })()}
-              <p className="w-full titrage text-2xl font-bold leading-[1.4] text-white lg:text-3xl">
+              <h3 className="w-full titrage break-words text-2xl font-bold leading-[1.4] text-white 2xl:text-3xl">
                 {profil.titre}
-              </p>
+              </h3>
               <p className="w-full text-base leading-[1.5] text-white opacity-80">
                 {profil.description}
               </p>

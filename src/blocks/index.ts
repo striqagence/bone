@@ -21,7 +21,7 @@ export const BandePoles: Block = {
       defaultValue: false,
       admin: {
         description:
-          "À laisser décoché quand le hero de la page annonce déjà les pôles.",
+          "À laisser décoché quand le hero de la page annonce déjà les pôles. Le titre reste alors saisi : il n’est plus affiché, mais les lecteurs d’écran l’annoncent avant les trois bandes.",
       },
     },
     { name: "surtitre", type: "text", localized: true, label: "Surtitre" },

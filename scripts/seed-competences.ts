@@ -4,6 +4,25 @@ import config from "@payload-config";
 /** Sections de l'écran Compétences, sous son hero déjà renseigné. */
 const payload = await getPayload({ config });
 
+/**
+ * La bande des pôles n'affiche pas son titre ici — le hero l'annonce déjà —
+ * mais le garde en base : sans lui, les trois bandes se rattacheraient au
+ * titre de la section précédente pour qui parcourt la page à l'oreille.
+ */
+const BANDE_FR = {
+  blockType: "bandePoles" as const,
+  avecEnTete: false,
+  titreHaut: "Trois pôles, une seule logique :",
+  titreBas: "sécuriser vos décisions d’infrastructure.",
+};
+
+const BANDE_EN = {
+  blockType: "bandePoles" as const,
+  avecEnTete: false,
+  titreHaut: "Three divisions, one logic:",
+  titreBas: "making your infrastructure decisions safe.",
+};
+
 const { docs } = await payload.find({
   collection: "pages",
   where: { slug: { equals: "competences" } },
@@ -13,7 +32,7 @@ const { docs } = await payload.find({
 if (!docs[0]) throw new Error("page « competences » introuvable");
 
 const fr = [
-  { blockType: "bandePoles" as const, avecEnTete: false },
+  BANDE_FR,
   {
     blockType: "synergie" as const,
     titre: "Les 3 pôles ne fonctionnent pas en silo ils se renforcent.",
@@ -30,7 +49,7 @@ const fr = [
 ];
 
 const en = [
-  { blockType: "bandePoles" as const, avecEnTete: false },
+  BANDE_EN,
   {
     blockType: "synergie" as const,
     titre: "The three divisions do not work in silos — they reinforce each other.",
