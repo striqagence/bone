@@ -19,6 +19,10 @@ import "leaflet/dist/leaflet.css";
  * Le repère est dessiné en SVG plutôt qu'importé : les icônes par défaut de
  * Leaflet arrivent avec leurs images, dont les chemins se cassent au moindre
  * changement de base d'URL.
+ *
+ * `isolate` n'est pas décoratif : Leaflet empile ses propres couches jusqu'à
+ * z-index 1000, bien au-dessus de l'en-tête. Sans contexte d'empilement propre,
+ * la carte passait par-dessus le menu au défilement.
  */
 const REPERE = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 44" width="32" height="44">
@@ -88,7 +92,7 @@ export function CarteAcces({
       ref={conteneur}
       role="img"
       aria-label={intitule}
-      className="size-full bg-gris-300 [&_.leaflet-control-attribution]:text-[10px] [&_.leaflet-tile-pane]:contrast-[1.05] [&_.leaflet-tile-pane]:saturate-[0.85]"
+      className="isolate size-full bg-gris-300 [&_.leaflet-control-attribution]:text-[10px] [&_.leaflet-tile-pane]:contrast-[1.05] [&_.leaflet-tile-pane]:saturate-[0.85]"
     />
   );
 }
