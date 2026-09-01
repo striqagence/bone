@@ -167,7 +167,7 @@ const fr = [
       {
         question: "Bone travaille-t-il avec des PME comme avec des grands comptes ?",
         reponse:
-          "Oui. Le point d’entrée change — un diagnostic de deux heures pour une PME, un audit cadré pour un grand compte — mais la méthode reste la même : comprendre avant de recommander.",
+          "Oui. Le point d’entrée change, un diagnostic de deux heures pour une PME et un audit cadré pour un grand compte, mais la méthode reste la même : comprendre avant de recommander.",
       },
     ],
   },
@@ -286,7 +286,7 @@ const en = [
       {
         question: "Does Bone work with SMEs as well as large accounts?",
         reponse:
-          "Yes. The entry point changes — a two-hour diagnosis for an SME, a framed audit for a large account — but the method stays the same: understand before recommending.",
+          "Yes. The entry point changes, a two-hour diagnosis for an SME and a framed audit for a large account, but the method stays the same: understand before recommending.",
       },
     ],
   },

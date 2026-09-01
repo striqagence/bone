@@ -87,7 +87,7 @@ const couchesFr = {
       picto: "stockage" as const,
       titre: "Stockage",
       texte:
-        "Le stockage n’est jamais neutre : mal dimensionné, il coûte cher ; mal sécurisé, il expose vos données les plus sensibles. On évalue autant la performance que la résilience — un stockage rapide mais sans plan de reprise n’est qu’un risque déguisé. C’est souvent là que se cache la dette technique la plus coûteuse à corriger.",
+        "Le stockage n’est jamais neutre : mal dimensionné, il coûte cher ; mal sécurisé, il expose vos données les plus sensibles. On évalue autant la performance que la résilience : un stockage rapide mais sans plan de reprise n’est qu’un risque déguisé. C’est souvent là que se cache la dette technique la plus coûteuse à corriger.",
       accentuee: false,
     },
     {
@@ -118,7 +118,7 @@ const couchesEn = {
       picto: "stockage" as const,
       titre: "Storage",
       texte:
-        "Storage is never neutral: badly sized, it costs a fortune; badly secured, it exposes your most sensitive data. We assess resilience as much as performance — fast storage with no recovery plan is only a risk in disguise. This is often where the most expensive technical debt hides.",
+        "Storage is never neutral: badly sized, it costs a fortune; badly secured, it exposes your most sensitive data. We assess resilience as much as performance: fast storage with no recovery plan is only a risk in disguise. This is often where the most expensive technical debt hides.",
       accentuee: false,
     },
     {
@@ -178,7 +178,7 @@ const faqFr = {
     {
         question: "Bone intervient-il sans créer de dépendance ?",
         reponse:
-          "Oui, c’est la règle. Chaque mission se termine par des livrables qui restent chez vous — cartographie, documentation, plan d’action — et par un transfert à vos équipes. Vous devez pouvoir continuer sans nous.",
+          "Oui, c’est la règle. Chaque mission se termine par des livrables qui restent chez vous (cartographie, documentation, plan d’action) et par un transfert à vos équipes. Vous devez pouvoir continuer sans nous.",
       },
   ],
 };
@@ -207,7 +207,7 @@ const faqEn = {
     {
         question: "Does Bone work without creating dependency?",
         reponse:
-          "Yes, that is the rule. Every engagement ends with deliverables that stay with you — maps, documentation, an action plan — and with a handover to your teams. You must be able to carry on without us.",
+          "Yes, that is the rule. Every engagement ends with deliverables that stay with you (maps, documentation, an action plan) and with a handover to your teams. You must be able to carry on without us.",
       },
   ],
 };

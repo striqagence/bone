@@ -52,7 +52,7 @@ const en = [
   BANDE_EN,
   {
     blockType: "synergie" as const,
-    titre: "The three divisions do not work in silos — they reinforce each other.",
+    titre: "The three divisions do not work in silos, they reinforce each other.",
     texte:
       "An Expertise audit can reveal an estate worth remarketing (Capital); a Feed project rests on the same rigour.",
   },

@@ -22,7 +22,7 @@ const en = {
   propos:
     "Bone is an independent expert in critical IT infrastructure: network, storage and systems steered as a single system rather than three separate blocks. Its independence guarantees recommendations guided by the organisation’s interest, with no ties to a vendor or manufacturer.",
   precision:
-    "Bone supports CIOs, CISOs and executives through audits, NIS2/ISO 27001 compliance and sustainable performance choices for the estate — to decide in full knowledge, not to sell a solution.",
+    "Bone supports CIOs, CISOs and executives through audits, NIS2/ISO 27001 compliance and sustainable performance choices for the estate, to decide in full knowledge rather than to sell a solution.",
   cta: { libelle: "Find out more", chemin: "/a-propos" },
 };
 

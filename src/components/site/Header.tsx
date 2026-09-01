@@ -65,7 +65,7 @@ export function Header({
   const filet = <span aria-hidden className="h-5 w-px bg-white" />;
 
   const logotype = (
-    <Link href={lien("/", langue)} aria-label="BONE IT — accueil">
+    <Link href={lien("/", langue)} aria-label="BONE IT, accueil">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/brand/bone-logotype.svg"

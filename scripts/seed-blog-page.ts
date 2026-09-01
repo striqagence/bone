@@ -68,7 +68,7 @@ const newsletterEn = {
   chapo: "A short analysis to decide better on your infrastructure. Unsubscribe in one click.",
   libelleChamp: "Your work email",
   libelleBouton: "Subscribe",
-  messageSucces: "Noted — you will receive the next analysis.",
+  messageSucces: "Noted, you will receive the next analysis.",
 };
 
 const { docs } = await payload.find({

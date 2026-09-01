@@ -125,7 +125,7 @@ export default async function DesignSystem({ params }: PageProps<"/[locale]/desi
         <h2 className="px-16 text-2xl">Cartes de pôle</h2>
         <p className="px-16 text-sm text-gris-400">
           Le bloc description et action apparaît au survol à partir de 1024px, et reste
-          visible en dessous — le survol n’existe pas sur écran tactile.
+          visible en dessous : le survol n’existe pas sur écran tactile.
         </p>
         <div className="flex flex-wrap gap-6 px-16">
           <CartePole
@@ -262,9 +262,9 @@ export default async function DesignSystem({ params }: PageProps<"/[locale]/desi
         <p className="titrage text-6xl font-bold">Titrage 6xl</p>
         <p className="titrage text-4xl font-bold">Titrage 4xl</p>
         <p className="titrage text-2xl font-bold">Titrage 2xl</p>
-        <p className="text-xl">Corps xl — Work Sans</p>
-        <p className="text-base">Corps base — Work Sans</p>
-        <p className="text-sm">Corps sm — Work Sans</p>
+        <p className="text-xl">Corps xl · Work Sans</p>
+        <p className="text-base">Corps base · Work Sans</p>
+        <p className="text-sm">Corps sm · Work Sans</p>
       </section>
       </div>
     </main>

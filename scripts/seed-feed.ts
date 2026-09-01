@@ -101,7 +101,7 @@ const fr = [
       {
         question: "BONE intervient-il en diffusion live et en post-production ?",
         reponse:
-          "Oui, sur les deux. Les besoins diffèrent — latence et redondance d’un côté, capacité et débit de l’autre — mais ils reposent sur la même chaîne, qu’on traite d’un bout à l’autre.",
+          "Oui, sur les deux. Les besoins diffèrent (latence et redondance d’un côté, capacité et débit de l’autre) mais ils reposent sur la même chaîne, qu’on traite d’un bout à l’autre.",
       },
     ],
   },
@@ -186,7 +186,7 @@ const en = [
       {
         question: "Does BONE work on live broadcast as well as post-production?",
         reponse:
-          "Yes, on both. The needs differ — latency and redundancy on one side, capacity and throughput on the other — but they rest on the same chain, which we handle end to end.",
+          "Yes, on both. The needs differ (latency and redundancy on one side, capacity and throughput on the other) but they rest on the same chain, which we handle end to end.",
       },
     ],
   },

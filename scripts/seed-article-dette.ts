@@ -229,7 +229,7 @@ const sectionsEn = [
       {
         question: "Do I have to replace everything at once?",
         reponse:
-          "No — a diagnosis separates what must be dealt with urgently from what can still wait.",
+          "No: a diagnosis separates what must be dealt with urgently from what can still wait.",
       },
       {
         question: "How long before we see a return?",

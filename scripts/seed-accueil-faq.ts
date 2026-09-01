@@ -39,7 +39,7 @@ const fr = {
     {
         question: "Bone intervient-il sans créer de dépendance ?",
         reponse:
-          "Oui, c’est la règle. Chaque mission se termine par des livrables qui restent chez vous — cartographie, documentation, plan d’action — et par un transfert à vos équipes. Vous devez pouvoir continuer sans nous.",
+          "Oui, c’est la règle. Chaque mission se termine par des livrables qui restent chez vous (cartographie, documentation, plan d’action) et par un transfert à vos équipes. Vous devez pouvoir continuer sans nous.",
       },
   ],
 };
@@ -67,7 +67,7 @@ const en = {
     {
         question: "Does Bone work without creating dependency?",
         reponse:
-          "Yes, that is the rule. Every engagement ends with deliverables that stay with you — maps, documentation, an action plan — and with a handover to your teams. You must be able to carry on without us.",
+          "Yes, that is the rule. Every engagement ends with deliverables that stay with you (maps, documentation, an action plan) and with a handover to your teams. You must be able to carry on without us.",
       },
   ],
 };

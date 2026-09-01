@@ -114,7 +114,7 @@ const fr = [
       {
         question: "Combien de temps dure un premier diagnostic ?",
         reponse:
-          "Deux heures d’échange suffisent à dégager les risques prioritaires. Un audit plus poussé — health check d’architecture, audit sécurité ciblé — se compte en jours, trois en général.",
+          "Deux heures d’échange suffisent à dégager les risques prioritaires. Un audit plus poussé (health check d’architecture, audit sécurité ciblé) se compte en jours, trois en général.",
       },
       {
         question: "Faut-il un budget pour démarrer avec Bone ?",
@@ -124,7 +124,7 @@ const fr = [
       {
         question: "Bone intervient-il sans créer de dépendance ?",
         reponse:
-          "Oui, c’est la règle. Chaque mission se termine par des livrables qui restent chez vous — cartographie, documentation, plan d’action — et par un transfert à vos équipes. Vous devez pouvoir continuer sans nous.",
+          "Oui, c’est la règle. Chaque mission se termine par des livrables qui restent chez vous (cartographie, documentation, plan d’action) et par un transfert à vos équipes. Vous devez pouvoir continuer sans nous.",
       },
     ],
   },
@@ -212,7 +212,7 @@ const en = [
       {
         question: "How long does a first diagnosis take?",
         reponse:
-          "Two hours of conversation are enough to surface the priority risks. A deeper audit — an architecture health check, a targeted security audit — is counted in days, usually three.",
+          "Two hours of conversation are enough to surface the priority risks. A deeper audit (an architecture health check, a targeted security audit) is counted in days, usually three.",
       },
       {
         question: "Do I need a budget to start with Bone?",
@@ -222,7 +222,7 @@ const en = [
       {
         question: "Does Bone work without creating dependency?",
         reponse:
-          "Yes, that is the rule. Every engagement ends with deliverables that stay with you — maps, documentation, an action plan — and with a handover to your teams. You must be able to carry on without us.",
+          "Yes, that is the rule. Every engagement ends with deliverables that stay with you (maps, documentation, an action plan) and with a handover to your teams. You must be able to carry on without us.",
       },
     ],
   },
