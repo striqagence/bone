@@ -54,8 +54,9 @@ const corpsFr = racine([
   paragraphe("Le site a été conçu et développé par l’agence StriQ."),
   titre("Propriété intellectuelle"),
   paragraphe(
-    "L’ensemble des éléments composant ce site — textes, images, illustrations, logotypes, charte " +
-      "graphique, structure et code — est protégé par le droit de la propriété intellectuelle. Toute " +
+    "Tous les éléments composant ce site, qu’il s’agisse des textes, des images, des illustrations, " +
+      "des logotypes, de la charte graphique, de la structure ou du code, sont protégés par le droit " +
+      "de la propriété intellectuelle. Toute " +
       "reproduction, représentation ou adaptation, totale ou partielle, sans autorisation écrite " +
       "préalable, est interdite.",
   ),
@@ -109,8 +110,8 @@ const corpsEn = racine([
   paragraphe("The site was designed and built by StriQ."),
   titre("Intellectual property"),
   paragraphe(
-    "Every element of this site — text, images, illustrations, logotypes, visual identity, structure " +
-      "and code — is protected by intellectual property law. Any reproduction, representation or " +
+    "Every element of this site, whether text, images, illustrations, logotypes, visual identity, " +
+      "structure or code, is protected by intellectual property law. Any reproduction, representation or " +
       "adaptation, in whole or in part, without prior written permission, is prohibited.",
   ),
   paragraphe(

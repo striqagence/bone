@@ -42,13 +42,13 @@ const corpsFr = racine([
       "reconstitution de votre navigation.",
   ),
   paragraphe(
-    "Formulaire de contact — votre rôle, votre nom, votre prénom, votre adresse professionnelle, " +
+    "Formulaire de contact : votre rôle, votre nom, votre prénom, votre adresse professionnelle, " +
       "votre numéro de téléphone et la description de votre demande. Ces données servent à vous " +
       "répondre et à préparer le premier échange. La base légale est l’exécution de mesures " +
       "précontractuelles prises à votre demande.",
   ),
   paragraphe(
-    "Inscription à la lettre d’information — votre adresse électronique et la langue de la page " +
+    "Inscription à la lettre d’information : votre adresse électronique et la langue de la page " +
       "depuis laquelle vous vous êtes inscrit. Ces données servent à vous envoyer une analyse " +
       "mensuelle. La base légale est votre consentement, que vous pouvez retirer à tout moment.",
   ),
@@ -116,12 +116,12 @@ const corpsEn = racine([
       "reconstruction of your browsing.",
   ),
   paragraphe(
-    "Contact form — your role, surname, first name, work email address, telephone number and the " +
+    "Contact form: your role, surname, first name, work email address, telephone number and the " +
       "description of your request. This data is used to answer you and to prepare the first " +
       "conversation. The legal basis is the performance of pre-contractual steps taken at your request.",
   ),
   paragraphe(
-    "Newsletter subscription — your email address and the language of the page you subscribed from. " +
+    "Newsletter subscription: your email address and the language of the page you subscribed from. " +
       "This data is used to send you a monthly analysis. The legal basis is your consent, which you " +
       "may withdraw at any time.",
   ),
