@@ -1,0 +1,71 @@
+/**
+ * Habillage du plan d'accès.
+ *
+ * Leaflet arrive avec sa propre feuille de style, pensée pour un fond de carte
+ * générique. Ce fichier ne change rien à son fonctionnement : il ne reprend
+ * que ce qui se voit — la teinte du fond, les commandes de zoom et la mention
+ * d'attribution — pour que la carte appartienne à la charte plutôt qu'à
+ * OpenStreetMap.
+ *
+ * Les tuiles sont désaturées et légèrement refroidies. Le fond de carte
+ * standard est rose, vert et jaune : posé à côté d'un encart bleu de marque sur
+ * une page gris clair, il jurait. Désaturé, il redevient un fond, et le repère
+ * bleu comme l'encart reprennent la première place.
+ *
+ * La règle porte sur le calque des tuiles seul, jamais sur la carte entière :
+ * un filtre sur le conteneur emporterait aussi le repère et les commandes.
+ */
+.carte-bone .leaflet-tile-pane {
+  filter: grayscale(1) sepia(0.3) hue-rotate(175deg) saturate(0.5) brightness(1.05) contrast(0.94);
+}
+
+/* --- Commandes de zoom ---------------------------------------------------
+   Reprises des petites cartes de la charte : fond clair, coins à 4px, et
+   l'ombre dure décalée qu'on retrouve sur les boutons et les cartes. */
+.carte-bone .leaflet-control-zoom {
+  border: 0;
+  border-radius: var(--radius-default, 4px);
+  box-shadow: 4px 4px 0 0 rgb(0 0 34 / 0.25);
+  overflow: hidden;
+}
+
+.carte-bone .leaflet-control-zoom a {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border: 0;
+  background: var(--color-gris-50, #fafafa);
+  color: var(--color-primary-950, #131353);
+  font-weight: 700;
+}
+
+.carte-bone .leaflet-control-zoom a:first-child {
+  border-bottom: 1px solid var(--color-gris-300, #dadadb);
+}
+
+.carte-bone .leaflet-control-zoom a:hover {
+  background: #fff;
+  color: var(--color-primary-600, #2020ff);
+}
+
+.carte-bone .leaflet-control-zoom a:focus-visible {
+  outline: 2px solid var(--color-primary-600, #2020ff);
+  outline-offset: -2px;
+}
+
+/* --- Attribution ---------------------------------------------------------
+   Obligatoire, donc lisible : discrète mais pas effacée. */
+.carte-bone .leaflet-control-attribution {
+  padding: 2px 6px;
+  border-radius: var(--radius-default, 4px) 0 0 0;
+  background: rgb(250 250 250 / 0.9);
+  color: var(--color-gris-400, #8b8ba4);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.carte-bone .leaflet-control-attribution a {
+  color: var(--color-primary-950, #131353);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

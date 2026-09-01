@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 
 import "leaflet/dist/leaflet.css";
+import "./carte.css";
 
 /**
  * Plan d'accès de la page contact.
@@ -64,6 +65,12 @@ export function CarteAcces({
         attributionControl: true,
       });
 
+      // Leaflet signe la carte d'un drapeau ukrainien par défaut. Le crédit
+      // lui reste dû, la prise de position n'appartient pas au client.
+      carte.attributionControl.setPrefix(
+        '<a href="https://leafletjs.com" target="_blank" rel="noreferrer">Leaflet</a>',
+      );
+
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -92,7 +99,7 @@ export function CarteAcces({
       ref={conteneur}
       role="img"
       aria-label={intitule}
-      className="isolate size-full bg-gris-300 [&_.leaflet-control-attribution]:text-[10px] [&_.leaflet-tile-pane]:contrast-[1.05] [&_.leaflet-tile-pane]:saturate-[0.85]"
+      className="carte-bone isolate size-full bg-gris-100"
     />
   );
 }
