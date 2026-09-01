@@ -55,7 +55,7 @@ export function SectionGrille({
         {intitules.map(({ texte, description }) => (
           <div
             key={texte}
-            className="flex flex-col items-start justify-center gap-2.5 rounded bg-gray-50 px-9 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)]"
+            className="carte-survol flex flex-col items-start justify-center gap-2.5 rounded bg-gray-50 px-9 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)]"
           >
             <h3 className="w-full titrage text-lg font-bold leading-[1.4] text-primary-950">
               {texte}

@@ -14,7 +14,7 @@ type Taille = "lg" | "sm" | "barre";
  * rectangle opaque et sans le coût d'un filtre au repaint.
  */
 const base =
-  "inline-flex items-center justify-center gap-2 rounded titrage font-bold leading-7 whitespace-nowrap transition-colors";
+  "group inline-flex items-center justify-center gap-2 rounded titrage font-bold leading-7 whitespace-nowrap transition-colors";
 
 const variantes: Record<Variante, string> = {
   primary:

@@ -106,3 +106,64 @@
     line-height: 1.2;
   }
 }
+
+/* =============================================================================
+   Apparition au défilement.
+
+   Les sections montent de quelques pixels en se révélant. L'effet est court :
+   c'est une respiration, pas une animation.
+
+   Tout tient dans la feuille de style, accroché à la progression du
+   défilement. Un observateur en JavaScript aurait fait dépendre la visibilité
+   du contenu de la bonne exécution d'un script : une hydratation qui tarde, et
+   la section serait restée à zéro d'opacité.
+
+   `@supports` borne le risque : les navigateurs qui ignorent
+   `animation-timeline` — Firefox à ce jour — n'appliquent rien et affichent
+   les sections telles quelles. Le pire défaut possible est donc l'absence
+   d'effet, jamais l'absence de contenu.
+
+   Le mouvement disparaît pour qui a demandé à son système de le réduire.
+   ========================================================================== */
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .apparition {
+      animation: apparition linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+/* =============================================================================
+   Survol des cartes.
+
+   La charte pose ses cartes sur une ombre dure décalée. Les soulever de deux
+   pixels vers le haut et la gauche creuse l'écart avec cette ombre : la carte
+   décolle sans que l'ombre ait à changer de valeur, ce qui laisse l'effet
+   fonctionner aussi bien sur une ombre de 5px que sur une de 10.
+
+   Le mouvement disparaît pour qui a demandé à son système de le réduire.
+   ========================================================================== */
+
+@utility carte-survol {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .carte-survol:hover {
+    transform: translate(-2px, -2px);
+  }
+}

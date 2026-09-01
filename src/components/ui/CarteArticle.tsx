@@ -38,7 +38,7 @@ export function CarteArticle({
   return (
     <Link
       href={lien(chemin, langue)}
-      className="flex h-[500px] w-full flex-col items-start gap-6 rounded bg-gray-50 px-7 pb-9 pt-7 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)]"
+      className="carte-survol group flex h-[500px] w-full flex-col items-start gap-6 rounded bg-gray-50 px-7 pb-9 pt-7 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)]"
     >
       <div className="relative flex w-full flex-col items-start gap-4">
         <div className="relative h-[180px] w-full overflow-hidden rounded bg-gris-300">
@@ -48,7 +48,7 @@ export function CarteArticle({
               alt={image.alt}
               fill
               sizes="(min-width: 1024px) 344px, 100vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105"
             />
           )}
         </div>

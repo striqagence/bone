@@ -41,7 +41,7 @@ export function SectionArchetype({
           {traits.map(({ id, picto, libelle }) => (
             <li
               key={id ?? libelle}
-              className="flex items-center gap-2.5 rounded border border-gris-300 px-9 py-8 text-primary-600 shadow-[10px_10px_0_0_rgb(0_0_34/0.1)]"
+              className="carte-survol flex items-center gap-2.5 rounded border border-gris-300 px-9 py-8 text-primary-600 shadow-[10px_10px_0_0_rgb(0_0_34/0.1)]"
             >
               {pictoTrait(picto)}
               <p className="titrage text-lg font-bold leading-[1.4] text-primary-950">{libelle}</p>

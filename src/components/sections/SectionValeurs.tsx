@@ -34,7 +34,7 @@ export function SectionValeurs({
           {cartes.map(({ id, picto, titre, texte }) => (
             <li
               key={id ?? titre}
-              className="flex flex-col items-start gap-2.5 rounded bg-gray-50 px-6 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)] 2xl:px-9"
+              className="carte-survol flex flex-col items-start gap-2.5 rounded bg-gray-50 px-6 py-7 shadow-[5px_5px_0_0_rgb(0_0_34/0.3)] 2xl:px-9"
             >
               <div className="flex items-center gap-2.5 text-primary-600">
                 {pictoTrait(picto)}

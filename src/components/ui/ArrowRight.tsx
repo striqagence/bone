@@ -13,10 +13,15 @@
  *
  * Le trait passe en `currentColor` : Figma exporte une variante par couleur
  * (blanc, #000022), alors que le glyphe est strictement le même.
+ *
+ * La flèche avance de deux pixels quand on survole le bouton ou la carte qui la
+ * porte : c'est le seul mouvement du bouton, le reste étant affaire de couleur.
  */
 export function ArrowRight({ className = "" }: { className?: string }) {
   return (
-    <span className={`inline-flex size-5 shrink-0 items-center justify-center ${className}`}>
+    <span
+      className={`inline-flex size-5 shrink-0 items-center justify-center transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 ${className}`}
+    >
       <svg
         width="14.8334"
         height="9.83333"

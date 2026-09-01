@@ -64,7 +64,7 @@ export function CartePole({
             alt=""
             fill
             sizes="(min-width: 1024px) 640px, 100vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
           />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_34/0.3),rgb(0_0_34/0.6))]" />

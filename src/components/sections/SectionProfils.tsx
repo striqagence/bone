@@ -71,7 +71,7 @@ export function SectionProfils({
         {profils.map((profil, index) => (
           <div
             key={profil.titre}
-            className={`flex flex-col items-start gap-8 p-8 shadow-[10px_10px_0_0_var(--color-encre)] xl:min-h-[450px] xl:flex-row xl:items-center xl:p-10 2xl:p-14 ${fonds[index % fonds.length]}`}
+            className={`carte-survol flex flex-col items-start gap-8 p-8 shadow-[10px_10px_0_0_var(--color-encre)] xl:min-h-[450px] xl:flex-row xl:items-center xl:p-10 2xl:p-14 ${fonds[index % fonds.length]}`}
           >
             <div className="relative size-[250px] max-w-full shrink-0 overflow-hidden rounded bg-primary-950">
               {profil.image && (

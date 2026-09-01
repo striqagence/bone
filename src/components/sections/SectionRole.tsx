@@ -61,7 +61,7 @@ export function SectionRole({
             className={`flex flex-col items-start ${index === 1 ? "lg:pt-10" : ""} ${index === 2 ? "lg:pt-20" : ""}`}
           >
             <div
-              className={`flex w-full flex-col items-start justify-center gap-3 rounded px-9 pb-11 pt-14 shadow-[10px_10px_0_0_var(--color-encre)] ${accentuee ? "bg-primary-600 text-white" : "bg-white text-primary-950"}`}
+              className={`carte-survol flex w-full flex-col items-start justify-center gap-3 rounded px-9 pb-11 pt-14 shadow-[10px_10px_0_0_var(--color-encre)] ${accentuee ? "bg-primary-600 text-white" : "bg-white text-primary-950"}`}
             >
               {picto ? (
                 <div className="flex w-full items-center gap-3">

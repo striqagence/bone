@@ -54,7 +54,7 @@ function CarteComparaison({ carte, accentuee = false }: { carte: Carte; accentue
   return (
     <div className={`flex flex-1 flex-col items-start ${accentuee ? "lg:pb-[30px]" : ""}`}>
       <div
-        className={`flex w-full flex-col items-start gap-4 rounded px-9 py-7 ${
+        className={`carte-survol flex w-full flex-col items-start gap-4 rounded px-9 py-7 ${
           accentuee
             ? "bg-primary-600 text-primary-50 shadow-[10px_10px_0_0_var(--color-encre)]"
             : "bg-gray-50 text-primary-950 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)]"
