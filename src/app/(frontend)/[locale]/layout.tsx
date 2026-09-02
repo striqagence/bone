@@ -4,6 +4,7 @@ import { Google_Sans_Flex, Work_Sans } from "next/font/google";
 
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { BASE } from "@/lib/donnees-structurees";
 import { estUneLangue, langues } from "@/lib/i18n";
 import { chargerNavigation, pourEntete } from "@/lib/navigation";
 
@@ -33,9 +34,20 @@ const policeSecondaire = Work_Sans({
   display: "swap",
 });
 
+/**
+ * Réglages communs à toutes les pages.
+ *
+ * `metadataBase` rend absolues les adresses que chaque page déclare en
+ * relatif — canoniques, alternances de langue, images de partage. Sans elle,
+ * Next les laisse relatives et les réseaux sociaux ne les résolvent pas.
+ *
+ * Le gabarit de titre suffixe la marque, sauf sur l'accueil, qui la porte déjà
+ * et déclare son titre en absolu.
+ */
 export const metadata: Metadata = {
-  title: "BONE IT",
-  description: "",
+  metadataBase: new URL(BASE),
+  title: { default: "BONE", template: "%s | BONE" },
+  openGraph: { siteName: "BONE", type: "website" },
 };
 
 export function generateStaticParams() {

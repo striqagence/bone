@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { ACCUEIL } from "@/lib/donnees-structurees";
 import { lien, type Langue } from "@/lib/i18n";
 
 import { ChevronDroite, IconeAccueil } from "./icones";
@@ -35,7 +36,7 @@ export function FilDAriane({
         className={`flex min-w-0 items-center gap-1 text-[9px] font-semibold leading-none ${attenue}`}
       >
         <li className="flex items-center gap-1">
-          <Link href={lien("/", langue)} aria-label="Accueil" className="flex items-center">
+          <Link href={lien("/", langue)} aria-label={ACCUEIL[langue]} className="flex items-center">
             <IconeAccueil />
           </Link>
           <ChevronDroite />

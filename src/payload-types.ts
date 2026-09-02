@@ -1409,6 +1409,19 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Accueil {
   id: number;
+  /**
+   * Ce que les moteurs et les réseaux sociaux affichent.
+   */
+  referencement: {
+    /**
+     * Une soixantaine de signes : au-delà, Google tronque.
+     */
+    metaTitre: string;
+    /**
+     * Cent cinquante à cent soixante signes.
+     */
+    metaDescription: string;
+  };
   hero: {
     surtitre: string;
     /**
@@ -1668,6 +1681,19 @@ export interface Blog {
  */
 export interface Contact {
   id: number;
+  /**
+   * Ce que les moteurs et les réseaux sociaux affichent.
+   */
+  referencement: {
+    /**
+     * Une soixantaine de signes : au-delà, Google tronque.
+     */
+    metaTitre: string;
+    /**
+     * Cent cinquante à cent soixante signes.
+     */
+    metaDescription: string;
+  };
   surtitre: string;
   titre: string;
   description: string;
@@ -1831,6 +1857,12 @@ export interface Navigation {
  * via the `definition` "accueil_select".
  */
 export interface AccueilSelect<T extends boolean = true> {
+  referencement?:
+    | T
+    | {
+        metaTitre?: T;
+        metaDescription?: T;
+      };
   hero?:
     | T
     | {
@@ -2075,6 +2107,12 @@ export interface BlogSelect<T extends boolean = true> {
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
+  referencement?:
+    | T
+    | {
+        metaTitre?: T;
+        metaDescription?: T;
+      };
   surtitre?: T;
   titre?: T;
   description?: T;

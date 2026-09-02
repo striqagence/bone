@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import config from "@payload-config";
@@ -14,15 +15,39 @@ import { SectionPositionnement } from "@/components/sections/SectionPositionneme
 import { SectionProfils } from "@/components/sections/SectionProfils";
 import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
+import { DonneesStructurees } from "@/components/site/DonneesStructurees";
+import {
+  graphe,
+  organisation,
+  page as fichePage,
+  questionsFrequentes,
+  siteWeb,
+} from "@/lib/donnees-structurees";
 import { estUneLangue } from "@/lib/i18n";
 import { cheminDe } from "@/lib/pages";
+
+export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  if (!estUneLangue(locale)) return {};
+
+  const payload = await getPayload({ config });
+  const { referencement } = await payload.findGlobal({ slug: "accueil", locale, depth: 0 });
+
+  // L'accueil porte le nom du site : le gabarit qui suffixe les autres pages
+  // le répéterait.
+  return {
+    title: { absolute: referencement.metaTitre },
+    description: referencement.metaDescription,
+    alternates: { canonical: locale === "fr" ? "/" : `/${locale}` },
+  };
+}
 
 export default async function Accueil({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres, faq, appel, profils } =
+  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres, faq, appel, profils, referencement } =
     await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
 
   /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
@@ -58,8 +83,21 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
       : [];
   });
 
+  const structure = graphe([
+    organisation(locale),
+    siteWeb(locale, referencement.metaDescription),
+    fichePage(locale, {
+      chemin: "/",
+      titre: referencement.metaTitre,
+      description: referencement.metaDescription,
+    }),
+    questionsFrequentes(faq.questions ?? []),
+  ]);
+
   return (
     <>
+      <DonneesStructurees donnees={structure} />
+
       <HeroAccueil
         langue={locale}
         surtitre={hero.surtitre}

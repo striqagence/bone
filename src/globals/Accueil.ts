@@ -17,6 +17,30 @@ export const Accueil: GlobalConfig = {
   hooks: { afterChange: [() => revaliderSite()] },
   fields: [
     {
+      name: "referencement",
+      type: "group",
+      label: "Référencement",
+      admin: { description: "Ce que les moteurs et les réseaux sociaux affichent." },
+      fields: [
+        {
+          name: "metaTitre",
+          type: "text",
+          required: true,
+          localized: true,
+          label: "Titre pour les moteurs",
+          admin: { description: "Une soixantaine de signes : au-delà, Google tronque." },
+        },
+        {
+          name: "metaDescription",
+          type: "textarea",
+          required: true,
+          localized: true,
+          label: "Description pour les moteurs",
+          admin: { description: "Cent cinquante à cent soixante signes." },
+        },
+      ],
+    },
+    {
       name: "hero",
       type: "group",
       label: "Hero",

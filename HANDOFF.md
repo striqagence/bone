@@ -216,6 +216,32 @@ Deux pièges à connaître :
 
 ---
 
+## Référencement
+
+Chaque page porte son titre et sa description, saisis au back-office : onglet
+« Référencement » des pages, groupe du même nom sur les globals Accueil et
+Contact. Le script de peuplement refuse d'écrire au-delà de soixante signes
+pour le titre et cent soixante pour la description, longueurs au-delà
+desquelles Google tronque. Le gabarit du gabarit de page suffixe « | BONE »,
+sauf sur l'accueil qui déclare son titre en absolu.
+
+Les données structurées sont assemblées dans `src/lib/donnees-structurees.ts`
+et posées en une seule balise par page. Deux règles s'y tiennent : ne décrire
+que ce que la page montre — une FAQ balisée dont la réponse serait absente
+enfreindrait les consignes des moteurs — et ne rien inventer, d'où l'absence
+des identifiants d'immatriculation, qui manquent aussi aux mentions légales.
+
+**`NEXT_PUBLIC_SERVER_URL` doit porter le domaine de production.** Toutes les
+adresses absolues en dépendent : canoniques, alternances de langue, fiches
+JSON-LD. En développement elle vaut localhost, ce qui est sans conséquence,
+mais une mise en ligne avec cette valeur ferait pointer le balisage sur une
+machine locale.
+
+Les articles de blog sont volontairement sans balisage : leur contenu est du
+remplissage, il n'y a rien à déclarer aux moteurs tant qu'il n'est pas écrit.
+
+---
+
 ## Largeurs
 
 La maquette est dessinée pour 1920px. Les sections gardent ses proportions à

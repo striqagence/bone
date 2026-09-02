@@ -7,7 +7,15 @@ import { HeroInterne } from "@/components/sections/HeroInterne";
 import { RendreSections } from "@/components/sections/RendreSections";
 import { SectionArticleUne } from "@/components/sections/SectionArticleUne";
 import { SectionListeArticles } from "@/components/sections/SectionListeArticles";
+import { DonneesStructurees } from "@/components/site/DonneesStructurees";
 import { chargerCategories, listerArticles } from "@/lib/articles";
+import {
+  alternatives,
+  filDAriane,
+  graphe,
+  organisation,
+  page as fichePage,
+} from "@/lib/donnees-structurees";
 import { estUneLangue } from "@/lib/i18n";
 import { arianeDe, trouverPage } from "@/lib/pages";
 
@@ -34,6 +42,7 @@ export async function generateMetadata({
   return {
     title: page.metaTitre ?? page.titre,
     description: page.metaDescription ?? undefined,
+    alternates: alternatives("/blog", locale),
   };
 }
 
@@ -73,8 +82,21 @@ export default async function PageBlog({
       ? { src: page.image.url, alt: page.image.alt }
       : undefined;
 
+  const structure = graphe([
+    organisation(locale),
+    fichePage(locale, {
+      chemin: "/blog",
+      titre: page.metaTitre ?? page.titre,
+      description: page.metaDescription ?? "",
+      type: "Blog",
+    }),
+    filDAriane(locale, [{ libelle: page.titre, chemin: "/blog" }]),
+  ]);
+
   return (
     <>
+      <DonneesStructurees donnees={structure} />
+
       <HeroInterne
         langue={locale}
         entrees={arianeDe(page)}

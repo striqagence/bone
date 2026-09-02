@@ -5,10 +5,20 @@ import { HeroInterne } from "@/components/sections/HeroInterne";
 import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
 import { RendreSections } from "@/components/sections/RendreSections";
 import { derniersArticles } from "@/lib/articles";
+import { DonneesStructurees } from "@/components/site/DonneesStructurees";
 import { encoderCourriel } from "@/lib/courriel";
+import {
+  alternatives,
+  filDAriane,
+  graphe,
+  organisation,
+  page as fichePage,
+  questionsFrequentes,
+  service,
+} from "@/lib/donnees-structurees";
 import { chargerNavigation } from "@/lib/navigation";
 import { estUneLangue } from "@/lib/i18n";
-import { arianeDe, chargerPoles, trouverPage } from "@/lib/pages";
+import { arianeDe, chargerPoles, cheminDe, trouverPage } from "@/lib/pages";
 
 /**
  * Rend une page du back-office à partir de son chemin.
@@ -29,6 +39,7 @@ export async function generateMetadata({
   return {
     title: page.metaTitre ?? page.titre,
     description: page.metaDescription ?? undefined,
+    alternates: alternatives(`/${cheminDe(page)}`, locale),
   };
 }
 
@@ -58,6 +69,33 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
     besoinCourriel ? chargerNavigation(locale) : Promise.resolve(null),
   ]);
 
+  const chemin = `/${cheminDe(page)}`;
+  const ariane = arianeDe(page);
+  const faq = sections.find((s) => s.blockType === "faq");
+
+  const structure = graphe([
+    organisation(locale),
+    fichePage(locale, {
+      chemin,
+      titre: page.metaTitre ?? page.titre,
+      description: page.metaDescription ?? "",
+      // Une page de pôle décrit une offre, « À propos » décrit l'entreprise.
+      type: page.slug === "a-propos" ? "AboutPage" : "WebPage",
+    }),
+    filDAriane(
+      locale,
+      ariane.map((e, i) => ({ libelle: e.libelle, chemin: e.chemin ?? (i === ariane.length - 1 ? chemin : "/") })),
+    ),
+    page.pole
+      ? service(locale, {
+          chemin,
+          nom: page.titre,
+          description: page.accroche ?? page.metaDescription ?? "",
+        })
+      : null,
+    faq && "questions" in faq ? questionsFrequentes(faq.questions ?? []) : null,
+  ]);
+
   const cta =
     page.cta?.libelle && page.cta.chemin
       ? { libelle: page.cta.libelle, chemin: page.cta.chemin }
@@ -79,6 +117,8 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
   if (page.pole) {
     return (
       <>
+        <DonneesStructurees donnees={structure} />
+
         <HeroPleineImage
           langue={locale}
           entrees={arianeDe(page)}
@@ -96,6 +136,8 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
 
   return (
     <>
+      <DonneesStructurees donnees={structure} />
+
       <HeroInterne
         langue={locale}
         entrees={arianeDe(page)}

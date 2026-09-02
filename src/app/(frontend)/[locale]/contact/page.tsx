@@ -7,6 +7,15 @@ import { SectionAppel } from "@/components/sections/SectionAppel";
 import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionFormulaireContact } from "@/components/sections/SectionFormulaireContact";
 import { IconeLinkedin } from "@/components/ui/IconeLinkedin";
+import { DonneesStructurees } from "@/components/site/DonneesStructurees";
+import {
+  alternatives,
+  filDAriane,
+  graphe,
+  organisation,
+  page as fichePage,
+  questionsFrequentes,
+} from "@/lib/donnees-structurees";
 import { estUneLangue } from "@/lib/i18n";
 
 /**
@@ -22,12 +31,12 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!estUneLangue(locale)) return {};
   const payload = await getPayload({ config });
-  const { titre, description } = await payload.findGlobal({
-    slug: "contact",
-    locale,
-    depth: 0,
-  });
-  return { title: titre, description };
+  const { referencement } = await payload.findGlobal({ slug: "contact", locale, depth: 0 });
+  return {
+    title: referencement.metaTitre,
+    description: referencement.metaDescription,
+    alternates: alternatives("/contact", locale),
+  };
 }
 
 export default async function PageContact({ params }: PageProps<"/[locale]/contact">) {
@@ -42,8 +51,22 @@ export default async function PageContact({ params }: PageProps<"/[locale]/conta
       ? { src: valeur.url, alt: String((valeur as { alt?: string }).alt ?? "") }
       : undefined;
 
+  const structure = graphe([
+    organisation(locale),
+    fichePage(locale, {
+      chemin: "/contact",
+      titre: contenu.referencement.metaTitre,
+      description: contenu.referencement.metaDescription,
+      type: "ContactPage",
+    }),
+    filDAriane(locale, [{ libelle: contenu.titre, chemin: "/contact" }]),
+    questionsFrequentes(contenu.faq.questions ?? []),
+  ]);
+
   return (
     <>
+      <DonneesStructurees donnees={structure} />
+
       <SectionFormulaireContact
         langue={locale}
         ariane={contenu.titre}

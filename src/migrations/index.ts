@@ -40,6 +40,7 @@ import * as migration_20260901_121614_retire_image_du_plan from './20260901_1216
 import * as migration_20260901_121627_plan_en_coordonnees from './20260901_121627_plan_en_coordonnees';
 import * as migration_20260901_124047_courriel_encart_contact from './20260901_124047_courriel_encart_contact';
 import * as migration_20260901_144904_bouton_google_maps from './20260901_144904_bouton_google_maps';
+import * as migration_20260902_140823_referencement_globaux from './20260902_140823_referencement_globaux';
 
 export const migrations = [
   {
@@ -250,6 +251,11 @@ export const migrations = [
   {
     up: migration_20260901_144904_bouton_google_maps.up,
     down: migration_20260901_144904_bouton_google_maps.down,
-    name: '20260901_144904_bouton_google_maps'
+    name: '20260901_144904_bouton_google_maps',
+  },
+  {
+    up: migration_20260902_140823_referencement_globaux.up,
+    down: migration_20260902_140823_referencement_globaux.down,
+    name: '20260902_140823_referencement_globaux'
   },
 ];
