@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { ChiffreAnime } from "@/components/ui/ChiffreAnime";
 import { Surtitre } from "@/components/ui/Surtitre";
 import { FlecheRenvoi } from "@/components/ui/icones";
 
@@ -55,7 +56,7 @@ export function SectionLeConstat({
             </h3>
             <div className="flex w-full flex-col items-start justify-end gap-5">
               <p className="titrage text-6xl font-bold leading-[1.2] whitespace-nowrap text-primary-600 lg:text-7xl">
-                {realite.chiffre}
+                <ChiffreAnime valeur={realite.chiffre} />
               </p>
               <p className="w-full text-base font-semibold leading-[1.5] text-primary-950">
                 {realite.legende}

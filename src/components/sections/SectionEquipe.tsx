@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { ChiffreAnime } from "@/components/ui/ChiffreAnime";
 import { Surtitre } from "@/components/ui/Surtitre";
 
 /**
@@ -56,7 +57,7 @@ export function SectionEquipe({
                 className="flex flex-1 flex-col items-start gap-2.5 border-l-2 border-primary-600 px-11 py-5"
               >
                 <p className="titrage text-5xl font-semibold leading-[1.2] text-primary-600 lg:text-[72px]">
-                  {valeur}
+                  <ChiffreAnime valeur={valeur} />
                 </p>
                 <p className="titrage text-xs font-semibold uppercase leading-5 tracking-[3px] text-primary-950 opacity-60">
                   {libelle}
