@@ -18,7 +18,6 @@ import { SectionPromesse } from "@/components/sections/SectionPromesse";
 import { SectionRole } from "@/components/sections/SectionRole";
 import { SectionPoles } from "@/components/sections/SectionPoles";
 import { SectionSynergie } from "@/components/sections/SectionSynergie";
-import { Apparition } from "@/components/ui/Apparition";
 import type { Langue } from "@/lib/i18n";
 import type { Article } from "@/lib/articles";
 import type { Page } from "@/lib/pages";
@@ -37,23 +36,6 @@ type Bande = {
  * Les blocs qui parlent des pôles sont alimentés par les pages de pôle et non
  * par une saisie : ces libellés n'ont qu'une source dans tout le site.
  */
-/**
- * Ces sections révèlent leurs cartes une à une, en descente. L'enveloppe de
- * section leur ferait double emploi : les deux animations se multiplieraient
- * en opacité, et leurs mouvements se contrarieraient, l'une montant quand
- * l'autre descend.
- */
-const ANIME_SES_BLOCS = new Set([
-  "chiffres",
-  "grille",
-  "escalier",
-  "enjeux",
-  "differenciation",
-  "reperes",
-  "valeurs",
-  "archetype",
-]);
-
 /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
 function photo(valeur: unknown) {
   return valeur && typeof valeur === "object" && "url" in valeur && typeof valeur.url === "string"
@@ -80,228 +62,219 @@ export function RendreSections({
   return (
     <>
       {sections.map((section) => {
-        const rendu = (() => {
-          switch (section.blockType) {
-            case "bandePoles":
-              return (
-                <SectionPoles
-                  key={section.id}
-                  langue={langue}
-                  surtitre={section.avecEnTete ? section.surtitre : null}
-                  titreHaut={section.titreHaut}
-                  titreBas={section.titreBas}
-                  poles={bandes}
-                />
-              );
-            case "synergie":
-              return (
-                <SectionSynergie
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  texte={section.texte}
-                  poles={bandes.map(({ pole }) => pole)}
-                />
-              );
-            case "grille":
-              return (
-                <SectionGrille
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  chapo={section.chapo}
-                  intitules={section.intitules ?? []}
-                />
-              );
-            case "escalier":
-              return (
-                <SectionRole
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  chapo={section.chapo}
-                  etapes={section.cartes ?? []}
-                />
-              );
-            case "enjeux":
-              return (
-                <SectionProfils
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titreHaut={section.titreHaut}
-                  titreBas={section.titreBas}
-                  profils={(section.cartes ?? []).map((c) => ({
-                    picto: c.picto,
-                    titre: c.titre,
-                    description: c.description,
-                    reponse: c.reponse,
-                    image: photo(c.image),
-                  }))}
-                />
-              );
-            case "differenciation":
-              return (
-                <SectionDifferenciation
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  habituelle={{
-                    badge: section.habituelle.badge,
-                    titre: section.habituelle.titre,
-                    texte: section.habituelle.texte,
-                    puces: (section.habituelle.puces ?? []).map(({ texte }) => texte),
-                  }}
-                  bone={{
-                    badge: section.bone.badge,
-                    titre: section.bone.titre,
-                    texte: section.bone.texte,
-                    puces: (section.bone.puces ?? []).map(({ texte }) => texte),
-                  }}
-                />
-              );
-            case "partenaires":
-              return (
-                <SectionPartenaires
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  logos={section.logos ?? []}
-                />
-              );
-            case "texteLong":
-              return (
-                <SectionTexteLong
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  corps={section.corps}
-                  courriel={courriel}
-                  langue={langue}
-                  repliCourriel={repliCourriel}
-                />
-              );
-            case "reperes":
-              return <SectionReperes key={section.id} cartes={section.cartes ?? []} />;
-            case "valeurs":
-              return (
-                <SectionValeurs
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  cartes={section.cartes ?? []}
-                />
-              );
-            case "archetype":
-              return (
-                <SectionArchetype
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  chapo={section.chapo}
-                  traits={section.traits ?? []}
-                />
-              );
-            case "equipe":
-              return (
-                <SectionEquipe
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  texte={section.texte}
-                  image={photo(section.image)}
-                  statistiques={section.statistiques ?? []}
-                />
-              );
-            case "newsletter":
-              return (
-                <SectionNewsletter
-                  key={section.id}
-                  langue={langue}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  chapo={section.chapo}
-                  libelles={{
-                    placeholder: section.libelleChamp,
-                    bouton: section.libelleBouton,
-                    succes: section.messageSucces,
-                  }}
-                />
-              );
-            case "posture":
-              return (
-                <SectionPosture
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  refus={section.refus}
-                  engagement={section.engagement}
-                />
-              );
-            case "pointsEntree":
-              return (
-                <SectionPointsEntree
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  enTetes={section.enTetes}
-                  lignes={section.lignes ?? []}
-                />
-              );
-            case "promesse":
-              return (
-                <SectionPromesse key={section.id} surtitre={section.surtitre} titre={section.titre} />
-              );
-            case "chiffres":
-              return (
-                <SectionChiffres
-                  key={section.id}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  constat={section.constat}
-                  consequence={section.consequence}
-                  statistiques={section.statistiques ?? []}
-                />
-              );
-            case "articles":
-              return (
-                <SectionArticles
-                  key={section.id}
-                  langue={langue}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  libelleAction={section.libelleAction}
-                  articles={articles.slice(0, section.nombre)}
-                />
-              );
-            case "faq":
-              return (
-                <SectionFaq
-                  key={section.id}
-                  id="faq"
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  questions={section.questions ?? []}
-                  image={photo(section.image)}
-                />
-              );
-            case "appelAction":
-              return (
-                <SectionAppel
-                  key={section.id}
-                  langue={langue}
-                  surtitre={section.surtitre}
-                  titre={section.titre}
-                  chapo={section.chapo}
-                  cta={section.cta}
-                />
-              );
-            default:
-              return null;
-          }
-        })();
-
-        if (!rendu) return null;
-        return ANIME_SES_BLOCS.has(section.blockType) ? (
-          rendu
-        ) : (
-          <Apparition key={section.id}>{rendu}</Apparition>
-        );
+        switch (section.blockType) {
+          case "bandePoles":
+            return (
+              <SectionPoles
+                key={section.id}
+                langue={langue}
+                surtitre={section.avecEnTete ? section.surtitre : null}
+                titreHaut={section.titreHaut}
+                titreBas={section.titreBas}
+                poles={bandes}
+              />
+            );
+          case "synergie":
+            return (
+              <SectionSynergie
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                texte={section.texte}
+                poles={bandes.map(({ pole }) => pole)}
+              />
+            );
+          case "grille":
+            return (
+              <SectionGrille
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                intitules={section.intitules ?? []}
+              />
+            );
+          case "escalier":
+            return (
+              <SectionRole
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                etapes={section.cartes ?? []}
+              />
+            );
+          case "enjeux":
+            return (
+              <SectionProfils
+                key={section.id}
+                surtitre={section.surtitre}
+                titreHaut={section.titreHaut}
+                titreBas={section.titreBas}
+                profils={(section.cartes ?? []).map((c) => ({
+                  picto: c.picto,
+                  titre: c.titre,
+                  description: c.description,
+                  reponse: c.reponse,
+                  image: photo(c.image),
+                }))}
+              />
+            );
+          case "differenciation":
+            return (
+              <SectionDifferenciation
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                habituelle={{
+                  badge: section.habituelle.badge,
+                  titre: section.habituelle.titre,
+                  texte: section.habituelle.texte,
+                  puces: (section.habituelle.puces ?? []).map(({ texte }) => texte),
+                }}
+                bone={{
+                  badge: section.bone.badge,
+                  titre: section.bone.titre,
+                  texte: section.bone.texte,
+                  puces: (section.bone.puces ?? []).map(({ texte }) => texte),
+                }}
+              />
+            );
+          case "partenaires":
+            return (
+              <SectionPartenaires
+                key={section.id}
+                surtitre={section.surtitre}
+                logos={section.logos ?? []}
+              />
+            );
+          case "texteLong":
+            return (
+              <SectionTexteLong
+                key={section.id}
+                surtitre={section.surtitre}
+                corps={section.corps}
+                courriel={courriel}
+                langue={langue}
+                repliCourriel={repliCourriel}
+              />
+            );
+          case "reperes":
+            return <SectionReperes key={section.id} cartes={section.cartes ?? []} />;
+          case "valeurs":
+            return (
+              <SectionValeurs
+                key={section.id}
+                surtitre={section.surtitre}
+                cartes={section.cartes ?? []}
+              />
+            );
+          case "archetype":
+            return (
+              <SectionArchetype
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                traits={section.traits ?? []}
+              />
+            );
+          case "equipe":
+            return (
+              <SectionEquipe
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                texte={section.texte}
+                image={photo(section.image)}
+                statistiques={section.statistiques ?? []}
+              />
+            );
+          case "newsletter":
+            return (
+              <SectionNewsletter
+                key={section.id}
+                langue={langue}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                libelles={{
+                  placeholder: section.libelleChamp,
+                  bouton: section.libelleBouton,
+                  succes: section.messageSucces,
+                }}
+              />
+            );
+          case "posture":
+            return (
+              <SectionPosture
+                key={section.id}
+                surtitre={section.surtitre}
+                refus={section.refus}
+                engagement={section.engagement}
+              />
+            );
+          case "pointsEntree":
+            return (
+              <SectionPointsEntree
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                enTetes={section.enTetes}
+                lignes={section.lignes ?? []}
+              />
+            );
+          case "promesse":
+            return (
+              <SectionPromesse key={section.id} surtitre={section.surtitre} titre={section.titre} />
+            );
+          case "chiffres":
+            return (
+              <SectionChiffres
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                constat={section.constat}
+                consequence={section.consequence}
+                statistiques={section.statistiques ?? []}
+              />
+            );
+          case "articles":
+            return (
+              <SectionArticles
+                key={section.id}
+                langue={langue}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                libelleAction={section.libelleAction}
+                articles={articles.slice(0, section.nombre)}
+              />
+            );
+          case "faq":
+            return (
+              <SectionFaq
+                key={section.id}
+                id="faq"
+                surtitre={section.surtitre}
+                titre={section.titre}
+                questions={section.questions ?? []}
+                image={photo(section.image)}
+              />
+            );
+          case "appelAction":
+            return (
+              <SectionAppel
+                key={section.id}
+                langue={langue}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                cta={section.cta}
+              />
+            );
+          default:
+            return null;
+        }
       })}
     </>
   );
