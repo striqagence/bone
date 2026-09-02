@@ -1,3 +1,4 @@
+import { ChiffreAnime } from "@/components/ui/ChiffreAnime";
 import { Surtitre } from "@/components/ui/Surtitre";
 
 /**
@@ -56,7 +57,7 @@ export function SectionChiffres({
           >
             <div className="flex w-full flex-col items-start gap-2.5 border-l-2 border-accent-700 px-8 py-5 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)] 2xl:px-11">
               <p className="titrage pb-5 font-semibold leading-[1.2] whitespace-nowrap text-white">
-                <span className="text-5xl 2xl:text-7xl">{valeur}</span>
+                <ChiffreAnime valeur={valeur} className="text-5xl 2xl:text-7xl" />
                 <span className="text-lg font-light">{unite}</span>
               </p>
               {/* Le libellé passe à la ligne : à quatre colonnes sur un écran
