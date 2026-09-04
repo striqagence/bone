@@ -290,3 +290,24 @@ cd ~/bone && npm install && npm run dev
 
 Site sur http://localhost:3000, back-office sur http://localhost:3000/admin.
 Le `.env` local est déjà renseigné (non versionné).
+
+## Brouillons
+
+Les collections `pages` et `posts` versionnent leurs contenus. Leur lecture
+publique est filtrée sur `_status: published` par `src/lib/acces.ts` : un
+brouillon ne sort ni par le blog, ni par l'API REST, ni par GraphQL.
+
+Deux pièges tiennent à Payload et valent d'être connus avant d'écrire une
+requête ou un script :
+
+- le local API ignore l'`access` par défaut. Toute requête du front vers
+  `pages` ou `posts` doit porter `overrideAccess: false`, sans quoi elle
+  ressort les brouillons ;
+- `payload.update({ draft: true })` n'écrit que dans la table des versions.
+  Pour dépublier un article, il faut écrire `_status` **sans** `draft: true`.
+
+Un premier article de fond attend en brouillon,
+« Fin de support d'un hyperviseur : quatre chemins, et comment choisir »
+(`scripts/seed-article-hyperviseur.ts`). Il est visible dans le back-office et
+se publie depuis là. Les neuf autres articles restent des placeholders : seul
+leur titre existe.

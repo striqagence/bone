@@ -54,6 +54,8 @@ export async function derniersArticles(langue: Langue, limite = 4): Promise<Arti
   const payload = await getPayload({ config });
   const { docs } = await payload.find({
     collection: "posts",
+    // Le local API ignore l’`access` par défaut : sans ceci, un brouillon sortirait.
+    overrideAccess: false,
     locale: langue,
     sort: "-publieLe",
     depth: 2,
@@ -93,6 +95,8 @@ export async function listerArticles({
   const payload = await getPayload({ config });
   const { docs, totalDocs } = await payload.find({
     collection: "posts",
+    // Le local API ignore l’`access` par défaut : sans ceci, un brouillon sortirait.
+    overrideAccess: false,
     locale: langue,
     sort: "-publieLe",
     depth: 2,

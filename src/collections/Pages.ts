@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 
 import { sections } from "../blocks";
+import { lectureDesPubliees } from "../lib/acces";
 import { revaliderSite } from "../lib/revalidate";
 
 /**
@@ -24,7 +25,7 @@ export const Pages: CollectionConfig = {
     group: "Contenu",
     defaultColumns: ["titre", "slug", "parent", "_status"],
   },
-  access: { read: () => true },
+  access: { read: lectureDesPubliees },
   versions: { drafts: true },
   hooks: {
     afterChange: [() => revaliderSite()],

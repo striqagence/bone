@@ -23,6 +23,8 @@ async function chargerArticle(slug: string, langue: Langue): Promise<Post | null
   const payload = await getPayload({ config });
   const { docs } = await payload.find({
     collection: "posts",
+    // Le local API ignore l’`access` par défaut : sans ceci, un brouillon sortirait.
+    overrideAccess: false,
     locale: langue,
     where: { slug: { equals: slug } },
     limit: 1,

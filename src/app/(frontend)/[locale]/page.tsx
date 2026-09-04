@@ -65,6 +65,8 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
   const ordre = ["expertise", "capital", "feed"] as const;
   const { docs: pagesPoles } = await payload.find({
     collection: "pages",
+    // Le local API ignore l’`access` par défaut : sans ceci, un brouillon sortirait.
+    overrideAccess: false,
     locale,
     where: { pole: { in: [...ordre] } },
     depth: 2,

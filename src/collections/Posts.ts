@@ -15,6 +15,7 @@ import {
 
 import { Articles, AppelAction, Faq } from "../blocks";
 import { ARetenir } from "../blocks/article";
+import { lectureDesPubliees } from "../lib/acces";
 import { revaliderSite } from "../lib/revalidate";
 
 /**
@@ -38,7 +39,7 @@ export const Posts: CollectionConfig = {
     group: "Contenu",
     defaultColumns: ["titre", "categorie", "publieLe", "_status"],
   },
-  access: { read: () => true },
+  access: { read: lectureDesPubliees },
   versions: { drafts: true },
   hooks: {
     afterChange: [() => revaliderSite()],

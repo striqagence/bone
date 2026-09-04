@@ -22,6 +22,8 @@ export async function trouverPage(
   const payload = await getPayload({ config });
   const { docs } = await payload.find({
     collection: "pages",
+    // Le local API ignore l’`access` par défaut : sans ceci, un brouillon sortirait.
+    overrideAccess: false,
     locale: langue,
     where: { slug: { equals: segments[segments.length - 1] } },
     depth: 2,
@@ -57,6 +59,8 @@ export async function chargerPoles(langue: Langue) {
   const payload = await getPayload({ config });
   const { docs } = await payload.find({
     collection: "pages",
+    // Le local API ignore l’`access` par défaut : sans ceci, un brouillon sortirait.
+    overrideAccess: false,
     locale: langue,
     where: { pole: { in: [...ordre] } },
     depth: 2,
