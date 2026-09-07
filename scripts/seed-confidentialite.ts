@@ -38,8 +38,8 @@ const corpsFr = racine([
 
   titre("Ce que nous collectons, et pourquoi"),
   paragraphe(
-    "Le site ne collecte que ce que vous y saisissez. Il n’y a ni compte, ni profilage, ni " +
-      "reconstitution de votre navigation.",
+    "Le site ne collecte que ce que vous y saisissez, et une empreinte technique destinée à protéger " +
+      "les formulaires. Il n’y a ni compte, ni profilage, ni reconstitution de votre navigation.",
   ),
   paragraphe(
     "Formulaire de contact : votre rôle, votre nom, votre prénom, votre adresse professionnelle, " +
@@ -52,11 +52,19 @@ const corpsFr = racine([
       "depuis laquelle vous vous êtes inscrit. Ces données servent à vous envoyer une analyse " +
       "mensuelle. La base légale est votre consentement, que vous pouvez retirer à tout moment.",
   ),
+  paragraphe(
+    "Protection des formulaires : pour empêcher leur remplissage automatisé, nous enregistrons une " +
+      "empreinte de votre adresse IP au moment de l’envoi. Cette empreinte résulte d’un calcul " +
+      "irréversible, votre adresse elle-même n’est jamais enregistrée, et elle ne sert qu’à compter " +
+      "les envois récents afin d’en plafonner le nombre. La base légale est notre intérêt légitime à " +
+      "protéger le site.",
+  ),
 
   titre("Combien de temps nous les conservons"),
   liste([
     "Demandes de contact : trois ans à compter de notre dernier échange.",
     "Inscriptions à la lettre d’information : jusqu’au retrait de votre consentement, puis trois ans au titre de la preuve de ce consentement.",
+    "Empreintes de protection des formulaires : vingt-quatre heures, puis suppression automatique.",
   ]),
 
   titre("Qui y a accès"),
@@ -112,8 +120,8 @@ const corpsEn = racine([
 
   titre("What we collect, and why"),
   paragraphe(
-    "The site collects only what you type into it. There is no account, no profiling, and no " +
-      "reconstruction of your browsing.",
+    "The site collects only what you type into it, plus a technical fingerprint used to protect the " +
+      "forms. There is no account, no profiling, and no reconstruction of your browsing.",
   ),
   paragraphe(
     "Contact form: your role, surname, first name, work email address, telephone number and the " +
@@ -125,11 +133,18 @@ const corpsEn = racine([
       "This data is used to send you a monthly analysis. The legal basis is your consent, which you " +
       "may withdraw at any time.",
   ),
+  paragraphe(
+    "Form protection: to prevent automated submissions, we record a fingerprint of your IP address " +
+      "when a form is sent. That fingerprint is the result of an irreversible calculation, your " +
+      "address itself is never stored, and it is used only to count recent submissions in order to " +
+      "cap them. The legal basis is our legitimate interest in protecting the site.",
+  ),
 
   titre("How long we keep it"),
   liste([
     "Contact requests: three years from our last exchange.",
     "Newsletter subscriptions: until you withdraw your consent, then three years as proof of that consent.",
+    "Form protection fingerprints: twenty-four hours, then automatic deletion.",
   ]),
 
   titre("Who has access"),

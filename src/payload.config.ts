@@ -9,6 +9,7 @@ import sharp from "sharp";
 
 import { Categories } from "./collections/Categories";
 import { Abonnes } from "./collections/Abonnes";
+import { Verrous } from "./collections/Verrous";
 import { Demandes } from "./collections/Demandes";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
@@ -88,7 +89,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " · Bone" },
   },
-  collections: [Users, Media, Pages, Posts, Categories, Demandes, Abonnes],
+  collections: [Users, Media, Pages, Posts, Categories, Demandes, Abonnes, Verrous],
   globals: [Accueil, Blog, Contact, Navigation],
   /**
    * Le français est la langue de référence : c'est elle qui est saisie, et

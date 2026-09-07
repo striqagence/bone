@@ -74,6 +74,7 @@ export interface Config {
     categories: Category;
     demandes: Demande;
     abonnes: Abonne;
+    verrous: Verrous;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     demandes: DemandesSelect<false> | DemandesSelect<true>;
     abonnes: AbonnesSelect<false> | AbonnesSelect<true>;
+    verrous: VerrousSelect<false> | VerrousSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -748,6 +750,17 @@ export interface Abonne {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "verrous".
+ */
+export interface Verrous {
+  id: number;
+  cle: string;
+  expiration: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -797,6 +810,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'abonnes';
         value: number | Abonne;
+      } | null)
+    | ({
+        relationTo: 'verrous';
+        value: number | Verrous;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1360,6 +1377,16 @@ export interface DemandesSelect<T extends boolean = true> {
 export interface AbonnesSelect<T extends boolean = true> {
   email?: T;
   langue?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "verrous_select".
+ */
+export interface VerrousSelect<T extends boolean = true> {
+  cle?: T;
+  expiration?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -7,9 +7,9 @@ import type { CollectionConfig } from "payload";
  * qui échoue ne doit pas faire disparaître une demande. La notification viendra
  * s'ajouter quand un adaptateur d'e-mail sera branché.
  *
- * En lecture, la collection est réservée aux utilisateurs connectés — elle
- * contient des coordonnées professionnelles. En création elle est ouverte,
- * c'est le formulaire public qui écrit.
+ * En lecture, la collection est réservée aux utilisateurs connectés : elle
+ * contient des coordonnées professionnelles. En création elle est fermée
+ * aussi, l'écriture passant par l'action serveur et ses protections anti-abus.
  */
 export const Demandes: CollectionConfig = {
   slug: "demandes",
@@ -20,7 +20,10 @@ export const Demandes: CollectionConfig = {
     defaultColumns: ["email", "nom", "prenom", "profil", "createdAt"],
   },
   access: {
-    create: () => true,
+    // Fermée : `POST /api/demandes` et la mutation GraphQL équivalente laissaient
+    // écrire n'importe qui, sans passer par le formulaire ni par ses
+    // protections. L'action serveur écrit par le local API, qui passe outre.
+    create: () => false,
     read: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),

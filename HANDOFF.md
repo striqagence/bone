@@ -311,3 +311,55 @@ Un premier article de fond attend en brouillon,
 (`scripts/seed-article-hyperviseur.ts`). Il est visible dans le back-office et
 se publie depuis là. Les neuf autres articles restent des placeholders : seul
 leur titre existe.
+
+## Formulaires et anti-abus
+
+Les deux formulaires publics (contact, lettre d'information) écrivent dans
+Supabase. Quatre protections se superposent, décrites dans `src/lib/antiabus.ts` :
+
+1. **Les collections sont fermées en création.** `POST /api/demandes`,
+   `POST /api/abonnes` et les mutations GraphQL équivalentes répondent 403.
+   C'était la faille principale : on pouvait remplir les tables sans jamais
+   toucher au formulaire. L'action serveur écrit par le local API, qui passe
+   outre l'`access` : elle est désormais le seul chemin d'écriture.
+2. **Un champ leurre**, invisible et hors du parcours clavier. Rempli, l'envoi
+   reçoit une réponse de succès et n'écrit rien. Son nom (`complement`) est
+   neutre à dessein : un intitulé du genre « societe » serait rempli par le
+   remplissage automatique du navigateur et ferait passer un visiteur pour un
+   robot.
+3. **Un jeton d'ouverture**, signé, valable de 2 secondes à 3 heures après
+   l'affichage, et à usage unique. Il écarte l'envoi instantané et le rejeu
+   d'une requête capturée. Les pages étant statiques, il est demandé au montage
+   par une action dédiée, jamais rendu dans le HTML.
+4. **Un plafond de cadence** par adresse : 3 demandes par heure et 10 par jour,
+   5 et 20 pour la lettre d'information. C'est la seule protection qui tienne
+   face à quelqu'un qui scripte l'action serveur, et donc celle qui empêche le
+   remplissage en masse.
+
+Les compteurs vivent dans la collection `verrous`, masquée du back-office et
+fermée de tous les côtés. **L'adresse IP n'y est jamais écrite** : seule une
+signature tronquée l'est, et le secret qui permettrait de la recalculer n'est
+pas dans la base. Les lignes portent leur péremption et sont purgées à l'envoi
+suivant. Ce traitement est déclaré dans la politique de confidentialité.
+
+En cas de panne de la base, les contrôles laissent passer plutôt que de
+bloquer : l'enregistrement échouera de toute façon juste après, et refuser
+fermerait le formulaire à tout le monde sans rien protéger.
+
+Ce qui reste à faire côté abus : rien n'est branché sur une alerte. Si le
+volume de demandes devient un sujet, le plus simple est de surveiller la
+croissance de la table `demandes` plutôt que d'ajouter un captcha, qui
+obligerait à revoir la politique de confidentialité et à poser une bannière de
+consentement.
+
+## Adresse de contact
+
+L'adresse n'apparaît plus dans le pied de page. Même dérobée, elle était
+présente sur chaque page du site et donc facile à moissonner. Elle subsiste sur
+la page de contact et sur les deux pages légales, où elle est obligatoire, et
+toujours sous forme encodée (`lib/courriel.ts`).
+
+Elle a aussi été retirée des données structurées, où elle était publiée **en
+clair** dans le JSON-LD de chaque page, ce qui annulait toute la peine prise
+ailleurs. La propriété `email` de `Organization` est facultative ; le numéro de
+téléphone, lui, reste.

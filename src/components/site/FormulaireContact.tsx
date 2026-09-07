@@ -2,7 +2,9 @@
 
 import { useActionState, useState } from "react";
 
+import { ChampLeurre } from "@/components/ui/ChampLeurre";
 import { SoumissionFormulaire } from "@/components/ui/SoumissionFormulaire";
+import { useJeton } from "@/components/ui/useJeton";
 import { IconeErreur, IconeSucces } from "@/components/ui/icones";
 import { envoyerDemande, type Champ, type Resultat } from "@/actions/envoyerDemande";
 import type { Langue } from "@/lib/i18n";
@@ -62,6 +64,7 @@ export function FormulaireContact({
     contexte: "",
   });
   const [touches, setTouches] = useState<Partial<Record<Champ, boolean>>>({});
+  const { jeton, pret } = useJeton();
 
   const [resultat, action, enCours] = useActionState<Resultat | null, FormData>(
     (_precedent, donnees) => envoyerDemande(donnees),
@@ -78,6 +81,9 @@ export function FormulaireContact({
   const valide = (champ: Champ) =>
     Boolean(touches[champ]) && !regles[champ](valeurs[champ]);
 
+  /** Une erreur qui ne vise aucun champ : elle s'affiche près du bouton. */
+  const enErreur = resultat?.etat === "erreur" && !resultat.champs;
+
   const majuscules = "titrage text-xs font-semibold uppercase leading-none tracking-wider text-primary-950";
 
   if (resultat?.etat === "succes") {
@@ -93,6 +99,8 @@ export function FormulaireContact({
     <form action={action} className="flex w-full flex-col items-start gap-8">
       <input type="hidden" name="langue" value={langue} />
       <input type="hidden" name="profil" value={profil} />
+      <input type="hidden" name="jeton" value={jeton} />
+      <ChampLeurre />
 
       <fieldset className="flex flex-col items-start gap-3">
         <legend className={majuscules}>{libelles.vousEtes}</legend>
@@ -158,10 +166,15 @@ export function FormulaireContact({
 
       <SoumissionFormulaire
         libelle={libelles.envoyer}
-        enCours={enCours}
-        etat={resultat?.etat === "erreur" && !resultat.champs ? "erreur" : "repos"}
+        /* Le formulaire n'est pas prêt tant que le jeton n'est pas arrivé. */
+        enCours={enCours || !pret}
+        etat={enErreur ? "erreur" : "repos"}
         message={
-          resultat?.etat === "erreur" && !resultat.champs ? libelles.erreur : libelles.mentionLegale
+          enErreur
+            ? /* Un refus anti-abus s'explique de lui-même ; le reste garde le
+                 message générique du back-office. */
+              (resultat.message ?? libelles.erreur)
+            : libelles.mentionLegale
         }
       />
     </form>

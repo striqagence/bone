@@ -41,6 +41,7 @@ import * as migration_20260901_121627_plan_en_coordonnees from './20260901_12162
 import * as migration_20260901_124047_courriel_encart_contact from './20260901_124047_courriel_encart_contact';
 import * as migration_20260901_144904_bouton_google_maps from './20260901_144904_bouton_google_maps';
 import * as migration_20260902_140823_referencement_globaux from './20260902_140823_referencement_globaux';
+import * as migration_20260907_085005_verrous_antiabus from './20260907_085005_verrous_antiabus';
 
 export const migrations = [
   {
@@ -256,6 +257,11 @@ export const migrations = [
   {
     up: migration_20260902_140823_referencement_globaux.up,
     down: migration_20260902_140823_referencement_globaux.down,
-    name: '20260902_140823_referencement_globaux'
+    name: '20260902_140823_referencement_globaux',
+  },
+  {
+    up: migration_20260907_085005_verrous_antiabus.up,
+    down: migration_20260907_085005_verrous_antiabus.down,
+    name: '20260907_085005_verrous_antiabus'
   },
 ];

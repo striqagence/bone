@@ -45,7 +45,10 @@ export function organisation(langue: Langue) {
     name: "BONE",
     url: absolu("/", langue),
     logo: `${BASE}/brand/bone-logotype.svg`,
-    email: "bone@contact.fr",
+    // Pas d'adresse de courriel ici. La propriété est facultative, et une
+    // adresse en clair dans le JSON-LD de chaque page est plus facile à
+    // moissonner que celle qu'on prend soin de dérober dans le pied de page.
+    // Le numéro reste : il est utile aux moteurs et bien moins exposé au spam.
     telephone: "+33180866066",
     address: {
       "@type": "PostalAddress",

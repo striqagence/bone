@@ -4,7 +4,9 @@ import { useActionState } from "react";
 
 import { classesBouton } from "@/components/ui/Button";
 import { ArrowRight } from "@/components/ui/ArrowRight";
+import { ChampLeurre } from "@/components/ui/ChampLeurre";
 import { IconeErreur, IconeSucces } from "@/components/ui/icones";
+import { useJeton } from "@/components/ui/useJeton";
 import { abonnerNewsletter, type ResultatAbonnement } from "@/actions/abonnerNewsletter";
 import type { Langue } from "@/lib/i18n";
 
@@ -25,6 +27,8 @@ export function FormulaireNewsletter({
   langue: Langue;
   libelles: { placeholder: string; bouton: string; succes: string };
 }) {
+  const { jeton, pret } = useJeton();
+
   const [resultat, action, enCours] = useActionState<ResultatAbonnement | null, FormData>(
     (_precedent, donnees) => abonnerNewsletter(donnees),
     null,
@@ -43,6 +47,8 @@ export function FormulaireNewsletter({
     <form action={action} className="flex w-full flex-col items-start gap-3 lg:w-auto">
       <div className="flex w-full flex-col items-stretch gap-5 lg:flex-row lg:items-center">
         <input type="hidden" name="langue" value={langue} />
+        <input type="hidden" name="jeton" value={jeton} />
+        <ChampLeurre />
         <label className="sr-only" htmlFor="newsletter-email">
           {libelles.placeholder}
         </label>
@@ -57,7 +63,7 @@ export function FormulaireNewsletter({
         />
         <button
           type="submit"
-          disabled={enCours}
+          disabled={enCours || !pret}
           className={`${classesBouton({ taille: "lg" })} disabled:opacity-70`}
         >
           {libelles.bouton}
