@@ -58,7 +58,9 @@ export function organisation(langue: Langue) {
       addressLocality: "Villebon-sur-Yvette",
       addressCountry: "FR",
     },
-    sameAs: ["https://www.linkedin.com"],
+    // `sameAs` rattache l'entreprise à ses profils publics : c'est ce qui
+    // permet à un moteur de relier la fiche du site à celle de LinkedIn.
+    sameAs: ["https://www.linkedin.com/company/boneit/"],
   };
 }
 

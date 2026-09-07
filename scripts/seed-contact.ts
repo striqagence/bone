@@ -110,7 +110,7 @@ const fr = {
     surtitre: "notre contenu expert",
     titre: "Pas encore prêt à échanger ? Suivez notre contenu expert.",
     chapo: "Pédagogie · Déconstruction · Analyse · Performance · Durabilité IT",
-    cta: { libelle: "Nous suivre sur", url: "https://www.linkedin.com" },
+    cta: { libelle: "Nous suivre sur", url: "https://www.linkedin.com/company/boneit/" },
   },
 };
 
@@ -172,7 +172,7 @@ const en = {
     surtitre: "our expert content",
     titre: "Not ready to talk yet? Follow our expert content.",
     chapo: "Teaching · Unpacking · Analysis · Performance · Sustainable IT",
-    cta: { libelle: "Follow us on", url: "https://www.linkedin.com" },
+    cta: { libelle: "Follow us on", url: "https://www.linkedin.com/company/boneit/" },
   },
 };
 
