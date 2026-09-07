@@ -15,7 +15,7 @@ const media = async (fichier: string) => {
 
 /** La maquette reprend ici la photo du hero de « Nos compétences ». */
 const photoHero = await media("hero-competences.jpg");
-const photoFaq = await media("article-exemple.jpg");
+const photoFaq = await media("article-stockage-video.jpg");
 
 const heroFr = {
   surtitre: "Notre méthode",

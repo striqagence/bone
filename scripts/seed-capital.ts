@@ -6,7 +6,7 @@ const payload = await getPayload({ config });
 
 const { docs: photosFaq } = await payload.find({
   collection: "media",
-  where: { filename: { equals: "article-exemple.jpg" } },
+  where: { filename: { equals: "article-stockage-video.jpg" } },
   limit: 1,
 });
 const photoFaq = photosFaq[0]?.id;
@@ -115,14 +115,14 @@ const fr = [
       {
         valeur: "~2",
         unite: "M€",
-        libelle: "De chiffre d’affaire",
+        libelle: "De chiffre d’affaires",
         precision:
           "actuel généré par l’activité de rachat, reconditionnement et revente de matériel IT.",
       },
       {
         valeur: "70",
         unite: "%",
-        libelle: "Part en déchet à revaloriser",
+        libelle: "Part en déchets à revaloriser",
         precision:
           "Une proportion du parc IT jetée alors qu’elle conserve une valeur d’usage ou de revente.",
       },

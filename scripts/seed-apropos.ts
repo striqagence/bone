@@ -38,7 +38,7 @@ const photoEquipe = await media(
 );
 const { docs: photosFaq } = await payload.find({
   collection: "media",
-  where: { filename: { equals: "article-exemple.jpg" } },
+  where: { filename: { equals: "article-stockage-video.jpg" } },
   limit: 1,
 });
 const photoFaq = photosFaq[0]?.id;

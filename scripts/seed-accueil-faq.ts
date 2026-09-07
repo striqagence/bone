@@ -11,7 +11,7 @@ const payload = await getPayload({ config });
 
 const { docs } = await payload.find({
   collection: "media",
-  where: { filename: { equals: "article-exemple.jpg" } },
+  where: { filename: { equals: "article-stockage-video.jpg" } },
   limit: 1,
 });
 const photo = docs[0]?.id;
