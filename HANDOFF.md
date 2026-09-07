@@ -321,6 +321,24 @@ cd ~/bone && npm install && npm run dev
 Site sur http://localhost:3000, back-office sur http://localhost:3000/admin.
 Le `.env` local est déjà renseigné (non versionné).
 
+## Gabarit d'article
+
+Les deux articles rédigés suivent la même trame, et les suivants devraient s'y
+tenir :
+
+1. un encadré **« L'essentiel de cet article »** en tête, qui annonce ce que
+   l'article couvre ;
+2. le corps, en titres de niveau 2 que le sommaire reprend ;
+3. un encadré **« à retenir »** en fin de corps, qui dit quoi en faire. Il ne
+   répète pas le premier : l'un oriente, l'autre conclut ;
+4. la **FAQ**, puis « à lire aussi », puis l'appel à l'action. La FAQ passe
+   avant les autres lectures : elle appartient encore à l'article, alors que
+   les renvois en sortent.
+
+Les deux encadrés sont le même bloc d'éditeur (`aRetenir`), dont l'étiquette
+est libre. Rien n'impose cette trame dans le schéma : c'est une convention
+éditoriale, à tenir à la main au back-office.
+
 ## Brouillons
 
 Les collections `pages` et `posts` versionnent leurs contenus. Leur lecture

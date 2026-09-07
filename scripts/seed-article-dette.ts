@@ -94,6 +94,16 @@ const racine = (enfants: unknown[]) => ({
 });
 
 const contenuFr = racine([
+  /**
+   * Le résumé ouvre l'article, l'encadré « à retenir » le referme. Les deux ne
+   * disent pas la même chose : le premier annonce ce que l'article couvre, le
+   * second ce qu'il faut en faire.
+   */
+  aRetenir("L’essentiel de cet article", [
+    "Sept signaux qui trahissent une infrastructure vieillissante, et ce qu’ils coûtent.",
+    "Comment mettre un chiffre sur ce que l’immobilisme coûte chaque année.",
+    "Par où commencer, sans engager un remplacement complet.",
+  ]),
   titre("Le coût invisible d’une infra qu’on n’ausculte plus"),
   paragraphe(
     "Une infrastructure vieillissante ne prévient jamais par une alerte claire. Elle s’exprime par des symptômes diffus : un incident de plus, une heure d’astreinte de plus, une migration repoussée d’un trimestre. Chaque signal pris isolément semble mineur. Additionnés, ils forment un coût réel, rarement identifié comme tel dans les arbitrages budgétaires.",
@@ -127,6 +137,11 @@ const contenuFr = racine([
 ]);
 
 const contenuEn = racine([
+  aRetenir("The essentials of this article", [
+    "Seven signals that betray an ageing infrastructure, and what they cost.",
+    "How to put a figure on what standing still costs you each year.",
+    "Where to start, without committing to a full replacement.",
+  ]),
   titre("The invisible cost of an infrastructure nobody examines"),
   paragraphe(
     "An ageing infrastructure never warns you with a clear alert. It speaks through diffuse symptoms: one more incident, one more hour on call, a migration pushed back another quarter. Taken alone, each signal looks minor. Added up, they form a real cost, rarely identified as such when budgets are arbitrated.",
@@ -168,13 +183,6 @@ const photoFaq = photosFaq[0]?.id;
 
 const sectionsFr = [
   {
-    blockType: "articles" as const,
-    surtitre: "à lire aussi",
-    titre: "Nos derniers articles",
-    libelleAction: "Lire l’article",
-    nombre: 4,
-  },
-  {
     blockType: "faq" as const,
     surtitre: "Questions fréquentes",
     titre: "Vos questions, nos réponses franches.",
@@ -198,6 +206,13 @@ const sectionsFr = [
     ],
   },
   {
+    blockType: "articles" as const,
+    surtitre: "à lire aussi",
+    titre: "Nos derniers articles",
+    libelleAction: "Lire l’article",
+    nombre: 4,
+  },
+  {
     blockType: "appelAction" as const,
     surtitre: "notre point de départ",
     titre: "Mesurer ce que votre parc vous coûte déjà.",
@@ -208,13 +223,6 @@ const sectionsFr = [
 ];
 
 const sectionsEn = [
-  {
-    blockType: "articles" as const,
-    surtitre: "further reading",
-    titre: "Our latest articles",
-    libelleAction: "Read the article",
-    nombre: 4,
-  },
   {
     blockType: "faq" as const,
     surtitre: "Frequently asked questions",
@@ -237,6 +245,13 @@ const sectionsEn = [
           "The first effects are measurable in weeks: fewer repeat incidents, shorter interventions. The budget gain reads over the financial year, once the avoided replacements are documented.",
       },
     ],
+  },
+  {
+    blockType: "articles" as const,
+    surtitre: "further reading",
+    titre: "Our latest articles",
+    libelleAction: "Read the article",
+    nombre: 4,
   },
   {
     blockType: "appelAction" as const,

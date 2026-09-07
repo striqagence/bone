@@ -47,6 +47,19 @@ const en = {
 };
 
 const corpsFr = racine([
+  /**
+   * Le résumé ouvre l'article, l'encadré « à retenir » le referme. Le premier
+   * annonce ce que l'article couvre, le second ce qu'il faut en faire.
+   */
+  blocEditeur({
+    blockType: "aRetenir",
+    etiquette: "L’essentiel de cet article",
+    points: [
+      { texte: "Ce qu’une date de fin de support change vraiment, et pour qui." },
+      { texte: "Les quatre issues possibles, et non les deux qu’on pose d’habitude." },
+      { texte: "Ce qui départage réellement ces quatre chemins." },
+    ],
+  }),
   titre("Ce qu’une fin de support change vraiment"),
   paragraphe(
     "Une date de fin de support ne casse rien le jour venu. Les machines tournent, les sauvegardes " +
@@ -122,6 +135,15 @@ const corpsFr = racine([
 ]);
 
 const corpsEn = racine([
+  blocEditeur({
+    blockType: "aRetenir",
+    etiquette: "The essentials of this article",
+    points: [
+      { texte: "What an end-of-support date really changes, and for whom." },
+      { texte: "The four possible outcomes, not the two usually put on the table." },
+      { texte: "What actually decides between those four roads." },
+    ],
+  }),
   titre("What an end of support actually changes"),
   paragraphe(
     "An end-of-support date breaks nothing on the day. The machines run, the backups pass, nobody " +
@@ -202,13 +224,6 @@ const { docs: photosFaq } = await payload.find({
 
 const sectionsFr = [
   {
-    blockType: "articles" as const,
-    surtitre: "à lire aussi",
-    titre: "Nos derniers articles",
-    libelleAction: "Lire l’article",
-    nombre: 4,
-  },
-  {
     blockType: "faq" as const,
     surtitre: "Questions fréquentes",
     titre: "Vos questions, nos réponses franches.",
@@ -232,6 +247,13 @@ const sectionsFr = [
     ],
   },
   {
+    blockType: "articles" as const,
+    surtitre: "à lire aussi",
+    titre: "Nos derniers articles",
+    libelleAction: "Lire l’article",
+    nombre: 4,
+  },
+  {
     blockType: "appelAction" as const,
     surtitre: "notre point de départ",
     titre: "Instruire les quatre chemins avant d’en écarter trois.",
@@ -242,13 +264,6 @@ const sectionsFr = [
 ];
 
 const sectionsEn = [
-  {
-    blockType: "articles" as const,
-    surtitre: "further reading",
-    titre: "Our latest articles",
-    libelleAction: "Read the article",
-    nombre: 4,
-  },
   {
     blockType: "faq" as const,
     surtitre: "Frequently asked questions",
@@ -271,6 +286,13 @@ const sectionsEn = [
           "After. A comparison run before the dependency inventory always produces an answer, rarely the right one.",
       },
     ],
+  },
+  {
+    blockType: "articles" as const,
+    surtitre: "further reading",
+    titre: "Our latest articles",
+    libelleAction: "Read the article",
+    nombre: 4,
   },
   {
     blockType: "appelAction" as const,
