@@ -20,12 +20,9 @@ import {
  * Cette progression est portée par la position et non par le contenu : le
  * back-office n'a donc pas à la saisir.
  *
- * Le même composant sert aux cartes d'enjeux des pages de pôle, dans une
- * variante sobre : aplat marine, sans ombre ni décalage au survol. Le dégradé
- * y était lu comme un patchwork plutôt que comme une progression ; l'ombre ne
- * servait qu'à détacher des fonds devenus identiques ; et ces cartes ne sont
- * pas cliquables, si bien que les animer au survol promettait un geste qui
- * n'existe pas.
+ * Le même composant sert aux cartes d'enjeux des pages de pôle, avec les mêmes
+ * fonds : la maquette les décline pareil. Seul le décalage au survol y est
+ * écarté, ces cartes n'étant pas cliquables.
  *
  * Le titre alterne deux intensités, l'énoncé en retrait et sa résolution à
  * pleine opacité — l'inverse du hero, où c'est le verbe qui est appuyé.
@@ -47,15 +44,15 @@ export function SectionProfils({
   titreHaut,
   titreBas,
   profils,
-  variante = "degrade",
+  survol = true,
 }: {
   surtitre: string;
   /** Absent, le titre s'affiche d'une seule intensité — l'accueil l'énonce en
       deux temps, la page Expertise non. */
   titreHaut?: string | null;
   titreBas: string;
-  /** « sobre » : aplat marine, sans ombre portée ni réaction au survol. */
-  variante?: "degrade" | "sobre";
+  /** Faux, les cartes ne réagissent plus au passage de la souris. */
+  survol?: boolean;
   profils: {
     picto: keyof typeof pictos;
     titre: string;
@@ -81,11 +78,9 @@ export function SectionProfils({
         {profils.map((profil, index) => (
           <div
             key={profil.titre}
-            className={`flex flex-col items-start gap-8 p-8 xl:min-h-[450px] xl:flex-row xl:items-center xl:p-10 2xl:p-14 ${
-              variante === "degrade"
-                ? `carte-survol shadow-[10px_10px_0_0_var(--color-encre)] ${fonds[index % fonds.length]}`
-                : "bg-primary-950"
-            }`}
+            className={`flex flex-col items-start gap-8 p-8 shadow-[10px_10px_0_0_var(--color-encre)] xl:min-h-[450px] xl:flex-row xl:items-center xl:p-10 2xl:p-14 ${
+              fonds[index % fonds.length]
+            } ${survol ? "carte-survol" : ""}`}
           >
             <div className="relative size-[250px] max-w-full shrink-0 overflow-hidden rounded bg-primary-950">
               {profil.image && (

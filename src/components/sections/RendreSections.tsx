@@ -109,11 +109,10 @@ export function RendreSections({
             return (
               <SectionProfils
                 key={section.id}
-                /* Variante sobre : aplat marine, sans ombre ni survol. Le
-                   dégradé de l'accueil se lisait ici comme un patchwork, et
-                   ces cartes n'étant pas cliquables, les animer au survol
-                   promettait un geste qui n'existe pas. */
-                variante="sobre"
+                /* Les fonds sont ceux de la maquette, comme sur l'accueil.
+                   Seul le survol est écarté : ces cartes ne sont pas
+                   cliquables, l'animer promettait un geste qui n'existe pas. */
+                survol={false}
                 surtitre={section.surtitre}
                 titreHaut={section.titreHaut}
                 titreBas={section.titreBas}
