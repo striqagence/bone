@@ -32,7 +32,7 @@ const heroEn = {
 const corpsFr = racine([
   titre("Qui est responsable de vos données"),
   paragraphe(
-    "BONE, dont le siège est situé 27 avenue de la Baltique, 91140 Villebon-sur-Yvette, est " +
+    "BONE IT, dont le siège est situé 12 avenue de Norvège, 91140 Villebon-sur-Yvette, est " +
       "responsable des traitements décrits ici. Pour toute question, écrivez à ⟦courriel⟧.",
   ),
 
@@ -114,7 +114,7 @@ const corpsFr = racine([
 const corpsEn = racine([
   titre("Who is responsible for your data"),
   paragraphe(
-    "BONE, registered office at 27 avenue de la Baltique, 91140 Villebon-sur-Yvette, France, is the " +
+    "BONE IT, registered office at 12 avenue de Norvège, 91140 Villebon-sur-Yvette, France, is the " +
       "controller for the processing described here. For any question, write to ⟦courriel⟧.",
   ),
 

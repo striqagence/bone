@@ -43,6 +43,7 @@ export function organisation(langue: Langue) {
     "@type": "Organization",
     "@id": ORGANISATION,
     name: "BONE",
+    legalName: "BONE IT",
     url: absolu("/", langue),
     logo: `${BASE}/brand/bone-logotype.svg`,
     // Pas d'adresse de courriel ici. La propriété est facultative, et une
@@ -52,7 +53,7 @@ export function organisation(langue: Langue) {
     telephone: "+33180866066",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "27 avenue de la Baltique",
+      streetAddress: "12 avenue de Norvège",
       postalCode: "91140",
       addressLocality: "Villebon-sur-Yvette",
       addressCountry: "FR",

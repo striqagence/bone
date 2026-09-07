@@ -6,9 +6,11 @@ import { liste, paragraphe, racine, titre } from "./lexical";
 /**
  * Mentions légales.
  *
- * Les informations d'immatriculation ne sont pas connues du dépôt : elles sont
- * laissées entre crochets, à compléter au back-office avant la mise en ligne.
- * Inventer un numéro RCS serait pire que de le laisser manquant.
+ * Dénomination, SIREN, siège social et directeur de la publication ont été
+ * fournis par la cliente. Ce qui manque encore — forme juridique, capital,
+ * ville du RCS, SIRET, numéro de TVA — reste entre crochets, à compléter au
+ * back-office avant la mise en ligne. Inventer un identifiant légal serait
+ * pire que de le laisser manquant.
  */
 const payload = await getPayload({ config });
 
@@ -29,11 +31,11 @@ const heroEn = {
 const corpsFr = racine([
   titre("Éditeur du site"),
   paragraphe(
-    "Le présent site est édité par BONE, [forme juridique] au capital de [montant] euros, dont le siège " +
-      "social est situé 27 avenue de la Baltique, 91140 Villebon-sur-Yvette, France.",
+    "Le présent site est édité par BONE IT, [forme juridique] au capital de [montant] euros, dont le " +
+      "siège social est situé 12 avenue de Norvège, 91140 Villebon-sur-Yvette, France.",
   ),
   liste([
-    "Immatriculation : RCS [ville] sous le numéro [numéro]",
+    "SIREN : 847 676 970, immatriculée au RCS de [ville]",
     "SIRET : [numéro]",
     "TVA intracommunautaire : [numéro]",
     "Téléphone : 01 80 86 60 66",
@@ -41,8 +43,8 @@ const corpsFr = racine([
   ]),
   titre("Directeur de la publication"),
   paragraphe(
-    "[Prénom et nom], en sa qualité de [fonction]. Toute demande relative au contenu du site peut lui " +
-      "être adressée à ⟦courriel⟧.",
+    "Tarek Boukachabia est le directeur de la publication du site. Toute demande relative à son " +
+      "contenu peut lui être adressée à ⟦courriel⟧.",
   ),
   titre("Hébergement"),
   paragraphe(
@@ -85,11 +87,11 @@ const corpsFr = racine([
 const corpsEn = racine([
   titre("Site publisher"),
   paragraphe(
-    "This site is published by BONE, [legal form] with share capital of [amount] euros, registered " +
-      "office at 27 avenue de la Baltique, 91140 Villebon-sur-Yvette, France.",
+    "This site is published by BONE IT, [legal form] with share capital of [amount] euros, registered " +
+      "office at 12 avenue de Norvège, 91140 Villebon-sur-Yvette, France.",
   ),
   liste([
-    "Registration: Trade and Companies Register of [city] under number [number]",
+    "SIREN: 847 676 970, registered with the Trade and Companies Register of [city]",
     "SIRET: [number]",
     "VAT number: [number]",
     "Telephone: +33 1 80 86 60 66",
@@ -97,8 +99,8 @@ const corpsEn = racine([
   ]),
   titre("Publication director"),
   paragraphe(
-    "[First name and surname], acting as [role]. Any request concerning the content of this site may " +
-      "be sent to ⟦courriel⟧.",
+    "Tarek Boukachabia is the publication director of this site. Any request concerning its content " +
+      "may be sent to ⟦courriel⟧.",
   ),
   titre("Hosting"),
   paragraphe(

@@ -175,10 +175,16 @@ toutes les pages, sans message d'erreur.
 1. **Vidéo du hero d'accueil** : prévue, une image est servie en attendant. Le
    passage demandera un champ vidéo, une balise `<video>` muette en boucle, et
    l'image actuelle en repli.
-2. **Mentions légales incomplètes** : forme juridique, capital, RCS, SIRET,
-   TVA et directeur de la publication sont entre crochets dans le texte. Le
-   reste — hébergeur, sous-traitants, régions — est exact. À compléter au
-   back-office avant la mise en ligne.
+2. **Mentions légales presque complètes** : dénomination (BONE IT), SIREN
+   (847 676 970), siège (12 avenue de Norvège, 91140 Villebon-sur-Yvette) et
+   directeur de la publication (Tarek Boukachabia) sont renseignés. Restent
+   entre crochets, faute de les connaître : forme juridique, capital social,
+   ville du RCS, SIRET et numéro de TVA. Le reste, hébergeur, sous-traitants et
+   régions, est exact. À compléter au back-office avant la mise en ligne.
+
+   Le numéro de TVA intracommunautaire se déduit du SIREN par une formule
+   fixe et vaudrait FR61847676970, mais seulement si la société est assujettie.
+   À confirmer plutôt qu'à recopier.
 3. **Pas d'adaptateur e-mail** : ni réinitialisation de mot de passe, ni
    notification du formulaire de contact, ni envoi de la lettre d'information.
    `striq-web` utilise Resend.
