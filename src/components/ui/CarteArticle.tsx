@@ -18,6 +18,9 @@ import { classesBouton } from "./Button";
  * de quatre lignes poussait le bouton hors de la carte dès que la colonne se
  * resserrait. Les cartes d'une même rangée restent alignées, la grille les
  * étirant sur la plus haute.
+ *
+ * Encore fallait-il que la plus haute ne soit pas beaucoup plus haute que les
+ * autres : titre et chapô occupent donc trois lignes chacun, ni plus ni moins.
  */
 export function CarteArticle({
   langue,
@@ -68,10 +71,18 @@ export function CarteArticle({
             <span className="text-primary-600">{date}</span>
             <span className="text-gris-400">{tempsDeLecture}</span>
           </div>
-          <h3 className="w-full titrage text-xl font-bold leading-[1.4] text-primary-950">
+          {/* Titre et chapô sont bornés à trois lignes et occupent trois
+              lignes, même courts. Sans cela, une carte au titre de quatre
+              lignes imposait sa hauteur à toute la rangée, et ses voisines se
+              retrouvaient avec cent cinquante pixels de vide au-dessus de leur
+              bouton. Le texte entier reste dans la page : `line-clamp` ne
+              tronque qu'à l'affichage, un lecteur d'écran le lit en entier. */}
+          <h3 className="line-clamp-3 min-h-[4.2em] w-full titrage text-xl font-bold leading-[1.4] text-primary-950">
             {titre}
           </h3>
-          <p className="w-full text-base leading-[1.5] text-primary-950 opacity-60">{description}</p>
+          <p className="line-clamp-3 min-h-[4.5em] w-full text-base leading-[1.5] text-primary-950 opacity-60">
+            {description}
+          </p>
         </div>
 
         <span className={classesBouton({ variante: "tertiaire", taille: "sm" })}>
