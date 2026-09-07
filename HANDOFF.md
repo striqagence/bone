@@ -269,8 +269,18 @@ figées. Les puces de filtre du blog passent à la ligne dès 768px au lieu de
 défiler : faire défiler une bande horizontale à la souris est bien moins
 commode qu'au doigt.
 
-Mesuré de 768 à 1440px, sur le blog, un article, l'accueil, À propos, Expertise
-et Contact : aucun débordement, aucune puce tronquée, aucun contenu hors carte.
+Le pied de page avait les mêmes symptômes. Ses trois colonnes de liens
+tenaient sur deux colonnes de grille, si bien que la troisième se retrouvait
+seule sur sa ligne avec jusqu'à six cents pixels de vide à sa droite ; elles
+sont désormais sur une rangée dès 640px. La ligne des mentions ne se met à
+l'horizontale qu'à 1280px, en dessous de quoi le dernier lien passait seul à la
+ligne. Le filigrane est exprimé en pourcentage du bloc plutôt qu'en pixels : sa
+largeur sautait de 820 à 1429px à 1024, où il ne restait du mot « Bone » que
+les deux premières lettres.
+
+Mesuré de 390 à 1920px, sur le blog, un article, l'accueil, À propos,
+Expertise, Contact et le pied de page, en français et en anglais : aucun
+débordement, aucune puce tronquée, aucun contenu hors carte.
 
 ## Largeurs
 
