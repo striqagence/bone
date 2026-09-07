@@ -43,18 +43,20 @@ export function SectionArticleUne({
 
         <Link
           href={lien(article.chemin, langue)}
-          className="carte-survol group flex w-full flex-col items-stretch gap-7 rounded bg-gray-50 p-7 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)] lg:h-[400px] lg:flex-row lg:items-center lg:gap-10 lg:pr-24"
+          className="carte-survol group flex w-full flex-col items-stretch gap-7 rounded bg-gray-50 p-7 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)] xl:min-h-[400px] xl:flex-row xl:items-center xl:gap-10 xl:pr-24"
         >
-          {/* La hauteur de l'image est posée en dur : dans une rangée à hauteur
-              fixe, un `h-full` se résoudrait sur un parent en hauteur
-              automatique et l'image disparaîtrait. */}
-          <div className="relative h-[220px] flex-1 overflow-hidden rounded bg-gris-300 lg:h-[344px]">
+          {/* Les deux colonnes n'apparaissent qu'à 1280px : à 1024, la colonne
+              de texte tombait sous les 340px, le titre passait à cinq lignes et
+              le bouton sortait de la carte. La hauteur de l'image est posée en
+              dur, un `h-full` se résolvant sur un parent en hauteur
+              automatique, où l'image disparaîtrait. */}
+          <div className="relative h-[220px] flex-1 overflow-hidden rounded bg-gris-300 xl:h-[344px]">
             {article.image && (
               <Image
                 src={article.image.src}
                 alt={article.image.alt}
                 fill
-                sizes="(min-width: 1024px) 718px, 100vw"
+                sizes="(min-width: 1280px) 718px, 100vw"
                 className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105"
                 priority
               />

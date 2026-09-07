@@ -249,6 +249,29 @@ remplissage, il n'y a rien à déclarer aux moteurs tant qu'il n'est pas écrit.
 
 ---
 
+## Tablettes
+
+Le seuil `lg` de Tailwind tombe à 1024px, soit exactement la largeur d'une
+tablette en paysage. Plusieurs blocs y basculaient en deux colonnes alors que
+la place manquait :
+
+- les cartes d'article, en trois colonnes, tombaient à 235px de large ; leur
+  hauteur étant figée à 500px, le bouton « Lire l'article » sortait de la carte
+  de 56 à 112px ;
+- l'article à la une passait en deux colonnes dans une carte de 400px de haut,
+  que son titre sur cinq lignes débordait ;
+- le hero des pages internes réduisait sa colonne de droite à 376px, dont une
+  photo de 230px et un encart de 194px.
+
+Ces blocs passent maintenant à deux colonnes à partir de `xl` (1280px), et les
+hauteurs de la maquette sont devenues des minimums plutôt que des valeurs
+figées. Les puces de filtre du blog passent à la ligne dès 768px au lieu de
+défiler : faire défiler une bande horizontale à la souris est bien moins
+commode qu'au doigt.
+
+Mesuré de 768 à 1440px, sur le blog, un article, l'accueil, À propos, Expertise
+et Contact : aucun débordement, aucune puce tronquée, aucun contenu hors carte.
+
 ## Largeurs
 
 La maquette est dessinée pour 1920px. Les sections gardent ses proportions à

@@ -14,8 +14,11 @@ import { lien, type Langue } from "@/lib/i18n";
  * 30px vers le haut, l'autre vers le bas — et non par un positionnement absolu,
  * pour que l'ensemble garde sa hauteur naturelle.
  *
- * Le décalage tombe en dessous de 1024px : superposer deux blocs de 476 et
- * 400px sur un téléphone les rendrait illisibles, ils s'empilent donc.
+ * Le décalage tombe en dessous de 1280px : superposer deux blocs de 476 et
+ * 400px sur un téléphone les rendrait illisibles, ils s'empilent donc. Le seuil
+ * était à 1024px, mais sur une tablette en paysage la colonne de droite tombait
+ * à 376px, dont une photo de 230px et un encart de 194px : le texte y descendait
+ * sur dix lignes de trois mots.
  *
  * Au-dessus, les deux blocs et leur chevauchement sont exprimés en pourcentages
  * de la colonne — 61,3 %, 51,5 % et 12,9 % reprennent les 476, 400 et 100px de
@@ -46,8 +49,8 @@ export function HeroInterne({
 }) {
   return (
     <section className="flex w-full flex-col items-center overflow-hidden bg-gris-100 px-6 pb-16 pt-24 lg:px-28 lg:pb-28 lg:pt-32">
-      <div className="grid w-full max-w-[1600px] grid-cols-1 gap-x-12 gap-y-5 lg:grid-cols-2">
-        <FilDAriane entrees={entrees} langue={langue} fond="clair" className="lg:col-span-2" />
+      <div className="grid w-full max-w-[1600px] grid-cols-1 gap-x-12 gap-y-5 xl:grid-cols-2">
+        <FilDAriane entrees={entrees} langue={langue} fond="clair" className="xl:col-span-2" />
 
         <div className="flex flex-col items-start justify-center gap-5 py-8">
           <div className="flex w-full flex-col items-start justify-end gap-5">
@@ -71,19 +74,19 @@ export function HeroInterne({
           )}
         </div>
 
-        <div className="flex flex-col items-stretch lg:flex-row lg:items-center">
+        <div className="flex flex-col items-stretch xl:flex-row xl:items-center">
           {/* Sans photo — les pages légales n'en portent pas — la colonne se
               réduit à l'encart : un aplat gris à la place de l'image se lirait
               comme une image qui n'a pas chargé. */}
           {image && (
-            <div className="flex flex-col items-start lg:mr-[-12.9%] lg:w-[61.3%] lg:pb-[30px]">
-              <div className="relative h-[240px] w-full rounded lg:h-[380px] xl:h-[430px]">
+            <div className="flex flex-col items-start xl:mr-[-12.9%] xl:w-[61.3%] xl:pb-[30px]">
+              <div className="relative h-[240px] w-full rounded xl:h-[380px] 2xl:h-[430px]">
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
                   priority
-                  sizes="(min-width: 1024px) 30vw, 100vw"
+                  sizes="(min-width: 1280px) 30vw, 100vw"
                   className="rounded object-cover"
                 />
               </div>
@@ -93,7 +96,7 @@ export function HeroInterne({
           {/* L'encart passe au-dessus de la photo, comme dans la maquette : la
               photo est positionnée, elle prendrait sinon le dessus quel que
               soit l'ordre du document, et rognerait le texte. */}
-          <div className={`relative flex items-end lg:h-full lg:pt-[30px] ${image ? "lg:w-[51.5%]" : "lg:w-full"}`}>
+          <div className={`relative flex items-end xl:h-full xl:pt-[30px] ${image ? "xl:w-[51.5%]" : "xl:w-full"}`}>
             <div className="flex flex-1 flex-col items-start justify-center gap-5 rounded bg-gray-50 p-6 shadow-[10px_10px_0_0_var(--color-encre)] xl:p-9">
               <p className="w-full text-base font-medium text-primary-950">{description}</p>
             </div>

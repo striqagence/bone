@@ -13,6 +13,11 @@ import { classesBouton } from "./Button";
  * n'en emprunte que l'apparence. La maquette place l'ancre sur ce seul bouton,
  * ce qui réduirait la cible cliquable à un rectangle de 130px au bas d'une
  * carte de 400 × 500.
+ *
+ * Les 500px de la maquette sont un minimum, pas une hauteur : figés, un titre
+ * de quatre lignes poussait le bouton hors de la carte dès que la colonne se
+ * resserrait. Les cartes d'une même rangée restent alignées, la grille les
+ * étirant sur la plus haute.
  */
 export function CarteArticle({
   langue,
@@ -38,7 +43,7 @@ export function CarteArticle({
   return (
     <Link
       href={lien(chemin, langue)}
-      className="carte-survol group flex h-[500px] w-full flex-col items-start gap-6 rounded bg-gray-50 px-7 pb-9 pt-7 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)]"
+      className="carte-survol group flex min-h-[500px] w-full flex-col items-start gap-6 rounded bg-gray-50 px-7 pb-9 pt-7 shadow-[10px_10px_0_0_rgb(0_0_34/0.3)]"
     >
       <div className="relative flex w-full flex-col items-start gap-4">
         <div className="relative h-[180px] w-full overflow-hidden rounded bg-gris-300">

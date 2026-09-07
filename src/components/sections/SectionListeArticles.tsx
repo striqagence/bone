@@ -59,11 +59,17 @@ export function SectionListeArticles({
             qui navigue au clavier ou à l'oreille, sans rien changer à l'écran. */}
         <h2 className="sr-only">{libelles.titre}</h2>
 
-        <div className="flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between">
-          {/* Les filtres défilent au doigt : cinq puces ne tiennent pas sur la
-              largeur d'un téléphone, et les passer à la ligne repousserait la
-              grille d'autant. */}
-          <ul className="-mx-6 flex w-[calc(100%+3rem)] items-center gap-2.5 overflow-x-auto px-6 lg:mx-0 lg:w-auto lg:px-0">
+        <div className="flex flex-col items-start gap-4 xl:flex-row xl:items-center xl:justify-between">
+          {/* Sur un téléphone, les puces défilent au doigt : cinq d'entre elles
+              n'y tiennent pas, et les passer à la ligne repousserait la grille
+              d'autant. Dès 768px elles passent à la ligne : il y a la place
+              pour deux rangées, et faire défiler une bande horizontale à la
+              souris est bien moins commode qu'au doigt.
+
+              Elles ne partagent leur ligne avec le décompte qu'à partir de
+              1280px : en dessous, la dernière puce se retrouvait tronquée
+              contre lui. */}
+          <ul className="-mx-6 flex w-[calc(100%+3rem)] items-center gap-2.5 overflow-x-auto px-6 md:mx-0 md:w-full md:flex-wrap md:overflow-visible md:px-0 xl:w-auto">
             <li>
               <Link href={url()} className={puce(!categorieActive)}>
                 {libelles.tousSujets}
@@ -86,7 +92,7 @@ export function SectionListeArticles({
         {articles.length === 0 ? (
           <p className="py-12 text-lg text-primary-950 opacity-60">{libelles.vide}</p>
         ) : (
-          <ul className="apparition-bloc grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="apparition-bloc grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3">
             {articles.map((article) => (
               <li key={article.chemin} className="flex">
                 <CarteArticle
