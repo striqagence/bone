@@ -175,17 +175,11 @@ toutes les pages, sans message d'erreur.
 1. **Vidéo du hero d'accueil** : prévue, une image est servie en attendant. Le
    passage demandera un champ vidéo, une balise `<video>` muette en boucle, et
    l'image actuelle en repli.
-2. **Mentions légales : deux numéros manquants**. Renseignés : BONE IT, SARL
-   au capital fixe de 100 000,00 €, SIREN 847 676 970, RCS d'Évry, siège au
-   12 avenue de Norvège, 91140 Villebon-sur-Yvette, directeur de la
-   publication Tarek Boukachabia. Restent entre crochets, faute de les
-   connaître : **le SIRET** (le SIREN suivi des cinq chiffres du NIC du siège)
-   et **le numéro de TVA intracommunautaire**. À compléter au back-office
-   avant la mise en ligne.
-
-   La TVA se déduit du SIREN par une formule fixe et vaudrait FR61847676970,
-   mais seulement si la société est assujettie. À confirmer plutôt qu'à
-   recopier.
+2. **Mentions légales complètes** : BONE IT, SARL au capital fixe de
+   100 000,00 €, SIREN 847 676 970, SIRET 847 676 970 00027, TVA
+   FR61847676970, RCS d'Évry, siège au 12 avenue de Norvège, 91140
+   Villebon-sur-Yvette, directeur de la publication Tarek Boukachabia. Plus
+   aucun crochet dans le texte.
 3. **Pas d'adaptateur e-mail** : ni réinitialisation de mot de passe, ni
    notification du formulaire de contact, ni envoi de la lettre d'information.
    `striq-web` utilise Resend.

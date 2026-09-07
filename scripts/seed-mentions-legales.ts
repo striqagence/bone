@@ -6,10 +6,10 @@ import { liste, paragraphe, racine, titre } from "./lexical";
 /**
  * Mentions légales.
  *
- * Les informations d'immatriculation ont été fournies par la cliente. Seuls le
- * SIRET et le numéro de TVA manquent encore : ils restent entre crochets, à
- * compléter au back-office avant la mise en ligne. Inventer un identifiant
- * légal serait pire que de le laisser manquant.
+ * Toutes les informations d'immatriculation ont été fournies par la cliente.
+ * Les deux dernières ont été recoupées avant d'être inscrites : le SIRET porte
+ * bien le SIREN, son NIC est 00027 et sa clé de Luhn tombe juste ; la clé du
+ * numéro de TVA correspond à celle que le SIREN impose.
  */
 const payload = await getPayload({ config });
 
@@ -36,8 +36,8 @@ const corpsFr = racine([
   ),
   liste([
     "SIREN : 847 676 970, immatriculée au RCS d’Évry",
-    "SIRET : [numéro]",
-    "TVA intracommunautaire : [numéro]",
+    "SIRET : 847 676 970 00027",
+    "TVA intracommunautaire : FR61847676970",
     "Téléphone : 01 80 86 60 66",
     "Courriel : ⟦courriel⟧",
   ]),
@@ -93,8 +93,8 @@ const corpsEn = racine([
   ),
   liste([
     "SIREN: 847 676 970, registered with the Évry Trade and Companies Register",
-    "SIRET: [number]",
-    "VAT number: [number]",
+    "SIRET: 847 676 970 00027",
+    "VAT number: FR61847676970",
     "Telephone: +33 1 80 86 60 66",
     "Email: ⟦courriel⟧",
   ]),
