@@ -175,16 +175,17 @@ toutes les pages, sans message d'erreur.
 1. **Vidéo du hero d'accueil** : prévue, une image est servie en attendant. Le
    passage demandera un champ vidéo, une balise `<video>` muette en boucle, et
    l'image actuelle en repli.
-2. **Mentions légales presque complètes** : dénomination (BONE IT), SIREN
-   (847 676 970), siège (12 avenue de Norvège, 91140 Villebon-sur-Yvette) et
-   directeur de la publication (Tarek Boukachabia) sont renseignés. Restent
-   entre crochets, faute de les connaître : forme juridique, capital social,
-   ville du RCS, SIRET et numéro de TVA. Le reste, hébergeur, sous-traitants et
-   régions, est exact. À compléter au back-office avant la mise en ligne.
+2. **Mentions légales : deux numéros manquants**. Renseignés : BONE IT, SARL
+   au capital fixe de 100 000,00 €, SIREN 847 676 970, RCS d'Évry, siège au
+   12 avenue de Norvège, 91140 Villebon-sur-Yvette, directeur de la
+   publication Tarek Boukachabia. Restent entre crochets, faute de les
+   connaître : **le SIRET** (le SIREN suivi des cinq chiffres du NIC du siège)
+   et **le numéro de TVA intracommunautaire**. À compléter au back-office
+   avant la mise en ligne.
 
-   Le numéro de TVA intracommunautaire se déduit du SIREN par une formule
-   fixe et vaudrait FR61847676970, mais seulement si la société est assujettie.
-   À confirmer plutôt qu'à recopier.
+   La TVA se déduit du SIREN par une formule fixe et vaudrait FR61847676970,
+   mais seulement si la société est assujettie. À confirmer plutôt qu'à
+   recopier.
 3. **Pas d'adaptateur e-mail** : ni réinitialisation de mot de passe, ni
    notification du formulaire de contact, ni envoi de la lettre d'information.
    `striq-web` utilise Resend.
@@ -369,3 +370,17 @@ Elle a aussi été retirée des données structurées, où elle était publiée 
 clair** dans le JSON-LD de chaque page, ce qui annulait toute la peine prise
 ailleurs. La propriété `email` de `Organization` est facultative ; le numéro de
 téléphone, lui, reste.
+
+Sur les pages légales, où la loi impose de l'afficher, l'adresse est **une
+image** : ni cliquable, ni sélectionnable, ni lisible par un moissonneur. Son
+texte de remplacement l'épelle (« bone arobase contact point fr ») pour qu'un
+lecteur d'écran la restitue sans qu'une expression régulière la reconnaisse. Le
+clic et le copier-coller sont perdus : c'est le prix assumé de ce choix.
+
+Le fichier est produit par `npx payload run scripts/generer-image-courriel.ts`,
+qui lit l'adresse dans le back-office et la compose dans la police du site via
+Chrome. **À relancer si l'adresse change** : le nom du fichier porte une
+empreinte de l'adresse, si bien qu'une adresse modifiée sans régénération ne
+correspond plus à aucun fichier, et la page se rabat sur un renvoi au
+formulaire plutôt que d'afficher une adresse périmée. Chrome n'est nécessaire
+qu'à cette génération, jamais au build ni à l'exécution.

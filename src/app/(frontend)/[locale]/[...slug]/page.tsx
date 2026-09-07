@@ -6,7 +6,7 @@ import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
 import { RendreSections } from "@/components/sections/RendreSections";
 import { derniersArticles } from "@/lib/articles";
 import { DonneesStructurees } from "@/components/site/DonneesStructurees";
-import { encoderCourriel } from "@/lib/courriel";
+import { imageCourriel } from "@/lib/image-courriel";
 import {
   alternatives,
   filDAriane,
@@ -109,7 +109,7 @@ export default async function PageDuSite({ params }: PageProps<"/[locale]/[...sl
       langue={locale}
       bandes={bandes}
       articles={articles}
-      courriel={navigation ? encoderCourriel(navigation.contact.email) : undefined}
+      courriel={navigation ? imageCourriel(navigation.contact.email, locale) : undefined}
       repliCourriel={navigation?.contact.libelleFormulaire ?? ""}
     />
   );

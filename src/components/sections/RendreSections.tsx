@@ -21,6 +21,7 @@ import { SectionSynergie } from "@/components/sections/SectionSynergie";
 import type { Langue } from "@/lib/i18n";
 import type { Article } from "@/lib/articles";
 import type { Page } from "@/lib/pages";
+import type { ImageCourriel } from "@/lib/image-courriel";
 
 type Bande = {
   pole: "expertise" | "capital" | "feed";
@@ -55,8 +56,8 @@ export function RendreSections({
   langue: Langue;
   bandes: Bande[];
   articles: Article[];
-  /** Adresse encodée, pour les textes qui portent le jeton de courriel. */
-  courriel?: string;
+  /** Image de l'adresse, pour les textes qui portent le jeton de courriel. */
+  courriel?: ImageCourriel;
   repliCourriel?: string;
 }) {
   return (

@@ -6,11 +6,10 @@ import { liste, paragraphe, racine, titre } from "./lexical";
 /**
  * Mentions légales.
  *
- * Dénomination, SIREN, siège social et directeur de la publication ont été
- * fournis par la cliente. Ce qui manque encore — forme juridique, capital,
- * ville du RCS, SIRET, numéro de TVA — reste entre crochets, à compléter au
- * back-office avant la mise en ligne. Inventer un identifiant légal serait
- * pire que de le laisser manquant.
+ * Les informations d'immatriculation ont été fournies par la cliente. Seuls le
+ * SIRET et le numéro de TVA manquent encore : ils restent entre crochets, à
+ * compléter au back-office avant la mise en ligne. Inventer un identifiant
+ * légal serait pire que de le laisser manquant.
  */
 const payload = await getPayload({ config });
 
@@ -31,11 +30,12 @@ const heroEn = {
 const corpsFr = racine([
   titre("Éditeur du site"),
   paragraphe(
-    "Le présent site est édité par BONE IT, [forme juridique] au capital de [montant] euros, dont le " +
-      "siège social est situé 12 avenue de Norvège, 91140 Villebon-sur-Yvette, France.",
+    "Le présent site est édité par BONE IT, société à responsabilité limitée au capital fixe de " +
+      "100 000,00 euros, dont le siège social est situé 12 avenue de Norvège, 91140 " +
+      "Villebon-sur-Yvette, France.",
   ),
   liste([
-    "SIREN : 847 676 970, immatriculée au RCS de [ville]",
+    "SIREN : 847 676 970, immatriculée au RCS d’Évry",
     "SIRET : [numéro]",
     "TVA intracommunautaire : [numéro]",
     "Téléphone : 01 80 86 60 66",
@@ -87,11 +87,12 @@ const corpsFr = racine([
 const corpsEn = racine([
   titre("Site publisher"),
   paragraphe(
-    "This site is published by BONE IT, [legal form] with share capital of [amount] euros, registered " +
-      "office at 12 avenue de Norvège, 91140 Villebon-sur-Yvette, France.",
+    "This site is published by BONE IT, a French limited liability company (SARL) with a fixed share " +
+      "capital of 100,000.00 euros, registered office at 12 avenue de Norvège, 91140 " +
+      "Villebon-sur-Yvette, France.",
   ),
   liste([
-    "SIREN: 847 676 970, registered with the Trade and Companies Register of [city]",
+    "SIREN: 847 676 970, registered with the Évry Trade and Companies Register",
     "SIRET: [number]",
     "VAT number: [number]",
     "Telephone: +33 1 80 86 60 66",

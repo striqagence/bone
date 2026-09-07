@@ -1,10 +1,12 @@
+import Link from "next/link";
 import { RichText, type JSXConvertersFunction } from "@payloadcms/richtext-lexical/react";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
-import { AdresseCourriel } from "@/components/ui/AdresseCourriel";
+import { CourrielEnImage } from "@/components/ui/CourrielEnImage";
 import { Surtitre } from "@/components/ui/Surtitre";
 import { FlecheRenvoi } from "@/components/ui/icones";
-import type { Langue } from "@/lib/i18n";
+import { lien, type Langue } from "@/lib/i18n";
+import type { ImageCourriel } from "@/lib/image-courriel";
 
 /**
  * Texte long d'une page légale.
@@ -16,13 +18,16 @@ import type { Langue } from "@/lib/i18n";
  *
  * Les mentions légales doivent afficher une adresse de courriel, la loi
  * l'exige : elle ne peut pas être remplacée par un renvoi au formulaire. Le
- * texte porte donc un jeton à sa place, et le rendu y substitue l'adresse, qui
- * n'est jamais écrite dans la page.
+ * texte porte donc un jeton à sa place, et le rendu y substitue une image de
+ * l'adresse. Elle n'est ainsi ni écrite dans la page, ni cliquable.
+ *
+ * Faute d'image, c'est le renvoi au formulaire qui s'affiche : mieux vaut un
+ * détour qu'une adresse fausse.
  */
 const JETON = "⟦courriel⟧";
 
 const fabriquer =
-  (courriel: string | undefined, langue: Langue, repli: string): JSXConvertersFunction =>
+  (courriel: ImageCourriel | undefined, langue: Langue, repli: string): JSXConvertersFunction =>
   ({ defaultConverters }) => ({
     ...defaultConverters,
   heading: ({ node, nodesToJSX }) => {
@@ -51,17 +56,22 @@ const fabriquer =
   ),
   text: ({ node }) => {
     const morceaux = node.text.split(JETON);
-    if (morceaux.length === 1 || !courriel) return node.text.replace(JETON, "");
+    if (morceaux.length === 1) return node.text;
     return morceaux.map((morceau, i) => (
       <span key={i}>
-        {i > 0 && (
-          <AdresseCourriel
-            code={courriel}
-            langue={langue}
-            repli={repli}
-            className="text-primary-600 underline underline-offset-2"
-          />
-        )}
+        {i > 0 &&
+          (courriel ? (
+            <CourrielEnImage image={courriel} />
+          ) : (
+            /* Sans image, la phrase ne peut pas s'arrêter dans le vide : elle
+               renvoie au formulaire, qui reste un moyen de nous joindre. */
+            <Link
+              href={lien("/contact", langue)}
+              className="text-primary-600 underline underline-offset-2"
+            >
+              {repli}
+            </Link>
+          ))}
         {morceau}
       </span>
     ));
@@ -90,8 +100,8 @@ export function SectionTexteLong({
 }: {
   surtitre?: string | null;
   corps: SerializedEditorState;
-  /** L'adresse encodée, si la page en porte une. */
-  courriel?: string;
+  /** L'image de l'adresse, si la page en porte une. */
+  courriel?: ImageCourriel;
   langue: Langue;
   repliCourriel: string;
 }) {
