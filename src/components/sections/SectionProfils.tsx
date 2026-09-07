@@ -20,11 +20,12 @@ import {
  * Cette progression est portée par la position et non par le contenu : le
  * back-office n'a donc pas à la saisir.
  *
- * Le même composant sert aux cartes d'enjeux des pages de pôle, où le dégradé
- * est écarté : entre le bleu de marque et le marine, l'écart y était lu comme
- * un patchwork plutôt que comme une progression. Elles prennent alors l'aplat
- * marine, et l'ombre portée tombe avec le dégradé — elle ne servait qu'à
- * détacher des fonds voisins devenus identiques.
+ * Le même composant sert aux cartes d'enjeux des pages de pôle, dans une
+ * variante sobre : aplat marine, sans ombre ni décalage au survol. Le dégradé
+ * y était lu comme un patchwork plutôt que comme une progression ; l'ombre ne
+ * servait qu'à détacher des fonds devenus identiques ; et ces cartes ne sont
+ * pas cliquables, si bien que les animer au survol promettait un geste qui
+ * n'existe pas.
  *
  * Le titre alterne deux intensités, l'énoncé en retrait et sa résolution à
  * pleine opacité — l'inverse du hero, où c'est le verbe qui est appuyé.
@@ -46,15 +47,15 @@ export function SectionProfils({
   titreHaut,
   titreBas,
   profils,
-  degrade = true,
+  variante = "degrade",
 }: {
   surtitre: string;
   /** Absent, le titre s'affiche d'une seule intensité — l'accueil l'énonce en
       deux temps, la page Expertise non. */
   titreHaut?: string | null;
   titreBas: string;
-  /** Faux, les cartes prennent toutes le marine, sans ombre portée. */
-  degrade?: boolean;
+  /** « sobre » : aplat marine, sans ombre portée ni réaction au survol. */
+  variante?: "degrade" | "sobre";
   profils: {
     picto: keyof typeof pictos;
     titre: string;
@@ -80,9 +81,9 @@ export function SectionProfils({
         {profils.map((profil, index) => (
           <div
             key={profil.titre}
-            className={`carte-survol flex flex-col items-start gap-8 p-8 xl:min-h-[450px] xl:flex-row xl:items-center xl:p-10 2xl:p-14 ${
-              degrade
-                ? `shadow-[10px_10px_0_0_var(--color-encre)] ${fonds[index % fonds.length]}`
+            className={`flex flex-col items-start gap-8 p-8 xl:min-h-[450px] xl:flex-row xl:items-center xl:p-10 2xl:p-14 ${
+              variante === "degrade"
+                ? `carte-survol shadow-[10px_10px_0_0_var(--color-encre)] ${fonds[index % fonds.length]}`
                 : "bg-primary-950"
             }`}
           >

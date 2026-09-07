@@ -109,9 +109,11 @@ export function RendreSections({
             return (
               <SectionProfils
                 key={section.id}
-                /* Aplat uni : le dégradé de l'accueil, repris ici, se lisait
-                   comme un patchwork plutôt que comme une progression. */
-                degrade={false}
+                /* Variante sobre : aplat marine, sans ombre ni survol. Le
+                   dégradé de l'accueil se lisait ici comme un patchwork, et
+                   ces cartes n'étant pas cliquables, les animer au survol
+                   promettait un geste qui n'existe pas. */
+                variante="sobre"
                 surtitre={section.surtitre}
                 titreHaut={section.titreHaut}
                 titreBas={section.titreBas}
