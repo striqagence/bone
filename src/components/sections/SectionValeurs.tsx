@@ -6,6 +6,12 @@ import { pictoTrait, type NomPictoTrait } from "@/components/ui/pictos-traits";
  *
  * Cartes claires posées sur le fond sombre, au filigrane près : c'est la même
  * bande que « Nos 3 pôles » à l'accueil, en plus court et sans lien.
+ *
+ * La section respire comme les autres, `py-16 lg:py-32`. Son sommet était collé
+ * au bloc précédent : il n'avait aucun rembourrage haut au delà de 1024px, et
+ * comme les deux blocs partagent le même fond sombre, la coupure ne se voyait
+ * pas. Il restait 100px entre les deux contenus, contre 200 à 560 partout
+ * ailleurs sur la page.
  */
 export function SectionValeurs({
   surtitre,
@@ -15,7 +21,7 @@ export function SectionValeurs({
   cartes: { id?: string | null; picto: NomPictoTrait; titre: string; texte: string }[];
 }) {
   return (
-    <section className="relative flex w-full flex-col items-center overflow-hidden bg-encre px-6 pb-16 pt-8 lg:px-28 lg:pb-32 lg:pt-0">
+    <section className="relative flex w-full flex-col items-center overflow-hidden bg-encre px-6 py-16 lg:px-28 lg:py-32">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/brand/bone-filigrane.svg"
