@@ -109,6 +109,9 @@ export function RendreSections({
             return (
               <SectionProfils
                 key={section.id}
+                /* Aplat uni : le dégradé de l'accueil, repris ici, se lisait
+                   comme un patchwork plutôt que comme une progression. */
+                degrade={false}
                 surtitre={section.surtitre}
                 titreHaut={section.titreHaut}
                 titreBas={section.titreBas}
