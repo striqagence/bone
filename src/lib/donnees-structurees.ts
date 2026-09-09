@@ -9,14 +9,26 @@ import { lien, type Langue } from "./i18n";
  * qui ne soit vérifié. Les identifiants d'immatriculation manquent encore aux
  * mentions légales : ils manquent donc aussi ici, plutôt que d'être inventés.
  *
- * L'adresse de base vient de l'environnement. En développement elle vaut
- * localhost, ce qui produit des URL absolues inutilisables mais sans
- * conséquence : les moteurs ne lisent que la production.
+ * L'adresse de base vient de l'environnement, avec le même repli que la
+ * configuration Payload : à défaut de variable explicite, celle du déploiement
+ * Vercel, qui suit automatiquement le domaine de production. Sans ce repli, une
+ * mise en ligne sans `NEXT_PUBLIC_SERVER_URL` annonçait « localhost » dans
+ * toutes les URL canoniques, les `hreflang` et les données structurées.
  */
-export const BASE = (process.env.NEXT_PUBLIC_SERVER_URL ?? "http://localhost:3000").replace(
-  /\/$/,
-  "",
-);
+function adresseDeBase(): string {
+  if (process.env.NEXT_PUBLIC_SERVER_URL) return process.env.NEXT_PUBLIC_SERVER_URL;
+  const production = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  return production ? `https://${production}` : "http://localhost:3000";
+}
+
+export const BASE = adresseDeBase().replace(/\/$/, "");
+
+/**
+ * Vrai tant que le site n'est pas servi depuis son domaine définitif : en
+ * local, ou sur une adresse de prévisualisation Vercel. Le `robots.txt` s'y
+ * appuie pour refuser l'indexation.
+ */
+export const ADRESSE_PROVISOIRE = /(^|\.)vercel\.app$|^localhost$/.test(new URL(BASE).hostname);
 
 const absolu = (chemin: string, langue: Langue) => `${BASE}${lien(chemin, langue)}`;
 
