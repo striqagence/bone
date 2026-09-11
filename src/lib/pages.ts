@@ -3,6 +3,7 @@ import config from "@payload-config";
 
 import type { Page } from "@/payload-types";
 
+import { contexteApercu } from "./apercu";
 import type { Langue } from "./i18n";
 
 /**
@@ -20,10 +21,16 @@ export async function trouverPage(
   if (segments.length === 0) return null;
 
   const payload = await getPayload({ config });
+  // En aperçu, l'utilisateur connecté est transmis : l'accès en lecture le
+  // reconnaît et laisse passer le brouillon. Sinon, les deux valeurs sont
+  // neutres et la page se comporte comme pour un visiteur.
+  const { draft, user } = await contexteApercu();
   const { docs } = await payload.find({
     collection: "pages",
     // Le local API ignore l’`access` par défaut : sans ceci, un brouillon sortirait.
     overrideAccess: false,
+    draft,
+    user,
     locale: langue,
     where: { slug: { equals: segments[segments.length - 1] } },
     depth: 2,

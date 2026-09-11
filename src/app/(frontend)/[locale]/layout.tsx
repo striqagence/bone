@@ -9,6 +9,8 @@ import { estUneLangue, langues } from "@/lib/i18n";
 import { chargerNavigation, pourEntete } from "@/lib/navigation";
 
 import "./globals.css";
+import { BandeauApercu } from "@/components/site/BandeauApercu";
+import { contexteApercu } from "@/lib/apercu";
 
 /**
  * Les deux familles du design system, chargées en variable : une seule requête
@@ -61,6 +63,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
   if (!estUneLangue(locale)) notFound();
 
   const navigation = await chargerNavigation(locale);
+  // Le bandeau n'apparaît qu'en aperçu : hors de ce cas, `contexteApercu` ne
+  // lit qu'un cookie et ne tente aucune authentification.
+  const { draft: enApercu } = await contexteApercu();
 
   return (
     <html
@@ -68,6 +73,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
       className={`${policePrimaire.variable} ${policeSecondaire.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {enApercu && <BandeauApercu />}
         <Header langue={locale} navigation={pourEntete(navigation)} />
         {children}
         <Footer langue={locale} navigation={navigation} />

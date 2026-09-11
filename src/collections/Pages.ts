@@ -3,6 +3,7 @@ import type { CollectionConfig } from "payload";
 import { sections } from "../blocks";
 import { lectureDesPubliees } from "../lib/acces";
 import { revaliderSite } from "../lib/revalidate";
+import { urlApercu } from "../lib/apercu-url";
 
 /**
  * Pages du site vitrine.
@@ -22,6 +23,7 @@ export const Pages: CollectionConfig = {
   labels: { singular: "Page", plural: "Pages" },
   admin: {
     useAsTitle: "titre",
+    preview: (doc, { locale }) => urlApercu({ collection: "pages", id: doc.id as string }, locale),
     group: "Contenu",
     defaultColumns: ["titre", "slug", "parent", "_status"],
   },

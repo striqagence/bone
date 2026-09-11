@@ -1,6 +1,7 @@
 import type { GlobalConfig } from "payload";
 
 import { revaliderSite } from "../lib/revalidate";
+import { urlApercu } from "../lib/apercu-url";
 
 /**
  * Libellés de la liste du blog.
@@ -14,7 +15,10 @@ import { revaliderSite } from "../lib/revalidate";
 export const Blog: GlobalConfig = {
   slug: "blog",
   label: "Blog",
-  admin: { group: "Configuration" },
+  admin: {
+    group: "Configuration",
+    preview: (_, { locale }) => urlApercu({ global: "blog" }, locale),
+  },
   access: { read: () => true },
   hooks: { afterChange: [() => revaliderSite()] },
   fields: [

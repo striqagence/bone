@@ -17,6 +17,7 @@ import { Articles, AppelAction, Faq } from "../blocks";
 import { ARetenir } from "../blocks/article";
 import { lectureDesPubliees } from "../lib/acces";
 import { revaliderSite } from "../lib/revalidate";
+import { urlApercu } from "../lib/apercu-url";
 
 /**
  * Articles du blog.
@@ -36,6 +37,7 @@ export const Posts: CollectionConfig = {
   labels: { singular: "Article", plural: "Articles" },
   admin: {
     useAsTitle: "titre",
+    preview: (doc, { locale }) => urlApercu({ collection: "posts", id: doc.id as string }, locale),
     group: "Contenu",
     defaultColumns: ["titre", "categorie", "publieLe", "_status"],
   },

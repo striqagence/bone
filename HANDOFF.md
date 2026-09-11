@@ -343,6 +343,27 @@ Les deux encadrés sont le même bloc d'éditeur (`aRetenir`), dont l'étiquette
 est libre. Rien n'impose cette trame dans le schéma : c'est une convention
 éditoriale, à tenir à la main au back-office.
 
+## Aperçu depuis le back-office
+
+Chaque page, chaque article et les globaux Accueil, Contact et Blog portent un
+bouton d'aperçu dans le back-office. Il ouvre la page publique, brouillon
+compris, et un bandeau bleu le signale avec un lien pour en sortir.
+
+Le back-office ne connaît pas l'URL publique d'une page : elle se déduit de la
+chaîne de ses parents, que la configuration d'une collection ne peut pas
+remonter sans importer Payload et créer un cycle. Le bouton pointe donc vers
+`/apercu` avec un identifiant, et c'est cette route qui résout le chemin.
+
+Voir un brouillon demande **deux** conditions : le mode brouillon de Next, posé
+par cette route, **et** un utilisateur Payload connecté, que `contexteApercu`
+revérifie à chaque rendu. Le cookie seul ne suffit pas, il vit dans le
+navigateur et survivrait à une déconnexion. Vérifié : un cookie de brouillon
+forgé sans session n'ouvre rien.
+
+Ce qui reste à faire de ce côté : l'aperçu côte à côte, qui affiche la page
+dans un panneau de l'admin et se rafraîchit à la frappe. Il demande le paquet
+`@payloadcms/live-preview-react`, non installé.
+
 ## Brouillons
 
 Les collections `pages` et `posts` versionnent leurs contenus. Leur lecture

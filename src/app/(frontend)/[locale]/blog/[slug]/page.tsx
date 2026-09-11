@@ -11,6 +11,7 @@ import { RendreSections } from "@/components/sections/RendreSections";
 import { derniersArticles, enArticle } from "@/lib/articles";
 import { estUneLangue, type Langue } from "@/lib/i18n";
 import type { Post } from "@/payload-types";
+import { contexteApercu } from "@/lib/apercu";
 
 /**
  * Détail d'un article.
@@ -21,10 +22,13 @@ import type { Post } from "@/payload-types";
  */
 async function chargerArticle(slug: string, langue: Langue): Promise<Post | null> {
   const payload = await getPayload({ config });
+  const { draft, user } = await contexteApercu();
   const { docs } = await payload.find({
     collection: "posts",
     // Le local API ignore l’`access` par défaut : sans ceci, un brouillon sortirait.
     overrideAccess: false,
+    draft,
+    user,
     locale: langue,
     where: { slug: { equals: slug } },
     limit: 1,

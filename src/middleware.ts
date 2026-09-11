@@ -25,9 +25,10 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   /**
-   * Le back-office et l'API de Payload sont hors du périmètre : ils vivent dans
-   * le groupe de routes `(payload)`, qui n'a pas de segment de langue. Les
-   * fichiers statiques et les assets de marque sont exclus pour la même raison.
+   * Le back-office, l'API et l'aperçu de Payload sont hors du périmètre : ils
+   * vivent dans le groupe de routes `(payload)`, qui n'a pas de segment de
+   * langue. Les fichiers statiques et les assets de marque sont exclus pour la
+   * même raison.
    */
-  matcher: ["/((?!admin|api|_next/static|_next/image|brand|favicon.ico|.*\\.).*)"],
+  matcher: ["/((?!admin|api|apercu|_next/static|_next/image|brand|favicon.ico|.*\\.).*)"],
 };
