@@ -59,7 +59,11 @@ export const Media: CollectionConfig = {
     afterDelete: [() => revaliderSite()],
   },
   labels: { singular: "Média", plural: "Médias" },
-  admin: { group: "Contenu" },
+  admin: {
+    group: "Contenu",
+    description:
+      "Images et fichiers. Le texte alternatif est lu à voix haute : décrivez ce que montre l’image.",
+  },
   access: { read: () => true },
   upload: {
     // Trois largeurs couvrant les usages courants : vignette, carte, bandeau.

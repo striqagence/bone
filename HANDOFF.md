@@ -364,6 +364,26 @@ Ce qui reste à faire de ce côté : l'aperçu côte à côte, qui affiche la pa
 dans un panneau de l'admin et se rafraîchit à la frappe. Il demande le paquet
 `@payloadcms/live-preview-react`, non installé.
 
+## Confort d'édition
+
+Chaque bloc de section porte une **vignette** dans le sélecteur du back-office :
+une photo de lui-même, prise sur le site, rangée dans `public/blocs`. Vingt
+intitulés dans une liste ne se distinguent pas les uns des autres, vingt images
+si. Elles se régénèrent par :
+
+```bash
+npm start &                                   # le site doit répondre
+npx payload run scripts/vignettes-blocs.ts
+```
+
+Le script retrouve chaque bloc par son titre sur la page qui le porte, masque
+l'en-tête collant, cadre en 16:9 depuis le sommet de la section et réduit à
+360px. Deux blocs n'ayant pas de titre, `reperes` et `texteLong`, ont un repère
+écrit en dur dans le script. À relancer quand une section change d'allure.
+
+Chaque collection et chaque global porte par ailleurs une phrase de
+description, affichée en tête de son écran d'édition.
+
 ## Brouillons
 
 Les collections `pages` et `posts` versionnent leurs contenus. Leur lecture

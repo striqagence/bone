@@ -16,6 +16,7 @@ export const Demandes: CollectionConfig = {
   labels: { singular: "Demande", plural: "Demandes" },
   admin: {
     group: "Contact",
+    description: "Les demandes reçues par le formulaire de contact, de la plus récente à la plus ancienne.",
     useAsTitle: "email",
     defaultColumns: ["email", "nom", "prenom", "profil", "createdAt"],
   },

@@ -39,6 +39,7 @@ export const Posts: CollectionConfig = {
     useAsTitle: "titre",
     preview: (doc, { locale }) => urlApercu({ collection: "posts", id: doc.id as string }, locale),
     group: "Contenu",
+    description: "Les articles du blog. Un brouillon reste invisible du public jusqu’à sa publication.",
     defaultColumns: ["titre", "categorie", "publieLe", "_status"],
   },
   access: { read: lectureDesPubliees },

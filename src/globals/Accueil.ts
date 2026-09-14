@@ -15,6 +15,7 @@ export const Accueil: GlobalConfig = {
   label: "Accueil",
   admin: {
     group: "Contenu",
+    description: "La page d’accueil. Ses sections sont fixes : leur contenu se modifie ici, pas leur ordre.",
     preview: (_, { locale }) => urlApercu({ global: "accueil" }, locale),
   },
   access: { read: () => true },

@@ -140,6 +140,8 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Les comptes qui accèdent à ce back-office.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -166,6 +168,8 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Images et fichiers. Le texte alternatif est lu à voix haute : décrivez ce que montre l’image.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
@@ -214,6 +218,8 @@ export interface Media {
   };
 }
 /**
+ * Les pages du site. Chaque page choisit ses sections et leur ordre.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
@@ -608,6 +614,8 @@ export interface Page {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Les articles du blog. Un brouillon reste invisible du public jusqu’à sa publication.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
@@ -697,6 +705,8 @@ export interface Post {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Les rubriques du blog. Changer un slug change l’adresse du filtre correspondant.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
@@ -716,6 +726,8 @@ export interface Category {
   createdAt: string;
 }
 /**
+ * Les demandes reçues par le formulaire de contact, de la plus récente à la plus ancienne.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "demandes".
  */
@@ -735,6 +747,8 @@ export interface Demande {
   createdAt: string;
 }
 /**
+ * Les inscriptions à la lettre d’information.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "abonnes".
  */
@@ -1431,6 +1445,8 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * La page d’accueil. Ses sections sont fixes : leur contenu se modifie ici, pas leur ordre.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "accueil".
  */
@@ -1667,6 +1683,8 @@ export interface Accueil {
   createdAt?: string | null;
 }
 /**
+ * Les libellés de la liste du blog et des pages d’article. Aucun texte éditorial ici.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog".
  */
@@ -1703,6 +1721,8 @@ export interface Blog {
   createdAt?: string | null;
 }
 /**
+ * La page de contact : coordonnées, plan d’accès et libellés du formulaire.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact".
  */

@@ -18,6 +18,7 @@ export const Contact: GlobalConfig = {
   label: "Contact",
   admin: {
     group: "Contenu",
+    description: "La page de contact : coordonnées, plan d’accès et libellés du formulaire.",
     preview: (_, { locale }) => urlApercu({ global: "contact" }, locale),
   },
   access: { read: () => true },

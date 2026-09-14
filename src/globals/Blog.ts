@@ -17,6 +17,7 @@ export const Blog: GlobalConfig = {
   label: "Blog",
   admin: {
     group: "Configuration",
+    description: "Les libellés de la liste du blog et des pages d’article. Aucun texte éditorial ici.",
     preview: (_, { locale }) => urlApercu({ global: "blog" }, locale),
   },
   access: { read: () => true },

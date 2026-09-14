@@ -16,12 +16,18 @@ import {
  * Les écrans internes enchaînent des sections différentes sous un même hero.
  * Un champ de blocs sur la collection Pages évite d'avoir un global par page,
  * et laisse le back-office réordonner les sections sans passer par le code.
+ *
+ * Chaque bloc porte une vignette : une photo de lui-même, prise sur le site et
+ * rangée dans `public/blocs`. Vingt intitulés dans une liste ne se distinguent
+ * pas les uns des autres, vingt images si. Elles se régénèrent par
+ * `scripts/vignettes-blocs.ts` quand une section change d'allure.
  */
 export const BandePoles: Block = {
   slug: "bandePoles",
   labels: { singular: "Bande des pôles", plural: "Bandes des pôles" },
   admin: {
     group: "Sections",
+    images: { thumbnail: { url: "/blocs/bandePoles.jpg", alt: "Aperçu du bloc Bande des pôles" } },
   },
   fields: [
     {
@@ -43,7 +49,10 @@ export const BandePoles: Block = {
 export const Synergie: Block = {
   slug: "synergie",
   labels: { singular: "Synergie des pôles", plural: "Synergies des pôles" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/synergie.jpg", alt: "Aperçu du bloc Synergie des pôles" } },
+  },
   fields: [
     { name: "surtitre", type: "text", localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -54,7 +63,10 @@ export const Synergie: Block = {
 export const AppelAction: Block = {
   slug: "appelAction",
   labels: { singular: "Appel à l’action", plural: "Appels à l’action" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/appelAction.jpg", alt: "Aperçu du bloc Appel à l’action" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -74,7 +86,10 @@ export const AppelAction: Block = {
 export const Grille: Block = {
   slug: "grille",
   labels: { singular: "Grille d’intitulés", plural: "Grilles d’intitulés" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/grille.jpg", alt: "Aperçu du bloc Grille d’intitulés" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -107,7 +122,10 @@ export const Grille: Block = {
 export const Escalier: Block = {
   slug: "escalier",
   labels: { singular: "Cartes en escalier", plural: "Cartes en escalier" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/escalier.jpg", alt: "Aperçu du bloc Cartes en escalier" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -146,7 +164,10 @@ export const Escalier: Block = {
 export const Articles: Block = {
   slug: "articles",
   labels: { singular: "À lire aussi", plural: "À lire aussi" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/articles.jpg", alt: "Aperçu du bloc À lire aussi" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -176,7 +197,10 @@ export const Articles: Block = {
 export const Faq: Block = {
   slug: "faq",
   labels: { singular: "Questions fréquentes", plural: "Questions fréquentes" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/faq.jpg", alt: "Aperçu du bloc Questions fréquentes" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -203,7 +227,10 @@ export const Faq: Block = {
 export const Enjeux: Block = {
   slug: "enjeux",
   labels: { singular: "Cartes d’enjeux", plural: "Cartes d’enjeux" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/enjeux.jpg", alt: "Aperçu du bloc Cartes d’enjeux" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     {
@@ -252,7 +279,10 @@ export const Enjeux: Block = {
 export const Promesse: Block = {
   slug: "promesse",
   labels: { singular: "Affirmation sur halos", plural: "Affirmations sur halos" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/promesse.jpg", alt: "Aperçu du bloc Affirmation sur halos" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -262,7 +292,10 @@ export const Promesse: Block = {
 export const Chiffres: Block = {
   slug: "chiffres",
   labels: { singular: "Statistiques", plural: "Statistiques" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/chiffres.jpg", alt: "Aperçu du bloc Statistiques" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -303,7 +336,10 @@ export const Chiffres: Block = {
 export const Differenciation: Block = {
   slug: "differenciation",
   labels: { singular: "Comparaison", plural: "Comparaisons" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/differenciation.jpg", alt: "Aperçu du bloc Comparaison" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -367,7 +403,10 @@ export const Differenciation: Block = {
 export const Partenaires: Block = {
   slug: "partenaires",
   labels: { singular: "Logos partenaires", plural: "Logos partenaires" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/partenaires.jpg", alt: "Aperçu du bloc Logos partenaires" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     {
@@ -405,7 +444,10 @@ export const Partenaires: Block = {
 export const Posture: Block = {
   slug: "posture",
   labels: { singular: "Posture", plural: "Postures" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/posture.jpg", alt: "Aperçu du bloc Posture" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     {
@@ -439,7 +481,10 @@ export const Posture: Block = {
 export const PointsEntree: Block = {
   slug: "pointsEntree",
   labels: { singular: "Points d'entrée", plural: "Points d'entrée" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/pointsEntree.jpg", alt: "Aperçu du bloc Points d'entrée" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -477,7 +522,10 @@ export const PointsEntree: Block = {
 export const Newsletter: Block = {
   slug: "newsletter",
   labels: { singular: "Newsletter", plural: "Newsletters" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/newsletter.jpg", alt: "Aperçu du bloc Newsletter" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -526,7 +574,10 @@ const pictosTraits = [
 export const Reperes: Block = {
   slug: "reperes",
   labels: { singular: "Repères chiffrés", plural: "Repères chiffrés" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/reperes.jpg", alt: "Aperçu du bloc Repères chiffrés" } },
+  },
   fields: [
     {
       name: "cartes",
@@ -553,7 +604,10 @@ export const Reperes: Block = {
 export const Valeurs: Block = {
   slug: "valeurs",
   labels: { singular: "Valeurs", plural: "Valeurs" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/valeurs.jpg", alt: "Aperçu du bloc Valeurs" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     {
@@ -577,7 +631,10 @@ export const Valeurs: Block = {
 export const Archetype: Block = {
   slug: "archetype",
   labels: { singular: "Archétype", plural: "Archétypes" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/archetype.jpg", alt: "Aperçu du bloc Archétype" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
@@ -602,7 +659,10 @@ export const Archetype: Block = {
 export const Equipe: Block = {
   slug: "equipe",
   labels: { singular: "Équipe", plural: "Équipes" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/equipe.jpg", alt: "Aperçu du bloc Équipe" } },
+  },
   fields: [
     { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
     { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
@@ -631,7 +691,10 @@ export const Equipe: Block = {
 export const TexteLong: Block = {
   slug: "texteLong",
   labels: { singular: "Texte", plural: "Textes" },
-  admin: { group: "Sections" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/texteLong.jpg", alt: "Aperçu du bloc Texte" } },
+  },
   fields: [
     { name: "surtitre", type: "text", localized: true, label: "Surtitre" },
     {

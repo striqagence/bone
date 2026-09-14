@@ -13,7 +13,12 @@ import type { CollectionConfig } from "payload";
 export const Abonnes: CollectionConfig = {
   slug: "abonnes",
   labels: { singular: "Abonné", plural: "Abonnés" },
-  admin: { group: "Contact", useAsTitle: "email", defaultColumns: ["email", "langue", "createdAt"] },
+  admin: {
+    group: "Contact",
+    description: "Les inscriptions à la lettre d’information.",
+    useAsTitle: "email",
+    defaultColumns: ["email", "langue", "createdAt"],
+  },
   access: {
     // Fermée : `POST /api/abonnes` et la mutation GraphQL équivalente laissaient
     // écrire n'importe qui, sans passer par le formulaire ni par ses

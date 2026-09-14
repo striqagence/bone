@@ -8,7 +8,12 @@ export const Categories: CollectionConfig = {
   labels: { singular: "Catégorie", plural: "Catégories" },
   /** L'ordre des filtres du blog est celui de la maquette, pas l'alphabet. */
   orderable: true,
-  admin: { useAsTitle: "nom", group: "Contenu", defaultColumns: ["nom", "slug"] },
+  admin: {
+    useAsTitle: "nom",
+    group: "Contenu",
+    description: "Les rubriques du blog. Changer un slug change l’adresse du filtre correspondant.",
+    defaultColumns: ["nom", "slug"],
+  },
   access: { read: () => true },
   hooks: { afterChange: [() => revaliderSite()] },
   fields: [

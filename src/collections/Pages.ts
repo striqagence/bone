@@ -25,6 +25,7 @@ export const Pages: CollectionConfig = {
     useAsTitle: "titre",
     preview: (doc, { locale }) => urlApercu({ collection: "pages", id: doc.id as string }, locale),
     group: "Contenu",
+    description: "Les pages du site. Chaque page choisit ses sections et leur ordre.",
     defaultColumns: ["titre", "slug", "parent", "_status"],
   },
   access: { read: lectureDesPubliees },
