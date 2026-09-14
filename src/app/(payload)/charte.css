@@ -1,0 +1,69 @@
+/*
+ * Charte du site appliquée au back-office.
+ *
+ * L'interface de Payload est volontairement monochrome : ses liens héritent de
+ * la couleur du texte et ses boutons se peignent dans une échelle de gris. Il
+ * n'existe donc pas de variable d'accent à basculer, et chaque règle ci-dessous
+ * vise une classe de l'interface. Elles sont peu nombreuses à dessein : plus on
+ * redessine Payload, plus on s'expose à voir la mise à jour suivante défaire
+ * le travail.
+ *
+ * Trois choses seulement sont reprises de la maquette : les deux familles de
+ * caractères, le bleu de marque sur ce qui agit, et le marine sur ce qui est
+ * actif. Le reste appartient à Payload.
+ */
+
+:root {
+  /* Les polices sont chargées par le gabarit de l'administration. */
+  --font-body: var(--police-bo-texte), ui-sans-serif, system-ui, sans-serif;
+
+  --bone-bleu: #2020ff;
+  --bone-bleu-fonce: #1e1db6;
+  --bone-marine: #131353;
+}
+
+/* Titres, navigation et boutons prennent la police de titrage du site, dont la
+   largeur poussée à 120 est ce qui donne son allure à la marque. */
+h1,
+h2,
+h3,
+h4,
+.nav__link,
+.btn,
+.step-nav {
+  font-family: var(--police-bo-titres), var(--police-bo-texte), sans-serif;
+  font-stretch: 120%;
+}
+
+/* Ce qui agit prend le bleu de marque. */
+.btn--style-primary .btn__content,
+.btn--style-primary {
+  background-color: var(--bone-bleu);
+  color: #fff;
+}
+
+.btn--style-primary:not(.btn--disabled):hover,
+.btn--style-primary:not(.btn--disabled):focus-visible {
+  background-color: var(--bone-bleu-fonce);
+  color: #fff;
+}
+
+/* Le contour de focus doit rester visible sur les deux thèmes : le bleu de
+   marque est assez sombre pour tenir sur blanc, assez saturé pour tenir sur
+   noir. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--bone-bleu);
+  outline-offset: 2px;
+}
+
+/* La rubrique ouverte se signale par le marine de la charte plutôt que par un
+   gris de plus. */
+.nav__link--active,
+.nav-group__toggle[aria-expanded="true"] {
+  color: var(--bone-marine);
+}
+
+[data-theme="dark"] .nav__link--active,
+[data-theme="dark"] .nav-group__toggle[aria-expanded="true"] {
+  color: #fff;
+}
