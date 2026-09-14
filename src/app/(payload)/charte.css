@@ -67,3 +67,84 @@ h4,
 [data-theme="dark"] .nav-group__toggle[aria-expanded="true"] {
   color: #fff;
 }
+
+/*
+ * Pictogrammes de la navigation.
+ *
+ * Payload ne prévoit pas d'icône par collection : sa configuration n'a pas de
+ * champ pour ça, et la seule autre voie serait de remplacer sa navigation
+ * entière, ce qui casserait à la première mise à jour. Il pose en revanche un
+ * identifiant stable sur chaque entrée, `nav-<slug>` pour une collection et
+ * `nav-global-<slug>` pour un global : c'est l'accroche utilisée ici.
+ *
+ * Les tracés sont posés en masque et non en image : le pictogramme prend ainsi
+ * la couleur du texte, donc suit le thème clair ou sombre et l'état actif, sans
+ * qu'il faille en dessiner deux versions.
+ *
+ * Si Payload change ces identifiants, les pictogrammes disparaissent sans rien
+ * casser d'autre. C'est la raison de ce choix plutôt qu'une surcharge de
+ * composant.
+ */
+#nav-pages,
+#nav-posts,
+#nav-categories,
+#nav-media,
+#nav-demandes,
+#nav-abonnes,
+#nav-users,
+#nav-global-accueil,
+#nav-global-contact,
+#nav-global-blog,
+#nav-global-navigation {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 1.05em;
+    height: 1.05em;
+    margin-inline-end: 0.55em;
+    vertical-align: -0.2em;
+    background-color: currentColor;
+    opacity: 0.7;
+    -webkit-mask: var(--bone-picto) center / contain no-repeat;
+    mask: var(--bone-picto) center / contain no-repeat;
+  }
+
+  &:hover::before,
+  &.nav__link--active::before {
+    opacity: 1;
+  }
+}
+
+#nav-pages {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M9%204h9a1%201%200%200%201%201%201v13a1%201%200%200%201-1%201H9a1%201%200%200%201-1-1V5a1%201%200%200%201%201-1z%27%2F%3E%3Cpath%20d%3D%27M5%207.5V18a2.5%202.5%200%200%200%202.5%202.5H16%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-posts {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M5%204.5h14v15H5z%27%2F%3E%3Cpath%20d%3D%27M8.5%209h7%27%2F%3E%3Cpath%20d%3D%27M8.5%2012.5h7%27%2F%3E%3Cpath%20d%3D%27M8.5%2016h4%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-categories {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M11.5%204H5.5a1.5%201.5%200%200%200-1.5%201.5v6l8.5%208.5%207.5-7.5L11.5%204z%27%2F%3E%3Cpath%20d%3D%27M8%208.2h.01%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-media {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M4.5%205h15v14h-15z%27%2F%3E%3Cpath%20d%3D%27M4.5%2016l4-4%203%203%204-4.5%203.5%204%27%2F%3E%3Cpath%20d%3D%27M9%209.5h.01%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-demandes {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M3.5%206h17v12h-17z%27%2F%3E%3Cpath%20d%3D%27M3.5%207l8.5%206%208.5-6%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-abonnes {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M12%204a5%205%200%200%200-5%205v3.5L5.5%2016h13L17%2012.5V9a5%205%200%200%200-5-5z%27%2F%3E%3Cpath%20d%3D%27M10%2018.5a2%202%200%200%200%204%200%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-users {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M12%205.2a3.2%203.2%200%201%201%200%206.4%203.2%203.2%200%200%201%200-6.4z%27%2F%3E%3Cpath%20d%3D%27M5%2020a7%207%200%200%201%2014%200%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-global-accueil {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M4%2011l8-6.5%208%206.5%27%2F%3E%3Cpath%20d%3D%27M6.5%2010v9.5h11V10%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-global-contact {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M12%2020.5s6.5-6%206.5-10.5a6.5%206.5%200%201%200-13%200c0%204.5%206.5%2010.5%206.5%2010.5z%27%2F%3E%3Cpath%20d%3D%27M12%207.7a2.3%202.3%200%201%201%200%204.6%202.3%202.3%200%200%201%200-4.6z%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-global-blog {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M4%207.5h16%27%2F%3E%3Cpath%20d%3D%27M4%2012h16%27%2F%3E%3Cpath%20d%3D%27M4%2016.5h9%27%2F%3E%3Cpath%20d%3D%27M8.5%207.5v0%27%2F%3E%3Cpath%20d%3D%27M15%2012v0%27%2F%3E%3C%2Fsvg%3E");
+}
+#nav-global-navigation {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M12%204a8%208%200%201%201%200%2016%208%208%200%200%201%200-16z%27%2F%3E%3Cpath%20d%3D%27M15.2%208.8l-2%204.4-4.4%202%202-4.4z%27%2F%3E%3C%2Fsvg%3E");
+}

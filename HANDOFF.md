@@ -408,6 +408,28 @@ Comme pour l'accueil, le texte rendu a été comparé avant et après, dans les
 deux langues : identique, avant comme après la suppression des anciennes
 colonnes.
 
+## Charte du back-office
+
+L'administration reprend les deux familles du site, le bleu de marque sur ce
+qui agit et le marine sur ce qui est actif. Tout tient dans
+`src/app/(payload)/charte.css`, importé par le gabarit du groupe de routes.
+
+Les règles y sont peu nombreuses à dessein : l'interface de Payload est
+monochrome et n'expose aucune variable d'accent, si bien que chaque règle vise
+une de ses classes. Plus on la redessine, plus on s'expose à ce qu'une mise à
+jour défasse le travail. Deux principes s'appliquent partout :
+
+- passer par les variables de Payload quand il en offre. Ses boutons se
+  peignent par `--bg-color` et `--color` ; forcer un fond leur faisait perdre
+  leurs angles arrondis, portés par un élément intérieur ;
+- s'accrocher à ce qui est stable. La navigation pose `nav-<slug>` sur chaque
+  entrée, et c'est ce qui porte les onze pictogrammes. S'ils disparaissent un
+  jour, rien d'autre ne cassera.
+
+Les pictogrammes sont posés en masque et non en image : ils prennent la couleur
+du texte, donc suivent le thème et l'état actif sans qu'il faille en dessiner
+deux versions.
+
 ## Confort d'édition
 
 Chaque bloc de section porte une **vignette** dans le sélecteur du back-office :
