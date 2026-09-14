@@ -430,6 +430,11 @@ Les pictogrammes sont posés en masque et non en image : ils prennent la couleur
 du texte, donc suivent le thème et l'état actif sans qu'il faille en dessiner
 deux versions.
 
+Trois grands champs en portent un également, le hero, les sections et le
+référencement, accrochés au même genre d'identifiant, `field-<nom>`. Le
+référencement des pages et des articles fait exception : c'est un onglet, et
+les onglets de Payload n'ont pas d'identifiant.
+
 ## Confort d'édition
 
 Chaque bloc de section porte une **vignette** dans le sélecteur du back-office :

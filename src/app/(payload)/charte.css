@@ -148,3 +148,44 @@ h4,
 #nav-global-navigation {
   --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M12%204a8%208%200%201%201%200%2016%208%208%200%200%201%200-16z%27%2F%3E%3Cpath%20d%3D%27M15.2%208.8l-2%204.4-4.4%202%202-4.4z%27%2F%3E%3C%2Fsvg%3E");
 }
+
+/*
+ * Pictogrammes des grands champs.
+ *
+ * Même mécanique que la navigation : les champs de type groupe et le champ de
+ * blocs portent un `id="field-<nom>"`, seul repère stable que Payload offre à
+ * l'intérieur d'un formulaire. Les onglets, eux, n'en ont pas : le
+ * référencement des pages et des articles, qui en est un, reste sans
+ * pictogramme.
+ */
+#field-hero > .group-field__header .group-field__title,
+#field-referencement > .group-field__header .group-field__title,
+#field-sections > .blocks-field__header .field-label {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 1.05em;
+    height: 1.05em;
+    margin-inline-end: 0.5em;
+    vertical-align: -0.18em;
+    background-color: currentColor;
+    opacity: 0.65;
+    -webkit-mask: var(--bone-picto) center / contain no-repeat;
+    mask: var(--bone-picto) center / contain no-repeat;
+  }
+}
+
+#field-hero > .group-field__header .group-field__title,
+#field-hero > .blocks-field__header .field-label {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M4%205h16v6H4z%27%2F%3E%3Cpath%20d%3D%27M4%2014.5h10%27%2F%3E%3Cpath%20d%3D%27M4%2018h6%27%2F%3E%3C%2Fsvg%3E");
+}
+
+#field-sections > .group-field__header .group-field__title,
+#field-sections > .blocks-field__header .field-label {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M4%204.5h16v4.5H4z%27%2F%3E%3Cpath%20d%3D%27M4%2012h16v4.5H4z%27%2F%3E%3Cpath%20d%3D%27M8.5%2019.5h7%27%2F%3E%3C%2Fsvg%3E");
+}
+
+#field-referencement > .group-field__header .group-field__title,
+#field-referencement > .blocks-field__header .field-label {
+  --bone-picto: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M10.8%204.5a6.3%206.3%200%201%201%200%2012.6%206.3%206.3%200%200%201%200-12.6z%27%2F%3E%3Cpath%20d%3D%27M15.4%2015.4l4.1%204.1%27%2F%3E%3C%2Fsvg%3E");
+}
