@@ -77,18 +77,27 @@ const carte: Record<string, { url: string; repere: string }> = {};
 for (const [bloc, { chemin, repere }] of Object.entries(REPERES_MANUELS)) {
   carte[bloc] = { url: `${SITE}${chemin}`, repere };
 }
+
+/** Le texte le plus long a le plus de chances d'être unique dans la page. */
+const repereDe = (section: Section): string | null => {
+  const candidats = [section.titreBas, section.titre, section.surtitre, section.titreHaut].filter(
+    (v): v is string => typeof v === "string" && v.trim().length > 8,
+  );
+  return candidats.length ? candidats.sort((a, b) => b.length - a.length)[0].slice(0, 48) : null;
+};
+
+// L'accueil porte quatre blocs qu'aucune autre page n'utilise.
+const accueil = await payload.findGlobal({ slug: "accueil", locale: "fr", depth: 0 });
+for (const section of (accueil.sections ?? []) as unknown as Section[]) {
+  if (carte[section.blockType]) continue;
+  const repere = repereDe(section);
+  if (repere) carte[section.blockType] = { url: `${SITE}/`, repere };
+}
 for (const page of docs as unknown as Noeud[]) {
   for (const section of page.sections ?? []) {
     if (carte[section.blockType]) continue;
-    // Le texte le plus long a le plus de chances d'être unique dans la page.
-    const candidats = [section.titreBas, section.titre, section.surtitre, section.titreHaut].filter(
-      (v): v is string => typeof v === "string" && v.trim().length > 8,
-    );
-    if (!candidats.length) continue;
-    carte[section.blockType] = {
-      url: `${SITE}${cheminDe(page)}`,
-      repere: candidats.sort((a, b) => b.length - a.length)[0].slice(0, 48),
-    };
+    const repere = repereDe(section);
+    if (repere) carte[section.blockType] = { url: `${SITE}${cheminDe(page)}`, repere };
   }
 }
 

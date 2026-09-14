@@ -4,17 +4,6 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 
 import { HeroAccueil } from "@/components/sections/HeroAccueil";
-import { SectionAppel } from "@/components/sections/SectionAppel";
-import { SectionChiffres } from "@/components/sections/SectionChiffres";
-import { SectionDifferenciation } from "@/components/sections/SectionDifferenciation";
-import { SectionFaq } from "@/components/sections/SectionFaq";
-import { SectionEnBref } from "@/components/sections/SectionEnBref";
-import { SectionLeConstat } from "@/components/sections/SectionLeConstat";
-import { SectionPoles } from "@/components/sections/SectionPoles";
-import { SectionPositionnement } from "@/components/sections/SectionPositionnement";
-import { SectionProfils } from "@/components/sections/SectionProfils";
-import { SectionPromesse } from "@/components/sections/SectionPromesse";
-import { SectionRole } from "@/components/sections/SectionRole";
 import { DonneesStructurees } from "@/components/site/DonneesStructurees";
 import {
   graphe,
@@ -25,6 +14,7 @@ import {
 } from "@/lib/donnees-structurees";
 import { estUneLangue } from "@/lib/i18n";
 import { cheminDe } from "@/lib/pages";
+import { RendreSections } from "@/components/sections/RendreSections";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
@@ -42,13 +32,24 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">): Prom
   };
 }
 
+/**
+ * Page d'accueil.
+ *
+ * Le hero reste un champ fixe du global : toute page en a exactement un, et
+ * rien ne justifie de pouvoir le retirer ou le dupliquer. Le reste est un
+ * tableau de blocs, comme sur les autres pages, et se réorganise au
+ * back-office sans passer par le code.
+ */
 export default async function Accueil({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const { hero, enBref, constat, promesse, positionnement, role, differenciation, poles, chiffres, faq, appel, profils, referencement } =
-    await payload.findGlobal({ slug: "accueil", locale, depth: 1 });
+  const { hero, sections, referencement } = await payload.findGlobal({
+    slug: "accueil",
+    locale,
+    depth: 2,
+  });
 
   /** Un média non résolu reste un identifiant : seul l'objet porte une URL. */
   const photo = (valeur: unknown) =>
@@ -93,7 +94,10 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
       titre: referencement.metaTitre,
       description: referencement.metaDescription,
     }),
-    questionsFrequentes(faq.questions ?? []),
+    // La FAQ n'est plus un groupe fixe : on la retrouve parmi les sections.
+    questionsFrequentes(
+      (sections ?? []).flatMap((s) => (s.blockType === "faq" ? (s.questions ?? []) : [])),
+    ),
   ]);
 
   return (
@@ -108,104 +112,12 @@ export default async function Accueil({ params }: PageProps<"/[locale]">) {
         cta={hero.cta}
         image={image}
       />
-      <SectionEnBref
+
+      <RendreSections
+        sections={sections ?? []}
         langue={locale}
-        surtitre={enBref.surtitre}
-        titre={enBref.titre}
-        propos={enBref.propos}
-        precision={enBref.precision}
-        cta={enBref.cta}
-      />
-      <SectionLeConstat
-        surtitre={constat.surtitre}
-        titre={constat.titre}
-        realite={{
-          titre: constat.realite.titre,
-          chiffre: constat.realite.chiffre,
-          legende: constat.realite.legende,
-          puces: (constat.realite.puces ?? []).map(({ texte }) => texte),
-          photo: photo(constat.realite.photo),
-        }}
-        enjeu={{
-          titre: constat.enjeu.titre,
-          texte: constat.enjeu.texte,
-          citation: constat.enjeu.citation,
-          photo: photo(constat.enjeu.photo),
-        }}
-      />
-      <SectionPromesse surtitre={promesse.surtitre} titre={promesse.titre} />
-      <SectionPositionnement
-        surtitre={positionnement.surtitre}
-        titre={positionnement.titre}
-        gauche={{
-          titre: positionnement.gauche.titre,
-          sousTitre: positionnement.gauche.sousTitre,
-          entrees: positionnement.gauche.entrees ?? [],
-        }}
-        droite={{
-          titre: positionnement.droite.titre,
-          sousTitre: positionnement.droite.sousTitre,
-          entrees: positionnement.droite.entrees ?? [],
-        }}
-      />
-      <SectionRole
-        surtitre={role.surtitre}
-        titre={role.titre}
-        chapo={role.chapo}
-        etapes={role.etapes ?? []}
-      />
-      <SectionPoles
-        langue={locale}
-        surtitre={poles.surtitre}
-        titreHaut={poles.titreHaut}
-        titreBas={poles.titreBas}
-        poles={bandes}
-      />
-      <SectionDifferenciation
-        surtitre={differenciation.surtitre}
-        titre={differenciation.titre}
-        habituelle={{
-          badge: differenciation.habituelle.badge,
-          titre: differenciation.habituelle.titre,
-          puces: (differenciation.habituelle.puces ?? []).map(({ texte }) => texte),
-        }}
-        bone={{
-          badge: differenciation.bone.badge,
-          titre: differenciation.bone.titre,
-          puces: (differenciation.bone.puces ?? []).map(({ texte }) => texte),
-        }}
-      />
-      <SectionChiffres
-        surtitre={chiffres.surtitre}
-        titre={chiffres.titre}
-        constat={chiffres.constat}
-        consequence={chiffres.consequence}
-        statistiques={chiffres.statistiques ?? []}
-      />
-      <SectionProfils
-        surtitre={profils.surtitre}
-        titreHaut={profils.titreHaut}
-        titreBas={profils.titreBas}
-        profils={(profils.liste ?? []).map((p) => ({
-          picto: p.picto,
-          titre: p.titre,
-          description: p.description,
-          reponse: p.reponse,
-          image: photo(p.image),
-        }))}
-      />
-      <SectionFaq
-        surtitre={faq.surtitre}
-        titre={faq.titre}
-        questions={faq.questions ?? []}
-        image={photo(faq.image)}
-      />
-      <SectionAppel
-        langue={locale}
-        surtitre={appel.surtitre}
-        titre={appel.titre}
-        chapo={appel.chapo}
-        cta={appel.cta}
+        bandes={bandes}
+        articles={[]}
       />
     </>
   );

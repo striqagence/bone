@@ -371,6 +371,27 @@ qu'on remplacerait à la volée. Le composant qui écoute n'est monté qu'en
 aperçu, et Next le sert dans un morceau séparé : vérifié, aucun des neuf
 fichiers chargés par une page publique ne le contient.
 
+## Page d'accueil
+
+Ses onze sections sont des **blocs**, comme sur les autres pages : elles se
+réordonnent, se retirent et s'ajoutent depuis le back-office. Seuls le hero et
+le référencement restent des champs fixes, parce que toute page en a exactement
+un et que rien ne justifie de pouvoir les dupliquer.
+
+La reprise a été faite par `scripts/accueil-en-sections.ts`, qui copie chaque
+groupe dans le bloc correspondant. Sept blocs existaient déjà sur les autres
+pages ; quatre ont été dérivés des groupes, champ pour champ, pour que ce soit
+une copie et non une transcription. Deux renommages seulement : « poles »
+devient une bande de pôles, « profils » des cartes d'enjeux.
+
+Le texte rendu a été comparé avant et après, dans les deux langues : identique,
+à la ligne près. La suppression des anciennes colonnes n'a été faite qu'ensuite,
+dans une migration distincte qui ne touche que les tables `accueil_`.
+
+Les onze scripts d'amorçage qui remplissaient ces groupes sont dans
+`scripts/archive`, hors du typage. Ils ne servent plus à rien sinon à garder
+les textes d'origine, dans les deux langues.
+
 ## Confort d'édition
 
 Chaque bloc de section porte une **vignette** dans le sélecteur du back-office :

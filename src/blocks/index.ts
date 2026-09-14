@@ -718,7 +718,202 @@ export const TexteLong: Block = {
   ],
 };
 
+/**
+ * Présentation courte de l'agence, sous le hero de l'accueil.
+ *
+ * Affichée en retrait sous le propos.
+ */
+export const EnBref: Block = {
+  slug: "enBref",
+  labels: { singular: "En bref", plural: "En bref" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/enBref.jpg", alt: "Aperçu du bloc En bref" } },
+  },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    { name: "propos", type: "textarea", required: true, localized: true, label: "Propos" },
+    {
+      name: "precision",
+      type: "textarea",
+      required: true,
+      localized: true,
+      label: "Précision",
+      admin: { description: "Affichée en retrait sous le propos." },
+    },
+    {
+      name: "cta",
+      type: "group",
+      label: "Bouton",
+      fields: [
+        { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
+        { name: "chemin", type: "text", required: true, label: "Chemin" },
+      ],
+    },
+  ],
+};
+
+/**
+ * Le constat en deux volets, la réalité chiffrée et l'enjeu.
+ *
+ * Affiché en très grand, en bleu de marque.
+ */
+export const Constat: Block = {
+  slug: "constat",
+  labels: { singular: "Le constat", plural: "Le constat" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/constat.jpg", alt: "Aperçu du bloc Le constat" } },
+  },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    {
+      name: "realite",
+      type: "group",
+      label: "Carte « La réalité terrain »",
+      fields: [
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        {
+          name: "chiffre",
+          type: "text",
+          required: true,
+          label: "Chiffre",
+          admin: { description: "Affiché en très grand, en bleu de marque." },
+        },
+        { name: "legende", type: "textarea", required: true, localized: true, label: "Légende" },
+        {
+          name: "puces",
+          type: "array",
+          label: "Puces",
+          fields: [
+            { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+          ],
+        },
+        { name: "photo", type: "upload", relationTo: "media", label: "Photo" },
+      ],
+    },
+    {
+      name: "enjeu",
+      type: "group",
+      label: "Carte « Le vrai enjeu »",
+      fields: [
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+        {
+          name: "citation",
+          type: "textarea",
+          required: true,
+          localized: true,
+          label: "Citation",
+          admin: { description: "Affichée en italique, guillemets compris." },
+        },
+        { name: "photo", type: "upload", relationTo: "media", label: "Photo" },
+      ],
+    },
+  ],
+};
+
+/**
+ * Les étapes de l'intervention, énoncées comme un rôle.
+ *
+ * Affiche la carte sur fond bleu.
+ */
+export const Role: Block = {
+  slug: "role",
+  labels: { singular: "Notre rôle fondamental", plural: "Notre rôle fondamental" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/role.jpg", alt: "Aperçu du bloc Notre rôle fondamental" } },
+  },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    { name: "chapo", type: "textarea", required: true, localized: true, label: "Chapô" },
+    {
+      name: "etapes",
+      type: "array",
+      label: "Étapes",
+      minRows: 1,
+      admin: { initCollapsed: true },
+      fields: [
+        { name: "numero", type: "text", required: true, label: "Numéro" },
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+        {
+          name: "accentuee",
+          type: "checkbox",
+          label: "Mise en avant",
+          defaultValue: false,
+          admin: { description: "Affiche la carte sur fond bleu." },
+        },
+      ],
+    },
+  ],
+};
+
+/**
+ * Deux colonnes opposées : ce qu'on attend d'un prestataire, ce que Bone apporte.
+ *
+ * Les deux colonnes se lisent par paires : la première entrée de gauche fait face à la première de droite.
+ */
+export const Positionnement: Block = {
+  slug: "positionnement",
+  labels: { singular: "Positionnement", plural: "Positionnement" },
+  admin: {
+    group: "Sections",
+    images: { thumbnail: { url: "/blocs/positionnement.jpg", alt: "Aperçu du bloc Positionnement" } },
+  },
+  fields: [
+    { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
+    { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
+    {
+      name: "gauche",
+      type: "group",
+      label: "Colonne de gauche",
+      fields: [
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        { name: "sousTitre", type: "text", required: true, localized: true, label: "Sous-titre" },
+        {
+          name: "entrees",
+          type: "array",
+          label: "Entrées",
+          minRows: 1,
+          fields: [
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "droite",
+      type: "group",
+      label: "Colonne de droite",
+      fields: [
+        { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+        { name: "sousTitre", type: "text", required: true, localized: true, label: "Sous-titre" },
+        {
+          name: "entrees",
+          type: "array",
+          label: "Entrées",
+          minRows: 1,
+          fields: [
+            { name: "titre", type: "text", required: true, localized: true, label: "Titre" },
+            { name: "texte", type: "textarea", required: true, localized: true, label: "Texte" },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 export const sections = [
+  EnBref,
+  Constat,
+  Positionnement,
+  Role,
   BandePoles,
   Synergie,
   Grille,

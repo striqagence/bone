@@ -42,6 +42,8 @@ import * as migration_20260901_124047_courriel_encart_contact from './20260901_1
 import * as migration_20260901_144904_bouton_google_maps from './20260901_144904_bouton_google_maps';
 import * as migration_20260902_140823_referencement_globaux from './20260902_140823_referencement_globaux';
 import * as migration_20260907_085005_verrous_antiabus from './20260907_085005_verrous_antiabus';
+import * as migration_20260914_072646_sections_accueil from './20260914_072646_sections_accueil';
+import * as migration_20260914_073418_retire_groupes_accueil from './20260914_073418_retire_groupes_accueil';
 
 export const migrations = [
   {
@@ -262,6 +264,16 @@ export const migrations = [
   {
     up: migration_20260907_085005_verrous_antiabus.up,
     down: migration_20260907_085005_verrous_antiabus.down,
-    name: '20260907_085005_verrous_antiabus'
+    name: '20260907_085005_verrous_antiabus',
+  },
+  {
+    up: migration_20260914_072646_sections_accueil.up,
+    down: migration_20260914_072646_sections_accueil.down,
+    name: '20260914_072646_sections_accueil',
+  },
+  {
+    up: migration_20260914_073418_retire_groupes_accueil.up,
+    down: migration_20260914_073418_retire_groupes_accueil.down,
+    name: '20260914_073418_retire_groupes_accueil'
   },
 ];

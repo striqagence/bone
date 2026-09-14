@@ -22,6 +22,9 @@ import type { Langue } from "@/lib/i18n";
 import type { Article } from "@/lib/articles";
 import type { Page } from "@/lib/pages";
 import type { ImageCourriel } from "@/lib/image-courriel";
+import { SectionPositionnement } from "@/components/sections/SectionPositionnement";
+import { SectionLeConstat } from "@/components/sections/SectionLeConstat";
+import { SectionEnBref } from "@/components/sections/SectionEnBref";
 
 type Bande = {
   pole: "expertise" | "capital" | "feed";
@@ -64,6 +67,67 @@ export function RendreSections({
     <>
       {sections.map((section) => {
         switch (section.blockType) {
+          case "enBref":
+            return (
+              <SectionEnBref
+                key={section.id}
+                langue={langue}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                propos={section.propos}
+                precision={section.precision}
+                cta={section.cta}
+              />
+            );
+          case "constat":
+            return (
+              <SectionLeConstat
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                realite={{
+                  titre: section.realite.titre,
+                  chiffre: section.realite.chiffre,
+                  legende: section.realite.legende,
+                  puces: (section.realite.puces ?? []).map(({ texte }) => texte),
+                  photo: photo(section.realite.photo),
+                }}
+                enjeu={{
+                  titre: section.enjeu.titre,
+                  texte: section.enjeu.texte,
+                  citation: section.enjeu.citation,
+                  photo: photo(section.enjeu.photo),
+                }}
+              />
+            );
+          case "positionnement":
+            return (
+              <SectionPositionnement
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                gauche={{
+                  titre: section.gauche.titre,
+                  sousTitre: section.gauche.sousTitre,
+                  entrees: section.gauche.entrees ?? [],
+                }}
+                droite={{
+                  titre: section.droite.titre,
+                  sousTitre: section.droite.sousTitre,
+                  entrees: section.droite.entrees ?? [],
+                }}
+              />
+            );
+          case "role":
+            return (
+              <SectionRole
+                key={section.id}
+                surtitre={section.surtitre}
+                titre={section.titre}
+                chapo={section.chapo}
+                etapes={section.etapes ?? []}
+              />
+            );
           case "bandePoles":
             return (
               <SectionPoles

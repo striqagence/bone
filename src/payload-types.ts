@@ -259,6 +259,102 @@ export interface Page {
   sections?:
     | (
         | {
+            surtitre: string;
+            titre: string;
+            propos: string;
+            /**
+             * Affichée en retrait sous le propos.
+             */
+            precision: string;
+            cta: {
+              libelle: string;
+              chemin: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'enBref';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            realite: {
+              titre: string;
+              /**
+               * Affiché en très grand, en bleu de marque.
+               */
+              chiffre: string;
+              legende: string;
+              puces?:
+                | {
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              photo?: (number | null) | Media;
+            };
+            enjeu: {
+              titre: string;
+              texte: string;
+              /**
+               * Affichée en italique, guillemets compris.
+               */
+              citation: string;
+              photo?: (number | null) | Media;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'constat';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            gauche: {
+              titre: string;
+              sousTitre: string;
+              entrees?:
+                | {
+                    titre: string;
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            droite: {
+              titre: string;
+              sousTitre: string;
+              entrees?:
+                | {
+                    titre: string;
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'positionnement';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            etapes?:
+              | {
+                  numero: string;
+                  titre: string;
+                  texte: string;
+                  /**
+                   * Affiche la carte sur fond bleu.
+                   */
+                  accentuee?: boolean | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'role';
+          }
+        | {
             /**
              * À laisser décoché quand le hero de la page annonce déjà les pôles. Le titre reste alors saisi : il n’est plus affiché, mais les lecteurs d’écran l’annoncent avant les trois bandes.
              */
@@ -969,6 +1065,104 @@ export interface PagesSelect<T extends boolean = true> {
   sections?:
     | T
     | {
+        enBref?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              propos?: T;
+              precision?: T;
+              cta?:
+                | T
+                | {
+                    libelle?: T;
+                    chemin?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        constat?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              realite?:
+                | T
+                | {
+                    titre?: T;
+                    chiffre?: T;
+                    legende?: T;
+                    puces?:
+                      | T
+                      | {
+                          texte?: T;
+                          id?: T;
+                        };
+                    photo?: T;
+                  };
+              enjeu?:
+                | T
+                | {
+                    titre?: T;
+                    texte?: T;
+                    citation?: T;
+                    photo?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        positionnement?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              gauche?:
+                | T
+                | {
+                    titre?: T;
+                    sousTitre?: T;
+                    entrees?:
+                      | T
+                      | {
+                          titre?: T;
+                          texte?: T;
+                          id?: T;
+                        };
+                  };
+              droite?:
+                | T
+                | {
+                    titre?: T;
+                    sousTitre?: T;
+                    entrees?:
+                      | T
+                      | {
+                          titre?: T;
+                          texte?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        role?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              etapes?:
+                | T
+                | {
+                    numero?: T;
+                    titre?: T;
+                    texte?: T;
+                    accentuee?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         bandePoles?:
           | T
           | {
@@ -1484,201 +1678,453 @@ export interface Accueil {
     };
     image?: (number | null) | Media;
   };
-  enBref: {
-    surtitre: string;
-    titre: string;
-    propos: string;
-    /**
-     * Affichée en retrait sous le propos.
-     */
-    precision: string;
-    cta: {
-      libelle: string;
-      chemin: string;
-    };
-  };
-  constat: {
-    surtitre: string;
-    titre: string;
-    realite: {
-      titre: string;
-      /**
-       * Affiché en très grand, en bleu de marque.
-       */
-      chiffre: string;
-      legende: string;
-      puces?:
-        | {
-            texte: string;
-            id?: string | null;
-          }[]
-        | null;
-      photo?: (number | null) | Media;
-    };
-    enjeu: {
-      titre: string;
-      texte: string;
-      /**
-       * Affichée en italique, guillemets compris.
-       */
-      citation: string;
-      photo?: (number | null) | Media;
-    };
-  };
-  promesse: {
-    surtitre: string;
-    titre: string;
-  };
-  role: {
-    surtitre: string;
-    titre: string;
-    chapo: string;
-    etapes?:
-      | {
-          numero: string;
-          titre: string;
-          texte: string;
-          /**
-           * Affiche la carte sur fond bleu.
-           */
-          accentuee?: boolean | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
   /**
-   * Les deux colonnes se lisent par paires : la première entrée de gauche fait face à la première de droite.
+   * Les sections de la page, dans l’ordre d’affichage. Le hero ci-dessus reste en tête.
    */
-  positionnement: {
-    surtitre: string;
-    titre: string;
-    gauche: {
-      titre: string;
-      sousTitre: string;
-      entrees?:
+  sections?:
+    | (
         | {
+            surtitre: string;
+            titre: string;
+            propos: string;
+            /**
+             * Affichée en retrait sous le propos.
+             */
+            precision: string;
+            cta: {
+              libelle: string;
+              chemin: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'enBref';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            realite: {
+              titre: string;
+              /**
+               * Affiché en très grand, en bleu de marque.
+               */
+              chiffre: string;
+              legende: string;
+              puces?:
+                | {
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              photo?: (number | null) | Media;
+            };
+            enjeu: {
+              titre: string;
+              texte: string;
+              /**
+               * Affichée en italique, guillemets compris.
+               */
+              citation: string;
+              photo?: (number | null) | Media;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'constat';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            gauche: {
+              titre: string;
+              sousTitre: string;
+              entrees?:
+                | {
+                    titre: string;
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            droite: {
+              titre: string;
+              sousTitre: string;
+              entrees?:
+                | {
+                    titre: string;
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'positionnement';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            etapes?:
+              | {
+                  numero: string;
+                  titre: string;
+                  texte: string;
+                  /**
+                   * Affiche la carte sur fond bleu.
+                   */
+                  accentuee?: boolean | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'role';
+          }
+        | {
+            /**
+             * À laisser décoché quand le hero de la page annonce déjà les pôles. Le titre reste alors saisi : il n’est plus affiché, mais les lecteurs d’écran l’annoncent avant les trois bandes.
+             */
+            avecEnTete?: boolean | null;
+            surtitre?: string | null;
+            titreHaut?: string | null;
+            titreBas?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bandePoles';
+          }
+        | {
+            surtitre?: string | null;
             titre: string;
             texte: string;
             id?: string | null;
-          }[]
-        | null;
-    };
-    droite: {
-      titre: string;
-      sousTitre: string;
-      entrees?:
+            blockName?: string | null;
+            blockType: 'synergie';
+          }
         | {
+            surtitre: string;
+            titre: string;
+            /**
+             * Affichée à droite du titre.
+             */
+            chapo?: string | null;
+            intitules?:
+              | {
+                  texte: string;
+                  /**
+                   * Facultative. Affichée sous l’intitulé, précédée d’une flèche.
+                   */
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'grille';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            /**
+             * Chaque carte porte soit un numéro, soit un pictogramme. La dernière est souvent mise en avant.
+             */
+            cartes?:
+              | {
+                  numero?: string | null;
+                  /**
+                   * Remplace le numéro s’il est renseigné.
+                   */
+                  picto?: ('antenne' | 'stockage' | 'systemes') | null;
+                  titre: string;
+                  texte: string;
+                  accentuee?: boolean | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'escalier';
+          }
+        | {
+            surtitre: string;
+            /**
+             * Facultatif. Affiché en retrait devant le titre.
+             */
+            titreHaut?: string | null;
+            titreBas: string;
+            /**
+             * Les fonds s’assombrissent dans l’ordre : la progression suit la position.
+             */
+            cartes?:
+              | {
+                  picto: 'antenne' | 'securite' | 'balance' | 'boussole' | 'dette' | 'alerte' | 'liens';
+                  titre: string;
+                  description: string;
+                  reponse: string;
+                  image?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'enjeux';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'promesse';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            /**
+             * Première moitié du chapô, à pleine intensité.
+             */
+            constat: string;
+            /**
+             * Facultative. Affichée en retrait à la suite du constat — l’accueil l’emploie, Capital énonce d’un seul tenant.
+             */
+            consequence?: string | null;
+            statistiques?:
+              | {
+                  valeur: string;
+                  unite: string;
+                  libelle: string;
+                  precision: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'chiffres';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            libelleAction: string;
+            /**
+             * Les derniers articles publiés sont repris automatiquement : leur contenu se gère depuis le blog.
+             */
+            nombre: number;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'articles';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            image?: (number | null) | Media;
+            questions?:
+              | {
+                  question: string;
+                  /**
+                   * Sans réponse, la question s’affiche sans pouvoir se déplier.
+                   */
+                  reponse?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            habituelle: {
+              badge: string;
+              titre: string;
+              /**
+               * Alternative aux puces : la page Media énonce d’un bloc là où l’accueil détaille point par point.
+               */
+              texte?: string | null;
+              puces?:
+                | {
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            bone: {
+              badge: string;
+              titre: string;
+              /**
+               * Alternative aux puces : la page Media énonce d’un bloc là où l’accueil détaille point par point.
+               */
+              texte?: string | null;
+              puces?:
+                | {
+                    texte: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'differenciation';
+          }
+        | {
+            surtitre: string;
+            /**
+             * Les fichiers vivent dans public/brand/partenaires. Ajouter un partenaire suppose d’y déposer son SVG.
+             */
+            logos?:
+              | {
+                  fichier: string;
+                  nom: string;
+                  /**
+                   * Calée à l’œil dans la maquette : les logos n’ont pas le même poids optique.
+                   */
+                  hauteur: number;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'partenaires';
+          }
+        | {
+            surtitre: string;
+            refus: {
+              intitule: string;
+              citation: string;
+              precision?: string | null;
+            };
+            engagement: {
+              intitule: string;
+              citation: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'posture';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            enTetes: {
+              profil: string;
+              pointEntree: string;
+              livrable: string;
+            };
+            lignes?:
+              | {
+                  profil: string;
+                  pointEntree: string;
+                  livrable: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pointsEntree';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            libelleChamp: string;
+            libelleBouton: string;
+            messageSucces: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsletter';
+          }
+        | {
+            surtitre?: string | null;
+            corps: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'texteLong';
+          }
+        | {
+            cartes?:
+              | {
+                  prefixe?: string | null;
+                  valeur: string;
+                  suffixe?: string | null;
+                  libelle: string;
+                  description: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'reperes';
+          }
+        | {
+            surtitre: string;
+            cartes?:
+              | {
+                  picto: 'diplome' | 'eclair' | 'boucle' | 'cible' | 'bouclier' | 'direction' | 'ampoule' | 'personne';
+                  titre: string;
+                  texte: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'valeurs';
+          }
+        | {
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            traits?:
+              | {
+                  picto: 'diplome' | 'eclair' | 'boucle' | 'cible' | 'bouclier' | 'direction' | 'ampoule' | 'personne';
+                  libelle: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'archetype';
+          }
+        | {
+            surtitre: string;
             titre: string;
             texte: string;
+            image?: (number | null) | Media;
+            statistiques?:
+              | {
+                  valeur: string;
+                  libelle: string;
+                  id?: string | null;
+                }[]
+              | null;
             id?: string | null;
-          }[]
-        | null;
-    };
-  };
-  differenciation: {
-    surtitre: string;
-    titre: string;
-    habituelle: {
-      badge: string;
-      titre: string;
-      puces?:
+            blockName?: string | null;
+            blockType: 'equipe';
+          }
         | {
-            texte: string;
+            surtitre: string;
+            titre: string;
+            chapo: string;
+            cta: {
+              libelle: string;
+              chemin: string;
+            };
             id?: string | null;
-          }[]
-        | null;
-    };
-    bone: {
-      badge: string;
-      titre: string;
-      puces?:
-        | {
-            texte: string;
-            id?: string | null;
-          }[]
-        | null;
-    };
-  };
-  /**
-   * Les trois bandes sont alimentées par les pages de pôle : leur accroche courte, leur surtitre et leur photo. Seuls les titres de la section se saisissent ici.
-   */
-  poles: {
-    surtitre: string;
-    /**
-     * En grand, bleu de marque.
-     */
-    titreHaut: string;
-    /**
-     * Plus petite, marine.
-     */
-    titreBas: string;
-  };
-  chiffres: {
-    surtitre: string;
-    titre: string;
-    /**
-     * Première moitié du chapô, à pleine intensité.
-     */
-    constat: string;
-    /**
-     * Seconde moitié, affichée en retrait.
-     */
-    consequence: string;
-    statistiques?:
-      | {
-          valeur: string;
-          unite: string;
-          libelle: string;
-          precision: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  faq: {
-    surtitre: string;
-    titre: string;
-    image?: (number | null) | Media;
-    questions?:
-      | {
-          question: string;
-          /**
-           * Sans réponse, la question s’affiche sans pouvoir se déplier.
-           */
-          reponse?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  appel: {
-    surtitre: string;
-    titre: string;
-    chapo: string;
-    cta: {
-      libelle: string;
-      chemin: string;
-    };
-  };
-  /**
-   * Les fonds s’assombrissent dans l’ordre des profils : la progression suit la position, elle ne se saisit pas.
-   */
-  profils: {
-    surtitre: string;
-    /**
-     * Affiché en retrait.
-     */
-    titreHaut: string;
-    titreBas: string;
-    liste?:
-      | {
-          picto: 'antenne' | 'securite' | 'balance' | 'boussole';
-          titre: string;
-          description: string;
-          reponse: string;
-          image?: (number | null) | Media;
-          id?: string | null;
-        }[]
-      | null;
-  };
+            blockName?: string | null;
+            blockType: 'appelAction';
+          }
+      )[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1930,198 +2376,423 @@ export interface AccueilSelect<T extends boolean = true> {
             };
         image?: T;
       };
-  enBref?:
+  sections?:
     | T
     | {
-        surtitre?: T;
-        titre?: T;
-        propos?: T;
-        precision?: T;
-        cta?:
+        enBref?:
           | T
           | {
-              libelle?: T;
-              chemin?: T;
-            };
-      };
-  constat?:
-    | T
-    | {
-        surtitre?: T;
-        titre?: T;
-        realite?:
-          | T
-          | {
+              surtitre?: T;
               titre?: T;
-              chiffre?: T;
-              legende?: T;
-              puces?:
-                | T
-                | {
-                    texte?: T;
-                    id?: T;
-                  };
-              photo?: T;
-            };
-        enjeu?:
-          | T
-          | {
-              titre?: T;
-              texte?: T;
-              citation?: T;
-              photo?: T;
-            };
-      };
-  promesse?:
-    | T
-    | {
-        surtitre?: T;
-        titre?: T;
-      };
-  role?:
-    | T
-    | {
-        surtitre?: T;
-        titre?: T;
-        chapo?: T;
-        etapes?:
-          | T
-          | {
-              numero?: T;
-              titre?: T;
-              texte?: T;
-              accentuee?: T;
-              id?: T;
-            };
-      };
-  positionnement?:
-    | T
-    | {
-        surtitre?: T;
-        titre?: T;
-        gauche?:
-          | T
-          | {
-              titre?: T;
-              sousTitre?: T;
-              entrees?:
-                | T
-                | {
-                    titre?: T;
-                    texte?: T;
-                    id?: T;
-                  };
-            };
-        droite?:
-          | T
-          | {
-              titre?: T;
-              sousTitre?: T;
-              entrees?:
-                | T
-                | {
-                    titre?: T;
-                    texte?: T;
-                    id?: T;
-                  };
-            };
-      };
-  differenciation?:
-    | T
-    | {
-        surtitre?: T;
-        titre?: T;
-        habituelle?:
-          | T
-          | {
-              badge?: T;
-              titre?: T;
-              puces?:
-                | T
-                | {
-                    texte?: T;
-                    id?: T;
-                  };
-            };
-        bone?:
-          | T
-          | {
-              badge?: T;
-              titre?: T;
-              puces?:
-                | T
-                | {
-                    texte?: T;
-                    id?: T;
-                  };
-            };
-      };
-  poles?:
-    | T
-    | {
-        surtitre?: T;
-        titreHaut?: T;
-        titreBas?: T;
-      };
-  chiffres?:
-    | T
-    | {
-        surtitre?: T;
-        titre?: T;
-        constat?: T;
-        consequence?: T;
-        statistiques?:
-          | T
-          | {
-              valeur?: T;
-              unite?: T;
-              libelle?: T;
+              propos?: T;
               precision?: T;
+              cta?:
+                | T
+                | {
+                    libelle?: T;
+                    chemin?: T;
+                  };
               id?: T;
+              blockName?: T;
             };
-      };
-  faq?:
-    | T
-    | {
-        surtitre?: T;
-        titre?: T;
-        image?: T;
-        questions?:
+        constat?:
           | T
           | {
-              question?: T;
-              reponse?: T;
-              id?: T;
-            };
-      };
-  appel?:
-    | T
-    | {
-        surtitre?: T;
-        titre?: T;
-        chapo?: T;
-        cta?:
-          | T
-          | {
-              libelle?: T;
-              chemin?: T;
-            };
-      };
-  profils?:
-    | T
-    | {
-        surtitre?: T;
-        titreHaut?: T;
-        titreBas?: T;
-        liste?:
-          | T
-          | {
-              picto?: T;
+              surtitre?: T;
               titre?: T;
-              description?: T;
-              reponse?: T;
-              image?: T;
+              realite?:
+                | T
+                | {
+                    titre?: T;
+                    chiffre?: T;
+                    legende?: T;
+                    puces?:
+                      | T
+                      | {
+                          texte?: T;
+                          id?: T;
+                        };
+                    photo?: T;
+                  };
+              enjeu?:
+                | T
+                | {
+                    titre?: T;
+                    texte?: T;
+                    citation?: T;
+                    photo?: T;
+                  };
               id?: T;
+              blockName?: T;
+            };
+        positionnement?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              gauche?:
+                | T
+                | {
+                    titre?: T;
+                    sousTitre?: T;
+                    entrees?:
+                      | T
+                      | {
+                          titre?: T;
+                          texte?: T;
+                          id?: T;
+                        };
+                  };
+              droite?:
+                | T
+                | {
+                    titre?: T;
+                    sousTitre?: T;
+                    entrees?:
+                      | T
+                      | {
+                          titre?: T;
+                          texte?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        role?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              etapes?:
+                | T
+                | {
+                    numero?: T;
+                    titre?: T;
+                    texte?: T;
+                    accentuee?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        bandePoles?:
+          | T
+          | {
+              avecEnTete?: T;
+              surtitre?: T;
+              titreHaut?: T;
+              titreBas?: T;
+              id?: T;
+              blockName?: T;
+            };
+        synergie?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              texte?: T;
+              id?: T;
+              blockName?: T;
+            };
+        grille?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              intitules?:
+                | T
+                | {
+                    texte?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        escalier?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              cartes?:
+                | T
+                | {
+                    numero?: T;
+                    picto?: T;
+                    titre?: T;
+                    texte?: T;
+                    accentuee?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        enjeux?:
+          | T
+          | {
+              surtitre?: T;
+              titreHaut?: T;
+              titreBas?: T;
+              cartes?:
+                | T
+                | {
+                    picto?: T;
+                    titre?: T;
+                    description?: T;
+                    reponse?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        promesse?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              id?: T;
+              blockName?: T;
+            };
+        chiffres?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              constat?: T;
+              consequence?: T;
+              statistiques?:
+                | T
+                | {
+                    valeur?: T;
+                    unite?: T;
+                    libelle?: T;
+                    precision?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        articles?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              libelleAction?: T;
+              nombre?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              image?: T;
+              questions?:
+                | T
+                | {
+                    question?: T;
+                    reponse?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        differenciation?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              habituelle?:
+                | T
+                | {
+                    badge?: T;
+                    titre?: T;
+                    texte?: T;
+                    puces?:
+                      | T
+                      | {
+                          texte?: T;
+                          id?: T;
+                        };
+                  };
+              bone?:
+                | T
+                | {
+                    badge?: T;
+                    titre?: T;
+                    texte?: T;
+                    puces?:
+                      | T
+                      | {
+                          texte?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        partenaires?:
+          | T
+          | {
+              surtitre?: T;
+              logos?:
+                | T
+                | {
+                    fichier?: T;
+                    nom?: T;
+                    hauteur?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        posture?:
+          | T
+          | {
+              surtitre?: T;
+              refus?:
+                | T
+                | {
+                    intitule?: T;
+                    citation?: T;
+                    precision?: T;
+                  };
+              engagement?:
+                | T
+                | {
+                    intitule?: T;
+                    citation?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        pointsEntree?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              enTetes?:
+                | T
+                | {
+                    profil?: T;
+                    pointEntree?: T;
+                    livrable?: T;
+                  };
+              lignes?:
+                | T
+                | {
+                    profil?: T;
+                    pointEntree?: T;
+                    livrable?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        newsletter?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              libelleChamp?: T;
+              libelleBouton?: T;
+              messageSucces?: T;
+              id?: T;
+              blockName?: T;
+            };
+        texteLong?:
+          | T
+          | {
+              surtitre?: T;
+              corps?: T;
+              id?: T;
+              blockName?: T;
+            };
+        reperes?:
+          | T
+          | {
+              cartes?:
+                | T
+                | {
+                    prefixe?: T;
+                    valeur?: T;
+                    suffixe?: T;
+                    libelle?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        valeurs?:
+          | T
+          | {
+              surtitre?: T;
+              cartes?:
+                | T
+                | {
+                    picto?: T;
+                    titre?: T;
+                    texte?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        archetype?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              traits?:
+                | T
+                | {
+                    picto?: T;
+                    libelle?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        equipe?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              texte?: T;
+              image?: T;
+              statistiques?:
+                | T
+                | {
+                    valeur?: T;
+                    libelle?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        appelAction?:
+          | T
+          | {
+              surtitre?: T;
+              titre?: T;
+              chapo?: T;
+              cta?:
+                | T
+                | {
+                    libelle?: T;
+                    chemin?: T;
+                  };
+              id?: T;
+              blockName?: T;
             };
       };
   updatedAt?: T;
