@@ -23,11 +23,16 @@ import { SelecteurLangue } from "./SelecteurLangue";
  * et floutée, logotype réduit. C'est l'état permanent des pages internes, dont
  * le hero est clair : un logotype blanc y serait illisible.
  *
- * Sur l'accueil, la barre au repos est posée par-dessus le hero et sort du flux
- * : le hero occupe donc bien toute la hauteur de la fenêtre, image de fond
- * comprise, et la barre défile avec lui. Dès les premiers pixels de défilement
- * elle cède la place à la barre compacte, fixée en haut — sans quoi la
- * navigation deviendrait inatteignable sur une page de 10 000px.
+ * Sur les pages dont le hero porte une photo en pleine largeur, la barre au
+ * repos est posée par-dessus et sort du flux : le hero occupe donc bien toute
+ * la hauteur prévue, image comprise, et la barre défile avec lui. Dès les
+ * premiers pixels de défilement elle cède la place à la barre compacte, fixée
+ * en haut — sans quoi la navigation deviendrait inatteignable sur une page de
+ * 10 000px.
+ *
+ * Ces pages sont l'accueil et les trois pôles. La liste n'est pas écrite ici :
+ * elle se déduit des chemins de pôle du global de navigation, les seules pages
+ * à porter ce hero. Renommer un pôle au back-office n'a donc rien à casser.
  *
  * Les SVG sont servis en `<img>` et non via next/image : ce sont des vectoriels
  * à dimensions fixes, que l'optimiseur ne peut ni redimensionner utilement ni
@@ -40,18 +45,20 @@ export function Header({
   langue: Langue;
   navigation: NavigationEntete;
 }) {
-  const surAccueil = cheminSansLangue(usePathname()) === "/";
+  const chemin = cheminSansLangue(usePathname());
+  const surHeroImage =
+    chemin === "/" || (navigation.poles ?? []).some((pole) => pole.chemin === chemin);
   const [defile, setDefile] = useState(false);
 
   useEffect(() => {
-    if (!surAccueil) return;
+    if (!surHeroImage) return;
     const surDefilement = () => setDefile(window.scrollY > 40);
     surDefilement(); // au rechargement, la page peut déjà être défilée
     window.addEventListener("scroll", surDefilement, { passive: true });
     return () => window.removeEventListener("scroll", surDefilement);
-  }, [surAccueil]);
+  }, [surHeroImage]);
 
-  const compact = !surAccueil || defile;
+  const compact = !surHeroImage || defile;
 
   const linkedin = (
     <a href={navigation.contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -90,7 +97,7 @@ export function Header({
     return (
       <header
         className={`z-50 flex h-[86px] w-full items-center justify-center px-4 py-4 xl:h-[114px] xl:py-5 ${
-          surAccueil ? "fixed inset-x-0 top-0" : "sticky top-0"
+          surHeroImage ? "fixed inset-x-0 top-0" : "sticky top-0"
         }`}
       >
         <div className="relative flex w-full max-w-[1648px] items-center justify-between rounded bg-encre/80 px-4 py-3 backdrop-blur-[5px] xl:px-6 xl:py-3.5">
