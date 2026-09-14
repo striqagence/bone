@@ -1,7 +1,7 @@
 import type { GlobalConfig } from "payload";
 
 import { revaliderSite } from "../lib/revalidate";
-import { urlApercu } from "../lib/apercu-url";
+import { TAILLES_APERCU, urlApercu } from "../lib/apercu-url";
 
 /**
  * Page de contact.
@@ -20,6 +20,10 @@ export const Contact: GlobalConfig = {
     group: "Contenu",
     description: "La page de contact : coordonnées, plan d’accès et libellés du formulaire.",
     preview: (_, { locale }) => urlApercu({ global: "contact" }, locale),
+    livePreview: {
+      breakpoints: TAILLES_APERCU,
+      url: ({ locale }) => urlApercu({ global: "contact" }, locale),
+    },
   },
   access: { read: () => true },
   hooks: { afterChange: [() => revaliderSite()] },

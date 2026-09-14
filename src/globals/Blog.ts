@@ -1,7 +1,7 @@
 import type { GlobalConfig } from "payload";
 
 import { revaliderSite } from "../lib/revalidate";
-import { urlApercu } from "../lib/apercu-url";
+import { TAILLES_APERCU, urlApercu } from "../lib/apercu-url";
 
 /**
  * Libellés de la liste du blog.
@@ -19,6 +19,10 @@ export const Blog: GlobalConfig = {
     group: "Configuration",
     description: "Les libellés de la liste du blog et des pages d’article. Aucun texte éditorial ici.",
     preview: (_, { locale }) => urlApercu({ global: "blog" }, locale),
+    livePreview: {
+      breakpoints: TAILLES_APERCU,
+      url: ({ locale }) => urlApercu({ global: "blog" }, locale),
+    },
   },
   access: { read: () => true },
   hooks: { afterChange: [() => revaliderSite()] },

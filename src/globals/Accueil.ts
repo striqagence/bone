@@ -1,7 +1,7 @@
 import type { GlobalConfig } from "payload";
 
 import { revaliderSite } from "../lib/revalidate";
-import { urlApercu } from "../lib/apercu-url";
+import { TAILLES_APERCU, urlApercu } from "../lib/apercu-url";
 
 /**
  * Contenu de la page d'accueil.
@@ -17,6 +17,10 @@ export const Accueil: GlobalConfig = {
     group: "Contenu",
     description: "La page d’accueil. Ses sections sont fixes : leur contenu se modifie ici, pas leur ordre.",
     preview: (_, { locale }) => urlApercu({ global: "accueil" }, locale),
+    livePreview: {
+      breakpoints: TAILLES_APERCU,
+      url: ({ locale }) => urlApercu({ global: "accueil" }, locale),
+    },
   },
   access: { read: () => true },
   hooks: { afterChange: [() => revaliderSite()] },

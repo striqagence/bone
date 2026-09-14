@@ -10,6 +10,7 @@ import { chargerNavigation, pourEntete } from "@/lib/navigation";
 
 import "./globals.css";
 import { BandeauApercu } from "@/components/site/BandeauApercu";
+import { RafraichirEnApercu } from "@/components/site/RafraichirEnApercu";
 import { contexteApercu } from "@/lib/apercu";
 
 /**
@@ -74,6 +75,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
     >
       <body className="min-h-full flex flex-col">
         {enApercu && <BandeauApercu />}
+        {enApercu && <RafraichirEnApercu />}
         <Header langue={locale} navigation={pourEntete(navigation)} />
         {children}
         <Footer langue={locale} navigation={navigation} />

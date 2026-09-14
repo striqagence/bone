@@ -3,7 +3,7 @@ import type { CollectionConfig } from "payload";
 import { sections } from "../blocks";
 import { lectureDesPubliees } from "../lib/acces";
 import { revaliderSite } from "../lib/revalidate";
-import { urlApercu } from "../lib/apercu-url";
+import { TAILLES_APERCU, urlApercu } from "../lib/apercu-url";
 
 /**
  * Pages du site vitrine.
@@ -24,6 +24,10 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: "titre",
     preview: (doc, { locale }) => urlApercu({ collection: "pages", id: doc.id as string }, locale),
+    livePreview: {
+      breakpoints: TAILLES_APERCU,
+      url: ({ data, locale }) => urlApercu({ collection: "pages", id: data.id as string }, locale),
+    },
     group: "Contenu",
     description: "Les pages du site. Chaque page choisit ses sections et leur ordre.",
     defaultColumns: ["titre", "slug", "parent", "_status"],

@@ -8,10 +8,31 @@
  */
 type Cible = { collection: string; id: string | number } | { global: string };
 
-export function urlApercu(cible: Cible, langue?: string): string {
+/**
+ * La langue arrive sous deux formes selon l'appelant : une chaîne pour le
+ * bouton d'aperçu, un objet de locale pour le panneau côte à côte.
+ */
+type Langue = string | { code?: string } | null | undefined;
+
+export function urlApercu(cible: Cible, langue?: Langue): string {
   const parametres = new URLSearchParams(
     "global" in cible ? { global: cible.global } : { collection: cible.collection, id: String(cible.id) },
   );
-  if (langue) parametres.set("langue", langue);
+  const code = typeof langue === "string" ? langue : langue?.code;
+  if (code) parametres.set("langue", code);
   return `/apercu?${parametres}`;
 }
+
+/**
+ * Tailles proposées par l'aperçu côte à côte.
+ *
+ * Ce sont les largeurs sur lesquelles le site a été réglé, pas des tailles
+ * d'appareils du commerce : un rédacteur doit pouvoir vérifier ce qu'on a
+ * corrigé, notamment la tablette en paysage, où plusieurs blocs basculent.
+ */
+export const TAILLES_APERCU = [
+  { label: "Téléphone", name: "telephone", width: 390, height: 844 },
+  { label: "Tablette", name: "tablette", width: 768, height: 1024 },
+  { label: "Tablette paysage", name: "tablettePaysage", width: 1024, height: 768 },
+  { label: "Ordinateur", name: "ordinateur", width: 1440, height: 900 },
+];

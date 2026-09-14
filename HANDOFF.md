@@ -360,9 +360,16 @@ revérifie à chaque rendu. Le cookie seul ne suffit pas, il vit dans le
 navigateur et survivrait à une déconnexion. Vérifié : un cookie de brouillon
 forgé sans session n'ouvre rien.
 
-Ce qui reste à faire de ce côté : l'aperçu côte à côte, qui affiche la page
-dans un panneau de l'admin et se rafraîchit à la frappe. Il demande le paquet
-`@payloadcms/live-preview-react`, non installé.
+L'aperçu existe aussi **côte à côte** : un panneau affiche la page à côté du
+formulaire, avec quatre largeurs, celles sur lesquelles le site a été réglé
+plutôt que des tailles d'appareils du commerce. La tablette en paysage y figure,
+c'est là que plusieurs blocs basculent.
+
+Le panneau se rafraîchit **à l'enregistrement**, pas à la frappe : les pages
+sont rendues par le serveur, leur contenu ne vit pas dans un état de composant
+qu'on remplacerait à la volée. Le composant qui écoute n'est monté qu'en
+aperçu, et Next le sert dans un morceau séparé : vérifié, aucun des neuf
+fichiers chargés par une page publique ne le contient.
 
 ## Confort d'édition
 

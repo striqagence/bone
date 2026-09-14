@@ -17,7 +17,7 @@ import { Articles, AppelAction, Faq } from "../blocks";
 import { ARetenir } from "../blocks/article";
 import { lectureDesPubliees } from "../lib/acces";
 import { revaliderSite } from "../lib/revalidate";
-import { urlApercu } from "../lib/apercu-url";
+import { TAILLES_APERCU, urlApercu } from "../lib/apercu-url";
 
 /**
  * Articles du blog.
@@ -38,6 +38,10 @@ export const Posts: CollectionConfig = {
   admin: {
     useAsTitle: "titre",
     preview: (doc, { locale }) => urlApercu({ collection: "posts", id: doc.id as string }, locale),
+    livePreview: {
+      breakpoints: TAILLES_APERCU,
+      url: ({ data, locale }) => urlApercu({ collection: "posts", id: data.id as string }, locale),
+    },
     group: "Contenu",
     description: "Les articles du blog. Un brouillon reste invisible du public jusqu’à sa publication.",
     defaultColumns: ["titre", "categorie", "publieLe", "_status"],
