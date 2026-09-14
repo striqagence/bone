@@ -75,9 +75,24 @@ export const AppelAction: Block = {
       name: "cta",
       type: "group",
       label: "Bouton",
+      admin: {
+        description:
+          "Renseigner le chemin pour une page du site, ou l’URL pour une destination extérieure.",
+      },
       fields: [
         { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
-        { name: "chemin", type: "text", required: true, label: "Chemin" },
+        {
+          name: "chemin",
+          type: "text",
+          label: "Chemin",
+          admin: { description: "Sans préfixe de langue : « /contact », pas « /fr/contact »." },
+        },
+        {
+          name: "url",
+          type: "text",
+          label: "URL extérieure",
+          admin: { description: "Adresse complète. Ouvre dans un nouvel onglet." },
+        },
       ],
     },
   ],

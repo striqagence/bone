@@ -3,10 +3,7 @@ import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import config from "@payload-config";
 
-import { SectionAppel } from "@/components/sections/SectionAppel";
-import { SectionFaq } from "@/components/sections/SectionFaq";
 import { SectionFormulaireContact } from "@/components/sections/SectionFormulaireContact";
-import { IconeLinkedin } from "@/components/ui/IconeLinkedin";
 import { DonneesStructurees } from "@/components/site/DonneesStructurees";
 import {
   alternatives,
@@ -17,6 +14,7 @@ import {
   questionsFrequentes,
 } from "@/lib/donnees-structurees";
 import { estUneLangue } from "@/lib/i18n";
+import { RendreSections } from "@/components/sections/RendreSections";
 
 /**
  * Page de contact.
@@ -46,11 +44,6 @@ export default async function PageContact({ params }: PageProps<"/[locale]/conta
   const payload = await getPayload({ config });
   const contenu = await payload.findGlobal({ slug: "contact", locale, depth: 1 });
 
-  const photo = (valeur: unknown) =>
-    valeur && typeof valeur === "object" && "url" in valeur && typeof valeur.url === "string"
-      ? { src: valeur.url, alt: String((valeur as { alt?: string }).alt ?? "") }
-      : undefined;
-
   const structure = graphe([
     organisation(locale),
     fichePage(locale, {
@@ -60,7 +53,10 @@ export default async function PageContact({ params }: PageProps<"/[locale]/conta
       type: "ContactPage",
     }),
     filDAriane(locale, [{ libelle: contenu.titre, chemin: "/contact" }]),
-    questionsFrequentes(contenu.faq.questions ?? []),
+    // La FAQ n'est plus un groupe fixe : on la retrouve parmi les sections.
+    questionsFrequentes(
+      (contenu.sections ?? []).flatMap((s) => (s.blockType === "faq" ? (s.questions ?? []) : [])),
+    ),
   ]);
 
   return (
@@ -79,19 +75,11 @@ export default async function PageContact({ params }: PageProps<"/[locale]/conta
         carte={contenu.carte}
         coordonnees={contenu.coordonnees}
       />
-      <SectionFaq
-        surtitre={contenu.faq.surtitre}
-        titre={contenu.faq.titre}
-        questions={contenu.faq.questions ?? []}
-        image={photo(contenu.faq.image)}
-      />
-      <SectionAppel
+      <RendreSections
+        sections={contenu.sections ?? []}
         langue={locale}
-        surtitre={contenu.appel.surtitre}
-        titre={contenu.appel.titre}
-        chapo={contenu.appel.chapo}
-        cta={contenu.appel.cta}
-        icone={<IconeLinkedin />}
+        bandes={[]}
+        articles={[]}
       />
     </>
   );

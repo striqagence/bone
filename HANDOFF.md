@@ -392,6 +392,22 @@ Les onze scripts d'amorçage qui remplissaient ces groupes sont dans
 `scripts/archive`, hors du typage. Ils ne servent plus à rien sinon à garder
 les textes d'origine, dans les deux langues.
 
+## Page de contact
+
+Sa FAQ et son appel à l'action sont des blocs, dans l'onglet « Questions et
+suite ». Le formulaire, le plan et l'encart de coordonnées restent des champs
+fixes : ils sont la page elle-même, pas des sections qu'on réordonne.
+
+La reprise a demandé d'élargir le bouton du bloc « appel à l'action », qui
+n'acceptait qu'un chemin interne : il accepte désormais aussi une URL
+extérieure, ce dont le contact avait besoin pour son lien LinkedIn. Le logo du
+réseau se pose tout seul quand l'adresse en vient. Le composant savait déjà le
+faire, seule la définition du champ était trop étroite.
+
+Comme pour l'accueil, le texte rendu a été comparé avant et après, dans les
+deux langues : identique, avant comme après la suppression des anciennes
+colonnes.
+
 ## Confort d'édition
 
 Chaque bloc de section porte une **vignette** dans le sélecteur du back-office :

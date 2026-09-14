@@ -2,6 +2,7 @@ import type { GlobalConfig } from "payload";
 
 import { revaliderSite } from "../lib/revalidate";
 import { TAILLES_APERCU, urlApercu } from "../lib/apercu-url";
+import { sections } from "../blocks";
 
 /**
  * Page de contact.
@@ -219,42 +220,15 @@ export const Contact: GlobalConfig = {
           label: "Questions et suite",
           fields: [
             {
-              name: "faq",
-              type: "group",
-              label: "Questions fréquentes",
-              fields: [
-                { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
-                { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
-                { name: "image", type: "upload", relationTo: "media", label: "Photo" },
-                {
-                  name: "questions",
-                  type: "array",
-                  label: "Questions",
-                  fields: [
-                    { name: "question", type: "text", required: true, localized: true, label: "Question" },
-                    { name: "reponse", type: "textarea", localized: true, label: "Réponse" },
-                  ],
-                },
-              ],
-            },
-            {
-              name: "appel",
-              type: "group",
-              label: "Appel à l’action",
-              fields: [
-                { name: "surtitre", type: "text", required: true, localized: true, label: "Surtitre" },
-                { name: "titre", type: "textarea", required: true, localized: true, label: "Titre" },
-                { name: "chapo", type: "textarea", required: true, localized: true, label: "Chapô" },
-                {
-                  name: "cta",
-                  type: "group",
-                  label: "Bouton",
-                  fields: [
-                    { name: "libelle", type: "text", required: true, localized: true, label: "Libellé" },
-                    { name: "url", type: "text", required: true, label: "URL" },
-                  ],
-                },
-              ],
+              name: "sections",
+              type: "blocks",
+              label: "Sections",
+              blocks: sections,
+              admin: {
+                initCollapsed: true,
+                description:
+                  "Ce qui suit le formulaire et le plan, dans l’ordre d’affichage.",
+              },
             },
           ],
         },

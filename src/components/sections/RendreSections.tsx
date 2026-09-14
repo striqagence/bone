@@ -25,6 +25,7 @@ import type { ImageCourriel } from "@/lib/image-courriel";
 import { SectionPositionnement } from "@/components/sections/SectionPositionnement";
 import { SectionLeConstat } from "@/components/sections/SectionLeConstat";
 import { SectionEnBref } from "@/components/sections/SectionEnBref";
+import { IconeLinkedin } from "@/components/ui/IconeLinkedin";
 
 type Bande = {
   pole: "expertise" | "capital" | "feed";
@@ -338,7 +339,15 @@ export function RendreSections({
                 surtitre={section.surtitre}
                 titre={section.titre}
                 chapo={section.chapo}
-                cta={section.cta}
+                /* La base rend « null » là où le composant attend « absent ». */
+                cta={{
+                  libelle: section.cta.libelle,
+                  chemin: section.cta.chemin ?? undefined,
+                  url: section.cta.url ?? undefined,
+                }}
+                /* Le logo accompagne le bouton quand il mène au réseau, comme
+                   la maquette le fait sur la page de contact. */
+                icone={section.cta.url?.includes("linkedin.com") ? <IconeLinkedin /> : undefined}
               />
             );
           default:

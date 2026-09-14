@@ -21,7 +21,12 @@ async function media(fichier: string, altFr: string, altEn: string) {
       filePath: path.join(DOSSIER, fichier),
       data: { alt: altFr },
     }));
-  await payload.update({ collection: "media", id: doc.id, locale: "en", data: { alt: altEn } });
+  await payload.update({
+    collection: "media",
+    id: doc.id,
+    locale: "en",
+    data: { alt: altEn },
+  });
   return doc.id;
 }
 
@@ -85,33 +90,41 @@ const fr = {
     email: "bone@contact.fr",
     contact: "01 80 86 60 66 · LinkedIn",
   },
-  faq: {
-    surtitre: "Questions fréquentes",
-    titre: "Vos questions, nos réponses franches.",
-    image: photos[0]?.id,
-    questions: [
-      {
-        question: "Le diagnostic est-il payant ?",
-        reponse:
-          "Non, le premier diagnostic est offert et sans engagement. Seules les missions qui en découlent sont facturées, sur devis.",
+  sections: [
+    {
+      blockType: "faq" as const,
+      surtitre: "Questions fréquentes",
+      titre: "Vos questions, nos réponses franches.",
+      image: photos[0]?.id,
+      questions: [
+        {
+          question: "Le diagnostic est-il payant ?",
+          reponse:
+            "Non, le premier diagnostic est offert et sans engagement. Seules les missions qui en découlent sont facturées, sur devis.",
+        },
+        {
+          question: "Sous quel délai serai-je recontacté ?",
+          reponse: "Une réponse est apportée sous 24 à 48 heures ouvrées.",
+        },
+        {
+          question: "Faut-il préparer des documents avant l’échange ?",
+          reponse:
+            "Rien n’est obligatoire. Si vous les avez sous la main, un schéma d’architecture, un inventaire du parc ou la liste de vos derniers incidents rendent le premier échange plus concret.",
+        },
+      ],
+    },
+    {
+      blockType: "appelAction" as const,
+      surtitre: "notre contenu expert",
+      titre: "Pas encore prêt à échanger ? Suivez notre contenu expert.",
+      chapo:
+        "Pédagogie · Déconstruction · Analyse · Performance · Durabilité IT",
+      cta: {
+        libelle: "Nous suivre sur",
+        url: "https://www.linkedin.com/company/boneit/",
       },
-      {
-        question: "Sous quel délai serai-je recontacté ?",
-        reponse: "Une réponse est apportée sous 24 à 48 heures ouvrées.",
-      },
-      {
-        question: "Faut-il préparer des documents avant l’échange ?",
-        reponse:
-          "Rien n’est obligatoire. Si vous les avez sous la main, un schéma d’architecture, un inventaire du parc ou la liste de vos derniers incidents rendent le premier échange plus concret.",
-      },
-    ],
-  },
-  appel: {
-    surtitre: "notre contenu expert",
-    titre: "Pas encore prêt à échanger ? Suivez notre contenu expert.",
-    chapo: "Pédagogie · Déconstruction · Analyse · Performance · Durabilité IT",
-    cta: { libelle: "Nous suivre sur", url: "https://www.linkedin.com/company/boneit/" },
-  },
+    },
+  ],
 };
 
 const en = {
@@ -133,8 +146,10 @@ const en = {
     envoyer: "Send my request",
     mentionLegale:
       "Your details are used only to answer your request. They are neither sold on nor used for anything else.",
-    succes: "Your request has been sent. A member of the BONE team will get back to you within 24 to 48 hours.",
-    erreur: "Something went wrong while sending. Please try again, or contact us directly by email.",
+    succes:
+      "Your request has been sent. A member of the BONE team will get back to you within 24 to 48 hours.",
+    erreur:
+      "Something went wrong while sending. Please try again, or contact us directly by email.",
   },
   carte: {
     ...carte,
@@ -147,38 +162,49 @@ const en = {
     email: "bone@contact.fr",
     contact: "+33 1 80 86 60 66 · LinkedIn",
   },
-  faq: {
-    ...fr.faq,
-    surtitre: "Frequently asked questions",
-    titre: "Your questions, our straight answers.",
-    questions: [
-      {
-        question: "Is the diagnosis chargeable?",
-        reponse:
-          "No, the first diagnosis is free and non-binding. Only the engagements that follow are billed, against a quote.",
+  sections: [
+    {
+      ...fr.sections[0],
+      blockType: "faq" as const,
+      surtitre: "Frequently asked questions",
+      titre: "Your questions, our straight answers.",
+      questions: [
+        {
+          question: "Is the diagnosis chargeable?",
+          reponse:
+            "No, the first diagnosis is free and non-binding. Only the engagements that follow are billed, against a quote.",
+        },
+        {
+          question: "How soon will I be contacted?",
+          reponse: "We reply within 24 to 48 working hours.",
+        },
+        {
+          question: "Do I need to prepare documents beforehand?",
+          reponse:
+            "Nothing is required. If you have them to hand, an architecture diagram, an estate inventory or a list of your recent incidents make the first conversation more concrete.",
+        },
+      ],
+    },
+    {
+      blockType: "appelAction" as const,
+      surtitre: "our expert content",
+      titre: "Not ready to talk yet? Follow our expert content.",
+      chapo: "Teaching · Unpacking · Analysis · Performance · Sustainable IT",
+      cta: {
+        libelle: "Follow us on",
+        url: "https://www.linkedin.com/company/boneit/",
       },
-      {
-        question: "How soon will I be contacted?",
-        reponse: "We reply within 24 to 48 working hours.",
-      },
-      {
-        question: "Do I need to prepare documents beforehand?",
-        reponse:
-          "Nothing is required. If you have them to hand, an architecture diagram, an estate inventory or a list of your recent incidents make the first conversation more concrete.",
-      },
-    ],
-  },
-  appel: {
-    surtitre: "our expert content",
-    titre: "Not ready to talk yet? Follow our expert content.",
-    chapo: "Teaching · Unpacking · Analysis · Performance · Sustainable IT",
-    cta: { libelle: "Follow us on", url: "https://www.linkedin.com/company/boneit/" },
-  },
+    },
+  ],
 };
 
 await payload.updateGlobal({ slug: "contact", locale: "fr", data: fr });
 
-const pose = await payload.findGlobal({ slug: "contact", locale: "fr", depth: 0 });
+const pose = await payload.findGlobal({
+  slug: "contact",
+  locale: "fr",
+  depth: 0,
+});
 
 await payload.updateGlobal({
   slug: "contact",
@@ -186,10 +212,26 @@ await payload.updateGlobal({
   data: {
     ...en,
     profils: en.profils.map((p, i) => ({ ...p, id: pose.profils?.[i]?.id })),
-    faq: {
-      ...en.faq,
-      questions: en.faq.questions.map((q, i) => ({ ...q, id: pose.faq?.questions?.[i]?.id })),
-    },
+    // Les blocs et leurs questions partagent leurs lignes entre les langues :
+    // les identifiants posés par le français sont repris.
+    sections: en.sections.map((section, i) => {
+      const posee = pose.sections?.[i] as {
+        id?: string | null;
+        questions?: { id?: string | null }[];
+      };
+      return {
+        ...section,
+        id: posee?.id,
+        ...("questions" in section
+          ? {
+              questions: section.questions.map((q, j) => ({
+                ...q,
+                id: posee?.questions?.[j]?.id,
+              })),
+            }
+          : {}),
+      };
+    }),
   },
 });
 

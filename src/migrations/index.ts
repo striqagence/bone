@@ -44,6 +44,9 @@ import * as migration_20260902_140823_referencement_globaux from './20260902_140
 import * as migration_20260907_085005_verrous_antiabus from './20260907_085005_verrous_antiabus';
 import * as migration_20260914_072646_sections_accueil from './20260914_072646_sections_accueil';
 import * as migration_20260914_073418_retire_groupes_accueil from './20260914_073418_retire_groupes_accueil';
+import * as migration_20260914_074530_sections_contact from './20260914_074530_sections_contact';
+import * as migration_20260914_074734_bouton_url from './20260914_074734_bouton_url';
+import * as migration_20260914_075126_retire_groupes_contact from './20260914_075126_retire_groupes_contact';
 
 export const migrations = [
   {
@@ -274,6 +277,21 @@ export const migrations = [
   {
     up: migration_20260914_073418_retire_groupes_accueil.up,
     down: migration_20260914_073418_retire_groupes_accueil.down,
-    name: '20260914_073418_retire_groupes_accueil'
+    name: '20260914_073418_retire_groupes_accueil',
+  },
+  {
+    up: migration_20260914_074530_sections_contact.up,
+    down: migration_20260914_074530_sections_contact.down,
+    name: '20260914_074530_sections_contact',
+  },
+  {
+    up: migration_20260914_074734_bouton_url.up,
+    down: migration_20260914_074734_bouton_url.down,
+    name: '20260914_074734_bouton_url',
+  },
+  {
+    up: migration_20260914_075126_retire_groupes_contact.up,
+    down: migration_20260914_075126_retire_groupes_contact.down,
+    name: '20260914_075126_retire_groupes_contact'
   },
 ];
