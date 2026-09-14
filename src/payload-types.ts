@@ -458,7 +458,7 @@ export interface Page {
              */
             constat: string;
             /**
-             * Facultative. Affichée en retrait à la suite du constat — l’accueil l’emploie, Capital énonce d’un seul tenant.
+             * Facultative. Affichée en retrait à la suite du constat : l’accueil l’emploie, Capital énonce d’un seul tenant.
              */
             consequence?: string | null;
             statistiques?:
@@ -1905,7 +1905,7 @@ export interface Accueil {
              */
             constat: string;
             /**
-             * Facultative. Affichée en retrait à la suite du constat — l’accueil l’emploie, Capital énonce d’un seul tenant.
+             * Facultative. Affichée en retrait à la suite du constat : l’accueil l’emploie, Capital énonce d’un seul tenant.
              */
             consequence?: string | null;
             statistiques?:
@@ -2179,7 +2179,7 @@ export interface Blog {
    */
   libelleTousSujets: string;
   /**
-   * « {n} articles » — {n} est remplacé par le nombre trouvé.
+   * « {n} articles ». {n} est remplacé par le nombre trouvé.
    */
   gabaritCompte: string;
   libelleCharger: string;
@@ -2482,7 +2482,7 @@ export interface Contact {
              */
             constat: string;
             /**
-             * Facultative. Affichée en retrait à la suite du constat — l’accueil l’emploie, Capital énonce d’un seul tenant.
+             * Facultative. Affichée en retrait à la suite du constat : l’accueil l’emploie, Capital énonce d’un seul tenant.
              */
             consequence?: string | null;
             statistiques?:

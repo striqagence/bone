@@ -329,7 +329,7 @@ export const Chiffres: Block = {
       label: "Conséquence",
       admin: {
         description:
-          "Facultative. Affichée en retrait à la suite du constat — l’accueil l’emploie, Capital énonce d’un seul tenant.",
+          "Facultative. Affichée en retrait à la suite du constat : l’accueil l’emploie, Capital énonce d’un seul tenant.",
       },
     },
     {

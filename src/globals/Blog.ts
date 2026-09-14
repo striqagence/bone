@@ -54,7 +54,7 @@ export const Blog: GlobalConfig = {
       required: true,
       localized: true,
       label: "Compteur d’articles",
-      admin: { description: "« {n} articles » — {n} est remplacé par le nombre trouvé." },
+      admin: { description: "« {n} articles ». {n} est remplacé par le nombre trouvé." },
     },
     { name: "libelleCharger", type: "text", required: true, localized: true, label: "Bouton « charger plus »" },
     {
