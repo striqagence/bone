@@ -34,6 +34,10 @@ import { SelecteurLangue } from "./SelecteurLangue";
  * elle se déduit des chemins de pôle du global de navigation, les seules pages
  * à porter ce hero. Renommer un pôle au back-office n'a donc rien à casser.
  *
+ * Les deux ne reçoivent pas le même état. L'accueil garde ses trois blocs
+ * flottants ; les pôles montrent la barre pleine, logotype réduit à l'intérieur
+ * de la pastille, simplement posée sur leur photo au lieu de la surmonter.
+ *
  * Les SVG sont servis en `<img>` et non via next/image : ce sont des vectoriels
  * à dimensions fixes, que l'optimiseur ne peut ni redimensionner utilement ni
  * convertir, et qui exigeraient en prime d'ouvrir `dangerouslyAllowSVG`.
@@ -46,8 +50,10 @@ export function Header({
   navigation: NavigationEntete;
 }) {
   const chemin = cheminSansLangue(usePathname());
-  const surHeroImage =
-    chemin === "/" || (navigation.poles ?? []).some((pole) => pole.chemin === chemin);
+  const surAccueil = chemin === "/";
+  const surPole = (navigation.poles ?? []).some((pole) => pole.chemin === chemin);
+  /** Pages dont le hero porte une photo pleine largeur : la barre s'y pose dessus. */
+  const surHeroImage = surAccueil || surPole;
   const [defile, setDefile] = useState(false);
 
   useEffect(() => {
@@ -58,7 +64,23 @@ export function Header({
     return () => window.removeEventListener("scroll", surDefilement);
   }, [surHeroImage]);
 
-  const compact = !surHeroImage || defile;
+  /**
+   * L'état déployé, logotype nu sur la photo et pastilles séparées, n'existe
+   * que sur l'accueil. Les pages de pôle montrent la barre pleine, logotype
+   * réduit compris, mais posée sur leur image.
+   */
+  const compact = !surAccueil || defile;
+
+  /**
+   * Hors du flux tant que la barre se pose sur une photo : en absolu au repos,
+   * pour qu'elle défile avec le hero, puis fixée dès les premiers pixels sans
+   * quoi la navigation deviendrait inatteignable.
+   */
+  const position = defile
+    ? "fixed inset-x-0 top-0"
+    : surHeroImage
+      ? "absolute inset-x-0 top-0"
+      : "sticky top-0";
 
   const linkedin = (
     <a href={navigation.contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -96,9 +118,7 @@ export function Header({
   if (compact) {
     return (
       <header
-        className={`z-50 flex h-[86px] w-full items-center justify-center px-4 py-4 xl:h-[114px] xl:py-5 ${
-          surHeroImage ? "fixed inset-x-0 top-0" : "sticky top-0"
-        }`}
+        className={`z-50 flex h-[86px] w-full items-center justify-center px-4 py-4 xl:h-[114px] xl:py-5 ${position}`}
       >
         <div className="relative flex w-full max-w-[1648px] items-center justify-between rounded bg-encre/80 px-4 py-3 backdrop-blur-[5px] xl:px-6 xl:py-3.5">
           {logotype}
