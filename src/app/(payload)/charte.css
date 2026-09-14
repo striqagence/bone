@@ -22,30 +22,30 @@
   --bone-marine: #131353;
 }
 
-/* Titres, navigation et boutons prennent la police de titrage du site, dont la
-   largeur poussée à 120 est ce qui donne son allure à la marque. */
+/* Titres et navigation prennent la police de titrage du site, dont la largeur
+   poussée à 120 est ce qui donne son allure à la marque. Les boutons en sont
+   exclus : ce sont des commandes, pas des titres, et une graisse étirée y
+   passe mal. */
 h1,
 h2,
 h3,
 h4,
 .nav__link,
-.btn,
 .step-nav {
   font-family: var(--police-bo-titres), var(--police-bo-texte), sans-serif;
   font-stretch: 120%;
 }
 
-/* Ce qui agit prend le bleu de marque. */
-.btn--style-primary .btn__content,
+/* Ce qui agit prend le bleu de marque.
+   Payload pilote ses boutons par des variables locales : les renseigner plutôt
+   que de forcer un fond laisse en place le rayon, les marges intérieures et
+   l'état désactivé. Peindre le bouton lui-même lui faisait perdre ses angles
+   arrondis, portés par un élément intérieur. */
 .btn--style-primary {
-  background-color: var(--bone-bleu);
-  color: #fff;
-}
-
-.btn--style-primary:not(.btn--disabled):hover,
-.btn--style-primary:not(.btn--disabled):focus-visible {
-  background-color: var(--bone-bleu-fonce);
-  color: #fff;
+  --bg-color: var(--bone-bleu);
+  --color: #fff;
+  --hover-bg: var(--bone-bleu-fonce);
+  --hover-color: #fff;
 }
 
 /* Le contour de focus doit rester visible sur les deux thèmes : le bleu de
