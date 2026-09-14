@@ -1,7 +1,7 @@
 /**
  * Adresse de courriel dérobée aux moissonneurs.
  *
- * Le principe est simple : la chaîne `bone@contact.fr` ne doit apparaître nulle
+ * Le principe est simple : la chaîne `contact@bone.fr` ne doit apparaître nulle
  * part dans ce que le serveur envoie. Les robots qui ratissent les pages
  * cherchent un motif « quelque chose arobase quelque chose point quelque
  * chose » dans le HTML brut ; ils n'exécutent pas le JavaScript. Une adresse

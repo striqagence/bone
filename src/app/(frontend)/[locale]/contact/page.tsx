@@ -15,6 +15,7 @@ import {
 } from "@/lib/donnees-structurees";
 import { estUneLangue } from "@/lib/i18n";
 import { RendreSections } from "@/components/sections/RendreSections";
+import { imageCourriel } from "@/lib/image-courriel";
 
 /**
  * Page de contact.
@@ -29,7 +30,11 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!estUneLangue(locale)) return {};
   const payload = await getPayload({ config });
-  const { referencement } = await payload.findGlobal({ slug: "contact", locale, depth: 0 });
+  const { referencement } = await payload.findGlobal({
+    slug: "contact",
+    locale,
+    depth: 0,
+  });
   return {
     title: referencement.metaTitre,
     description: referencement.metaDescription,
@@ -37,12 +42,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function PageContact({ params }: PageProps<"/[locale]/contact">) {
+export default async function PageContact({
+  params,
+}: PageProps<"/[locale]/contact">) {
   const { locale } = await params;
   if (!estUneLangue(locale)) notFound();
 
   const payload = await getPayload({ config });
-  const contenu = await payload.findGlobal({ slug: "contact", locale, depth: 1 });
+  const contenu = await payload.findGlobal({
+    slug: "contact",
+    locale,
+    depth: 1,
+  });
 
   const structure = graphe([
     organisation(locale),
@@ -55,7 +66,9 @@ export default async function PageContact({ params }: PageProps<"/[locale]/conta
     filDAriane(locale, [{ libelle: contenu.titre, chemin: "/contact" }]),
     // La FAQ n'est plus un groupe fixe : on la retrouve parmi les sections.
     questionsFrequentes(
-      (contenu.sections ?? []).flatMap((s) => (s.blockType === "faq" ? (s.questions ?? []) : [])),
+      (contenu.sections ?? []).flatMap((s) =>
+        s.blockType === "faq" ? (s.questions ?? []) : [],
+      ),
     ),
   ]);
 
@@ -70,10 +83,14 @@ export default async function PageContact({ params }: PageProps<"/[locale]/conta
         titre={contenu.titre}
         description={contenu.description}
         mentionChamps={contenu.mentionChamps}
-        profils={(contenu.profils ?? []).map(({ valeur, libelle }) => ({ valeur, libelle }))}
+        profils={(contenu.profils ?? []).map(({ valeur, libelle }) => ({
+          valeur,
+          libelle,
+        }))}
         libelles={contenu.libelles}
         carte={contenu.carte}
         coordonnees={contenu.coordonnees}
+        courriel={imageCourriel(contenu.coordonnees.email, locale)}
       />
       <RendreSections
         sections={contenu.sections ?? []}

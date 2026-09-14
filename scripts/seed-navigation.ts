@@ -39,7 +39,7 @@ const fr = {
   contact: {
     titre: "Contact",
     libelleFormulaire: "Notre formulaire",
-    email: "bone@contact.fr",
+    email: "contact@bone.fr",
     linkedin: "https://www.linkedin.com/company/boneit/",
   },
   liensLegaux: [

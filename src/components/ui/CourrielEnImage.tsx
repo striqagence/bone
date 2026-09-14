@@ -11,7 +11,18 @@ import type { ImageCourriel } from "@/lib/image-courriel";
  * de base de l'image sur celle du paragraphe : sans lui, une image s'aligne
  * par son bord inférieur et l'adresse flotterait au-dessus de la ligne.
  */
-export function CourrielEnImage({ image }: { image: ImageCourriel }) {
+export function CourrielEnImage({
+  image,
+  variante = "sombre",
+}: {
+  image: ImageCourriel;
+  /**
+   * « clair » pour les fonds sombres. L'image étant d'une seule couleur sur
+   * fond transparent, la ramener au blanc par un filtre évite d'en fabriquer
+   * et d'en versionner une seconde.
+   */
+  variante?: "sombre" | "clair";
+}) {
   const { src, alt, largeur, hauteur, base, taille } = image;
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -23,6 +34,7 @@ export function CourrielEnImage({ image }: { image: ImageCourriel }) {
       draggable={false}
       className="inline-block select-none"
       style={{
+        filter: variante === "clair" ? "brightness(0) invert(1)" : undefined,
         width: `${largeur / taille}em`,
         height: `${hauteur / taille}em`,
         verticalAlign: `-${(hauteur - base) / taille}em`,

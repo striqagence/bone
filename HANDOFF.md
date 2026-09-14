@@ -528,9 +528,9 @@ clair** dans le JSON-LD de chaque page, ce qui annulait toute la peine prise
 ailleurs. La propriété `email` de `Organization` est facultative ; le numéro de
 téléphone, lui, reste.
 
-Sur les pages légales, où la loi impose de l'afficher, l'adresse est **une
-image** : ni cliquable, ni sélectionnable, ni lisible par un moissonneur. Son
-texte de remplacement l'épelle (« bone arobase contact point fr ») pour qu'un
+Partout où elle apparaît — pages légales et encart de la page de contact —
+l'adresse est **une image** : ni cliquable, ni sélectionnable, ni lisible par un moissonneur. Son
+texte de remplacement l'épelle (« contact arobase bone point fr ») pour qu'un
 lecteur d'écran la restitue sans qu'une expression régulière la reconnaisse. Le
 clic et le copier-coller sont perdus : c'est le prix assumé de ce choix.
 
@@ -541,3 +541,6 @@ empreinte de l'adresse, si bien qu'une adresse modifiée sans régénération ne
 correspond plus à aucun fichier, et la page se rabat sur un renvoi au
 formulaire plutôt que d'afficher une adresse périmée. Chrome n'est nécessaire
 qu'à cette génération, jamais au build ni à l'exécution.
+
+L'encart de la page de contact étant sur fond bleu, l'image y est ramenée au
+blanc par un filtre plutôt que d'en fabriquer et d'en versionner une seconde.

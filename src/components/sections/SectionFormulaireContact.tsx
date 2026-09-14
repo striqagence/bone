@@ -1,10 +1,10 @@
 import { CarteAcces } from "@/components/site/CarteAcces";
-import { AdresseCourriel } from "@/components/ui/AdresseCourriel";
+import { CourrielEnImage } from "@/components/ui/CourrielEnImage";
 import { FormulaireContact } from "@/components/site/FormulaireContact";
 import { FilDAriane } from "@/components/ui/FilDAriane";
 import { Surtitre } from "@/components/ui/Surtitre";
-import { encoderCourriel } from "@/lib/courriel";
 import type { Langue } from "@/lib/i18n";
+import type { ImageCourriel } from "@/lib/image-courriel";
 
 /**
  * Section formulaire de la page de contact (Figma « Contact »).
@@ -23,6 +23,7 @@ export function SectionFormulaireContact({
   libelles,
   carte,
   coordonnees,
+  courriel,
   ariane,
 }: {
   langue: Langue;
@@ -39,7 +40,14 @@ export function SectionFormulaireContact({
     intitule: string;
     libelleLien: string;
   };
-  coordonnees: { badge: string; adresse: string; email: string; contact: string };
+  coordonnees: {
+    badge: string;
+    adresse: string;
+    email: string;
+    contact: string;
+  };
+  /** L'adresse en image. Absente, l'encart affiche le texte brut. */
+  courriel?: ImageCourriel;
   ariane: string;
 }) {
   return (
@@ -58,11 +66,19 @@ export function SectionFormulaireContact({
             <h1 className="w-full titrage text-3xl font-bold leading-[1.4] text-primary-950 lg:text-5xl">
               {titre}
             </h1>
-            <p className="w-full text-lg leading-[1.5] text-primary-950 opacity-60">{description}</p>
-            <p className="text-sm font-medium leading-[1.5] text-primary-600">{mentionChamps}</p>
+            <p className="w-full text-lg leading-[1.5] text-primary-950 opacity-60">
+              {description}
+            </p>
+            <p className="text-sm font-medium leading-[1.5] text-primary-600">
+              {mentionChamps}
+            </p>
           </div>
 
-          <FormulaireContact langue={langue} profils={profils} libelles={libelles} />
+          <FormulaireContact
+            langue={langue}
+            profils={profils}
+            libelles={libelles}
+          />
         </div>
 
         <div className="flex flex-col items-center justify-center">
@@ -93,11 +109,11 @@ export function SectionFormulaireContact({
               {coordonnees.adresse}
             </a>
             <p className="w-full text-base leading-[1.5] text-white opacity-80">
-              <AdresseCourriel
-                code={encoderCourriel(coordonnees.email)}
-                langue={langue}
-                className="underline underline-offset-2"
-              />
+              {courriel ? (
+                <CourrielEnImage image={courriel} variante="clair" />
+              ) : (
+                coordonnees.email
+              )}
               {" · "}
               {coordonnees.contact}
             </p>
