@@ -455,6 +455,28 @@ l'en-tête collant, cadre en 16:9 depuis le sommet de la section et réduit à
 Chaque collection et chaque global porte par ailleurs une phrase de
 description, affichée en tête de son écran d'édition.
 
+## Apparitions
+
+Trois mouvements, tous dans `globals.css`, tous bornés par `@supports` et par
+la préférence de mouvement réduit.
+
+- **Les grilles de cartes** (`.apparition-bloc`) : chaque enfant monte à son
+  tour, en cascade, au défilement.
+- **Les intros de section** : le surtitre ouvre, le titre suit, le chapô ferme,
+  quelques points d'écart entre les trois. La règle vise `section .surtitre`,
+  `section h2` et `section h2 + p`, donc toute nouvelle section en hérite sans
+  qu'il faille y penser. Les titres déjà pris dans une cascade en sont exclus,
+  sinon les opacités se multiplieraient.
+- **Les heros** : ils occupent le haut de l'écran, donc sont déjà visibles au
+  chargement et une animation liée au défilement les laisserait figés. Ceux-là
+  s'annoncent au temps, une seule fois, avec un échelonnement court.
+
+Un piège à connaître si l'on touche aux images-clés : **l'opacité d'arrivée n'y
+est pas écrite**. Une propriété absente de la dernière image reprend celle du
+style, ce qui laisse les paragraphes voulus à 60 ou 80 % à leur valeur. L'y
+écrire les ramènerait tous à 1, et le premier paragraphe de chaque section se
+détacherait des suivants.
+
 ## Brouillons
 
 Les collections `pages` et `posts` versionnent leurs contenus. Leur lecture

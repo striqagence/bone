@@ -37,7 +37,7 @@ export function Surtitre({
 }) {
   return (
     <Balise
-      className={`flex items-center gap-2.5 titrage text-xs font-semibold uppercase leading-5 tracking-widest ${couleurs[couleur]} ${className}`}
+      className={`surtitre flex items-center gap-2.5 titrage text-xs font-semibold uppercase leading-5 tracking-widest ${couleurs[couleur]} ${className}`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

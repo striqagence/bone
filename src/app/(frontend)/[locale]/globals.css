@@ -75,7 +75,9 @@
 /** Citations de la maquette : même police, inclinée par l'axe `slnt`. */
 @utility titrage-italique {
   font-family: var(--font-display);
-  font-variation-settings: "wdth" 120, "slnt" -10;
+  font-variation-settings:
+    "wdth" 120,
+    "slnt" -10;
 }
 
 /* =============================================================================
@@ -96,13 +98,19 @@
     line-height: 1.5;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     font-weight: 700;
     line-height: 1.4;
   }
 
-  .text-6xl, .text-7xl {
+  .text-6xl,
+  .text-7xl {
     line-height: 1.2;
   }
 }
@@ -183,23 +191,100 @@
     opacity: 0;
     translate: 0 14px;
   }
+  /* L'opacité d'arrivée n'est pas écrite : une propriété absente de la dernière
+     image reprend celle du style. Sans quoi l'animation ramènerait à 1 des
+     paragraphes voulus à 60 ou 80 %, et le premier de chaque section se
+     détacherait des suivants. */
   to {
-    opacity: 1;
     translate: none;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    section h2 {
+    section .surtitre,
+    section h2,
+    section h2 + p {
       animation: apparition-titre linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 55%;
     }
 
-    .apparition-bloc h2 {
+    /* Le surtitre ouvre, le titre suit, le chapô ferme. Quelques points
+       d'écart suffisent : au delà, on voit trois mouvements au lieu d'une
+       phrase qui se pose. */
+    section .surtitre {
+      animation-range: entry 0% entry 46%;
+    }
+
+    section h2 + p {
+      animation-range: entry 8% entry 64%;
+    }
+
+    /* Les titres déjà pris dans la cascade des cartes gardent leur exception,
+       et leur surtitre avec eux : leur conteneur s'anime, animer l'intérieur
+       par-dessus multiplierait les opacités. */
+    .apparition-bloc h2,
+    .apparition-bloc .surtitre,
+    .apparition-bloc h2 + p {
       animation: none;
     }
+  }
+}
+
+/* =============================================================================
+   Apparition à l'ouverture de la page.
+
+   Les heros occupent le haut de l'écran : ils sont déjà visibles au
+   chargement, et une animation liée au défilement les laisserait figés dans
+   leur état final. Ceux-là s'annoncent donc au temps, une seule fois, avec le
+   même mouvement que les titres pour que l'ensemble se tienne.
+
+   L'échelonnement suit l'ordre de lecture. Il reste court : au delà de trois
+   dixièmes de seconde, l'arrivée se remarque au lieu d'accompagner.
+
+   Sans la préférence de mouvement réduit, aucune règle ne s'applique et le
+   contenu est simplement là, ce qui est le bon comportement de repli.
+   ========================================================================== */
+
+@keyframes apparition-entree {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+  /* L'opacité d'arrivée n'est pas écrite : une propriété absente de la dernière
+     image reprend celle du style. Sans quoi l'animation ramènerait à 1 des
+     paragraphes voulus à 60 ou 80 %, et le premier de chaque section se
+     détacherait des suivants. */
+  to {
+    translate: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .apparition-entree > * {
+    animation: apparition-entree 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .apparition-entree > *:nth-child(2) {
+    animation-delay: 90ms;
+  }
+
+  .apparition-entree > *:nth-child(3) {
+    animation-delay: 180ms;
+  }
+
+  .apparition-entree > *:nth-child(n + 4) {
+    animation-delay: 260ms;
+  }
+
+  /* Le hero porte déjà son propre mouvement : le titre n'en reçoit pas un
+     second par la règle des sections. */
+  .apparition-entree .surtitre,
+  .apparition-entree h1,
+  .apparition-entree h2,
+  .apparition-entree h2 + p {
+    animation-name: apparition-entree;
   }
 }
 

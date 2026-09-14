@@ -52,7 +52,7 @@ export function HeroInterne({
       <div className="grid w-full max-w-[1600px] grid-cols-1 gap-x-12 gap-y-5 xl:grid-cols-2">
         <FilDAriane entrees={entrees} langue={langue} fond="clair" className="xl:col-span-2" />
 
-        <div className="flex flex-col items-start justify-center gap-5 py-8">
+        <div className="apparition-entree flex flex-col items-start justify-center gap-5 py-8">
           <div className="flex w-full flex-col items-start justify-end gap-5">
             <Surtitre couleur="marine">{surtitre}</Surtitre>
             {/* Le corps du titre suit la largeur disponible : à 60px, un mot

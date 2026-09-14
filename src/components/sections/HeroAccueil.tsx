@@ -59,7 +59,7 @@ export function HeroAccueil({
           className="pointer-events-none absolute -bottom-[233px] -right-[254px] hidden w-[818.871px] max-w-none lg:block"
         />
 
-        <div className="flex w-full flex-1 flex-col items-start justify-end gap-5">
+        <div className="apparition-entree flex w-full flex-1 flex-col items-start justify-end gap-5">
           <Surtitre couleur="blanc">{surtitre}</Surtitre>
           {/* Le corps de 72px de la maquette suppose ses 1233px de colonne. En
               dessous, il descend d'un cran par palier : sans quoi « Maîtrisez
@@ -75,7 +75,7 @@ export function HeroAccueil({
 
         {/* 367px, c'est 23 % des 1600 de la maquette. En pixels fixes, la
             colonne en occupait 46 % à 1024 et étranglait le titre. */}
-        <div className="flex w-full flex-col items-start gap-10 lg:h-full lg:w-[300px] lg:items-end lg:justify-between 2xl:w-[367px]">
+        <div className="apparition-entree flex w-full flex-col items-start gap-10 lg:h-full lg:w-[300px] lg:items-end lg:justify-between 2xl:w-[367px]">
           <p className="text-lg leading-[1.5] text-white lg:text-xl">{chapo}</p>
           <Button
             href={lien(cta.chemin, langue)}
