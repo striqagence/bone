@@ -87,7 +87,23 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
-    meta: { titleSuffix: " · Bone" },
+    meta: {
+      titleSuffix: " · Bone",
+      icons: [{ url: "/brand/bone-mark-degrade.svg", type: "image/svg+xml" }],
+    },
+    /**
+     * Le logotype de la marque remplace celui de Payload, à l'écran de
+     * connexion comme dans la barre de navigation. Les deux sont des
+     * composants et non des images : les fichiers de marque sont blancs, prévus
+     * pour les fonds sombres du site, et disparaîtraient sur le fond clair de
+     * l'administration. Repris en `currentColor`, le texte suit le thème.
+     */
+    components: {
+      graphics: {
+        Logo: "/components/admin/Logo#Logo",
+        Icon: "/components/admin/Icon#Icon",
+      },
+    },
   },
   collections: [Users, Media, Pages, Posts, Categories, Demandes, Abonnes, Verrous],
   globals: [Accueil, Blog, Contact, Navigation],
