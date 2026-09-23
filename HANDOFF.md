@@ -447,6 +447,102 @@ afin qu'une perte ne soit jamais totale, et **garder la clé de secours** que
 l'écran de configuration affiche sous « Saisir la clé à la main », dans un
 gestionnaire de mots de passe.
 
+## Trois langues
+
+Le chinois simplifié s'ajoute au français et à l'anglais depuis le 23 septembre
+2026. Tout part du tableau `langues` de `lib/i18n.ts` : il commande le
+middleware, les routes, le plan des pages et le sélecteur. Ajouter une langue
+revient à l'étendre, puis à suivre ce que TypeScript désigne, ce qui avait
+couvert six endroits sur sept.
+
+### Codes et adresses
+
+Le préfixe d'URL reste court, `/zh`, mais `zh-Hans` est déclaré aux moteurs et
+porté par l'attribut `lang` : « zh » seul ne dit pas quelle écriture est
+servie, et les caractères du chinois traditionnel diffèrent. Les deux formes
+vivent dans `codesHreflang`.
+
+Les identifiants d'URL ne sont pas localisés : `/zh/competences/expertise`
+garde le chemin français, comme l'anglais le faisait déjà. Les alternances de
+langue s'en trouvent simplifiées, mais un lecteur chinois voit des mots
+français dans la barre d'adresse. Localiser les slugs supposerait de les rendre
+traduisibles et de gérer les redirections des anciennes adresses ; ce n'est pas
+fait.
+
+### La police
+
+Ni Google Sans Flex ni Work Sans ne portent de caractères chinois. Noto Sans SC
+est chargée en **repli derrière** les polices de marque, et non à leur place :
+le navigateur descend la pile caractère par caractère, si bien que « BONE »,
+« IT » ou « NIS2 » gardent la charte au milieu d'une phrase chinoise. Inverser
+l'ordre aurait fait écrire le nom de la marque dans une autre police que sur le
+reste du site.
+
+`preload: false` est une nécessité : une fonte chinoise pèse plusieurs
+mégaoctets, découpés par plages Unicode. Mesuré sur l'accueil, dix-sept tranches
+sur trois cent quatre sont téléchargées, exactement celles dont la page a
+besoin.
+
+Trois réglages accompagnent l'écriture, dans `globals.css` sous
+`html[lang="zh-Hans"]` : coupure des lignes entre idéogrammes, interlettrage à
+zéro, et interlignes relevés (1,75 au lieu de 1,5). Un idéogramme occupe tout
+son cadratin là où une minuscule latine en laisse une partie vide ; à
+interligne égal, un paragraphe chinois paraît compact.
+
+### Le sélecteur de langue
+
+Il était construit pour exactement deux langues : il affichait la courante et
+pointait vers l'autre, son chevron n'ouvrant rien. Il déplie désormais la liste
+qu'il annonçait, chaque langue nommée dans sa propre écriture (« 中文 » se
+trouve du premier coup d'œil, « Chinois » non).
+
+Son alignement suit la position du contrôle, par la propriété `alignement` :
+dans l'en-tête il ouvre vers la gauche, dans le menu replié vers la droite.
+Sans cette distinction le panneau sortait du cadre par la gauche, de huit
+pixels, sous 1280px.
+
+### Traduire un contenu
+
+Deux scripts et un parcours commun, sous `scripts/`, plutôt qu'une saisie au
+back-office. Le chemin d'une chaîne désigne le même endroit à l'extraction et à
+la réinjection, y compris dans un corps d'article, où les nœuds de texte n'ont
+pas de nom.
+
+```
+npx payload run scripts/exporter-textes.ts fr traductions/source-fr.json
+npx payload run scripts/importer-traductions.ts zh traductions/zh.json
+```
+
+Les deux fichiers sont versionnés sous `traductions/`. Une chaîne sans
+traduction est laissée telle quelle, Payload servant le français en repli, et
+le compte des manquantes s'affiche à la fin de l'import.
+
+**La liste des clés à ne pas traduire, dans `traduction-parcours.ts`, mérite
+d'être lue avant d'y toucher.** Chaque entrée a évité un dégât : un identifiant
+d'URL traduit fabrique des liens morts, « picto » fait disparaître un
+pictogramme, « fichier » un logo partenaire, et les attributs de l'éditeur de
+texte riche (« h2 », « paragraph », « ltr ») détruisent le document. L'inverse
+guette aussi : « email » et « telephone » avaient été écartés comme
+coordonnées, alors qu'ils nomment aussi deux libellés du formulaire de contact,
+restés en français jusqu'à ce qu'on les remarque.
+
+### Ce qui reste en français
+
+Seize noms de constructeurs, trois numéros d'étape, trois signes « % », et
+l'adresse postale, qui doit rester lisible par un facteur français. Rien
+d'autre : mesuré page par page sur les douze pages du site.
+
+### Ce qui n'est pas traduit
+
+Le back-office reste en français et en anglais. Un contributeur chinois verrait
+les libellés français des champs. `payload.config.ts` déclare la locale
+`{ label: "中文", code: "zh" }` pour le contenu, ce qui suffit à saisir du
+chinois, mais l'interface elle-même n'est pas traduite.
+
+Les traductions sont un premier jet, au même titre que l'anglais. **Une
+relecture par un locuteur natif reste à faire avant une mise en ligne
+publique**, en particulier sur les pages légales, dont la portée est juridique.
+
 ## Langue du back-office
 
 `i18n: { fallbackLanguage: "fr" }` dans `payload.config.ts`. Payload choisit
