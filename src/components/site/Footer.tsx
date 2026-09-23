@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/Button";
-import { lien, type Langue } from "@/lib/i18n";
+import { lien, mentionDroits, type Langue } from "@/lib/i18n";
 import type { Navigation as NavigationGlobal } from "@/lib/navigation";
 
 import { NavLink } from "./NavLink";
@@ -127,7 +127,7 @@ export function Footer({
           {/* L'année se calcule au build : figée dans le code, elle serait
               périmée au premier janvier suivant. */}
           <p className="text-xs whitespace-nowrap text-white/80">
-            © {new Date().getFullYear()} Bone. Tous droits réservés
+            {mentionDroits[langue](new Date().getFullYear())}
           </p>
           <div className="flex flex-wrap items-center gap-x-7 gap-y-2 text-xs text-white/80 xl:justify-end">
             {(liensLegaux ?? []).map(({ libelle, chemin }) => (

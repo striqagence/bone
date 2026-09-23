@@ -54,6 +54,19 @@ export const codesHreflang: Record<Langue, string> = {
 };
 
 /**
+ * Mention de droits du pied de page.
+ *
+ * Elle vit dans le code et non au back-office : c'est une formule figée, que
+ * personne n'a à rédiger, et elle ne doit jamais manquer. L'année s'y insère à
+ * la construction du site.
+ */
+export const mentionDroits: Record<Langue, (annee: number) => string> = {
+  fr: (annee) => `© ${annee} Bone. Tous droits réservés`,
+  en: (annee) => `© ${annee} Bone. All rights reserved`,
+  zh: (annee) => `© ${annee} Bone. 保留所有权利`,
+};
+
+/**
  * Sens d'écriture et découpe des lignes.
  *
  * Le chinois ne sépare pas les mots par des espaces : un navigateur qui
