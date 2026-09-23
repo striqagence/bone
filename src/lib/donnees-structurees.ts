@@ -1,4 +1,5 @@
 import { lien, type Langue } from "./i18n";
+import { adresseServeur } from "./adresse";
 
 /**
  * Données structurées du site, au format JSON-LD.
@@ -15,22 +16,22 @@ import { lien, type Langue } from "./i18n";
  * mise en ligne sans `NEXT_PUBLIC_SERVER_URL` annonçait « localhost » dans
  * toutes les URL canoniques, les `hreflang` et les données structurées.
  */
-function adresseDeBase(): string {
-  if (process.env.NEXT_PUBLIC_SERVER_URL) return process.env.NEXT_PUBLIC_SERVER_URL;
-  const production = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  return production ? `https://${production}` : "http://localhost:3000";
-}
-
-export const BASE = adresseDeBase().replace(/\/$/, "");
+export const BASE = (adresseServeur() ?? "http://localhost:3000").replace(
+  /\/$/,
+  "",
+);
 
 /**
  * Vrai tant que le site n'est pas servi depuis son domaine définitif : en
  * local, ou sur une adresse de prévisualisation Vercel. Le `robots.txt` s'y
  * appuie pour refuser l'indexation.
  */
-export const ADRESSE_PROVISOIRE = /(^|\.)vercel\.app$|^localhost$/.test(new URL(BASE).hostname);
+export const ADRESSE_PROVISOIRE = /(^|\.)vercel\.app$|^localhost$/.test(
+  new URL(BASE).hostname,
+);
 
-const absolu = (chemin: string, langue: Langue) => `${BASE}${lien(chemin, langue)}`;
+const absolu = (chemin: string, langue: Langue) =>
+  `${BASE}${lien(chemin, langue)}`;
 
 /**
  * Adresses équivalentes d'une même page. La canonique est celle de la langue
@@ -99,7 +100,10 @@ export const ACCUEIL: Record<Langue, string> = { fr: "Accueil", en: "Home" };
  * Fil d'ariane. Le premier maillon est toujours l'accueil, comme à l'écran :
  * la fiche doit décrire la page, pas une navigation idéale.
  */
-export function filDAriane(langue: Langue, entrees: { libelle: string; chemin: string }[]) {
+export function filDAriane(
+  langue: Langue,
+  entrees: { libelle: string; chemin: string }[],
+) {
   const complet = [{ libelle: ACCUEIL[langue], chemin: "/" }, ...entrees];
   return {
     "@type": "BreadcrumbList",
@@ -137,7 +141,11 @@ export function page(
 /** Un pôle : ce que Bone vend, décrit comme un service. */
 export function service(
   langue: Langue,
-  { chemin, nom, description }: { chemin: string; nom: string; description: string },
+  {
+    chemin,
+    nom,
+    description,
+  }: { chemin: string; nom: string; description: string },
 ) {
   return {
     "@type": "Service",
@@ -155,7 +163,9 @@ export function service(
  * reprises : baliser une réponse absente de la page contreviendrait aux
  * consignes des moteurs.
  */
-export function questionsFrequentes(questions: { question: string; reponse?: string | null }[]) {
+export function questionsFrequentes(
+  questions: { question: string; reponse?: string | null }[],
+) {
   const repondues = questions.filter((q) => (q.reponse ?? "").trim());
   if (repondues.length === 0) return null;
   return {

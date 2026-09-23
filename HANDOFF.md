@@ -343,6 +343,36 @@ Les deux encadrés sont le même bloc d'éditeur (`aRetenir`), dont l'étiquette
 est libre. Rien n'impose cette trame dans le schéma : c'est une convention
 éditoriale, à tenir à la main au back-office.
 
+## Connexion au back-office
+
+Ce qui est en place, écrit dans `collections/Users.ts` plutôt que laissé aux
+valeurs par défaut de Payload, pour qu'une mise à jour ne les change pas sans
+qu'on le voie :
+
+- **cinq tentatives** puis dix minutes de blocage du compte ;
+- **session de deux heures** ;
+- **clé d'API désactivée** : aucune intégration ne s'authentifie ainsi, et la
+  laisser ouverte ajouterait une porte sans usage ;
+- **cookie de session marqué « secure »** dès que le site est servi en HTTPS.
+  Le réglage suit le protocole et non l'environnement : en local, `npm start`
+  tourne en mode production tout en servant du HTTP, et un cookie « secure » y
+  rendrait la connexion impossible ;
+- **mot de passe de douze caractères minimum**. Payload en accepte trois par
+  défaut. La règle est posée en validation, le champ de mot de passe étant
+  fabriqué par Payload et non exposé à la configuration.
+
+Ce qui manque encore, par ordre d'importance :
+
+1. **L'adaptateur e-mail.** Sans lui, « mot de passe oublié » n'envoie rien : le
+   jeton de réinitialisation part dans les journaux du serveur et n'atteint
+   personne. Un compte perdu se rattrape aujourd'hui en base, à la main.
+2. **La double authentification.** Payload 3 n'en propose pas nativement. Il
+   existe des extensions communautaires, mais ajouter une dépendance non
+   auditée sur le chemin d'authentification demande d'en peser le risque.
+3. **Qui peut créer un compte.** La collection n'a pas de règle d'accès : tout
+   utilisateur connecté peut en créer d'autres. C'est sans doute voulu à deux
+   ou trois, à revoir si le cercle s'élargit.
+
 ## Origines du back-office
 
 Payload glisse son `serverURL` dans une liste d'origines autorisées, puis

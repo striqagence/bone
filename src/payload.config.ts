@@ -19,6 +19,7 @@ import { Accueil } from "./globals/Accueil";
 import { Blog } from "./globals/Blog";
 import { Contact } from "./globals/Contact";
 import { Navigation } from "./globals/Navigation";
+import { adresseServeur } from "./lib/adresse";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -67,22 +68,6 @@ const storagePlugins = s3Configured
       }),
     ]
   : [];
-
-/**
- * URL publique du site.
- *
- * En local, `.env` fournit `NEXT_PUBLIC_SERVER_URL`. Sur Vercel on la déduit du
- * déploiement plutôt que de la figer : `VERCEL_PROJECT_PRODUCTION_URL` suit
- * automatiquement le domaine de production, y compris après l'ajout d'un
- * domaine personnalisé. Poser la variable à la main obligerait à penser à la
- * corriger ce jour-là, et une URL périmée casse les liens de prévisualisation.
- */
-function serverURL(): string | undefined {
-  if (process.env.NEXT_PUBLIC_SERVER_URL)
-    return process.env.NEXT_PUBLIC_SERVER_URL;
-  const production = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  return production ? `https://${production}` : undefined;
-}
 
 /**
  * Origines autorisées à s'authentifier par cookie.
@@ -183,7 +168,7 @@ export default buildConfig({
     push: false,
   }),
   secret: process.env.PAYLOAD_SECRET ?? "",
-  serverURL: serverURL(),
+  serverURL: adresseServeur(),
   csrf: origines(),
   sharp,
   plugins: [...storagePlugins],
