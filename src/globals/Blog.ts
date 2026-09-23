@@ -13,6 +13,11 @@ import { TAILLES_APERCU, urlApercu } from "../lib/apercu-url";
  * chaque traduction.
  */
 export const Blog: GlobalConfig = {
+  /**
+   * Lecture dispensée de la double authentification : le site public la fait
+   * en permanence, sans compte connecté. L'écriture, elle, reste enveloppée.
+   */
+  custom: { totp: { disableAccessWrapper: { read: true } } },
   slug: "blog",
   label: "Blog",
   admin: {

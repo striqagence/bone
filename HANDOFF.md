@@ -366,12 +366,94 @@ Ce qui manque encore, par ordre d'importance :
 1. **L'adaptateur e-mail.** Sans lui, « mot de passe oublié » n'envoie rien : le
    jeton de réinitialisation part dans les journaux du serveur et n'atteint
    personne. Un compte perdu se rattrape aujourd'hui en base, à la main.
-2. **La double authentification.** Payload 3 n'en propose pas nativement. Il
-   existe des extensions communautaires, mais ajouter une dépendance non
-   auditée sur le chemin d'authentification demande d'en peser le risque.
-3. **Qui peut créer un compte.** La collection n'a pas de règle d'accès : tout
+2. **Qui peut créer un compte.** La collection n'a pas de règle d'accès : tout
    utilisateur connecté peut en créer d'autres. C'est sans doute voulu à deux
    ou trois, à revoir si le cercle s'élargit.
+
+## Double authentification
+
+En place depuis le 23 septembre 2026, par `payload-totp` (code à usage unique
+d'une application d'authentification). Le greffon a été retenu sur des éléments
+vérifiables plutôt que sur sa notice : licence MIT, dépôt public, vingt
+versions depuis janvier 2025, dépendances de pair fixées sur notre version
+exacte de Payload, et un arbre de dépendances court. Sa source a été lue avant
+d'être branchée.
+
+### Comment cela se présente
+
+`forceSetup` est actif : **aucun compte ne peut s'en passer**. À la première
+connexion, l'écran d'administration conduit d'office à la configuration, code
+à scanner à l'appui. Ensuite, chaque connexion demande le mot de passe puis le
+code. Le second facteur pose un **deuxième cookie**, distinct de celui de
+session, et c'est sa présence qui ouvre les accès.
+
+### Le défaut du greffon, et ce qu'on a mis par-dessus
+
+Son enveloppe d'accès laisse passer, en toutes lettres dans `totpAccess.js`,
+**tout compte qui n'a pas encore configuré son second facteur** :
+
+```js
+if (user.hasTotp) { /* exige le second facteur */ }
+else { return innerAccess ? innerAccess(args) : true }
+```
+
+`forceSetup` ne contraint que l'écran d'administration ; l'API REST et GraphQL
+restaient ouvertes. Un mot de passe dérobé sur un compte jamais enrôlé suffisait
+donc à lire les demandes de contact et la liste des abonnés.
+
+`lib/second-facteur.ts` repasse derrière et exige, pour **toute requête
+authentifiée**, une session dont le code a été vérifié. Deux précautions y sont
+prises, et elles comptent :
+
+- une requête **anonyme** n'est pas refusée mais rendue à la règle d'origine.
+  Sans cela le site public s'effondrerait : c'est l'erreur que commet le
+  greffon, dont l'enveloppe répond `false` à tout visiteur ;
+- la **lecture** des contenus qui alimentent le site reste publique, par une
+  liste explicite de huit slugs. Tout le reste se ferme : écritures, versions,
+  et lecture des demandes, abonnés, comptes et verrous.
+
+L'enrôlement n'en souffre pas, les points d'entrée `/setup-totp` et
+`/verify-totp` du greffon écrivant en `overrideAccess: true`.
+
+Le même fichier corrige les formulations françaises du greffon, dont les titres
+portaient des capitales anglaises. La correction se fait **après** lui : ses
+propres chaînes écrasent celles qu'on lui passe.
+
+### Ce qui a été vérifié
+
+Le site public rend à l'identique et la lecture anonyme des articles publiés
+passe toujours. Un jeton obtenu par mot de passe seul reçoit `403` sur les
+demandes, les abonnés, les comptes et l'écriture des globaux, et `200` sur
+chacun une fois le code saisi. Un code faux est refusé. Le parcours complet a
+été fait à l'écran : première connexion conduite d'office à la configuration,
+puis connexion ordinaire passant par l'écran de vérification.
+
+### Aucun code de secours
+
+Le greffon n'en prévoit pas, et l'adaptateur e-mail manque toujours. **Un
+téléphone perdu ou réinitialisé enferme dehors.** Le seul retour est un accès à
+la base :
+
+```
+npx payload run scripts/reinitialiser-double-authentification.ts adresse@exemple.fr
+```
+
+Le script efface le second facteur du compte ; la connexion suivante redemande
+la configuration. Il demande les variables d'environnement de production pour
+agir sur la base de production.
+
+Deux précautions valent d'être prises : **enrôler deux comptes** plutôt qu'un,
+afin qu'une perte ne soit jamais totale, et **garder la clé de secours** que
+l'écran de configuration affiche sous « Saisir la clé à la main », dans un
+gestionnaire de mots de passe.
+
+## Langue du back-office
+
+`i18n: { fallbackLanguage: "fr" }` dans `payload.config.ts`. Payload choisit
+d'abord la langue du compte, puis celle du navigateur ; ce réglage ne tranche
+que lorsque ni l'une ni l'autre n'est connue. Un navigateur réglé en anglais
+verra donc l'administration en anglais, nos libellés français autour. Cela se
+change compte par compte, dans « Payload Settings » de la page de compte.
 
 ## Origines du back-office
 

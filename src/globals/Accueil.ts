@@ -12,6 +12,11 @@ import { sections } from "../blocks";
  * ajoutés section par section, au fil de l'intégration.
  */
 export const Accueil: GlobalConfig = {
+  /**
+   * Lecture dispensée de la double authentification : le site public la fait
+   * en permanence, sans compte connecté. L'écriture, elle, reste enveloppée.
+   */
+  custom: { totp: { disableAccessWrapper: { read: true } } },
   slug: "accueil",
   label: "Accueil",
   admin: {

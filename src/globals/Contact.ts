@@ -15,6 +15,11 @@ import { sections } from "../blocks";
  * visiteur, donc traduisibles depuis le back-office comme le reste.
  */
 export const Contact: GlobalConfig = {
+  /**
+   * Lecture dispensée de la double authentification : le site public la fait
+   * en permanence, sans compte connecté. L'écriture, elle, reste enveloppée.
+   */
+  custom: { totp: { disableAccessWrapper: { read: true } } },
   slug: "contact",
   label: "Contact",
   admin: {

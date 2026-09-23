@@ -4,6 +4,11 @@ import { revaliderSite } from "../lib/revalidate";
 
 /** Catégories du blog, affichées en étiquette sur les cartes d'article. */
 export const Categories: CollectionConfig = {
+  /**
+   * Lecture dispensée de la double authentification : le site public la fait
+   * en permanence, sans compte connecté. L'écriture, elle, reste enveloppée.
+   */
+  custom: { totp: { disableAccessWrapper: { read: true } } },
   slug: "categories",
   labels: { singular: "Catégorie", plural: "Catégories" },
   /** L'ordre des filtres du blog est celui de la maquette, pas l'alphabet. */

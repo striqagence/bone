@@ -47,6 +47,7 @@ import * as migration_20260914_073418_retire_groupes_accueil from './20260914_07
 import * as migration_20260914_074530_sections_contact from './20260914_074530_sections_contact';
 import * as migration_20260914_074734_bouton_url from './20260914_074734_bouton_url';
 import * as migration_20260914_075126_retire_groupes_contact from './20260914_075126_retire_groupes_contact';
+import * as migration_20260923_092204_double_authentification from './20260923_092204_double_authentification';
 
 export const migrations = [
   {
@@ -292,6 +293,11 @@ export const migrations = [
   {
     up: migration_20260914_075126_retire_groupes_contact.up,
     down: migration_20260914_075126_retire_groupes_contact.down,
-    name: '20260914_075126_retire_groupes_contact'
+    name: '20260914_075126_retire_groupes_contact',
+  },
+  {
+    up: migration_20260923_092204_double_authentification.up,
+    down: migration_20260923_092204_double_authentification.down,
+    name: '20260923_092204_double_authentification'
   },
 ];

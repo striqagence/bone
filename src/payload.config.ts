@@ -20,6 +20,12 @@ import { Blog } from "./globals/Blog";
 import { Contact } from "./globals/Contact";
 import { Navigation } from "./globals/Navigation";
 import { adresseServeur } from "./lib/adresse";
+import { payloadTotp } from "payload-totp";
+
+import {
+  exigerSecondFacteur,
+  traduireSecondFacteur,
+} from "./lib/second-facteur";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -167,10 +173,43 @@ export default buildConfig({
     // se déclencherait à froid sur chaque instance.
     push: false,
   }),
+  /* Le back-office s'adresse à une équipe française : sans cette valeur,
+     Payload sert ses propres libellés en anglais autour de nos champs
+     français. Chacun garde la possibilité d'en changer dans son compte. */
+  i18n: { fallbackLanguage: "fr" },
   secret: process.env.PAYLOAD_SECRET ?? "",
   serverURL: adresseServeur(),
   csrf: origines(),
   sharp,
-  plugins: [...storagePlugins],
+  plugins: [
+    ...storagePlugins,
+
+    /**
+     * Double authentification du back-office, par code à usage unique.
+     *
+     * L'enveloppe d'accès est laissée active : c'est elle qui exige, sur
+     * chaque requête, le second cookie posé après vérification du code. La
+     * désactiver globalement rendrait la double authentification décorative,
+     * un jeton de session volé suffisant alors à écrire par l'API.
+     *
+     * Elle refuse en revanche toute requête anonyme. Les contenus que le site
+     * public lit sont donc dispensés, en lecture seulement, collection par
+     * collection et global par global : voir `custom.totp` sur chacun.
+     *
+     * Le greffon doit rester en dernier, il réécrit l'ensemble des collections.
+     */
+    payloadTotp({
+      collection: "users",
+      /* Aucun compte ne doit pouvoir s'en passer : le seul intérêt d'un second
+         facteur est qu'il soit systématique. */
+      forceSetup: true,
+      totp: { issuer: "BONE" },
+    }),
+
+    /* Repasse derrière le greffon pour fermer sa porte ouverte : un compte non
+       encore enrôlé y obtenait l'accès complet avec le seul mot de passe. */
+    exigerSecondFacteur,
+    traduireSecondFacteur,
+  ],
   typescript: { outputFile: path.resolve(dirname, "payload-types.ts") },
 });

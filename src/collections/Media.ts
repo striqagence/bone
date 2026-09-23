@@ -40,6 +40,11 @@ export function nomDeFichierSur(nom: string): string {
 }
 
 export const Media: CollectionConfig = {
+  /**
+   * Lecture dispensée de la double authentification : le site public la fait
+   * en permanence, sans compte connecté. L'écriture, elle, reste enveloppée.
+   */
+  custom: { totp: { disableAccessWrapper: { read: true } } },
   slug: "media",
   hooks: {
     beforeOperation: [

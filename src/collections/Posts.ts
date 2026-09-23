@@ -33,6 +33,11 @@ import { TAILLES_APERCU, urlApercu } from "../lib/apercu-url";
 const sectionsArticle = [Articles, Faq, AppelAction];
 
 export const Posts: CollectionConfig = {
+  /**
+   * Lecture dispensée de la double authentification : le site public la fait
+   * en permanence, sans compte connecté. L'écriture, elle, reste enveloppée.
+   */
+  custom: { totp: { disableAccessWrapper: { read: true } } },
   slug: "posts",
   labels: { singular: "Article", plural: "Articles" },
   admin: {

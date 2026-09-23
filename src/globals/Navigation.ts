@@ -33,6 +33,11 @@ const champChemin = {
 };
 
 export const Navigation: GlobalConfig = {
+  /**
+   * Lecture dispensée de la double authentification : le site public la fait
+   * en permanence, sans compte connecté. L'écriture, elle, reste enveloppée.
+   */
+  custom: { totp: { disableAccessWrapper: { read: true } } },
   slug: "navigation",
   label: "Navigation",
   admin: { group: "Configuration" },
