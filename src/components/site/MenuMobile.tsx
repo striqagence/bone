@@ -115,7 +115,7 @@ export function MenuMobile({
               <img src="/brand/linkedin.svg" alt="" width={15.697} height={15} />
             </a>
             <span aria-hidden className="h-5 w-px bg-white" />
-            <SelecteurLangue langue={langue} />
+            <SelecteurLangue langue={langue} alignement="gauche" />
           </div>
 
           <Button

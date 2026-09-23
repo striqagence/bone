@@ -37,6 +37,7 @@ export const Abonnes: CollectionConfig = {
       options: [
         { label: "Français", value: "fr" },
         { label: "Anglais", value: "en" },
+        { label: "Chinois", value: "zh" },
       ],
       admin: { description: "Langue de la page depuis laquelle l’inscription a été faite." },
     },

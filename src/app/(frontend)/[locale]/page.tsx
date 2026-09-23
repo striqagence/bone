@@ -6,6 +6,7 @@ import config from "@payload-config";
 import { HeroAccueil } from "@/components/sections/HeroAccueil";
 import { DonneesStructurees } from "@/components/site/DonneesStructurees";
 import {
+  alternatives,
   graphe,
   organisation,
   page as fichePage,
@@ -28,7 +29,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">): Prom
   return {
     title: { absolute: referencement.metaTitre },
     description: referencement.metaDescription,
-    alternates: { canonical: locale === "fr" ? "/" : `/${locale}` },
+    /* L'accueil ne déclarait que sa canonique. Sans alternance, les trois
+       accueils du site se concurrencent au lieu de se désigner l'un l'autre. */
+    alternates: alternatives("/", locale),
   };
 }
 

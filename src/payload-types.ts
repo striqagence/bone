@@ -98,7 +98,7 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('fr' | 'en') | ('fr' | 'en')[];
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('fr' | 'en' | 'zh') | ('fr' | 'en' | 'zh')[];
   globals: {
     accueil: Accueil;
     blog: Blog;
@@ -111,7 +111,7 @@ export interface Config {
     contact: ContactSelect<false> | ContactSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
   };
-  locale: 'fr' | 'en';
+  locale: 'fr' | 'en' | 'zh';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -876,7 +876,7 @@ export interface Abonne {
   /**
    * Langue de la page depuis laquelle l’inscription a été faite.
    */
-  langue?: ('fr' | 'en') | null;
+  langue?: ('fr' | 'en' | 'zh') | null;
   updatedAt: string;
   createdAt: string;
 }

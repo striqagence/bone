@@ -3,7 +3,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 
 import { cheminDe } from "@/lib/pages";
-import { estUneLangue, langueParDefaut, lien } from "@/lib/i18n";
+import { estUneLangue, langueParDefaut, lien, type Langue } from "@/lib/i18n";
 
 /**
  * Ouvre l'aperçu d'un document depuis le back-office.
@@ -51,7 +51,7 @@ async function resoudre(
     global,
     id,
     langue,
-  }: { collection: string | null; global: string | null; id: string | null; langue: "fr" | "en" },
+  }: { collection: string | null; global: string | null; id: string | null; langue: Langue },
 ): Promise<string | null> {
   if (global === "accueil") return "/";
   if (global === "contact") return "/contact";

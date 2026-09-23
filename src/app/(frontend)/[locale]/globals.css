@@ -308,3 +308,58 @@
     transform: translate(-2px, -2px);
   }
 }
+
+/* =============================================================================
+   Chinois.
+
+   La police chinoise vient en fin de pile, derrière les polices de marque : un
+   navigateur descend famille par famille pour chaque caractère, si bien que le
+   latin garde sa charte et que seuls les idéogrammes changent de fonte. Les
+   remplacer partout aurait fait de « BONE » un mot écrit dans une autre police
+   que sur le reste du site.
+
+   Trois réglages suivent, qui n'ont de sens que pour une écriture sans espaces
+   entre les mots :
+
+   - `line-break: strict` et `word-break: normal` rendent au navigateur sa
+     coupure entre idéogrammes. Sans eux, il cherche des espaces, n'en trouve
+     pas, et laisse des lignes courtes suivies de blancs.
+   - l'interlettrage tombe à zéro : écarter des caractères déjà carrés et
+     régulièrement espacés dégrade la lecture au lieu de l'aérer.
+   - les hauteurs de ligne sont relevées. Les idéogrammes occupent toute la
+     hauteur de leur cadratin, là où l'œil d'une minuscule latine en laisse une
+     partie vide : à interligne égal, un paragraphe chinois paraît compact.
+   ========================================================================== */
+
+@layer base {
+  html[lang="zh-Hans"] {
+    --font-sans: var(--police-secondaire), var(--police-chinoise), ui-sans-serif,
+      system-ui, sans-serif;
+    --font-display: var(--police-primaire), var(--police-secondaire),
+      var(--police-chinoise), sans-serif;
+
+    line-break: strict;
+    word-break: normal;
+  }
+
+  html[lang="zh-Hans"] body {
+    line-height: 1.75;
+    letter-spacing: normal;
+  }
+
+  html[lang="zh-Hans"] :is(h1, h2, h3, h4, h5, h6) {
+    line-height: 1.5;
+    letter-spacing: normal;
+  }
+
+  html[lang="zh-Hans"] :is(.text-6xl, .text-7xl) {
+    line-height: 1.3;
+  }
+
+  /* L'axe de largeur ne porte que sur la police latine ; poussé à 120, il
+     resterait sans effet sur les idéogrammes et déséquilibrerait un titre
+     mêlant les deux écritures. */
+  html[lang="zh-Hans"] :is(.titrage, .titrage-italique) {
+    font-variation-settings: normal;
+  }
+}

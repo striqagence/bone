@@ -1,4 +1,4 @@
-import { lien, type Langue } from "./i18n";
+import { codesHreflang, langueParDefaut, langues, lien, type Langue } from "./i18n";
 import { adresseServeur } from "./adresse";
 
 /**
@@ -36,14 +36,24 @@ const absolu = (chemin: string, langue: Langue) =>
 /**
  * Adresses équivalentes d'une même page. La canonique est celle de la langue
  * lue ; `x-default` renvoie au français, langue d'origine du site.
+ *
+ * La liste est construite depuis `langues` plutôt qu'écrite à la main : elle
+ * était restée à deux entrées le jour où une troisième langue est arrivée,
+ * et une alternance non déclarée est une page que les moteurs traitent comme
+ * un doublon plutôt que comme une traduction.
  */
 export function alternatives(chemin: string, langue: Langue) {
+  /* `lien("/", "zh")` vaut « /zh/ » quand la canonique de la même page vaut
+     « /zh » : deux adresses pour une seule ressource, que les moteurs peuvent
+     traiter comme un doublon. La barre finale tombe partout, sauf à la racine
+     où elle est l'adresse. */
+  const adresse = (l: Langue) => lien(chemin, l).replace(/(.)\/$/, "$1");
+
   return {
-    canonical: lien(chemin, langue),
+    canonical: adresse(langue),
     languages: {
-      fr: lien(chemin, "fr"),
-      en: lien(chemin, "en"),
-      "x-default": lien(chemin, "fr"),
+      ...Object.fromEntries(langues.map((l) => [codesHreflang[l], adresse(l)])),
+      "x-default": adresse(langueParDefaut),
     },
   };
 }
@@ -84,7 +94,7 @@ export function siteWeb(langue: Langue, description: string) {
     url: absolu("/", langue),
     name: "BONE",
     description,
-    inLanguage: langue,
+    inLanguage: codesHreflang[langue],
     publisher: { "@id": ORGANISATION },
   };
 }
@@ -94,7 +104,11 @@ export function siteWeb(langue: Langue, description: string) {
  * équivalent en base : le global de navigation nomme les rubriques, pas la
  * racine, que la maquette ne montre qu'en pictogramme.
  */
-export const ACCUEIL: Record<Langue, string> = { fr: "Accueil", en: "Home" };
+export const ACCUEIL: Record<Langue, string> = {
+  fr: "Accueil",
+  en: "Home",
+  zh: "首页",
+};
 
 /**
  * Fil d'ariane. Le premier maillon est toujours l'accueil, comme à l'écran :
@@ -132,7 +146,7 @@ export function page(
     url: absolu(chemin, langue),
     name: titre,
     description,
-    inLanguage: langue,
+    inLanguage: codesHreflang[langue],
     isPartOf: { "@id": `${BASE}/#site` },
     about: { "@id": ORGANISATION },
   };

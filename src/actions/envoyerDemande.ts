@@ -39,11 +39,13 @@ const CADENCE = [
 const TROP_DE_DEMANDES: Record<Langue, string> = {
   fr: "Vous avez déjà envoyé plusieurs demandes. Réessayez dans une heure, ou écrivez-nous directement.",
   en: "You have already sent several requests. Please try again in an hour, or write to us directly.",
+  zh: "您已提交多次咨询，请一小时后再试，或直接与我们联系。",
 };
 
 const REESSAYER: Record<Langue, string> = {
   fr: "Votre session a expiré. Rechargez la page et renvoyez votre demande.",
   en: "Your session has expired. Please reload the page and send your request again.",
+  zh: "会话已过期，请刷新页面后重新提交。",
 };
 
 const PROFILS = ["dsi", "rssi", "technique", "infra", "dirigeant"];

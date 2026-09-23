@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { Google_Sans_Flex, Work_Sans } from "next/font/google";
+import { Google_Sans_Flex, Noto_Sans_SC, Work_Sans } from "next/font/google";
 
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { BASE } from "@/lib/donnees-structurees";
-import { estUneLangue, langues } from "@/lib/i18n";
+import { codesHreflang, estUneLangue, langues } from "@/lib/i18n";
 import { chargerNavigation, pourEntete } from "@/lib/navigation";
 
 import "./globals.css";
@@ -34,6 +34,31 @@ const policePrimaire = Google_Sans_Flex({
 const policeSecondaire = Work_Sans({
   subsets: ["latin"],
   variable: "--police-secondaire",
+  display: "swap",
+});
+
+/**
+ * Police des idéogrammes.
+ *
+ * Ni `Google Sans Flex` ni `Work Sans` ne portent de caractères chinois : sans
+ * cette famille, la version chinoise tomberait sur la police du système, qui
+ * diffère d'une machine à l'autre et n'a rien de la charte.
+ *
+ * Elle est déclarée en **repli** derrière les deux autres, et non à leur
+ * place : les mots latins qui parsèment le chinois, à commencer par « BONE »,
+ * gardent ainsi la police de marque, le navigateur ne descendant dans la pile
+ * que pour les caractères absents de la première famille.
+ *
+ * `preload: false` est ici une nécessité et non un réglage de confort. Une
+ * fonte chinoise pèse plusieurs mégaoctets, découpés par plages Unicode :
+ * précharger l'ensemble sur chaque page, y compris françaises, coûterait bien
+ * plus que ce qu'on gagnerait.
+ */
+const policeChinoise = Noto_Sans_SC({
+  weight: ["400", "500", "700"],
+  subsets: [],
+  preload: false,
+  variable: "--police-chinoise",
   display: "swap",
 });
 
@@ -70,8 +95,11 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
 
   return (
     <html
-      lang={locale}
-      className={`${policePrimaire.variable} ${policeSecondaire.variable} h-full antialiased`}
+      /* « zh » seul ne dit pas quelle écriture est servie : `zh-Hans` nomme le
+         chinois simplifié, ce dont dépendent la coupure des lignes, le choix
+         des glyphes et la proposition de traduction du navigateur. */
+      lang={codesHreflang[locale]}
+      className={`${policePrimaire.variable} ${policeSecondaire.variable} ${policeChinoise.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {enApercu && <BandeauApercu />}

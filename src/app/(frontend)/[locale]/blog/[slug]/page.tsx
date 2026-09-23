@@ -9,6 +9,7 @@ import { SommaireArticle } from "@/components/article/SommaireArticle";
 import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
 import { RendreSections } from "@/components/sections/RendreSections";
 import { derniersArticles, enArticle } from "@/lib/articles";
+import { alternatives } from "@/lib/donnees-structurees";
 import { estUneLangue, type Langue } from "@/lib/i18n";
 import type { Post } from "@/payload-types";
 import { contexteApercu } from "@/lib/apercu";
@@ -49,6 +50,11 @@ export async function generateMetadata({
   return {
     title: article.metaTitre ?? article.titre,
     description: article.metaDescription ?? article.extrait,
+    /* Les articles ne déclaraient aucune alternance : chaque traduction était
+       lue comme une page distincte, et non comme la même page dans une autre
+       langue. L'identifiant d'URL n'étant pas localisé, le chemin est commun
+       aux trois. */
+    alternates: alternatives(`/blog/${slug}`, locale),
   };
 }
 

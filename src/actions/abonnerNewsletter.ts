@@ -40,6 +40,12 @@ const MESSAGES: Record<Langue, { invalide: string; panne: string; trop: string; 
     trop: "You have already attempted several sign-ups. Please try again in an hour.",
     expire: "Your session has expired. Please reload the page and try again.",
   },
+  zh: {
+    invalide: "电子邮箱地址无效。",
+    panne: "订阅未能保存，请稍后再试。",
+    trop: "您已多次尝试订阅，请一小时后再试。",
+    expire: "会话已过期，请刷新页面后重试。",
+  },
 };
 
 export async function abonnerNewsletter(donnees: FormData): Promise<ResultatAbonnement> {

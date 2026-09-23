@@ -147,6 +147,7 @@ export default buildConfig({
     locales: [
       { label: "Français", code: "fr" },
       { label: "English", code: "en" },
+      { label: "中文", code: "zh" },
     ],
     defaultLocale: "fr",
     fallback: true,

@@ -17,6 +17,9 @@
  * reconnaît pas. Le clic et le copier-coller sont perdus, ce qui est le prix
  * assumé de ce choix.
  */
+
+import type { Langue } from "./i18n";
+
 export function encoderCourriel(adresse: string) {
   return Buffer.from(adresse, "utf8").toString("base64");
 }
@@ -54,6 +57,9 @@ export function nomImageCourriel(adresse: string) {
 const EPELLATION = {
   fr: { "@": " arobase ", ".": " point " },
   en: { "@": " at ", ".": " dot " },
+  /* « 艾特 » est la façon dont l'arobase se dit en chinois, par emprunt à
+     l'anglais ; aucun caractère ne la désigne. */
+  zh: { "@": " 艾特 ", ".": " 点 " },
 } as const;
 
 /**
@@ -62,7 +68,7 @@ const EPELLATION = {
  * Elle reste compréhensible à l'oreille sans jamais former le motif que
  * cherchent les moissonneurs.
  */
-export function epelerCourriel(adresse: string, langue: "fr" | "en") {
+export function epelerCourriel(adresse: string, langue: Langue) {
   const { "@": arobase, ".": point } = EPELLATION[langue];
   return adresse.replaceAll("@", arobase).replaceAll(".", point);
 }

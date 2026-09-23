@@ -25,6 +25,9 @@ export type Article = {
 const MINUTES: Record<Langue, (n: number) => string> = {
   fr: (n) => `${n} min de lecture`,
   en: (n) => `${n} min read`,
+  /* Le chinois place la durée après le verbe, et n'insère pas d'espace autour
+     des chiffres : « 阅读时长 5 分钟 » et non « 5 分钟 阅读 ». */
+  zh: (n) => `阅读时长 ${n} 分钟`,
 };
 
 export function enArticle(post: Post, langue: Langue): Article {
