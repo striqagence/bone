@@ -78,9 +78,39 @@ const storagePlugins = s3Configured
  * corriger ce jour-là, et une URL périmée casse les liens de prévisualisation.
  */
 function serverURL(): string | undefined {
-  if (process.env.NEXT_PUBLIC_SERVER_URL) return process.env.NEXT_PUBLIC_SERVER_URL;
+  if (process.env.NEXT_PUBLIC_SERVER_URL)
+    return process.env.NEXT_PUBLIC_SERVER_URL;
   const production = process.env.VERCEL_PROJECT_PRODUCTION_URL;
   return production ? `https://${production}` : undefined;
+}
+
+/**
+ * Origines autorisées à s'authentifier par cookie.
+ *
+ * Payload glisse `serverURL` dans cette liste, puis refuse tout cookie de
+ * session provenant d'une autre origine. Le projet répond sous plusieurs alias
+ * Vercel : sans les déclarer ici, on peut lire le back-office mais rien y
+ * écrire. La connexion tient, les pages s'affichent, et chaque enregistrement
+ * échoue par « You are not allowed to perform this action » pendant que la
+ * déconnexion reste sans effet. Les lectures passent parce qu'une navigation
+ * n'envoie pas d'en-tête `Origin` : seules les écritures trébuchent.
+ *
+ * `ORIGINES_ADMIN`, en variables d'environnement et séparées par des virgules,
+ * permet d'en ajouter sans toucher au code, le jour du domaine définitif.
+ */
+function origines(): string[] {
+  // `serverURL` n'y figure pas : Payload l'ajoute lui-même à la liste.
+  const candidats = [
+    process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL &&
+      `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`,
+    // Alias de projet, celui que l'équipe ouvre au quotidien. Vercel ne
+    // l'expose par aucune variable : il se déclare donc à la main.
+    "https://bone-striqagence.vercel.app",
+    "http://localhost:3000",
+    ...(process.env.ORIGINES_ADMIN ?? "").split(",").map((o) => o.trim()),
+  ];
+  return [...new Set(candidats.filter((o): o is string => Boolean(o)))];
 }
 
 export default buildConfig({
@@ -105,7 +135,16 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, Pages, Posts, Categories, Demandes, Abonnes, Verrous],
+  collections: [
+    Users,
+    Media,
+    Pages,
+    Posts,
+    Categories,
+    Demandes,
+    Abonnes,
+    Verrous,
+  ],
   globals: [Accueil, Blog, Contact, Navigation],
   /**
    * Le français est la langue de référence : c'est elle qui est saisie, et
@@ -145,7 +184,8 @@ export default buildConfig({
   }),
   secret: process.env.PAYLOAD_SECRET ?? "",
   serverURL: serverURL(),
+  csrf: origines(),
   sharp,
   plugins: [...storagePlugins],
   typescript: { outputFile: path.resolve(dirname, "payload-types.ts") },
-})
+});

@@ -343,6 +343,22 @@ Les deux encadrés sont le même bloc d'éditeur (`aRetenir`), dont l'étiquette
 est libre. Rien n'impose cette trame dans le schéma : c'est une convention
 éditoriale, à tenir à la main au back-office.
 
+## Origines du back-office
+
+Payload glisse son `serverURL` dans une liste d'origines autorisées, puis
+**refuse tout cookie de session venant d'une autre origine**. Le projet répond
+sous plusieurs alias Vercel : `bone-sandy` (celui que Vercel désigne comme URL
+de production, donc celui que `serverURL` reprend) et `bone-striqagence` (celui
+que l'équipe ouvre). Tant que le second n'était pas déclaré, on pouvait lire le
+back-office mais rien y écrire : la connexion tenait, les pages s'affichaient,
+chaque enregistrement échouait par « You are not allowed to perform this
+action », et la déconnexion restait sans effet. Les lectures passaient parce
+qu'une navigation n'envoie pas d'en-tête `Origin`.
+
+La liste est construite dans `payload.config.ts`. **Le jour du domaine
+définitif, il faut l'y ajouter**, soit dans le code, soit par la variable
+`ORIGINES_ADMIN`, plusieurs valeurs séparées par des virgules.
+
 ## Aperçu depuis le back-office
 
 Chaque page, chaque article et les globaux Accueil, Contact et Blog portent un
