@@ -32,6 +32,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# ... sauf le fichier d'exemple, qui n'a de sens que partagé : il ne contient
+# que des valeurs de démonstration, et documente ce qu'il faut renseigner.
+# La règle large au-dessus l'attrapait, si bien qu'il n'a jamais été versionné.
+!.env.example
 
 # vercel
 .vercel
