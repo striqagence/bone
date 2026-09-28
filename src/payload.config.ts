@@ -99,12 +99,15 @@ function origines(): string[] {
     // Alias de projet, celui que l'équipe ouvre au quotidien. Vercel ne
     // l'expose par aucune variable : il se déclare donc à la main.
     "https://bone-striqagence.vercel.app",
-    // Domaine définitif, déclaré avant la bascule. Une origine absente de
-    // cette liste laisse lire le back-office mais fait échouer chaque
-    // enregistrement, sans message qui dise pourquoi : la panne est muette et
-    // coûteuse à diagnostiquer, il vaut mieux l'ajouter trop tôt que trop tard.
-    "https://bone.fr",
-    "https://www.bone.fr",
+    // Domaine définitif. Le site reprend celui de l'entreprise, bone-it.com,
+    // plutôt que d'en adopter un nouveau : ses pages y sont indexées depuis
+    // 2023, et la forme avec www est celle qu'elles portent.
+    //
+    // Une origine absente de cette liste laisse lire le back-office mais fait
+    // échouer chaque enregistrement, sans message qui dise pourquoi : la panne
+    // est muette et coûteuse à diagnostiquer.
+    "https://www.bone-it.com",
+    "https://bone-it.com",
     "http://localhost:3000",
     ...(process.env.ORIGINES_ADMIN ?? "").split(",").map((o) => o.trim()),
   ];
@@ -204,7 +207,7 @@ export default buildConfig({
         email: resendAdapter({
           apiKey: process.env.RESEND_API_KEY,
           defaultFromAddress:
-            process.env.COURRIEL_EXPEDITEUR ?? "notifications@envoi.bone.fr",
+            process.env.COURRIEL_EXPEDITEUR ?? "notifications@envoi.bone-it.com",
           defaultFromName: "BONE",
         }),
       }

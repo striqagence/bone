@@ -38,14 +38,14 @@ const nextConfig: NextConfig = {
     ]);
 
     /**
-     * Chemins de l'ancien site, www.bone-it.com.
+     * Chemins de l'ancien site.
      *
-     * Les vraies redirections doivent vivre sur l'ancien domaine : une
-     * application servie par bone.fr ne peut pas répondre à la place de
-     * bone-it.com. Celles-ci couvrent le cas très probable où l'ancien site
-     * renverra en bloc vers la racine du nouveau, ou vers le même chemin :
-     * sans elles, chaque adresse indexée depuis des années atterrirait sur une
-     * page introuvable.
+     * Le nouveau site reprend le domaine de l'ancien, www.bone-it.com, au lieu
+     * d'en adopter un nouveau. Ces redirections ne relèvent donc plus d'une
+     * migration entre domaines : elles sont la seule chose qui rattrape les
+     * quatorze adresses indexées depuis 2023, au moment où elles cessent
+     * d'exister. Sans elles, chacune répondrait « page introuvable » le jour de
+     * la bascule, et les positions acquises seraient perdues.
      *
      * Le regroupement vers « capital » n'est pas un raccourci : les quatre
      * pages de valorisation, vente de pièces, upgrade et effacement des

@@ -87,7 +87,7 @@ const fr = {
     badge: "coordonnées",
     adresse: "12 Av. de Norvège, 91140 Villebon-sur-Yvette",
     // L'adresse est à part : elle n'est pas écrite dans la page servie.
-    email: "contact@bone.fr",
+    email: "info@bone-it.com",
     contact: "01 80 86 60 66 · LinkedIn",
   },
   sections: [
@@ -159,7 +159,7 @@ const en = {
   coordonnees: {
     badge: "contact details",
     adresse: "12 Av. de Norvège, 91140 Villebon-sur-Yvette, France",
-    email: "contact@bone.fr",
+    email: "info@bone-it.com",
     contact: "+33 1 80 86 60 66 · LinkedIn",
   },
   sections: [
