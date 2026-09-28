@@ -647,9 +647,11 @@ cette machine ne décode aucun H.264, pas même une vidéo témoin sans rapport.
 Une vidéo qui paraît bloquée en test ne l'est pas forcément dans un vrai
 navigateur — vérifier avec un fichier témoin avant de soupçonner le sien.
 
-Le poids reste perfectible : 6,6 Mo pour dix secondes en 720p, soit environ
-5 Mbit/s. Un réexport autour de 1,5 Mo serait plus confortable, d'autant que la
-source est étirée sur les grands écrans.
+Le poids est de 1,35 Mo pour dix secondes en 720p, après un réexport qui a
+divisé le fichier d'origine par cinq à durée et résolution identiques. Le
+fichier livré est celui de l'export, sans réencodage de notre part : ses trois
+pistes de timecode sont sans effet sur la lecture, et toucher à l'image pour
+les retirer dégraderait un arbitrage qualité/poids déjà fait.
 
 ## Langue du back-office
 
