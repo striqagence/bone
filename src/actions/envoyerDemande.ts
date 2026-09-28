@@ -99,7 +99,7 @@ export async function envoyerDemande(donnees: FormData): Promise<Resultat> {
 
   try {
     const payload = await getPayload({ config });
-    await payload.create({
+    const enregistree = await payload.create({
       collection: "demandes",
       data: { ...valeurs, profil: valeurs.profil as never, langue },
       // La collection est fermée en création pour l'API publique. Le local
@@ -111,7 +111,7 @@ export async function envoyerDemande(donnees: FormData): Promise<Resultat> {
        acquise dès la ligne écrite. `alerterNouvelleDemande` capture ses propres
        erreurs, si bien qu'une panne d'envoi ne peut pas se transformer ici en
        message d'échec devant un visiteur dont la demande est pourtant passée. */
-    await alerterNouvelleDemande({ ...valeurs, langue });
+    await alerterNouvelleDemande({ ...valeurs, langue, id: enregistree.id });
 
     return { etat: "succes" };
   } catch {
