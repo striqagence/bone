@@ -36,15 +36,29 @@ figée à la construction** : la définir côté hébergement ne suffit pas, il 
 redéployer derrière. Sans cela le `robots.txt` continue de refuser
 l'indexation et le plan du site reste vide, en silence.
 
+### L'envoi de courriels
+
+En service depuis le 28 septembre 2026. Le domaine d'envoi est
+`envoi.bone-it.com`, vérifié chez Resend, sur un compte dédié à Bone en région
+Irlande.
+
+Le sous-domaine n'est pas un détail de confort : la messagerie de l'entreprise
+est sur Microsoft 365, avec un SPF en `-all` et un DMARC en `p=quarantine`.
+Envoyer depuis `bone-it.com` aurait imposé de modifier ces enregistrements, et
+une erreur y aurait envoyé le courrier courant en indésirable. Sous `.envoi`,
+aucun conflit possible, et l'alignement relatif du DMARC laisse passer.
+
+Les destinataires des alertes se règlent **au back-office**, page Contact, et
+non par une variable d'environnement : la personne qui reçoit les demandes
+change plus souvent que le code. Une liste vide ne casse rien, mais personne
+n'est averti.
+
+Vérifié de bout en bout depuis le site en ligne : formulaire, écriture en base,
+alerte composée, message livré.
+
 ### Ce qui reste, par ordre d'urgence
 
-1. **Les trois enregistrements d'envoi ne sont pas posés.** Le client n'a fait
-   que les deux lignes du site. Le formulaire enregistre bien les demandes,
-   mais **personne n'en est averti** : elles s'accumulent au back-office sans
-   que rien ne le signale. C'est la panne la plus coûteuse du lot, parce
-   qu'elle est muette. Les valeurs sont dans Resend, domaine
-   `envoi.bone-it.com`.
-2. **Les clés Supabase n'ont pas été renouvelées.** Elles ont circulé pendant
+1. **Les clés Supabase n'ont pas été renouvelées.** Elles ont circulé pendant
    le développement, et le site est désormais public.
 3. **Un seul compte de back-office existe, non enrôlé** en double
    authentification. Sans code de secours, un téléphone perdu fermerait le seul
