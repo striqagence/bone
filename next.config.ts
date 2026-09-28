@@ -63,10 +63,18 @@ const nextConfig: NextConfig = {
       "/vente-de-piece-informatique": "/competences/capital",
       "/upgrade-des-equipements": "/competences/capital",
       "/effacement-des-donnees": "/competences/capital",
-      /* Le nouveau site n'a pas de page de questions fréquentes : elles sont
-         devenues des sections. Celle de la page de contact traite des mêmes
-         sujets que l'ancienne, du premier rendez-vous au déroulé d'un audit. */
-      "/foire-aux-questions": "/contact",
+      /* Trois pages de l'ancien site n'ont pas d'équivalent : les conditions
+         générales de vente, la page de recrutement et sa candidature, et la
+         foire aux questions, devenue des sections au fil des pages. Elles
+         mènent à l'accueil, faute de mieux.
+
+         C'est un pis-aller assumé et non une correspondance : un moteur qui
+         voit plusieurs adresses converger vers l'accueil y lit souvent une
+         page disparue plutôt qu'une page déplacée, et ne transmet alors rien.
+         La vraie réponse serait de republier ces contenus. */
+      "/conditions-generales-de-vente-bone-it": "/",
+      "/nous-rejoindre": "/",
+      "/foire-aux-questions": "/",
     }).map(([source, destination]) => ({ source, destination, permanent: true }));
 
     return [...raccourcis, ...ancienSite];
