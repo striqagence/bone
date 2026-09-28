@@ -173,6 +173,59 @@ export function service(
 }
 
 /**
+ * Un article du blog.
+ *
+ * Les pages d'article étaient les seules du site à ne porter aucune donnée
+ * structurée, alors que ce sont celles où elles comptent le plus : c'est de
+ * `BlogPosting` que dépendent la date, l'auteur et la vignette affichés dans
+ * les résultats de recherche.
+ *
+ * Tout ce qui est déclaré ici est visible sur la page : le titre, le chapô, la
+ * date, la catégorie et l'image du héros. La règle qui vaut pour la FAQ vaut
+ * ici aussi, et pour la même raison.
+ *
+ * L'auteur est l'entreprise et non une personne : aucun article n'est signé à
+ * l'écran, et inventer une signature pour satisfaire un moteur reviendrait à
+ * décrire une page qui n'existe pas.
+ */
+export function articleDeBlog(
+  langue: Langue,
+  {
+    chemin,
+    titre,
+    description,
+    image,
+    publieLe,
+    modifieLe,
+    categorie,
+  }: {
+    chemin: string;
+    titre: string;
+    description: string;
+    image?: string;
+    publieLe?: string | null;
+    modifieLe?: string | null;
+    categorie?: string;
+  },
+) {
+  return {
+    "@type": "BlogPosting",
+    "@id": `${absolu(chemin, langue)}#article`,
+    headline: titre,
+    description,
+    ...(image ? { image: [image] } : {}),
+    ...(publieLe ? { datePublished: publieLe } : {}),
+    ...(modifieLe ? { dateModified: modifieLe } : {}),
+    ...(categorie ? { articleSection: categorie } : {}),
+    inLanguage: codesHreflang[langue],
+    mainEntityOfPage: { "@type": "WebPage", "@id": absolu(chemin, langue) },
+    author: { "@id": ORGANISATION },
+    publisher: { "@id": ORGANISATION },
+    isPartOf: { "@id": `${BASE}/#site` },
+  };
+}
+
+/**
  * Questions fréquentes. Seules les questions dont la réponse est affichée sont
  * reprises : baliser une réponse absente de la page contreviendrait aux
  * consignes des moteurs.

@@ -8,8 +8,16 @@ import { PartageArticle } from "@/components/article/PartageArticle";
 import { SommaireArticle } from "@/components/article/SommaireArticle";
 import { HeroPleineImage } from "@/components/sections/HeroPleineImage";
 import { RendreSections } from "@/components/sections/RendreSections";
+import { DonneesStructurees } from "@/components/site/DonneesStructurees";
 import { derniersArticles, enArticle } from "@/lib/articles";
-import { alternatives } from "@/lib/donnees-structurees";
+import {
+  alternatives,
+  articleDeBlog,
+  filDAriane,
+  graphe,
+  organisation,
+  questionsFrequentes,
+} from "@/lib/donnees-structurees";
 import { estUneLangue, type Langue } from "@/lib/i18n";
 import type { Post } from "@/payload-types";
 import { contexteApercu } from "@/lib/apercu";
@@ -80,8 +88,33 @@ export default async function PageArticle({ params }: PageProps<"/[locale]/blog/
     ? [...titres, { texte: libelles.libelleFaq, ancre: "faq" }]
     : titres;
 
+  /* Les pages d'article étaient les seules du site sans donnée structurée.
+     Le graphe reprend exactement ce que la page montre : son titre, son chapô,
+     sa date, sa catégorie et l'image de son héros. */
+  const structure = graphe([
+    organisation(locale),
+    articleDeBlog(locale, {
+      chemin: `/blog/${slug}`,
+      titre: article.titre,
+      description: article.metaDescription ?? article.extrait,
+      image: resume.image?.src,
+      publieLe: article.publieLe,
+      modifieLe: article.updatedAt,
+      categorie: resume.categorie || undefined,
+    }),
+    filDAriane(locale, [
+      { libelle: "Blog", chemin: "/blog" },
+      { libelle: article.titre, chemin: `/blog/${slug}` },
+    ]),
+    questionsFrequentes(
+      sections.flatMap((s) => (s.blockType === "faq" ? (s.questions ?? []) : [])),
+    ),
+  ]);
+
   return (
     <>
+      <DonneesStructurees donnees={structure} />
+
       <HeroPleineImage
         langue={locale}
         entrees={[
