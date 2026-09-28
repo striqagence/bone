@@ -31,7 +31,7 @@ const corpsFr = racine([
   titre("Éditeur du site"),
   paragraphe(
     "Le présent site est édité par BONE IT, société à responsabilité limitée au capital fixe de " +
-      "100 000,00 euros, dont le siège social est situé 12 avenue de Norvège, 91140 " +
+      "100 000,00 euros, dont le siège social est situé 27 avenue de la Baltique, 91140 " +
       "Villebon-sur-Yvette, France.",
   ),
   liste([
@@ -88,7 +88,7 @@ const corpsEn = racine([
   titre("Site publisher"),
   paragraphe(
     "This site is published by BONE IT, a French limited liability company (SARL) with a fixed share " +
-      "capital of 100,000.00 euros, registered office at 12 avenue de Norvège, 91140 " +
+      "capital of 100,000.00 euros, registered office at 27 avenue de la Baltique, 91140 " +
       "Villebon-sur-Yvette, France.",
   ),
   liste([

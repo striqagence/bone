@@ -31,13 +31,13 @@ async function media(fichier: string, altFr: string, altEn: string) {
 }
 
 /**
- * Coordonnées relevées sur OpenStreetMap pour le 12 avenue de Norvège, au
+ * Coordonnées relevées sur OpenStreetMap pour le 27 avenue de la Baltique, au
  * numéro près. Le plan n'est plus une image : c'est la carte elle-même,
  * centrée là.
  */
 const carte = {
-  latitude: 48.6923676,
-  longitude: 2.2144843,
+  latitude: 48.6915304,
+  longitude: 2.2151003,
   zoom: 16,
 };
 
@@ -80,12 +80,12 @@ const fr = {
   },
   carte: {
     ...carte,
-    intitule: "Bone, 12 avenue de Norvège, Villebon-sur-Yvette",
+    intitule: "Bone, 27 avenue de la Baltique, Villebon-sur-Yvette",
     libelleLien: "Voir sur Google Maps",
   },
   coordonnees: {
     badge: "coordonnées",
-    adresse: "12 Av. de Norvège, 91140 Villebon-sur-Yvette",
+    adresse: "27 Av. de la Baltique, 91140 Villebon-sur-Yvette",
     // L'adresse est à part : elle n'est pas écrite dans la page servie.
     email: "info@bone-it.com",
     contact: "01 80 86 60 66 · LinkedIn",
@@ -153,12 +153,12 @@ const en = {
   },
   carte: {
     ...carte,
-    intitule: "Bone, 12 avenue de Norvège, Villebon-sur-Yvette, France",
+    intitule: "Bone, 27 avenue de la Baltique, Villebon-sur-Yvette, France",
     libelleLien: "View on Google Maps",
   },
   coordonnees: {
     badge: "contact details",
-    adresse: "12 Av. de Norvège, 91140 Villebon-sur-Yvette, France",
+    adresse: "27 Av. de la Baltique, 91140 Villebon-sur-Yvette, France",
     email: "info@bone-it.com",
     contact: "+33 1 80 86 60 66 · LinkedIn",
   },
