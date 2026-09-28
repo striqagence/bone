@@ -20,6 +20,7 @@ import { Blog } from "./globals/Blog";
 import { Contact } from "./globals/Contact";
 import { Navigation } from "./globals/Navigation";
 import { adresseServeur } from "./lib/adresse";
+import { resendAdapter } from "@payloadcms/email-resend";
 import { payloadTotp } from "payload-totp";
 
 import {
@@ -184,6 +185,30 @@ export default buildConfig({
      Payload sert ses propres libellés en anglais autour de nos champs
      français. Chacun garde la possibilité d'en changer dans son compte. */
   i18n: { fallbackLanguage: "fr" },
+
+  /**
+   * Envoi des courriels.
+   *
+   * L'adaptateur n'est branché que si la clé existe. Sans lui, Payload garde
+   * son comportement par défaut : il écrit le message dans les journaux au
+   * lieu de l'envoyer, ce qui laisse le site et le back-office fonctionner en
+   * local sans clé, et sans envoyer de courriel depuis un poste de travail.
+   *
+   * L'expéditeur est un sous-domaine dédié. Envoyer depuis l'adresse de
+   * contact elle-même aurait imposé de toucher aux réglages de la messagerie
+   * de l'entreprise, et un incident d'envoi automatique aurait alors pu
+   * perturber la réception de son courrier courant.
+   */
+  ...(process.env.RESEND_API_KEY
+    ? {
+        email: resendAdapter({
+          apiKey: process.env.RESEND_API_KEY,
+          defaultFromAddress:
+            process.env.COURRIEL_EXPEDITEUR ?? "notifications@envoi.bone.fr",
+          defaultFromName: "BONE",
+        }),
+      }
+    : {}),
   secret: process.env.PAYLOAD_SECRET ?? "",
   serverURL: adresseServeur(),
   csrf: origines(),

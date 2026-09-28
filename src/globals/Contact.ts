@@ -193,6 +193,31 @@ export const Contact: GlobalConfig = {
               ],
             },
             {
+              name: "notifications",
+              type: "group",
+              label: "Alertes de demande",
+              admin: {
+                description:
+                  "Qui est prévenu par courriel à chaque demande envoyée par le formulaire. Sans destinataire, la demande est bien enregistrée mais personne n’en est averti : il faut alors venir la lire ici.",
+              },
+              fields: [
+                {
+                  name: "destinataires",
+                  type: "array",
+                  label: "Destinataires",
+                  labels: { singular: "Destinataire", plural: "Destinataires" },
+                  fields: [
+                    {
+                      name: "adresse",
+                      type: "email",
+                      required: true,
+                      label: "Adresse e-mail",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               name: "coordonnees",
               type: "group",
               label: "Encart",

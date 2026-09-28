@@ -49,6 +49,7 @@ import * as migration_20260914_074734_bouton_url from './20260914_074734_bouton_
 import * as migration_20260914_075126_retire_groupes_contact from './20260914_075126_retire_groupes_contact';
 import * as migration_20260923_092204_double_authentification from './20260923_092204_double_authentification';
 import * as migration_20260923_094550_ajoute_le_chinois from './20260923_094550_ajoute_le_chinois';
+import * as migration_20260928_091534_alertes_de_demande from './20260928_091534_alertes_de_demande';
 
 export const migrations = [
   {
@@ -304,6 +305,11 @@ export const migrations = [
   {
     up: migration_20260923_094550_ajoute_le_chinois.up,
     down: migration_20260923_094550_ajoute_le_chinois.down,
-    name: '20260923_094550_ajoute_le_chinois'
+    name: '20260923_094550_ajoute_le_chinois',
+  },
+  {
+    up: migration_20260928_091534_alertes_de_demande.up,
+    down: migration_20260928_091534_alertes_de_demande.down,
+    name: '20260928_091534_alertes_de_demande'
   },
 ];

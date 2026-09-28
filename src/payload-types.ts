@@ -2269,6 +2269,17 @@ export interface Contact {
      */
     libelleLien: string;
   };
+  /**
+   * Qui est prévenu par courriel à chaque demande envoyée par le formulaire. Sans destinataire, la demande est bien enregistrée mais personne n’en est averti : il faut alors venir la lire ici.
+   */
+  notifications?: {
+    destinataires?:
+      | {
+          adresse: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   coordonnees: {
     badge: string;
     adresse: string;
@@ -3338,6 +3349,16 @@ export interface ContactSelect<T extends boolean = true> {
         zoom?: T;
         intitule?: T;
         libelleLien?: T;
+      };
+  notifications?:
+    | T
+    | {
+        destinataires?:
+          | T
+          | {
+              adresse?: T;
+              id?: T;
+            };
       };
   coordonnees?:
     | T

@@ -4,6 +4,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 
 import { cadenceDepassee, jetonRecevable, leurreRempli } from "@/lib/antiabus";
+import { alerterNouvelleDemande } from "@/lib/courriel-envoi";
 import { langues, type Langue } from "@/lib/i18n";
 
 /**
@@ -105,6 +106,13 @@ export async function envoyerDemande(donnees: FormData): Promise<Resultat> {
       // API passe outre, ce qui fait de cette action le seul chemin d'écriture.
       overrideAccess: true,
     });
+
+    /* L'alerte vient après l'enregistrement, et jamais avant : la demande est
+       acquise dès la ligne écrite. `alerterNouvelleDemande` capture ses propres
+       erreurs, si bien qu'une panne d'envoi ne peut pas se transformer ici en
+       message d'échec devant un visiteur dont la demande est pourtant passée. */
+    await alerterNouvelleDemande({ ...valeurs, langue });
+
     return { etat: "succes" };
   } catch {
     // Le détail reste dans les journaux du serveur : le visiteur n'a rien à
