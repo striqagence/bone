@@ -1,4 +1,4 @@
-# État du projet — 31 août 2026
+# État du projet — 28 septembre 2026
 
 Site vitrine **BONE IT**, intégré depuis Figma. Ce document sert à reprendre le
 travail : il consigne ce qui est en place, les décisions prises et ce qui reste
@@ -9,6 +9,50 @@ Pages, et la **page d'accueil complète** (12 sections). Rendu desktop et mobile
 validés par la cliente.
 
 ---
+
+## En ligne
+
+Le site est public depuis le 28 septembre 2026, sur **https://www.bone-it.com**.
+
+Il **remplace** l'ancien site WordPress de l'entreprise, sur le même domaine.
+Ce n'était pas le plan initial : bone.fr avait été retenu, puis abandonné au
+profit du domaine existant, dont les quatorze pages étaient indexées depuis
+2023. Le choix est le bon, et il a simplifié la bascule : pas de migration
+entre domaines, donc rien à configurer sur l'ancien hébergement.
+
+La forme **avec www** est canonique, puisque c'est celle sous laquelle ces
+pages étaient indexées. `bone-it.com` y redirige, Vercel s'en charge seul.
+
+### Ce que la bascule a demandé
+
+Deux enregistrements `A` remplacés chez OVH, vers `76.76.21.21`. Le certificat
+s'est émis automatiquement dans les minutes qui ont suivi, sans intervention.
+Aucun enregistrement Microsoft 365 n'a été touché : MX, SPF, DMARC, les deux
+signatures, Outlook, Teams et l'inscription des appareils vivent tous dans la
+même zone, et les abîmer était le vrai risque de l'opération.
+
+`NEXT_PUBLIC_SERVER_URL` est passée à `https://www.bone-it.com`. **Elle est
+figée à la construction** : la définir côté hébergement ne suffit pas, il faut
+redéployer derrière. Sans cela le `robots.txt` continue de refuser
+l'indexation et le plan du site reste vide, en silence.
+
+### Ce qui reste, par ordre d'urgence
+
+1. **Les trois enregistrements d'envoi ne sont pas posés.** Le client n'a fait
+   que les deux lignes du site. Le formulaire enregistre bien les demandes,
+   mais **personne n'en est averti** : elles s'accumulent au back-office sans
+   que rien ne le signale. C'est la panne la plus coûteuse du lot, parce
+   qu'elle est muette. Les valeurs sont dans Resend, domaine
+   `envoi.bone-it.com`.
+2. **Les clés Supabase n'ont pas été renouvelées.** Elles ont circulé pendant
+   le développement, et le site est désormais public.
+3. **Un seul compte de back-office existe, non enrôlé** en double
+   authentification. Sans code de secours, un téléphone perdu fermerait le seul
+   accès. En créer un second avant toute chose.
+4. **Neuf articles sur dix n'ont qu'un titre et un résumé**, et sont publics.
+5. Les **conditions générales de vente** et la **page de recrutement** de
+   l'ancien site n'ont pas d'équivalent et renvoient à l'accueil. Les CGV d'une
+   société qui revend du matériel ont une portée juridique.
 
 ## Accès et infrastructure
 
