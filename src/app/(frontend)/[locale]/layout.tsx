@@ -75,7 +75,26 @@ const policeChinoise = Noto_Sans_SC({
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),
   title: { default: "BONE", template: "%s | BONE" },
-  openGraph: { siteName: "BONE", type: "website" },
+  openGraph: {
+    siteName: "BONE",
+    type: "website",
+    /**
+     * Image de partage, fabriquée par `scripts/generer-image-partage.ts`.
+     *
+     * Sans elle, un lien posté sur LinkedIn s'affichait en bloc de texte nu.
+     * Une seule image sert les trois langues : elle ne porte que la marque, le
+     * titre et la description accompagnant déjà le lien dans la bonne langue.
+     */
+    images: [
+      {
+        url: "/brand/partage.png",
+        width: 1200,
+        height: 630,
+        alt: "BONE, from complexity to decision",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export function generateStaticParams() {

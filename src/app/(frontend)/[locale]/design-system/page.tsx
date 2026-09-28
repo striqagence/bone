@@ -8,6 +8,7 @@ import { MenuDeroulant } from "@/components/site/MenuDeroulant";
 import { FilDAriane } from "@/components/ui/FilDAriane";
 import { Surtitre } from "@/components/ui/Surtitre";
 import { estUneLangue } from "@/lib/i18n";
+import { estConnecte } from "@/lib/session";
 import { chargerNavigation } from "@/lib/navigation";
 import { notFound } from "next/navigation";
 import { NavLink } from "@/components/site/NavLink";
@@ -16,9 +17,16 @@ import { NavLink } from "@/components/site/NavLink";
  * Planche de contrôle du design system.
  *
  * Sert à comparer les composants au fichier Figma pendant l'intégration, sans
- * avoir à monter une page complète pour vérifier une variante. À retirer — ou à
- * passer derrière une condition d'environnement — avant la mise en ligne
- * publique du site.
+ * avoir à monter une page complète pour vérifier une variante.
+ *
+ * Elle est **réservée aux personnes connectées au back-office**. La page reste
+ * ainsi à portée de l'équipe, mais un visiteur reçoit la même réponse que pour
+ * une adresse inexistante : elle donne à lire l'inventaire des composants et
+ * des variantes prévues, ce qui n'a rien à faire sur un site public et
+ * n'apparaît dans aucune navigation.
+ *
+ * Le refus passe par `notFound` plutôt que par un code 403 : répondre « accès
+ * refusé » confirmerait que l'adresse existe.
  */
 const variantes = ["primary", "secondary", "tertiaire"] as const;
 const tailles = ["lg", "sm"] as const;
@@ -26,6 +34,7 @@ const tailles = ["lg", "sm"] as const;
 export default async function DesignSystem({ params }: PageProps<"/[locale]/design-system">) {
   const { locale } = await params;
   if (!estUneLangue(locale)) notFound();
+  if (!(await estConnecte())) notFound();
 
   const navigation = await chargerNavigation(locale);
 

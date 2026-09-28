@@ -98,6 +98,12 @@ function origines(): string[] {
     // Alias de projet, celui que l'équipe ouvre au quotidien. Vercel ne
     // l'expose par aucune variable : il se déclare donc à la main.
     "https://bone-striqagence.vercel.app",
+    // Domaine définitif, déclaré avant la bascule. Une origine absente de
+    // cette liste laisse lire le back-office mais fait échouer chaque
+    // enregistrement, sans message qui dise pourquoi : la panne est muette et
+    // coûteuse à diagnostiquer, il vaut mieux l'ajouter trop tôt que trop tard.
+    "https://bone.fr",
+    "https://www.bone.fr",
     "http://localhost:3000",
     ...(process.env.ORIGINES_ADMIN ?? "").split(",").map((o) => o.trim()),
   ];
