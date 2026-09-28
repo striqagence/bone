@@ -16,6 +16,27 @@ const nextConfig: NextConfig = {
     // un cache long évite de ré-optimiser à froid à chaque expiration.
     minimumCacheTTL: 2_678_400, // 31 jours
   },
+
+  /**
+   * Raccourcis vers les pôles.
+   *
+   * « Expertise », « Capital » et « Feed » sont des noms de marque avant
+   * d'être des rubriques : ils s'écrivent tels quels dans une signature, sur
+   * une carte de visite ou dans un message LinkedIn. Les trois adresses
+   * courtes répondaient 404, ce qui transforme chacune de ces mentions en
+   * impasse. Elles mènent désormais à la page du pôle.
+   *
+   * Permanentes, parce que la forme longue est et restera la vraie adresse :
+   * c'est elle que déclarent le plan du site et les balises canoniques.
+   */
+  async redirects() {
+    const poles = ["expertise", "capital", "feed"];
+    return poles.flatMap((pole) => [
+      { source: `/${pole}`, destination: `/competences/${pole}`, permanent: true },
+      { source: `/en/${pole}`, destination: `/en/competences/${pole}`, permanent: true },
+      { source: `/zh/${pole}`, destination: `/zh/competences/${pole}`, permanent: true },
+    ]);
+  },
 };
 
 export default withPayload(nextConfig);

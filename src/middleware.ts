@@ -38,6 +38,23 @@ export function middleware(request: NextRequest) {
     return reponse();
   }
 
+  /**
+   * Le français est servi à la racine : `/fr/contact` désigne donc la même page
+   * que `/contact`, et les deux répondaient. La balise canonique désignait bien
+   * la seconde, mais tous les robots ne la suivent pas, un lien externe peut
+   * viser l'une ou l'autre, et deux adresses pour une ressource se paient en
+   * budget d'exploration. La forme préfixée renvoie désormais vers la courte,
+   * de façon permanente.
+   *
+   * La réécriture plus bas ne crée pas de boucle : elle ne change pas l'URL
+   * affichée, si bien que le navigateur ne demande jamais `/fr/...`.
+   */
+  if (pathname === `/${langueParDefaut}` || pathname.startsWith(`/${langueParDefaut}/`)) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.slice(langueParDefaut.length + 1) || "/";
+    return NextResponse.redirect(url, 308);
+  }
+
   const dejaPrefixe = langues.some(
     (langue) => pathname === `/${langue}` || pathname.startsWith(`/${langue}/`),
   );
