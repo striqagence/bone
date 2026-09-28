@@ -75,6 +75,31 @@ const policeChinoise = Noto_Sans_SC({
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),
   title: { default: "BONE", template: "%s | BONE" },
+  /**
+   * Icône d'onglet, déclarée plutôt que posée en fichier de convention.
+   *
+   * C'est **exactement le fichier que sert le back-office**, et non une copie :
+   * les deux pointent sur `/brand/bone-mark-degrade.svg`, si bien qu'un
+   * changement de marque les suit toutes deux. Le site en avait jusqu'ici sa
+   * propre version, la même marque posée sur une tuile d'encre, qui aurait
+   * divergé à la première retouche.
+   *
+   * La marque nue reste lisible sur les deux fonds d'onglet, vérifié aux trois
+   * tailles : son dégradé va du bleu de marque au bleu clair, tous deux
+   * contrastés sur blanc comme sur gris anthracite.
+   *
+   * L'icône de l'écran d'accueil iOS garde son fond, elle : posée en
+   * transparence, elle serait composée sur un carré noir ou blanc selon la
+   * version du système, ce qui ne se prévoit pas.
+   */
+  icons: {
+    icon: [{ url: "/brand/bone-mark-degrade.svg", type: "image/svg+xml" }],
+    /* Déclarée ici et non laissée en fichier de convention : dès qu'on
+       renseigne `icons`, Next cesse de poser les fichiers `icon` et
+       `apple-icon` du dossier, et l'icône d'écran d'accueil disparaît en
+       silence. */
+    apple: [{ url: "/brand/bone-icone-ios.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     siteName: "BONE",
     type: "website",
