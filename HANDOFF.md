@@ -619,6 +619,38 @@ Les traductions sont un premier jet, au même titre que l'anglais. **Une
 relecture par un locuteur natif reste à faire avant une mise en ligne
 publique**, en particulier sur les pages légales, dont la portée est juridique.
 
+## La vidéo du hero d'accueil
+
+`public/brand/banniere-bone.mp4`, posée par `components/site/VideoFond.tsx`.
+Elle se superpose à l'image du hero, qui reste dessous et lui sert d'affiche :
+**si la vidéo ne démarre jamais, la page garde son apparence d'avant**. La
+dégradation est sans conséquence visible, ce qui a permis de la mettre en ligne
+sans pouvoir l'éprouver.
+
+Trois choses à savoir avant d'y toucher.
+
+**Elle n'est montée qu'au-dessus de 1024px et hors mouvement réduit.** Six
+mégaoctets et demi imposés à un téléphone en itinérance coûteraient cher pour
+un décor, et un fond animé en boucle gêne réellement certaines personnes.
+
+**La lecture est demandée à la main, pas par `autoPlay`.** Sur une balise
+insérée après coup par React, le navigateur a déjà arbitré la lecture
+automatique quand la source lui parvient : la vidéo reste alors figée à zéro,
+sans erreur ni message dans la console.
+
+**Le fichier d'origine portait trois pistes de timecode**, retirées par
+`avconvert --preset Preset1280x720`, qui ne touche pas à l'image. Un export
+qui en contient n'est pas forcément cassé, mais autant les enlever.
+
+Un avertissement sur les essais : le Chrome piloté par l'automatisation de
+cette machine ne décode aucun H.264, pas même une vidéo témoin sans rapport.
+Une vidéo qui paraît bloquée en test ne l'est pas forcément dans un vrai
+navigateur — vérifier avec un fichier témoin avant de soupçonner le sien.
+
+Le poids reste perfectible : 6,6 Mo pour dix secondes en 720p, soit environ
+5 Mbit/s. Un réexport autour de 1,5 Mo serait plus confortable, d'autant que la
+source est étirée sur les grands écrans.
+
 ## Langue du back-office
 
 `i18n: { fallbackLanguage: "fr" }` dans `payload.config.ts`. Payload choisit
