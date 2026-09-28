@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
 import { Surtitre } from "@/components/ui/Surtitre";
+import { VideoFond } from "@/components/site/VideoFond";
 import { lien, type Langue } from "@/lib/i18n";
 
 /**
@@ -18,6 +19,9 @@ import { lien, type Langue } from "@/lib/i18n";
  *
  * Le filigrane BONE déborde volontairement en bas à droite, comme au pied de
  * page. Il est masqué en dessous de 1024px, où il recouvrirait le titre.
+ *
+ * Le fond est une vidéo posée sur l'image, qui lui sert d'affiche. L'image
+ * reste seule sous 1024px et en mouvement réduit : voir `VideoFond`.
  */
 export function HeroAccueil({
   langue,
@@ -40,6 +44,9 @@ export function HeroAccueil({
         {image && (
           <Image src={image.src} alt="" fill priority sizes="100vw" className="object-cover" />
         )}
+        {/* La vidéo se pose par-dessus l'image, qui lui sert d'affiche et
+            reste seule sur les petites largeurs et en mouvement réduit. */}
+        <VideoFond source="/brand/banniere-bone.mp4" affiche={image?.src} />
         {/* Voile de la maquette : un dégradé oblique posé en fusion « multiply »,
             qui assombrit la photo sans la teinter uniformément. */}
         <div className="absolute inset-0 mix-blend-multiply bg-[linear-gradient(73.03deg,rgb(0_0_34/0.4)_1.93%,rgb(19_19_83/0.4)_100%)]" />
