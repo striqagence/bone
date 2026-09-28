@@ -31,11 +31,45 @@ const nextConfig: NextConfig = {
    */
   async redirects() {
     const poles = ["expertise", "capital", "feed"];
-    return poles.flatMap((pole) => [
+    const raccourcis = poles.flatMap((pole) => [
       { source: `/${pole}`, destination: `/competences/${pole}`, permanent: true },
       { source: `/en/${pole}`, destination: `/en/competences/${pole}`, permanent: true },
       { source: `/zh/${pole}`, destination: `/zh/competences/${pole}`, permanent: true },
     ]);
+
+    /**
+     * Chemins de l'ancien site, www.bone-it.com.
+     *
+     * Les vraies redirections doivent vivre sur l'ancien domaine : une
+     * application servie par bone.fr ne peut pas répondre à la place de
+     * bone-it.com. Celles-ci couvrent le cas très probable où l'ancien site
+     * renverra en bloc vers la racine du nouveau, ou vers le même chemin :
+     * sans elles, chaque adresse indexée depuis des années atterrirait sur une
+     * page introuvable.
+     *
+     * Le regroupement vers « capital » n'est pas un raccourci : les quatre
+     * pages de valorisation, vente de pièces, upgrade et effacement des
+     * données décrivent ce que ce pôle couvre désormais d'un seul tenant.
+     */
+    const ancienSite = Object.entries({
+      "/qui-sommes-nous": "/a-propos",
+      "/a-propos-esn-integration-infogerance-cybersecurite": "/a-propos",
+      "/notre-histoire": "/a-propos",
+      "/notre-histoire-valorisation-cloud-cybersecurite": "/a-propos",
+      "/nos-services": "/competences",
+      "/nos-services-it-integration-cloud-cybersecurite": "/competences",
+      "/audit-test-diagnostic": "/competences/expertise",
+      "/valorisation-de-parc-informatique": "/competences/capital",
+      "/vente-de-piece-informatique": "/competences/capital",
+      "/upgrade-des-equipements": "/competences/capital",
+      "/effacement-des-donnees": "/competences/capital",
+      /* Le nouveau site n'a pas de page de questions fréquentes : elles sont
+         devenues des sections. Celle de la page de contact traite des mêmes
+         sujets que l'ancienne, du premier rendez-vous au déroulé d'un audit. */
+      "/foire-aux-questions": "/contact",
+    }).map(([source, destination]) => ({ source, destination, permanent: true }));
+
+    return [...raccourcis, ...ancienSite];
   },
 };
 
