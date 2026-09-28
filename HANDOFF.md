@@ -56,6 +56,24 @@ n'est averti.
 Vérifié de bout en bout depuis le site en ligne : formulaire, écriture en base,
 alerte composée, message livré.
 
+Le gabarit de l'alerte est dans `lib/courriel-envoi.ts`. Son HTML paraît
+archaïque, et chaque choix a une raison qui ne se devine pas :
+
+- **des tableaux** plutôt qu'une mise en page moderne, Outlook s'appuyant sur
+  le moteur de rendu de Word ;
+- **des styles en ligne**, plusieurs clients supprimant la feuille de
+  l'en-tête ;
+- **un logotype typographique et non une image**. La plupart des clients
+  bloquent les images tant que le destinataire ne les autorise pas : un en-tête
+  bâti sur un fichier s'afficherait vide à la première lecture ;
+- **les polices système**, celles de la marque ne pouvant pas être chargées ;
+- **deux paliers d'adaptation, pas un.** La carte devient fluide dès 640px,
+  sinon elle déborde de cent cinquante et un pixels entre 481 et 631, soit la
+  largeur d'un volet de lecture. Les libellés ne s'empilent qu'à 480px.
+
+Pour le relire sans l'envoyer, extraire `gabarit` dans un fichier à part :
+`server-only` empêche d'importer ce module hors du bundler de Next.
+
 ### Ce qui reste, par ordre d'urgence
 
 1. **Les clés Supabase n'ont pas été renouvelées.** Elles ont circulé pendant
