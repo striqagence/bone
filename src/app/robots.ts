@@ -23,6 +23,10 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [{ userAgent: "*", allow: "/", disallow: ["/admin", "/api", "/design-system"] }],
+    /* Le plan y est annoncé en plus d'être déposé à la main dans les outils
+       pour webmasters : un robot qui découvre le site par un lien extérieur ne
+       passe pas par ces outils, et c'est ici qu'il cherche. */
+    sitemap: `${BASE}/sitemap.xml`,
     host: BASE,
   };
 }
